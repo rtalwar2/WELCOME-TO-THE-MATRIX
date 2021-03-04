@@ -5,7 +5,7 @@ let rij=0;
 let kolom=0;
 let rij2=0;
 let kolom2=0;
-function showNextStep(){
+function showNextStep(){//logica van deze methode nog niet 100% in orde, alert wordt niet uitgevoerd.
     document.querySelector(`#id_${rij}-${kolom}`).classList.remove("rood");
     document.querySelector(`#id2_${rij2}-${kolom2}`).classList.remove("rood");
     kolom++;
@@ -32,7 +32,7 @@ function showNextStep(){
     
 }
 
-function showfirstMatrix(matrix){
+function showfirstMatrix(matrix){//de 2 methodes kunnen verkort worden door een extra parameter mee te geven
     let tabel=document.querySelector(".table");
     tabel.parentElement.classList.add(`col-md-${matrix[0].length}`);
     tabel.innerText="";
@@ -50,7 +50,7 @@ function showfirstMatrix(matrix){
 
 function showsecondMatrix(matrix){
     let tabel=document.querySelectorAll(".table")[1];
-    tabel.parentElement.classList.add(`col-md-${matrix[0].length}`);
+    tabel.parentElement.classList.add(`col-md-${matrix[0].length}`);//zodat de matrix met behulp van een bootstrap klasse de duiste breedte heeft
     tabel.innerText="";
     for(let i in matrix){
         let tr=document.createElement("tr");
@@ -73,10 +73,10 @@ function init(){
 console.log("script geladen");
 matrix=[[1,2,3],[4,5,66],[7,8,5]];
 matrix2=[[1,5],[2,5],[3,3]];
-showfirstMatrix(matrix);
-showsecondMatrix(matrix2);
+showfirstMatrix(matrix);//matrix tonen
+showsecondMatrix(matrix2);//metrix tonen
 document.querySelector("#next").addEventListener("click",showNextStep)
-document.querySelector(`#id_${rij}-${kolom}`).classList.add("rood");
+document.querySelector(`#id_${rij}-${kolom}`).classList.add("rood");//zodat eerste elementen al gekleurd zijn
 document.querySelector(`#id2_${rij2}-${kolom2}`).classList.add("rood");
 }
 
