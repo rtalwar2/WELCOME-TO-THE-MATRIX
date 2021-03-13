@@ -20,35 +20,47 @@ Class Matrix{
 + getTransponneerde(): Matrix
 
 }
+class TutorialPage{
+    + alle_beschrijvingen:Map<string,beschrijvingen:string [] >
+    + startTutorial(string): generate html
+    + updateBeschrijving():void
+
+}
+class OefeningPage{
+    + startTutorial(string): generate html
+    + updateBeschrijving():void
+}
 
 abstract Class Tutorial{
-- string [] Beschrijving
-- int stapNummer
-
-
-+ refresh(stapnummer : int): void
+- stapNummer : int
 + Tutorial(matrix Matrix)
-
++ refresh(stapnummer : int): Matrix
 
 } 
 
 
 Class VermenigvuldigTutorial{
++ refresh(stapnummer : int): [Matrix,int,int]
 
 + VermenigvuldigTutorial(matrix_1 : Matrix, matrix_2 : Matrix)
 
 }
 
 Class TransponneerTutorial{
++ refresh(stapnummer : int): Matrix
 
 + TransponneerTutorial(matrix : Matrix)
 }
 
 Class InverseTutorial{
+    + refresh(stapnummer : int): Matrix
+
 + InverseTutorial(matrix : Matrix)
 }
 
 Class DeterminantTutorial{
+    + refresh(stapnummer : int): Matrix
+
 + DeterminantTutorial(matrix : Matrix)
 }
 
@@ -59,7 +71,7 @@ abstract Class Oefeningen{
 
     + Oefeningen(aantalOefeningen: int)    
     + showHint(element: HTML-Tag ): void
-    + correct(): boolean
+    + correct(antwoord : int): boolean
     
 }
 
@@ -75,6 +87,12 @@ Class DeterminantOefening{
 Class InverseOefening{
     +InverseOefening(aantalOefeningen: int)
     +correct: boolean
+}
+class Speler{
+    +naam:string
+    +Speler(naam:string)
+    -tutorials_finished:Map<int,bool>
+    +saveData():void
 }
 
 Tutorial <|-- VermenigvuldigTutorial
