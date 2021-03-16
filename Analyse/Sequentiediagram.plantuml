@@ -1,0 +1,130 @@
+@startuml
+autonumber
+
+actor Gebruiker
+participant MainProgram
+participant TutorialPage
+participant OefeningPage
+
+== Startup Program ==
+Gebruiker ->  MainProgram: Open Main
+activate MainProgram
+MainProgram->Gebruiker:vraag naam
+Gebruiker-->>MainProgram:naam
+activate Speler
+MainProgram->MainProgram:controleer of speler nieuw is
+alt nieuwe speler
+    MainProgram->Speler:Speler(naam)
+else speler bestaat
+    MainProgram->Speler:getData(naam)
+    Speler-->>MainProgram:data
+end
+
+MainProgram -> TutorialPage :get Tutorials
+TutorialPage-->>MainProgram: returns tutrials
+MainProgram -> OefeningPage :get oefeningen
+OefeningPage-->>MainProgram: returns oefeningen
+
+MainProgram -> MainProgram: generate html page
+Gebruiker -> MainProgram: Kiest Deelsysteem
+
+opt if deelsysteem is Tutorial
+    MainProgram->TutorialPage: target button
+    activate TutorialPage
+    TutorialPage -->> TutorialPage: generate html page
+    
+ else if deelsysteem is Oefening
+    
+    MainProgram->OefeningPage: target button
+    activate OefeningPage
+    OefeningPage -->> OefeningPage: generate html page
+
+end
+deactivate MainProgram
+
+== Tutorials  == 
+deactivate OefeningPage
+TutorialPage -> Matrix: create object matrix
+activate Matrix
+Matrix-->>TutorialPage:return matrix
+TutorialPage -> Tutorial: generate matrix
+activate Tutorial
+TutorialPage -->> TutorialPage:update beschrijving
+loop while tutorial not finished
+    opt nextStep
+    Gebruiker->TutorialPage: press next step button
+    else previousStep
+    Gebruiker->TutorialPage: press previous step button
+
+end    
+    TutorialPage -> Tutorial: refresh(stapnummer: int) 
+    TutorialPage -> TutorialPage: update beschrijving
+    Tutorial-->>Matrix: create object matrix
+    Matrix-->> Tutorial: return matrix
+    Tutorial-->>TutorialPage: Matrix[,int,int]
+    ' afhankelijk van welke tutorial je doet kan de refresh methode andere data teruggeven
+    ' Er wordt een nieuw matrix object gemaakt en teruggegeven
+    TutorialPage -->> TutorialPage: generate html page
+end
+TutorialPage->TutorialPage:update buttons
+
+opt gebruiker pressed oefening button
+    TutorialPage->OefeningPage:target button
+    activate OefeningPage
+   else  gebruiker pressed main button
+   TutorialPage->MainProgram
+ activate MainProgram
+end
+TutorialPage->Speler:saveData
+deactivate MainProgram
+deactivate TutorialPage
+deactivate Tutorial
+== Oefeningen == 
+
+OefeningPage-> Oefeningen: aantalOefeningen
+activate Oefeningen
+loop foreach oefening in Oefeningen
+Oefeningen -> Matrix: genereer matrices
+Matrix -->> Oefeningen: return matrices
+Oefeningen -->> OefeningPage: return matrices voor oefening
+Gebruiker -> OefeningPage: invoer gebruiker
+OefeningPage -> Oefeningen: Correct(input:int)
+Oefeningen -> Matrix: [vermenigvuldigMatrix(matrix_2),getDeterminant(),getInverse(),getTransponneerde()]
+Matrix -->> Oefeningen: return oplossing
+Oefeningen -->> OefeningPage: boolean
+OefeningPage -->> OefeningPage: update html
+' Gebruiker->OefeningPage:hint pressed
+' OefeningPage->Oefeningen:show hint
+' Oefeningen-->>OefeningPage: return hint
+end
+OefeningPage->OefeningPage:update buttons
+
+opt gebruiker pressed Tutorial button
+    TutorialPage<-OefeningPage:target button
+    activate TutorialPage
+   else  gebruiker pressed main button
+   OefeningPage->MainProgram
+ activate MainProgram
+end
+
+OefeningPage->Speler:saveData
+deactivate TutorialPage
+deactivate OefeningPage
+deactivate Oefeningen
+==einde programma==
+deactivate Matrix
+deactivate Speler
+deactivate TutorialPage
+deactivate Tutorial
+deactivate OefeningPage
+deactivate Oefeningen
+deactivate MainProgram
+@enduml
+@startuml
+class speler{
+    +naam:string
+    +Speler(naam:string)
+    -tutorials_finished:Map<int,bool>
+    +saveData():void
+}
+@enduml

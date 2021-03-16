@@ -1,0 +1,118 @@
+
+
+
+@startuml Matrix_Project
+skinparam ClassAttributeIconSize 0 
+skinparam Linetype ortho
+
+Class Matrix{
+- int aantalRijen
+- int aantalKolommen 
++ int [][] matrix {readOnly}
+
+
++ Matrix(dubelleArray: int [][])
++ Matrix()
++ drawMatrix(element: Table-Tag) : void
++ vermenigvuldigMatrix(matrix_2: Matrix): Matrix
++ getDeterminant(): int
++ getInverse(): Matrix
++ getTransponneerde(): Matrix
+
+}
+class TutorialPage{
+    + alle_beschrijvingen:Map<string,beschrijvingen:string [] >
+    + startTutorial(string): generate html
+    + updateBeschrijving():void
+
+}
+class OefeningPage{
+    + startTutorial(string): generate html
+    + updateBeschrijving():void
+}
+
+abstract Class Tutorial{
+- stapNummer : int
++ Tutorial(matrix Matrix)
++ refresh(stapnummer : int): Matrix
+
+} 
+
+
+Class VermenigvuldigTutorial{
++ refresh(stapnummer : int): [Matrix,int,int]
+
++ VermenigvuldigTutorial(matrix_1 : Matrix, matrix_2 : Matrix)
+
+}
+
+Class TransponneerTutorial{
++ refresh(stapnummer : int): Matrix
+
++ TransponneerTutorial(matrix : Matrix)
+}
+
+Class InverseTutorial{
+    + refresh(stapnummer : int): Matrix
+
++ InverseTutorial(matrix : Matrix)
+}
+
+Class DeterminantTutorial{
+    + refresh(stapnummer : int): Matrix
+
++ DeterminantTutorial(matrix : Matrix)
+}
+
+
+abstract Class Oefeningen{
+    - Matrix[] OefeningenReeks
+
+
+    + Oefeningen(aantalOefeningen: int)    
+    + showHint(element: HTML-Tag ): void
+    + correct(antwoord : int): boolean
+    
+}
+
+Class VermenigvuldigingOefening{
+    +VermenigvuldigingOefening(aantalOefeningen: int)
+    +correct: boolean
+}
+
+Class DeterminantOefening{
+    +DeterminantOefening(aantalOefeningen : int)
+    +correct: boolean 
+}
+Class InverseOefening{
+    +InverseOefening(aantalOefeningen: int)
+    +correct: boolean
+}
+class Speler{
+    +naam:string
+    +Speler(naam:string)
+    -tutorials_finished:Map<int,bool>
+    +saveData():void
+}
+
+Tutorial <|-- VermenigvuldigTutorial
+Tutorial <|-- DeterminantTutorial
+Tutorial <|-- InverseTutorial
+Tutorial <|-- TransponneerTutorial
+
+Oefeningen <|-- VermenigvuldigingOefening
+Oefeningen <|-- DeterminantOefening
+Oefeningen <|-- InverseOefening
+
+Matrix "*" -o Oefeningen  
+Tutorial o- "*" Matrix
+
+
+
+
+
+
+
+
+
+@enduml
