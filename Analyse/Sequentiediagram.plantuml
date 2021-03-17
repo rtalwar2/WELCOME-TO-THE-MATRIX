@@ -120,11 +120,4 @@ deactivate OefeningPage
 deactivate Oefeningen
 deactivate MainProgram
 @enduml
-@startuml
-class speler{
-    +naam:string
-    +Speler(naam:string)
-    -tutorials_finished:Map<int,bool>
-    +saveData():void
-}
-@enduml
+
