@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+skinparam Linetype ortho
+rectangle "project" {
+    (Matrixvermenigvuldiging aanleren) as use1
+    (Interactieve matrixvermenigvuldigingen) as use2
+    (uitleg over Determinanten +oefeningen) as use3
+    (uiteg over Transponeren) as use4
+    (uiteg over inverteren + oefeningen) as use5
+    (Toepassing: ‘Decrypt the wallet’) as use6
+    (Toepassing: simulatie Markov ketens) as use7
+}
+actor Gebruiker as user
+user -|> use1
+user -|> use2
+user -|> use3
+user -|> use4
+user -|> use5
+user -|> use6
+user -|> use7
+
+@enduml
