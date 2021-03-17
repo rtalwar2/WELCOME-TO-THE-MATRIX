@@ -3,7 +3,7 @@
 
 @startuml Matrix_Project
 skinparam ClassAttributeIconSize 0 
-skinparam Linetype ortho
+
 
 Class Matrix{
 - int aantalRijen
@@ -95,10 +95,7 @@ class Speler{
     +saveData():void
 }
 
-Tutorial <|-- VermenigvuldigTutorial
-Tutorial <|-- DeterminantTutorial
-Tutorial <|-- InverseTutorial
-Tutorial <|-- TransponneerTutorial
+
 
 Oefeningen <|-- VermenigvuldigingOefening
 Oefeningen <|-- DeterminantOefening
@@ -107,11 +104,16 @@ Oefeningen <|-- InverseOefening
 Matrix "*" -o Oefeningen  
 Tutorial o- "*" Matrix
 
+TutorialPage  o- Tutorial
+Oefeningen -o OefeningPage
 
+Tutorial <|-- VermenigvuldigTutorial
+Tutorial <|-- DeterminantTutorial
+Tutorial <|-- InverseTutorial
+Tutorial <|-- TransponneerTutorial
 
-
-
-
+Speler --> TutorialPage
+Speler --> OefeningPage
 
 
 
