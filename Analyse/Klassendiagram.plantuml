@@ -114,7 +114,4 @@ Tutorial <|-- TransponneerTutorial
 
 Speler --> TutorialPage
 Speler --> OefeningPage
-
-
-
 @enduml
