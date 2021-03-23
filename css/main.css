@@ -1,9 +1,12 @@
 /* button{
     color: white;
 } */
-
+body{
+    color: white;
+}
 h1{
     text-align: center;
+
 }
 main{
     margin-top: 10em;
@@ -29,4 +32,18 @@ main{
 * {margin: 0; padding: 0;}
 /*adding a black bg to the body to make things clearer*/
 body {background: black;}
-canvas {display: block;}
+canvas {
+    position: fixed;
+}
+
+.row{
+    margin-top: 1em;!important;
+
+}
+
+.btn-outline-success{
+    color: white;
+    border-color: black;
+    border-width: thick;
+    background-color: black;
+}
