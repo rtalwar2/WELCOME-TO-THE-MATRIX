@@ -1,0 +1,27 @@
+/* button{
+    color: white;
+} */
+
+h1{
+    text-align: center;
+}
+main{
+    margin-top: 10em;
+    margin-bottom: 10em;
+}
+#final_footer {
+    height: 150px;
+    color: lightgray;
+    background-color: black;
+    margin-top: 50px;
+    /* line-height: 20px; */
+    text-align: center;
+  }
+  #final_footer p {
+    padding: 50px 0;
+  }
+
+
+  .col-md-4{
+      margin: auto;
+  }
