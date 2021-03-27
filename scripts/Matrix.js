@@ -32,25 +32,39 @@ export default class Matrix{
         }else{
             return false;
         }
-
         return new Matrix(result);
     }
 
 
 
     drawMatrix(element) { //basis tekenfunctie, maakt een table aan en voegt deze toe aan element HTML DOM
-        let tbody = document.createhulpmatrixlement("tbody");
-        let table = document.createhulpmatrixlement("table").appendChild(tbody);
-        for (let i = 0; i < this.matrix.size; i++) {
-            let tr = document.createhulpmatrixlement("tr");
-            for (let j = 0; j < this.matrix[i].size; j++) {
-                let td = document.createhulpmatrixlement("td");
-                td.innerText = this.matrix[i][j];
+        let tabel=document.querySelector(".table");
+        tabel.parentElement.classList.add(`col-md-${this.aantalKolommen}`);
+        tabel.innerText="";
+        for(let i in matrix){
+            let tr=document.createElement("tr");
+            for(let j in matrix[i]){
+                let td=document.createElement("td");
+                td.innerText=matrix[i][j];
+                td.id=`id_${i}-${j}`;
                 tr.appendChild(td);
             }
-            tbody.appendChild(tr);
+            tabel.appendChild(tr);
         }
-        element.appendChild(table);
+
+        //
+        // let tbody = document.createhulpmatrixlement("tbody");
+        // let table = document.createhulpmatrixlement("table").appendChild(tbody);
+        // for (let i = 0; i < this.matrix.size; i++) {
+        //     let tr = document.createhulpmatrixlement("tr");
+        //     for (let j = 0; j < this.matrix[i].size; j++) {
+        //         let td = document.createhulpmatrixlement("td");
+        //         td.innerText = this.matrix[i][j];
+        //         tr.appendChild(td);
+        //     }
+        //     tbody.appendChild(tr);
+        // }
+        // element.appendChild(table);
     }
 
     getTransponneerde(){
