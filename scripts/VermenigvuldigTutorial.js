@@ -28,16 +28,17 @@ export class VermenigvuldigTutorial extends Tutorial{
             this.rij1++;
             this.som=0;
         }
+
         if(this.rij1===this.m1.aantalRijen){
             this.rij1=0;
             this.kolom2++;
         }
+
         if(this.kolom2===this.m2.aantalKolommen){
             alert("tutorial finished");
         }
         this.som+=this.m1.matrix[this.rij1][this.midden]+this.m2.matrix[this.rij1][this.midden];
-        return {element1:[this.rij1,this.midden],element2:[this.midden,this.kolom2],data:this.data,
-            tekst:`${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.rij1][this.midden]} = ?`}
+        return {element1:[this.rij1,this.midden],element2:[this.midden,this.kolom2],data:this.data, tekst:`${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.rij1][this.midden]} = ?`}
     }
 
 }
