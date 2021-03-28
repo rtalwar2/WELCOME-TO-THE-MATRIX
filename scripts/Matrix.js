@@ -8,20 +8,20 @@ export default class Matrix{
     constructor(aantalRijen=3, aantalKolommen=3,empty=false) {
         this.aantalRijen = aantalRijen;
         this.aantalKolommen = aantalKolommen;
-        this.matrix = [[],[]];
+        this.matrix = new Array(aantalRijen);
+        for(let i=0;i<aantalKolommen;i++){
+            this.matrix[i]=new Array(aantalKolommen);
+        }
         if(empty){
             for (let i = 0; i < this.aantalRijen; i++) {
                 for (let j = 0; j < this.aantalKolommen; j++) {
-                    this.matrix[i][j] = 0;
+                    this.matrix[i][j]=0;
                 }
             }
-            console.log("blub");
-            console.log(this.matrix);
-            console.log("blib2");
         }
         else{
-            for (let i = 0; i < this.matrix.length; i++) {
-                for (let j = 0; j < this.matrix[0].length; j++) {
+            for (let i = 0; i < this.aantalRijen; i++) {
+                for (let j = 0; j < this.aantalKolommen; j++) {
                     this.matrix[i][j] = Math.floor(Math.random() * 10);
                 }
             }
@@ -50,15 +50,15 @@ export default class Matrix{
 
 
     drawMatrix(element) { //basis tekenfunctie, maakt een table aan en voegt deze toe aan element HTML DOM
-        let tabel=document.querySelector(".table");
+        let tabel=element;
         tabel.parentElement.classList.add(`col-md-${this.aantalKolommen}`);
         tabel.innerText="";
-        for(let i in matrix){
+        for(let i in this.matrix){
             let tr=document.createElement("tr");
-            for(let j in matrix[i]){
+            for(let j in this.matrix[i]){
                 let td=document.createElement("td");
-                td.innerText=matrix[i][j];
-                td.id=`id_${i}-${j}`;
+                td.innerText=this.matrix[i][j];
+                td.dataset.id=`id_${i}-${j}`;
                 tr.appendChild(td);
             }
             tabel.appendChild(tr);
