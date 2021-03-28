@@ -1,17 +1,29 @@
 export default class Matrix{
-    constructor(aantalRijen, aantalKolommen){
+    // constructor(aantalRijen, aantalKolommen){ een klasse mag maar 1 constructor hebben blijkaar
+    //     this.aantalRijen = aantalRijen;
+    //     this.aantalKolommen = aantalKolommen;
+    //     this.matrix = [aantalRijen][aantalKolommen];
+    // }
+
+    constructor(aantalRijen=3, aantalKolommen=3,empty=false) {
         this.aantalRijen = aantalRijen;
         this.aantalKolommen = aantalKolommen;
-        this.matrix = [aantalRijen][aantalKolommen];
-    }
-
-    constructor() {
-        this.aantalRijen = 3;
-        this.aantalKolommen = 3;
-        this.matrix = [this.aantalRijen][this.aantalKolommen];
-        for (let i = 0; i < this.matrix.size; i++) {
-            for (let j = 0; j < this.matrix[0].size; j++) {
-                this.matrix[i][j] = Math.floor(Math.random() * 10);
+        this.matrix = [[],[]];
+        if(empty){
+            for (let i = 0; i < this.aantalRijen; i++) {
+                for (let j = 0; j < this.aantalKolommen; j++) {
+                    this.matrix[i][j] = 0;
+                }
+            }
+            console.log("blub");
+            console.log(this.matrix);
+            console.log("blib2");
+        }
+        else{
+            for (let i = 0; i < this.matrix.length; i++) {
+                for (let j = 0; j < this.matrix[0].length; j++) {
+                    this.matrix[i][j] = Math.floor(Math.random() * 10);
+                }
             }
         }
     }

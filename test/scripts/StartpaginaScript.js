@@ -15,7 +15,6 @@ function showNextStep(){//logica van deze methode nog niet 100% in orde, alert w
         rij++;
         rij2=0;
     }
-
     if(rij==matrix.length&&kolom2!=matrix2[rij2].length){
         // alert("tutorial finished");
         rij=0;
@@ -29,7 +28,6 @@ function showNextStep(){//logica van deze methode nog niet 100% in orde, alert w
     document.querySelector(`#id_${rij}-${kolom}`).classList.add("rood");
     console.log(rij,kolom2)
     document.querySelector(`#id2_${rij2}-${kolom2}`).classList.add("rood");
-    
 }
 
 function showfirstMatrix(matrix){//de 2 methodes kunnen verkort worden door een extra parameter mee te geven
