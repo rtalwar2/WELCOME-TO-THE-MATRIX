@@ -2,6 +2,7 @@ import Matrix from "./Matrix.js"
 export class Tutorial {
     stapnummer;
     matrix;
+    aantal_matrices;
     constructor() {
         if (this.constructor === Tutorial) {
             throw new Error("Abstract classes can't be instantiated.");

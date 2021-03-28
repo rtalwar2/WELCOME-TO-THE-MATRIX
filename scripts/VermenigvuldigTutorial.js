@@ -5,22 +5,30 @@ export class VermenigvuldigTutorial extends Tutorial{
 
     m1;
     m2;
+    matrices=[];
     rij1=0;
     kolom2=0;
     midden=0;
     data;
-    som;
+    som=0;
+    aantal_matrices;
+    finished=false;
     constructor(m1,m2){
         super();
         this.stapnummer=0;
         this.m1=m1;
         this.m2=m2;
         this.data=new Matrix(m1.aantalRijen,m2.aantalKolommen,true);
+        this.matrices.push(this.m1);
+        this.matrices.push(this.m2);
+        this.aantal_matrices=this.matrices.length;
     }
 
     refresh(stapnummer) {
-        console.log(this.m1.matrix[0][0])
-        this.stapnummer=stapnummer;
+        if(this.stapnummer===0){
+            this.stapnummer++;
+            return {element1:[this.rij1,this.midden],element2:[this.midden,this.kolom2],data:this.data, tekst:`${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.rij1][this.midden]} = ?`}
+        }
         this.midden++;
         if(this.midden===this.m1.aantalKolommen){
             this.midden=0;
@@ -35,10 +43,10 @@ export class VermenigvuldigTutorial extends Tutorial{
         }
 
         if(this.kolom2===this.m2.aantalKolommen){
-            alert("tutorial finished");
+             this.finished=true;
         }
-        this.som+=this.m1.matrix[this.rij1][this.midden]+this.m2.matrix[this.rij1][this.midden];
-        return {element1:[this.rij1,this.midden],element2:[this.midden,this.kolom2],data:this.data, tekst:`${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.rij1][this.midden]} = ?`}
+        this.som+=this.m1.matrix[this.rij1][this.midden]+this.m2.matrix[this.midden][this.kolom2];
+        return {element1:[this.rij1,this.midden],element2:[this.midden,this.kolom2],finished:this.finished,data:this.data, tekst:`${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.midden][this.kolom2]} = ?`}
     }
 
 }

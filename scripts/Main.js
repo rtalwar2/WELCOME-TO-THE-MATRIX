@@ -4,13 +4,14 @@ import {TutorialPage} from "./TutorialPage.js";
 
 function ListenToKnop(event){
     console.log(event.target);
+    localStorage.setItem("selected_button",event.target.innerText);
     window.open("./TutorialPage.html","_self")
 }
 
 function haalKnoppen(){
     let alle_teksten=[];
     for(let i of TutorialPage.alle_beschrijvingen){
-        alle_teksten.push(...Object.keys(i))[0];
+        alle_teksten.push(i.name);
     }
     alle_teksten.push(...OefeningPage.alle_oefeningen);
     for(let i in alle_teksten.slice(0,alle_teksten.length/2)){
@@ -28,7 +29,7 @@ function haalKnoppen(){
         let button2=document.createElement("button");
         button2.type="button";
         button2.classList.add(...["btn","btn-outline-success"]);
-        button2.innerText=alle_teksten[parseInt(i)+alle_teksten.length/2];
+        button2.innerText=alle_teksten[parseInt(i)+Math.round(alle_teksten.length/2)];
         content2.appendChild(button2);
         row.appendChild(content);
         row.appendChild(content2);
@@ -45,10 +46,8 @@ function haalKnoppen(){
 }
 
 function init(){
-
     haalKnoppen();
     document.querySelectorAll("button").forEach(value => value.addEventListener("click",ListenToKnop))
-
 }
 
 init();
