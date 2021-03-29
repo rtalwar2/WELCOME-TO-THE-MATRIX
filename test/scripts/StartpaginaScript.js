@@ -26,7 +26,7 @@ function showNextStep(){//logica van deze methode nog niet 100% in orde, alert w
     }
 
     document.querySelector(`#id_${rij}-${kolom}`).classList.add("rood");
-    console.log(rij,kolom2)
+    console.log(rij, kolom2)
     document.querySelector(`#id2_${rij2}-${kolom2}`).classList.add("rood");
 }
 
