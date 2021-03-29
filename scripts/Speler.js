@@ -1,18 +1,27 @@
-export default class Speler {
+export class Speler {
     naam;
     tutorials_finished;
 
-    // in local storage:(spelers:[naam1, naam2, ...], naam1:data1, naam2:data2, ...)
+    // in local storage:(naam1:data1, naam2:data2, ...)
 
-    constructor(naam) {             //Voor Spelers aan te maken
+    constructor(naam) {             //Om Spelers aan te maken
         this.naam = naam;
 
-        if (localStorage.getItem("spelers").includes(this.naam)) {      //als speler al bestaat
+        if (localStorage.getItem(this.naam) === null){          //als speler niet bestaat
+            this.tutorials_finished = new Map(
+                [["VermenigvuldigTutorial", false],
+                    ["TransponeerTutorial", false],
+                    ["InverseTutorial", false],
+                    ["DeterminantTutorial", false],
+                    ["DeterminantOefening", false],
+                    ["InverseOefening", false],
+                    ["VermenigvuldigOefening", false]]);
+            localStorage.setItem(this.naam, this.tutorials_finished);
+        }else {                                                 //als speler wel bestaat
             let myJSON = localStorage.getItem(this.naam);
             this.tutorials_finished = JSON.parse(myJSON);
-        } else {
-            this.tutorials_finished = new Map([[0, false], [1, false], [2, false], [3, false], [4, false], [5, false], [6, false]]);
         }
+
 
     }
 
@@ -20,8 +29,8 @@ export default class Speler {
         return this.tutorials_finished;
     }
 
-    eindTutorialOefening(nummer) {   //na bepaalde oefening/tutorial opslaan in map ,ook naar localstorage
-        this.tutorials_finished.set(nummer, true);
+    eindTutorialOefening(naamTutOef) {   //na bepaalde oefening/tutorial opslaan in map ,ook naar localstorage
+        this.tutorials_finished.set(naamTutOef, true);
         this.saveData()
     }
 

@@ -1,5 +1,6 @@
 import {OefeningPage} from "./OefeningPage.js";
 import {TutorialPage} from "./TutorialPage.js";
+import {Speler} from "./Speler.js";
 
 
 function ListenToKnop(event) {
@@ -51,4 +52,14 @@ function init() {
     //een aale knoppen eventlistener ListenToKnop toegevoegd
 }
 
+
+let dataSpeler;     // Map met gemaakte oefeningen/tutorials
+
+function spelerMaken(){
+    let naamSpeler = window.prompt("Naam?");
+    let speler = new Speler(naamSpeler);
+    dataSpeler = speler.getData();
+}
+
 init();
+spelerMaken();

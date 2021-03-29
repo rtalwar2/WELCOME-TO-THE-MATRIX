@@ -73,7 +73,7 @@ opt gebruiker pressed oefening button
    TutorialPage->MainProgram
  activate MainProgram
 end
-TutorialPage->Speler:eindTutorialOefening(Tutorial nummer)
+TutorialPage->Speler:eindTutorialOefening(Tutorial naam)
 deactivate MainProgram
 deactivate TutorialPage
 deactivate Tutorial
@@ -105,7 +105,7 @@ opt gebruiker pressed Tutorial button
  activate MainProgram
 end
 
-OefeningPage->Speler:eindTutorialOefening(Oefening nummer)
+OefeningPage->Speler:eindTutorialOefening(Oefening naam)
 deactivate TutorialPage
 deactivate OefeningPage
 deactivate Oefeningen
