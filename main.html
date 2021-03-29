@@ -1,79 +1,82 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Matrix tutorial</title>
     <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/main.css"/>
     <script defer src="scripts/ChineseTekens.js"></script>
-      <script type="module" src="scripts/Main.js"></script>
-  </head>
-  <body>
-  <canvas id="c"></canvas>
-  <div class="container">
-      <div class="row">
+    <script type="module" src="scripts/Main.js"></script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="container">
+    <div class="row">
         <div class="col-md-12">
-          <header>
-            <h1>Welcome to the Matrix</h1>
-          </header>
-          <main>
-              <nav>
-<!--                <div class="row ">-->
-<!--                    <div class="col-md-6 nav justify-content-center">-->
-<!--                        <button type="button" class="btn btn-outline-success">vermenigvuldiging</button>-->
+            <header>
+                <h1>Welcome to the Matrix</h1>
+            </header>
+            <main>
+                <nav>
+                    <!--                  de html code die dynamisch wordt ingevoegd-->
+                    <!--                <div class="row ">-->
+                    <!--                    <div class="col-md-6 nav justify-content-center">-->
+                    <!--                        <button type="button" class="btn btn-outline-success">vermenigvuldiging</button>-->
 
-<!--                    </div>-->
-<!--                    <div class="col-md-6 nav justify-content-center">-->
-<!--                        <button type="button" class="btn btn-outline-success">vermenigvuldigingOefeningen</button>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-md-6 nav justify-content-center">-->
+                    <!--                        <button type="button" class="btn btn-outline-success">vermenigvuldigingOefeningen</button>-->
 
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div class="row">-->
-<!--                    <div class="col-md-6 nav justify-content-center">-->
-<!--                        <button type="button" class="btn btn-outline-success">InverseTutorial</button>-->
+                    <!--                    </div>-->
+                    <!--                  </div>-->
+                    <!--                  <div class="row">-->
+                    <!--                    <div class="col-md-6 nav justify-content-center">-->
+                    <!--                        <button type="button" class="btn btn-outline-success">InverseTutorial</button>-->
 
-<!--                    </div>-->
-<!--                    <div class="col-md-6 nav justify-content-center">-->
-<!--                        <button type="button" class="btn btn-outline-success">InverseOefeningen</button>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-md-6 nav justify-content-center">-->
+                    <!--                        <button type="button" class="btn btn-outline-success">InverseOefeningen</button>-->
 
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div class="row">-->
-<!--                    <div class="col-md-6 nav justify-content-center">-->
-<!--                        <button type="button" class="btn btn-outline-success">DeterminantTutotial</button>-->
+                    <!--                    </div>-->
+                    <!--                  </div>-->
+                    <!--                  <div class="row">-->
+                    <!--                    <div class="col-md-6 nav justify-content-center">-->
+                    <!--                        <button type="button" class="btn btn-outline-success">DeterminantTutotial</button>-->
 
-<!--                    </div>-->
-<!--                    <div class="col-md-6 nav justify-content-center">-->
-<!--                        <button type="button" class="btn btn-outline-success">DeterminantOefeningen</button>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-md-6 nav justify-content-center">-->
+                    <!--                        <button type="button" class="btn btn-outline-success">DeterminantOefeningen</button>-->
 
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div class="row">-->
-<!--                    <div class="col-md-6 nav justify-content-center">-->
-<!--                        <button type="button" class="btn btn-outline-success">Markov Simulatie</button>-->
+                    <!--                    </div>-->
+                    <!--                  </div>-->
+                    <!--                  <div class="row">-->
+                    <!--                    <div class="col-md-6 nav justify-content-center">-->
+                    <!--                        <button type="button" class="btn btn-outline-success">Markov Simulatie</button>-->
 
-<!--                    </div>-->
-<!--                    <div class="col-md-6 nav justify-content-center">-->
-<!--                        <button type="button" class="btn btn-outline-success">crack my wallet</button>-->
-<!--                    </div>-->
-<!--                  </div>-->
-              </nav>
-          </main>
-          <footer id="final_footer">
-            <p>
-              Team-10 <time datetime="2020-02-24">24 februari 2020</time> <br />
-              <i>Terms and conditions apply</i> &copy;
-            </p>
-          </footer>
+                    <!--                    </div>-->
+                    <!--                    <div class="col-md-6 nav justify-content-center">-->
+                    <!--                        <button type="button" class="btn btn-outline-success">crack my wallet</button>-->
+                    <!--                    </div>-->
+                    <!--                  </div>-->
+                </nav>
+            </main>
+            <footer id="final_footer">
+                <p>
+                    Team-10
+                    <time datetime="2020-02-24">24 februari 2020</time>
+                    <br/>
+                    <i>Terms and conditions apply</i> &copy;
+                </p>
+            </footer>
         </div>
-      </div>
     </div>
-  </body>
+</div>
+</body>
 </html>
