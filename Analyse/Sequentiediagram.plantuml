@@ -11,17 +11,15 @@ Gebruiker ->  MainProgram: Open Main
 activate MainProgram
 MainProgram->Gebruiker:vraag naam
 Gebruiker-->>MainProgram:naam
+
 activate Speler
-MainProgram->MainProgram:controleer of speler nieuw is
-alt nieuwe speler
-    MainProgram->Speler:Speler(naam)
-else speler bestaat
-    MainProgram->Speler:getData(naam)
-    Speler-->>MainProgram:data
-end
+MainProgram->Speler:Speler(naam)
+MainProgram->Speler:getData(naam)
+Speler-->>MainProgram:data
+
 
 MainProgram -> TutorialPage :get Tutorials
-TutorialPage-->>MainProgram: returns tutrials
+TutorialPage-->>MainProgram: returns tutorials
 MainProgram -> OefeningPage :get oefeningen
 OefeningPage-->>MainProgram: returns oefeningen
 
@@ -75,7 +73,7 @@ opt gebruiker pressed oefening button
    TutorialPage->MainProgram
  activate MainProgram
 end
-TutorialPage->Speler:saveData
+TutorialPage->Speler:eindTutorialOefening(Tutorial nummer)
 deactivate MainProgram
 deactivate TutorialPage
 deactivate Tutorial
@@ -107,7 +105,7 @@ opt gebruiker pressed Tutorial button
  activate MainProgram
 end
 
-OefeningPage->Speler:saveData
+OefeningPage->Speler:eindTutorialOefening(Oefening nummer)
 deactivate TutorialPage
 deactivate OefeningPage
 deactivate Oefeningen

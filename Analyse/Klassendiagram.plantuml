@@ -90,8 +90,10 @@ Class InverseOefening{
 }
 class Speler{
     +naam:string
-    +Speler(naam:string)
     -tutorials_finished:Map<int,bool>
+    +Speler(naam:string)
+    +getData():Map<int,bool>
+    +eindTutorialOefening(nummer:int):void
     +saveData():void
 }
 
