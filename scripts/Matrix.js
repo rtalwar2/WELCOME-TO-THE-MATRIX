@@ -9,7 +9,7 @@ export default class Matrix {
         this.aantalRijen = aantalRijen;
         this.aantalKolommen = aantalKolommen;
         this.matrix = new Array(aantalRijen);
-        for (let i = 0; i < aantalKolommen; i++) {
+        for (let i = 0; i < aantalRijen; i++) {
             this.matrix[i] = new Array(aantalKolommen);
         }
         if (empty) {

@@ -1,6 +1,7 @@
 import Matrix from "./Matrix.js";
 import {Tutorial} from "./Tutorial.js";
 import {VermenigvuldigTutorial} from "./VermenigvuldigTutorial.js";
+import {TransponeerTutorial} from "./TransponeerTutorial.js";
 
 export class TutorialPage {
     static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal
@@ -28,7 +29,8 @@ export class TutorialPage {
 
 
     static tutorials = {//alle tutorials
-        "VermenigvuldigTutorial": new VermenigvuldigTutorial(new Matrix(), new Matrix()), "TransponeerTutorial": Object,
+        "VermenigvuldigTutorial": new VermenigvuldigTutorial(new Matrix(), new Matrix()),
+        "TransponeerTutorial": new TransponeerTutorial(new Matrix(2, 3)),
         "InverseTutorial": Object,
         "DeterminantTutorial": Object
     }
