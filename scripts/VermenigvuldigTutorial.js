@@ -26,10 +26,11 @@ export class VermenigvuldigTutorial extends Tutorial {
             //return {element1:[this.rij1,this.midden],element2:[this.midden,this.kolom2],data:this.data, tekst:`${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.rij1][this.midden]} = ?`}
             tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij1}-${this.midden}']`).classList.add("rood");
             tutorialPage.tabel2.querySelector(`[data-id='id_${this.midden}-${this.kolom2}']`).classList.add("rood");
+            this.som += this.m1.matrix[this.rij1][this.midden] * this.m2.matrix[this.midden][this.kolom2];
             return {
                 finished: this.finished,
                 data: this.data,
-                tekst: `${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.midden][this.kolom2]} = ?`
+                tekst: `${this.m1.matrix[this.rij1][this.midden]} * ${this.m2.matrix[this.midden][this.kolom2]} = ?`
             }
         }
         this.midden++;
@@ -51,12 +52,12 @@ export class VermenigvuldigTutorial extends Tutorial {
             tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij1}-${this.midden}']`).classList.add("rood");
             tutorialPage.tabel2.querySelector(`[data-id='id_${this.midden}-${this.kolom2}']`).classList.add("rood");
         }
-        this.som += this.m1.matrix[this.rij1][this.midden] + this.m2.matrix[this.midden][this.kolom2];
+        this.som += this.m1.matrix[this.rij1][this.midden] * this.m2.matrix[this.midden][this.kolom2];
         //return {element1:[this.rij1,this.midden],element2:[this.midden,this.kolom2],finished:this.finished,data:this.data, tekst:`${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.midden][this.kolom2]} = ?`}
         return {
             finished: this.finished,
             data: this.data,
-            tekst: `${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.midden][this.kolom2]} = ?`
+            tekst: `${this.m1.matrix[this.rij1][this.midden]} * ${this.m2.matrix[this.midden][this.kolom2]} = ?`
         }
 
     }
