@@ -13,7 +13,7 @@ export class VermenigvuldigTutorial extends Tutorial {
         super(m1);
         this.stapnummer = 0;
         this.m2 = m2;
-        this.data = new Matrix(m1.aantalRijen, m2.aantalKolommen, true);
+        this.data = new Matrix(m1.aantalRijen, m2.aantalKolommen, "0");
         this.matrices.push(this.m1);
         this.matrices.push(this.m2);
         this.aantal_matrices = this.matrices.length;

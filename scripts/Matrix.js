@@ -5,17 +5,17 @@ export default class Matrix {
     //     this.matrix = [aantalRijen][aantalKolommen];
     // }
 
-    constructor(aantalRijen = 3, aantalKolommen = 3, empty = false) {
+    constructor(aantalRijen = 3, aantalKolommen = 3,fill=null) {
         this.aantalRijen = aantalRijen;
         this.aantalKolommen = aantalKolommen;
         this.matrix = new Array(aantalRijen);
         for (let i = 0; i < aantalRijen; i++) {
             this.matrix[i] = new Array(aantalKolommen);
         }
-        if (empty) {
+        if (fill) {
             for (let i = 0; i < this.aantalRijen; i++) {
                 for (let j = 0; j < this.aantalKolommen; j++) {
-                    this.matrix[i][j] = 0;
+                    this.matrix[i][j] = fill;
                 }
             }
         } else {

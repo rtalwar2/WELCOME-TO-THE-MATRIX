@@ -12,7 +12,7 @@ export class TransponeerTutorial extends Tutorial {
     constructor(m1) {
         super(m1);
         this.stapnummer = 0;
-        this.data = new Matrix(m1.aantalKolommen, m1.aantalRijen,true);
+        this.data = new Matrix(m1.aantalKolommen, m1.aantalRijen,"x");
         this.matrices.push(this.m1);
         this.aantal_matrices = this.matrices.length;
     }
@@ -21,6 +21,8 @@ export class TransponeerTutorial extends Tutorial {
         //{finished:boolean,data:een matrix, tekst:"de best passende beschrijving bij de huidige bewerking"}
         document.querySelectorAll(".rood").forEach(value => value.classList.remove("rood"));//maakt de juite elementen rood
         if(this.stapnummer===0){
+            tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij}-${this.kolom}']`).classList.add("rood");
+            //tutorialPage.tabel3.querySelector(`[data-id='id_${this.kolom}-${this.rij}']`).classList.add("rood");
             this.stapnummer++;
         }
         else{
@@ -39,10 +41,8 @@ export class TransponeerTutorial extends Tutorial {
                 console.log(`id_${this.kolom}-${this.rij}`);
             }
         }
-
         this.data.matrix[this.kolom][this.rij]=this.m1.matrix[this.rij][this.kolom];
         return {finished:this.finished,data:this.data, tekst:"de best passende beschrijving bij de huidige bewerking"}
-
     }
 
 }
