@@ -32,8 +32,7 @@ export class Speler {
     }
 
     eindTutorialOefening(naamTutOef) {   //na bepaalde oefening/tutorial opslaan in map ,ook naar localstorage
-        this.tutorials_finished.set(naamTutOef, true);      // hier een error??
-
+        this.tutorials_finished[naamTutOef] = true;
         this.saveData();
     }
 
@@ -41,10 +40,5 @@ export class Speler {
     saveData() {                     //Om data naar local storage te sturen
         let myJSON = JSON.stringify(this.tutorials_finished);
         localStorage.setItem(this.naam, myJSON);
-
-        //test
-        let jf = this.tutorials_finished.get("VermenigvuldigTutorial");
-        localStorage.setItem("vermtut", jf);
-        //
     }
 }

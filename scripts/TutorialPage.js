@@ -57,6 +57,7 @@ export class TutorialPage {
         document.querySelector(".modal-body").innerText = "Ben je klaar voor de oefening?";
         document.querySelector("#exampleModalLabel").innerText = localStorage.getItem("selected_button") + " afgewerkt!";
         document.querySelector("#init_modal").click();
+
         let spelernaam = localStorage.getItem("huidige speler");
         let speler = new Speler(spelernaam);
         speler.eindTutorialOefening(localStorage.getItem("selected_button"));
