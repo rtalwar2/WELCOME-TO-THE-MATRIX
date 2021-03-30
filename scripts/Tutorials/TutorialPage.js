@@ -1,9 +1,9 @@
-import Matrix from "./Matrix.js";
+import Matrix from "../Matrix.js";
 import {Tutorial} from "./Tutorial.js";
 import {VermenigvuldigTutorial} from "./VermenigvuldigTutorial.js";
 import {TransponeerTutorial} from "./TransponeerTutorial.js";
 
-import {Speler} from "./Speler.js";
+import {Speler} from "../Speler.js";
 
 export class TutorialPage {
     static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal

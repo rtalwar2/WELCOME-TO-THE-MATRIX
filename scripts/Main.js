@@ -1,5 +1,5 @@
-import {OefeningPage} from "./OefeningPage.js";
-import {TutorialPage} from "./TutorialPage.js";
+import {OefeningPage} from "./Oefeningen/OefeningPage.js";
+import {TutorialPage} from "./Tutorials/TutorialPage.js";
 import {Speler} from "./Speler.js";
 
 
