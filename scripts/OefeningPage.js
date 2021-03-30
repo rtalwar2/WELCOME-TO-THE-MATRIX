@@ -1,10 +1,12 @@
-import {TutorialPage} from "./TutorialPage";
-import {VermenigvuldigTutorial} from "./VermenigvuldigTutorial";
-import Matrix from "./Matrix";
+
+import Matrix from "./Matrix.js";
+import {Oefeningen} from "./Oefeningen.js";
+import {VermenigvuldigOefening} from "./VermenigvuldigOefening.js";
+
 alert("script gevonden");
 
 export class OefeningPage {
-    static alle_oefeningen = ["InverseOefeningen", "vermenigvuldigingOefeningen", "DeterminantOefeningen"];
+    static alle_oefeningen = ["vermenigvuldigingOefeningen","InverseOefeningen" , "DeterminantOefeningen"];
     static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal
 
         name: "VermenigvuldigingOefeningen", description: "Oefeningen op vermenigvuldigen van matrices, bekijk hiervoor eerst de VermenigvuldigTutorial"},
@@ -13,10 +15,11 @@ export class OefeningPage {
 
     static oefeningen = {//alle soorten oefeningen
         "VermenigvuldigOefening": new VermenigvuldigOefening(new Matrix(), new Matrix()),
-        "TransponeerTutorial": Object,
-        "InverseTutorial": Object,
-        "DeterminantTutorial": Object
+        //"TransponeerTutorial": Object,
+        //"InverseTutorial": Object,
+        //"DeterminantTutorial": Object
     }
+    oefening;
     tabel1 = document.querySelector("#tabel_m1");
     tabel2 = document.querySelector("#tabel_m2");
     tabel3 = document.querySelector("#tabel_m3");
@@ -24,16 +27,6 @@ export class OefeningPage {
     constructor() {
     }
 
-    getTutorials() {
-        return this.alle_beschrijvingen.keys();
-    }
-
-    startOefening(naam) {
-        this.tutorial = TutorialPage.tutorials[naam];//de juiste tutorial toegekend.
-        for (let i = 0; i < this.tutorial.aantal_matrices; i++) {//zodat er bij de juiste aantal matrices de juiste tabellen gecreerd worden
-            this.tutorial.matrices[i].drawMatrix(this.tabellen[i]);
-        }
-    }
 
 }
 
@@ -48,8 +41,8 @@ function showDescription() {
     document.querySelector("#init_modal").click();
 }
 function init() {
-    oef.startOefening(localStorage.getItem("selected_button"));//uit localstorage de juiste tutorial ophalen en starten
-    showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
-    document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
+    //oef.startOefening(localStorage.getItem("selected_button"));//uit localstorage de juiste Oefening ophalen en starten
+   // showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
+    //document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
 }
 init();

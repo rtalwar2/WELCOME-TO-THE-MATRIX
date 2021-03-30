@@ -5,6 +5,8 @@ export default class Matrix {
     //     this.matrix = [aantalRijen][aantalKolommen];
     // }
 
+
+
     constructor(aantalRijen = 3, aantalKolommen = 3, empty = false) {
         this.aantalRijen = aantalRijen;
         this.aantalKolommen = aantalKolommen;
@@ -29,6 +31,8 @@ export default class Matrix {
 
     vermenigvuldigMatrix(matrix_2) {
         let result = []; //dubbele array
+        if (this.matrix.size !== 3 || this.matrix[0].size !== 3) return false;
+        else {
         if (this.matrix.size === matrix_2[0].size) {
             for (let i = 0; i < this.matrix.size; i++) {
                 result[i] = [];
@@ -44,6 +48,7 @@ export default class Matrix {
             return false;
         }
         return new Matrix(result);
+    }
     }
 
 
