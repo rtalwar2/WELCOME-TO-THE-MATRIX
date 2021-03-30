@@ -16,12 +16,14 @@ export class Speler {
                     ["DeterminantOefening", false],
                     ["InverseOefening", false],
                     ["VermenigvuldigOefening", false]]);
-            localStorage.setItem(this.naam, this.tutorials_finished);
+
+            this.saveData();
         }else {                                                 //als speler wel bestaat
             let myJSON = localStorage.getItem(this.naam);
             this.tutorials_finished = JSON.parse(myJSON);
         }
 
+        localStorage.setItem("huidige speler", this.naam);
 
     }
 
@@ -30,8 +32,8 @@ export class Speler {
     }
 
     eindTutorialOefening(naamTutOef) {   //na bepaalde oefening/tutorial opslaan in map ,ook naar localstorage
-        this.tutorials_finished.set(naamTutOef, true);
-        this.saveData()
+        this.tutorials_finished[naamTutOef] = true;
+        this.saveData();
     }
 
 

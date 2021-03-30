@@ -3,6 +3,8 @@ import {Tutorial} from "./Tutorial.js";
 import {VermenigvuldigTutorial} from "./VermenigvuldigTutorial.js";
 import {TransponeerTutorial} from "./TransponeerTutorial.js";
 
+import {Speler} from "./Speler.js";
+
 export class TutorialPage {
     static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal
         name: "TransponeerTutorial",
@@ -58,6 +60,10 @@ export class TutorialPage {
         document.querySelector(".modal-body").innerText = "Ben je klaar voor de oefening?";
         document.querySelector("#exampleModalLabel").innerText = localStorage.getItem("selected_button") + " afgewerkt!";
         document.querySelector("#init_modal").click();
+
+        let spelernaam = localStorage.getItem("huidige speler");
+        let speler = new Speler(spelernaam);
+        speler.eindTutorialOefening(localStorage.getItem("selected_button"));
     }
 
     changeStep() {//*************het strategy pattern toegepast
