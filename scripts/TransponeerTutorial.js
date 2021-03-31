@@ -19,10 +19,11 @@ export class TransponeerTutorial extends Tutorial {
 
     refresh(tutorialPage) {//de logica van de Transponeertutorial
         //{finished:boolean,data:een matrix, tekst:"de best passende beschrijving bij de huidige bewerking"}
-        document.querySelectorAll(".rood").forEach(value => value.classList.remove("rood"));//maakt de juite elementen rood
+        document.querySelectorAll(".rood").forEach(value => value.classList.remove("rood"));//verwijjdert alle vorige rode elementen
         if(this.stapnummer===0){
-            tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij}-${this.kolom}']`).classList.add("rood");
-            //tutorialPage.tabel3.querySelector(`[data-id='id_${this.kolom}-${this.rij}']`).classList.add("rood");
+            tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij}-${this.kolom}']`).classList.add("rood");//maakt de juite elementen rood
+            setTimeout(()=>tutorialPage.tabel3.querySelector(`[data-id='id_${this.kolom}-${this.rij}']`).classList.add("rood"),1)
+            //die timeout is er zodat de klasse rood pas wordt toegevoegd nadat de matrix in de html is geladen
             this.stapnummer++;
         }
         else{
@@ -36,13 +37,11 @@ export class TransponeerTutorial extends Tutorial {
             }
             else{
                 tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij}-${this.kolom}']`).classList.add("rood");
-                tutorialPage.tabel3.querySelector(`[data-id='id_${this.kolom}-${this.rij}']`).classList.add("rood");
-                console.log( tutorialPage.tabel3.querySelector(`[data-id='id_${this.kolom}-${this.rij}']`))
-                console.log(`id_${this.kolom}-${this.rij}`);
+                setTimeout(()=>tutorialPage.tabel3.querySelector(`[data-id='id_${this.kolom}-${this.rij}']`).classList.add("rood"),1);
             }
         }
         this.data.matrix[this.kolom][this.rij]=this.m1.matrix[this.rij][this.kolom];
-        return {finished:this.finished,data:this.data, tekst:"de best passende beschrijving bij de huidige bewerking"}
+        return {finished:this.finished,data:this.data, tekst:`rij ${this.rij} wordt kolom ${this.rij}`}
     }
 
 }
