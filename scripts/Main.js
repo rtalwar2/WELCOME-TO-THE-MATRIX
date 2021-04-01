@@ -47,6 +47,7 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
 }
 
 function init() {
+    spelerMaken();
     haalKnoppen();
     document.querySelectorAll("button").forEach(value => value.addEventListener("click", ListenToKnop))
     //een aale knoppen eventlistener ListenToKnop toegevoegd
@@ -62,4 +63,3 @@ function spelerMaken(){
 }
 
 init();
-spelerMaken();
