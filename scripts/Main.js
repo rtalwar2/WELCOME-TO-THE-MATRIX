@@ -15,6 +15,7 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
         alle_teksten.push(i.name);
     }
     alle_teksten.push(...OefeningPage.alle_oefeningen);
+    alle_teksten.sort()
     for (let i in alle_teksten.slice(0, alle_teksten.length / 2)) {//per 2 de knoppen invoegen zodat ze mooi naast elkaar komen
         let row = document.createElement("div");//wel een PROBLEEM bij oneven aantal knoppen
         row.classList.add("row");

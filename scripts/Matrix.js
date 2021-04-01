@@ -5,6 +5,7 @@ export default class Matrix {
     //     this.matrix = [aantalRijen][aantalKolommen];
     // }
 
+
     constructor(aantalRijen = 3, aantalKolommen = 3,fill=null) {
 
         this.aantalRijen = aantalRijen;
@@ -51,7 +52,7 @@ export default class Matrix {
     }
 
 
-    drawMatrix(element) { //basis tekenfunctie, maakt een table aan en voegt deze toe aan element HTML DOM
+    drawMatrix(element) { //basis tekenfunctie, vult table aan
         let tabel = element;
         tabel.parentElement.classList.add(`col-md-${this.aantalKolommen}`);
         tabel.innerText = "";
@@ -81,7 +82,7 @@ export default class Matrix {
         // element.appendChild(table);
     }
 
-    getTransponneerde() {
+    getTransponneerde() {//kan eenvoudiger
         let hulpmatrix = this.matrix;
         for (let i = 0; i < this.length; i++) {
             for (let j = 0; j < i; j++) {
@@ -152,5 +153,23 @@ export default class Matrix {
             for (var j = 0; j < this.matrix.length; j++)
                 result[i][j] = hulpmatrix[i][j];
         return result;
+    }
+
+    toString(){
+        let output="|";
+            for (let j = 0; j < this.aantalKolommen; j++) {
+                output+=this.matrix[0][j];
+            }
+            output+="|\n";
+
+        for (let i = 1; i < this.aantalRijen; i++) {
+            output+="\xa0\xa0\xa0\xa0\xa0|"
+            for (let j = 0; j < this.aantalKolommen; j++) {
+                output+=this.matrix[i][j];
+            }
+            output+="|\n";
+        }
+           return output.replace(/(\n$)/, "");
+        //return output
     }
 }

@@ -4,13 +4,18 @@ import {VermenigvuldigTutorial} from "./VermenigvuldigTutorial.js";
 import {TransponeerTutorial} from "./TransponeerTutorial.js";
 
 import {Speler} from "../Speler.js";
+import {DeterminantTutorial} from "./DeterminantTutorial.js";
 
 export class TutorialPage {
-    static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal
-        name: "TransponeerTutorial",
-        description: "eerst algemene uitleg over transponeren van matrices"
-    },
-        {name: "InverseTutorial", description: "eerst algemene uitleg over inverteren van matrices"},
+    static alle_beschrijvingen = [
+        {//deze beschrijvingen worden getoond in de modal
+            name: "TransponeerTutorial",
+            description: "eerst algemene uitleg over transponeren van matrices"
+        },
+        {
+            name: "InverseTutorial",
+            description: "eerst algemene uitleg over inverteren van matrices"
+        },
         {
             name: "VermenigvuldigTutorial",
             description: "eerst algemene uitleg over vermenigvuldigen van matrices\n\n" +
@@ -27,14 +32,17 @@ export class TutorialPage {
                 "                                esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo\n" +
                 "                                voluptas nulla pariatur?\""
         },
-        {name: "DeterminantTutorial", description: "eerst algemene uitleg over determinanten van matrices"}];
+        {
+            name: "DeterminantTutorial",
+            description: "eerst algemene uitleg over determinanten van matrices"
+        }];
 
 
     static tutorials = {//alle tutorials
         "VermenigvuldigTutorial": new VermenigvuldigTutorial(new Matrix(), new Matrix()),
         "TransponeerTutorial": new TransponeerTutorial(new Matrix(2, 3)),
         "InverseTutorial": Object,
-        "DeterminantTutorial": Object
+        "DeterminantTutorial": new DeterminantTutorial(new Matrix(3, 3))
     }
     tutorial;//variabele voor huidige tutorial
     tabel1 = document.querySelector("#tabel_m1");

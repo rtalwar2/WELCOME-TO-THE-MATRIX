@@ -30,10 +30,11 @@ table td {
     padding: 0.75rem 0.75rem;
     color:white;
     /*padding-right: -5px;*/
+    position: relative;
 }
 
 .rood {
-    background-color: pink;
+    background-color: #28a745;
 }
 
 .invisible {
@@ -59,3 +60,52 @@ body{
     background-color: black;
     color:white;
 }
+
+/*table {*/
+/*    border-collapse: collapse;*/
+/*}*/
+
+/*td {*/
+/*    position: relative;*/
+/*    !*padding: 5px 10px;*!*/
+/*}*/
+
+/*tr.strikeout td:before {*/
+/*    content: " ";*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 0;*/
+/*    border-bottom: 1px solid #28a745;*/
+/*    width: 100%;*/
+/*}*/
+.vertical-line{
+    width:0px;
+    z-index:10011;
+    border-right: 1px solid #28a745;
+    position: absolute;
+    height: 100%;
+    left: 50%;
+    top: 0;
+}
+.horizontal-line{
+    height:0px;
+    z-index:100121;
+    border-bottom: 1px solid #28a745;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+}
+/*tr.strikeout td:before {*/
+/*    content: " ";*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 0;*/
+/*    border-bottom: 1px solid #28a745;*/
+/*    width: 100%;*/
+/*}*/
+
+/*tr.strikeout td:after {*/
+/*    !*content: "\00B7";*!*/
+/*    !*font-size: 1px;*!*/
+/*}*/

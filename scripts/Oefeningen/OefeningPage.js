@@ -4,10 +4,8 @@ import {Oefeningen} from "./Oefeningen.js";
 import {VermenigvuldigOefening} from "./VermenigvuldigOefening.js";
 
 
-alert("script gevonden");
-
 export class OefeningPage {
-    static alle_oefeningen = ["vermenigvuldigingOefeningen","InverseOefeningen" , "DeterminantOefeningen"];
+    static alle_oefeningen = ["vermenigvuldigingOefeningen","InverseOefeningen" , "DeterminantOefeningen","TransponeerOefening"];
     static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal
 
         name: "VermenigvuldigingOefeningen", description: "Oefeningen op vermenigvuldigen van matrices, bekijk hiervoor eerst de VermenigvuldigTutorial"},

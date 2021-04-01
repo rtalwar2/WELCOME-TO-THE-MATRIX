@@ -4,15 +4,18 @@ export class Tutorial {
     stapnummer;
     matrix;
     aantal_matrices;
-    m1;//matrix waarmee te tutorial begint
+    matrix1;//matrix waarmee te tutorial begint
     data; //van vorm {finished:boolean,data:een matrix, tekst:"de best passende beschrijving bij de huidige bewerking"} wordt teruggegeven door refresh methode
     finished = false;
+    rij1=0;
+    kolom1=-1;
+    matrices = [];
 
     constructor(m1) {
         if (this.constructor === Tutorial) {
             throw new Error("Abstract classes can't be instantiated.");
         }
-        this.m1 = m1;
+        this.matrix1 = m1;
     }
 
     refresh(stapnummer) {
