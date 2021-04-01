@@ -6,7 +6,7 @@ export class VermenigvuldigTutorial extends Tutorial {
     matrices = [];
     rij1 = 0;
     kolom2 = 0;
-    midden = 0;
+    midden = -1;
     som = 0;
     m2;//de tweede matrix waarmee vermenigvuldigd wordt
     constructor(m1, m2) {
@@ -21,13 +21,13 @@ export class VermenigvuldigTutorial extends Tutorial {
 
     refresh(tutorialPage) {//de logica van de vermenigvuldigtutorial
         document.querySelectorAll(".rood").forEach(value => value.classList.remove("rood"));//maakt de juite elementen rood
-        if (this.stapnummer === 0) {//als het de eerste stap is, incrementeer nog niets, ik heb geprobeerd om deze if eruit te halen maar dat is niet gelukt
-            this.stapnummer++;
-            //return {element1:[this.rij1,this.midden],element2:[this.midden,this.kolom2],data:this.data, tekst:`${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.rij1][this.midden]} = ?`}
-            tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij1}-${this.midden}']`).classList.add("rood");
-            tutorialPage.tabel2.querySelector(`[data-id='id_${this.midden}-${this.kolom2}']`).classList.add("rood");
-        }
-        else{
+        // if (this.stapnummer === 0) {//als het de eerste stap is, incrementeer nog niets, ik heb geprobeerd om deze if eruit te halen maar dat is niet gelukt
+        //     this.stapnummer++;
+        //     //return {element1:[this.rij1,this.midden],element2:[this.midden,this.kolom2],data:this.data, tekst:`${this.m1.matrix[this.rij1][this.midden]} + ${this.m2.matrix[this.rij1][this.midden]} = ?`}
+        //     tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij1}-${this.midden}']`).classList.add("rood");
+        //     tutorialPage.tabel2.querySelector(`[data-id='id_${this.midden}-${this.kolom2}']`).classList.add("rood");
+        // }
+        //else{
             this.midden++;
             if (this.midden === this.m1.aantalKolommen) {
                 this.midden = 0;
@@ -46,7 +46,7 @@ export class VermenigvuldigTutorial extends Tutorial {
             } else {//als de tutorial niet gedaan is, kleur de juiste elementen
                 tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij1}-${this.midden}']`).classList.add("rood");
                 tutorialPage.tabel2.querySelector(`[data-id='id_${this.midden}-${this.kolom2}']`).classList.add("rood");
-            }
+          //  }
         }
 
         this.som += this.m1.matrix[this.rij1][this.midden] * this.m2.matrix[this.midden][this.kolom2];
