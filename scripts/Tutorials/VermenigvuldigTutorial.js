@@ -1,5 +1,5 @@
 import {Tutorial} from "./Tutorial.js";
-import Matrix from "./Matrix.js";
+import Matrix from "../Matrix.js";
 
 export class VermenigvuldigTutorial extends Tutorial {
 
