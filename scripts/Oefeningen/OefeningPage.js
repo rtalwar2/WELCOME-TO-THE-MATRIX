@@ -17,7 +17,7 @@ export class OefeningPage {
         //"TransponeerTutorial": Object,
         //"InverseTutorial": Object,
         //"DeterminantTutorial": Object
-    }
+    };
     oefening;
     tabel1 = document.querySelector("#tabel_m1");
     tabel2 = document.querySelector("#tabel_m2");

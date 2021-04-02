@@ -149,7 +149,7 @@ export default class Matrix {
             }
         }
 
-        for (var i = 0; i < this.matrix.length; i++)
+        for (let i = 0; i < this.matrix.length; i++)
             for (var j = 0; j < this.matrix.length; j++)
                 result[i][j] = hulpmatrix[i][j];
         return result;

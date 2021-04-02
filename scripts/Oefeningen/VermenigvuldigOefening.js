@@ -15,12 +15,11 @@ export class VermenigvuldigOefening extends Oefeningen{
             this.m1= new Matrix();
             this.m2=new Matrix();
             this.data = new Matrix(this.m1.aantalRijen, this.m2.aantalKolommen, true);
-            this.oplossing=this.m1.vermenigvuldigMatrix(this.m2)
+            this.oplossing=this.m1.vermenigvuldigMatrix(this.m2);
             this.matrices.push(this.m1);
             this.matrices.push(this.m2);
             this.matrices.push(this.data);
             this.aantal_matrices= this.matrices.length;
-
 
         }
 
