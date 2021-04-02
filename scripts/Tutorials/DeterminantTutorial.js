@@ -28,6 +28,7 @@ export class DeterminantTutorial extends Tutorial {
         this.kolom1++;
         if (this.kolom1 === this.matrix1.aantalKolommen) {
             this.finished = true;
+            tutorialPage.updateBeschrijving(this.tekst +`\n\n som= ${this.determinant} = ${this.matrix1.getDeterminant()}`)
         }
         else {
 
@@ -57,11 +58,11 @@ export class DeterminantTutorial extends Tutorial {
                     }
                 }
             }
-
         }
-        this.tekst+=`${this.determinant}\n${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.data.toString()} = `
-        this.determinant=this.data.getDeterminant();
-        return {finished: this.finished, data: this.data, tekst:this.tekst}
+        this.tekst+=`${(-1)**(this.rij1+this.kolom1)} * ${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.data.toString()} =  ${(-1)**(this.rij1+this.kolom1)*this.matrix1.matrix[this.rij1][this.kolom1]} *`
+            +` ${this.data.getDeterminant()}=${(-1)**(this.rij1+this.kolom1)*this.matrix1.matrix[this.rij1][this.kolom1]*this.data.getDeterminant()}\n`
+        this.determinant+=` ${(-1) ** (this.rij1 + this.kolom1) * this.matrix1.matrix[this.rij1][this.kolom1] * this.data.getDeterminant()}`
+        return {finished: this.finished, data: this.data, tekst:this.tekst +`\n\n som= ${this.determinant}`}
     }
 
 }

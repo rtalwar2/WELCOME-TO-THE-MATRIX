@@ -39,10 +39,10 @@ export class TutorialPage {
 
 
     static tutorials = {//alle tutorials
-        "VermenigvuldigTutorial": new VermenigvuldigTutorial(new Matrix(), new Matrix()),
-        "TransponeerTutorial": new TransponeerTutorial(new Matrix(2, 3)),
-        "InverseTutorial": Object,
-        "DeterminantTutorial": new DeterminantTutorial(new Matrix(3, 3))
+        "VermenigvuldigTutorial": [new VermenigvuldigTutorial(new Matrix(), new Matrix()),new VermenigvuldigTutorial(new Matrix(2,2), new Matrix(2,4))],
+        "TransponeerTutorial":[ new TransponeerTutorial(new Matrix(2, 3))],
+        "InverseTutorial": [Object],
+        "DeterminantTutorial": [new DeterminantTutorial(new Matrix(3, 3)),new DeterminantTutorial(new Matrix(2, 2))]
     }
     tutorial;//variabele voor huidige tutorial
     tabel1 = document.querySelector("#tabel_m1");
@@ -50,11 +50,14 @@ export class TutorialPage {
     tabel3 = document.querySelector("#tabel_m3");
     tabellen = [this.tabel1, this.tabel2, this.tabel3];
 
+    tutorialnumber=0;
+
     constructor() {
     }
 
-    startTutorial(naam) {
-        this.tutorial = TutorialPage.tutorials[naam];//de juiste tutorial toegekend.
+    startTutorial(naam,index) {
+        document.querySelector("#next_step").disabled = false;
+        this.tutorial = TutorialPage.tutorials[naam][index];//de juiste tutorial toegekend.
         for (let i = 0; i < this.tutorial.aantal_matrices; i++) {//zodat er bij de juiste aantal matrices de juiste tabellen gecreerd worden
             this.tutorial.matrices[i].drawMatrix(this.tabellen[i]);
         }
@@ -72,6 +75,12 @@ export class TutorialPage {
         let speler = new Speler(spelernaam);
         speler.eindTutorialOefening(localStorage.getItem("selected_button"));
     }
+    nextTutorial(){
+        document.querySelector(".modal-body").innerText = "klaar voor het volgende deel?";
+        document.querySelector("#exampleModalLabel").innerText = localStorage.getItem("selected_button") +
+            ` ${this.tutorialnumber}/${TutorialPage.tutorials[localStorage.getItem("selected_button")].length} afgewerkt!`;
+        document.querySelector("#init_modal").click();
+    }
 
     changeStep() {//*************het strategy pattern toegepast
         let data = this.tutorial.refresh(this);//de refresh methode krijgt een verwijzing naar de klasse mee zodat die de juiste tabel kan roodkleuren
@@ -79,8 +88,19 @@ export class TutorialPage {
         //proberen om dit voor elke tutorial zo te krijgen
         data.data.drawMatrix(this.tabel3);
         if (data.finished) {
-            setTimeout(this.endTutorial, 2000);
             document.querySelector("#next_step").disabled = true;
+
+            this.tutorialnumber++;
+            console.log(this.tutorialnumber)
+            if(this.tutorialnumber!==TutorialPage.tutorials[localStorage.getItem("selected_button")].length){
+                setTimeout(()=>{this.nextTutorial();
+                this.startTutorial(localStorage.getItem("selected_button"),this.tutorialnumber);}
+            , 2000);
+            }
+            else{
+                setTimeout(this.endTutorial, 2000);
+            }
+
         } else {
             this.updateBeschrijving(data.tekst);
         }
@@ -103,7 +123,7 @@ function showDescription() {
 }
 
 function init() {
-    tp.startTutorial(localStorage.getItem("selected_button"));//uit localstorage de juiste tutorial ophalen en starten
+    tp.startTutorial(localStorage.getItem("selected_button"),0);//uit localstorage de juiste tutorial ophalen en starten
     showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
 }

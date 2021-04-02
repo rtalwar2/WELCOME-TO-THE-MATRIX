@@ -5,6 +5,7 @@ export class VermenigvuldigTutorial extends Tutorial {
 
     kolom2 = 0;
     som = 0;
+    tekst="";
     matrix2;//de tweede matrix waarmee vermenigvuldigd wordt
     constructor(m1, m2) {
         super(m1);
@@ -25,6 +26,7 @@ export class VermenigvuldigTutorial extends Tutorial {
             this.data.matrix[this.rij1][this.kolom2] = this.som;
             this.rij1++;
             this.som = 0;
+            this.tekst="";
         }
 
         if (this.rij1 === this.matrix1.aantalRijen) {
@@ -34,16 +36,22 @@ export class VermenigvuldigTutorial extends Tutorial {
 
         if (this.kolom2 === this.matrix2.aantalKolommen) {
             this.finished = true;
-        } else {//als de tutorial niet gedaan is, kleur de juiste elementen
+        }
+        else {//als de tutorial niet gedaan is, kleur de juiste elementen
             tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij1}-${this.kolom1}']`).classList.add("rood");
             tutorialPage.tabel2.querySelector(`[data-id='id_${this.kolom1}-${this.kolom2}']`).classList.add("rood");
         }
 
         this.som += this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2];
+        this.tekst+=`${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} +`
+        console.log(this.tekst)
+        this.tekst.replace(/[+]$/,"");//werkt om een reden niet om eerste (of laatste) + teken te verwijderen
+        console.log(this.tekst)
         return {
             finished: this.finished,
             data: this.data,
-            tekst: `${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} = ?`
+            tekst: `${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} = ? --> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]}\n`
+                +`som= ${this.tekst} =(${this.som})`
         }
 
     }

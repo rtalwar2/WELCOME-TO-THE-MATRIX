@@ -10,7 +10,6 @@ export class Tutorial {
     rij1=0;
     kolom1=-1;
     matrices = [];
-
     constructor(m1) {
         if (this.constructor === Tutorial) {
             throw new Error("Abstract classes can't be instantiated.");

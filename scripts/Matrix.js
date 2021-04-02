@@ -163,7 +163,7 @@ export default class Matrix {
             output+="|\n";
 
         for (let i = 1; i < this.aantalRijen; i++) {
-            output+="\xa0\xa0\xa0\xa0\xa0|"
+            output+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|"
             for (let j = 0; j < this.aantalKolommen; j++) {
                 output+=this.matrix[i][j];
             }
