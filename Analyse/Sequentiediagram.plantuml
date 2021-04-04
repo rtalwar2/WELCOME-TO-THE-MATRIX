@@ -5,43 +5,88 @@ actor Gebruiker
 participant MainProgram
 participant TutorialPage
 participant OefeningPage
+participant Tutorial
+participant Oefeningen
+participant Matrix
+participant Speler
+participant localStorage
+
+
+
 
 == Startup Program ==
+
 Gebruiker ->  MainProgram: Open Main
 activate MainProgram
-MainProgram->Gebruiker:vraag naam
-Gebruiker-->>MainProgram:naam
 
+MainProgram -> MainProgram: init()
+
+
+
+== Speler Maken ==
+
+MainProgram -> MainProgram: spelerMaken()
+
+MainProgram -> Gebruiker: prompt(naam?)
+Gebruiker -->> MainProgram: naam
+
+MainProgram -> Speler: Speler(naam)
 activate Speler
-MainProgram->Speler:Speler(naam)
-MainProgram->Speler:getData(naam)
-Speler-->>MainProgram:data
+
+Speler -> localStorage: getItem(naam)
+localStorage -->> Speler: data over speler
+Speler -> Speler: saveData()
+Speler -> localStorage: setItem(naam, data)
+
+MainProgram -> Speler: getData()
+Speler -->> MainProgram: Map<String,boolean>
 
 
-MainProgram -> TutorialPage :get Tutorials
-TutorialPage-->>MainProgram: returns tutorials
-MainProgram -> OefeningPage :get oefeningen
-OefeningPage-->>MainProgram: returns oefeningen
 
-MainProgram -> MainProgram: generate html page
+== HTML goed genereren ==
+
+MainProgram -> MainProgram: haalKnoppen()
+
+MainProgram -> TutorialPage: TutorialPage.alle_beschrijvingen
+TutorialPage-->>MainProgram: returns alle_beschrijvingen
+
+MainProgram -> OefeningPage: OefeningPage.alle_oefeningen
+OefeningPage-->>MainProgram: returns alle_oefeningen
+
+MainProgram -->> MainProgram: generate html page
+
+
+
+== Kies Deelsysteem ==
+
 Gebruiker -> MainProgram: Kiest Deelsysteem
 
-opt if deelsysteem is Tutorial
-    MainProgram->TutorialPage: target button
-    activate TutorialPage
-    TutorialPage -->> TutorialPage: generate html page
+MainProgram -> MainProgram: ListenToKnop(event)
+MainProgram -> localStorage: setItem("selected_button", naam deelsysteem)
+
+
+opt  if deelsysteem is Tutorial
+        MainProgram -> TutorialPage: open TutorialPage
+        activate TutorialPage
+        TutorialPage -->> TutorialPage: generate html page
     
- else if deelsysteem is Oefening
-    
-    MainProgram->OefeningPage: target button
-    activate OefeningPage
-    OefeningPage -->> OefeningPage: generate html page
+     else if deelsysteem is Oefening
+        MainProgram -> OefeningPage: open OefeningPage
+        activate OefeningPage
+        OefeningPage -->> OefeningPage: generate html page
 
 end
 deactivate MainProgram
 
-== Tutorials  == 
+
+
+== Tutorials  ==
 deactivate OefeningPage
+
+TutorialPage -> TutorialPage: init()
+
+
+
 TutorialPage -> Matrix: create object matrix
 activate Matrix
 Matrix-->>TutorialPage:return matrix

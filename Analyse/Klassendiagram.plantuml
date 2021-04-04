@@ -28,7 +28,7 @@ class TutorialPage{
     - HTML-Tag tabel3
     - HTML-Tag[] tabellen
     - int tutorialnummer
-    - Map<naam: string,beschrijvingen: string[]> alle_beschrijvingen
+    + Map<naam: string,beschrijvingen: string[]> alle_beschrijvingen
 
     + startTutorial(naam:string, index: int): void
     + updateBeschrijving(tekst: String): void
@@ -38,6 +38,8 @@ class TutorialPage{
 }
 
 class OefeningPage{
+    + Map<naam: string,beschrijvingen: string[]> alle_oefeningen
+
 
     + startTutorial(string): generate html
     + updateBeschrijving(): void
