@@ -15,10 +15,10 @@ main{
 #final_footer {
     height: 150px;
     color: lightgray;
-    background-color: black;
-    margin-top: 50px;
     /* line-height: 20px; */
     text-align: center;
+    position:fixed;
+    width:100%;
   }
   #final_footer p {
     padding: 50px 0;
@@ -47,3 +47,4 @@ canvas {
     border-width: thick;
     background-color: black;
 }
+

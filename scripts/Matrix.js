@@ -138,11 +138,11 @@ export default class Matrix {
             }
         }
 
-        for (var k = this.matrix.length - 1; k > 0; k--) {
-            for (var i = k - 1; i >= 0; i--) {
+        for (let k = this.matrix.length - 1; k > 0; k--) {
+            for (let i = k - 1; i >= 0; i--) {
                 temp = result[i][k];
 
-                for (var j = 0; j < this.matrix.length; j++) {
+                for (let j = 0; j < this.matrix.length; j++) {
                     result[i][j] -= result[k][j] * temp;
                     hulpmatrix[i][j] -= hulpmatrix[k][j] * temp;
                 }
@@ -150,7 +150,7 @@ export default class Matrix {
         }
 
         for (let i = 0; i < this.matrix.length; i++)
-            for (var j = 0; j < this.matrix.length; j++)
+            for (let j = 0; j < this.matrix.length; j++)
                 result[i][j] = hulpmatrix[i][j];
         return result;
     }
@@ -163,7 +163,7 @@ export default class Matrix {
             output+="|\n";
 
         for (let i = 1; i < this.aantalRijen; i++) {
-            output+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|"
+            output+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|";
             for (let j = 0; j < this.aantalKolommen; j++) {
                 output+=this.matrix[i][j];
             }
