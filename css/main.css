@@ -15,7 +15,6 @@ main{
 #final_footer {
     height: 150px;
     color: lightgray;
-    background-color: black;
     /* line-height: 20px; */
     text-align: center;
     position:fixed;
@@ -48,3 +47,4 @@ canvas {
     border-width: thick;
     background-color: black;
 }
+
