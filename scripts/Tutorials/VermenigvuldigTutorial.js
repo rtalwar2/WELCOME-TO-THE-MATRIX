@@ -46,7 +46,7 @@ export class VermenigvuldigTutorial extends Tutorial {
 
         this.tekst+=`${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} +`
         console.log(this.tekst);
-        this.tekst.replace(/[+]$/,"");//werkt om een reden niet om eerste (of laatste) + teken te verwijderen
+        this.tekst.replace(/\+ $/,"");//werkt om een reden niet om eerste (of laatste) + teken te verwijderen
         console.log(this.tekst);
         return {
             finished: this.finished,
@@ -54,7 +54,5 @@ export class VermenigvuldigTutorial extends Tutorial {
             tekst: `${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} = ? --> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]}\n`
                 +`som= ${this.tekst} =(${this.som})`
         }
-
     }
-
 }

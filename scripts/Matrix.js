@@ -29,7 +29,7 @@ export default class Matrix {
         }
     }
 
-    vermenigvuldigMatrix(matrix_2) {
+    vermenigvuldigMatrix(matrix_2) { // moet nog een check bijkomen
         let result = []; //dubbele array
         if (this.matrix.length === matrix_2.matrix.length) {
             for (let i = 0; i < this.matrix.length; i++) {
@@ -106,7 +106,7 @@ export default class Matrix {
             result += this.matrix[0][2] * (this.matrix[1][0] * this.matrix[2][1] - this.matrix[1][1] * this.matrix[2][0]);
             return result;
         }*/
-
+        //werkt nog niet
         const subMatrix = (index) => this.matrix.slice(1).map(row => row.filter((e, colIndex) => colIndex !== index));
         const sign = (index) => index % 2 === 0 ? 1 : -1;
 
