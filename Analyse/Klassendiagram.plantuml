@@ -6,17 +6,18 @@ skinparam ClassAttributeIconSize 0
 
 
 class Matrix{
-    - int aantalRijen
-    - int aantalKolommen
+    + int aantalRijen
+    + int aantalKolommen
     + int [][] matrix {readOnly}
 
     + Matrix(aantalRijen: int, aantalKolommen: int, fill: [][])
 
-    + drawMatrix(element: Table-Tag) : void
     + vermenigvuldigMatrix(matrix_2: Matrix): Matrix
+    + importMatrix(dubbele_array: [][]): Matrix
+    + drawMatrix(element: Table-Tag) : void
+    + getTransponneerde(): Matrix
     + getDeterminant(): int
     + getInverse(): Matrix
-    + getTransponneerde(): Matrix
     + toSring(): String
 }
 
