@@ -27,14 +27,19 @@ export class OefeningPage {
     constructor() {
     }
 
-    startOefening(naam){
-        if(naam==="VermenigvuldigOefening"){
+    startOefening(naam) {
+        if (naam === "VermenigvuldigOefening") {
             this.oefening = OefeningPage.oefeningen[naam];
-            for(let i=0; i< this.oefening.aantal_matrices; i++){
+            this.oefening.maakInvul();
+            for (let i = 0; i < this.oefening.aantal_matrices; i++) {
                 this.oefening.matrices[i].drawMatrix(this.tabellen[i]);
             }
         }
-        }
+    }
+
+    maakInvul(){
+        throw new Error("This function needs to be implemented.");
+    }
 
 }
 
@@ -56,5 +61,6 @@ function init() {
     //showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     //document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
 }
+
 init();
 

@@ -98,14 +98,20 @@ export default class Matrix {
     }
 
     getDeterminant() { //tijdelijk enkel voor 3x3 matrixen, groter gaat ander algoritme gebruiken, dit kan ook efficienter(recursief)
-        let result = 0;
+        /*let result = 0;
         if (this.matrix.size !== 3 || this.matrix[0].size !== 3) return false;
         else {
             result += this.matrix[0][0] * (this.matrix[1][1] * this.matrix[2][2] - this.matrix[1][2] * this.matrix[2][1]);
             result -= this.matrix[0][1] * (this.matrix[1][0] * this.matrix[2][2] - this.matrix[1][2] * this.matrix[2][0]);
             result += this.matrix[0][2] * (this.matrix[1][0] * this.matrix[2][1] - this.matrix[1][1] * this.matrix[2][0]);
             return result;
-        }
+        }*/
+
+        const subMatrix = (index) => this.matrix.slice(1).map(row => row.filter((e, colIndex) => colIndex !== index));
+        const sign = (index) => index % 2 === 0 ? 1 : -1;
+
+        if (this.matrix.length === 1) return this.matrix[0][0];
+        return this.matrix[0].reduce((sum, curr, i) => sum + sign(i) * curr * this.getDeterminant(subMatrix(i)), 0);
     }
 
     getInverse() {
