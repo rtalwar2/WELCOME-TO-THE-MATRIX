@@ -4,7 +4,7 @@ import {Oefeningen} from "./Oefeningen.js";
 import {VermenigvuldigOefening} from "./VermenigvuldigOefening.js";
 
 
-export class OefeningPage {
+    export class OefeningPage {
     static alle_oefeningen = ["VermenigvuldigOefening","InverseOefening" , "DeterminantOefening","TransponeerOefening"];
     static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal
 
@@ -37,10 +37,6 @@ export class OefeningPage {
         }
     }
 
-    maakInvul(){
-        throw new Error("This function needs to be implemented.");
-    }
-
 }
 
 
@@ -61,6 +57,9 @@ function init() {
     //showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     //document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
 }
+let oef;
+if (window.location.pathname.split("/")[2] === "OefeningPage.html") {
+    init();
+}
 
-init();
 

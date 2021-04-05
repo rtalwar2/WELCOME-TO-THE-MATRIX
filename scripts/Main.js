@@ -4,10 +4,16 @@ import {Speler} from "./Speler.js";
 
 
 function ListenToKnop(event) {
-    localStorage.setItem("selected_button", event.target.innerText);//opschrift van de knop opslaan in local storage
-    window.open("./TutorialPage.html", "_self");//naar TutorialPage gaan, moet later gewijzigd worden met Oefeningenpage,
-    // kan gemakkelijk door bij invoegen van knoppen aan elke knop data-page="./TutorialPage.html" of data-page="./OefeningPage.html" toe te voegen
-}
+    let target = event.target.innerText
+    localStorage.setItem("selected_button", target);//opschrift van de knop opslaan in local storage
+    if(target.includes("Oefening")){
+        window.open("./OefeningPage.html","_self");
+    }else{
+        window.open("./TutorialPage.html", "_self"); //naar TutorialPage gaan, moet later gewijzigd worden met Oefeningenpage,
+        // kan gemakkelijk door bij invoegen van knoppen aan elke knop data-page="./TutorialPage.html" of data-page="./OefeningPage.html" toe te voegen
+
+    }
+   }
 
 function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en OefeningenPage klassen
     let alle_teksten = [];

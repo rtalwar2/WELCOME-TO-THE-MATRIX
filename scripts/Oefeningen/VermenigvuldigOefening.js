@@ -3,20 +3,21 @@ import Matrix from "../Matrix.js";
 
 
 export class VermenigvuldigOefening extends Oefeningen {
-    lege_matrix;
+
     oplossing;
     matrix2;
 
     constructor(m1, m2) {
         super(m1);
         this.matrix2 = m2;
-        this.lege_matrix = new Matrix();
+
         this.data = new Matrix(m1.aantalRijen, m2.aantalKolommen, "0");
         this.matrices.push(this.matrix1);
         this.matrices.push(this.matrix2);
         this.oplossing= m1.vermenigvuldigMatrix(m2);
         this.aantal_matrices = this.matrices.length;
     }
+
 
     getMatrix() {
         var matrix_row = [];
@@ -47,7 +48,7 @@ export class VermenigvuldigOefening extends Oefeningen {
                 }
             }
         }
-        return true;
+        return bool;
     }
 
 
@@ -82,10 +83,7 @@ export class VermenigvuldigOefening extends Oefeningen {
             form.appendChild(br);
         }
         //knop om checkMatrix uit te voeren
-        $("#get").click(function(){
-                console.log(this.checkMatrix());
-            }
-        );
     }
+
 }
 
