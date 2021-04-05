@@ -6,7 +6,7 @@ export default class Matrix {
     // }
 
 
-    constructor(aantalRijen = 3, aantalKolommen = 3,fill=null) {
+    constructor(aantalRijen = 3, aantalKolommen = 3,fill=false) {
 
         this.aantalRijen = aantalRijen;
         this.aantalKolommen = aantalKolommen;
@@ -14,10 +14,10 @@ export default class Matrix {
         for (let i = 0; i < aantalRijen; i++) {
             this.matrix[i] = new Array(aantalKolommen);
         }
-        if (fill) {
+        if (!fill) {
             for (let i = 0; i < this.aantalRijen; i++) {
                 for (let j = 0; j < this.aantalKolommen; j++) {
-                    this.matrix[i][j] = fill;
+                    this.matrix[i][j] =0 ;
                 }
             }
         } else {
@@ -113,7 +113,7 @@ export default class Matrix {
         for (let i = 0; i < this.matrix.length; i++)
             hulpmatrix[i] = [];
 
-        for (i = 0; i < this.matrix.length; i++)
+        for (let i = 0; i < this.matrix.length; i++)
             for (let j = 0; j < this.matrix.length; j++) {
                 hulpmatrix[i][j] = 0;
                 if (i === j)

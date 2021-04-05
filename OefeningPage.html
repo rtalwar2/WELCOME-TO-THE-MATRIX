@@ -17,89 +17,77 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <header>
-                <h1>Matrix Oefeningen</h1>
-            </header>
-            <main>
+        <header>
+            <h1>Matrix Oefeningen</h1>
+        </header>
+        <main>
 
-                <!-- Button trigger modal -->
-                <button id="init_modal" type="button" class="invisible" data-toggle="modal" data-target="#exampleModal"></button>
+            <!-- Button trigger modal -->
+            <button id="init_modal" type="button" class="invisible" data-toggle="modal" data-target="#exampleModal"></button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <!--                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">laten we beginnen</button>
-                            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <!--                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">laten we beginnen</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <section>
-                    <article>
-                        <div class="row">
-                            <div>
-                                <table id="tabel_m1" class="table">
-                                </table>
+            <section>
+                <article>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row align-middle">
+                                <div>
+                                    <table id="tabel_m1" class="table">
+                                    </table>
+                                </div>
+                                <div>
+                                    <table id="tabel_m2" class="table">
+                                    </table>
+                                </div>
+                                <div>
+                                    <table id="tabel_m3" class="table">
+
+                                    </table>
+                                    <div class="col-md-6"><form id="frm"></form></div>
+                                </div>
                             </div>
-                            <div>
-                                <table id="tabel_m2" class="table">
-                                </table>
-                            </div>
-                            <div>
-                                <table id="tabel_m3" class="table">
-                                </table>
-                            </div>
-                            <p class="col-md-8">
-                                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                                veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
-                                porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-                                velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore
-                                magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-                                exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-                                consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit
-                                esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
-                                voluptas nulla pariatur?"
-                            </p>
-                            <!--                            <div class="col-md-2">-->
-                            <!--                                <table class="table">-->
-                            <!--                                    <tbody class="col-md-8">-->
-                            <!--                                    <tr>-->
-                            <!--                                        <td><input type="text" /></td>-->
-                            <!--                                        <td><input type="text" /></td>-->
-                            <!--                                        <td><input type="text" /></td>-->
-                            <!--                                    </tr>-->
-                            <!--                                    <tr>-->
-                            <!--                                        <td><input type="text" /></td>-->
-                            <!--                                        <td><input type="text" /></td>-->
-                            <!--                                        <td><input type="text" /></td>-->
-                            <!--                                    </tr>-->
-                            <!--                                    <tr>-->
-                            <!--                                        <td><input type="text" /></td>-->
-                            <!--                                        <td><input type="text" /></td>-->
-                            <!--                                        <td><input type="text" /></td>-->
-                            <!--                                    </tr>-->
-                            <!--                                    </tbody>-->
-                            <!--                                </table>-->
-                            <!--                            </div>-->
                         </div>
-                    </article>
-                    <button id="next_step" type="button" >next</button>
+
+
+                        <button id="get"> get</button>
+                        <p class="col-md-8">
+                            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                            doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                            veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                            voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                            consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
+                            porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
+                            velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore
+                            magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+                            exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+                            consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit
+                            esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+                            voluptas nulla pariatur?"
+                        </p>
+                    </div>
+                </article>
+
+                    <button id="correct_opl" type="button" >indienen</button>
                 </section>
             </main>
             <footer id="final_footer">

@@ -5,38 +5,41 @@ import {VermenigvuldigOefening} from "./VermenigvuldigOefening.js";
 
 
 export class OefeningPage {
-    static alle_oefeningen = ["vermenigvuldigingOefeningen","InverseOefeningen" , "DeterminantOefeningen","TransponeerOefening"];
+    static alle_oefeningen = ["VermenigvuldigOefening","InverseOefening" , "DeterminantOefening","TransponeerOefening"];
     static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal
 
-        name: "VermenigvuldigingOefeningen", description: "Oefeningen op vermenigvuldigen van matrices, bekijk hiervoor eerst de VermenigvuldigTutorial"},
-        {name: "DeterminantOefeningen", description: "Oefeningen op determinant van matrices, bekijk hiervoor eerst de DeterminantTutorial"},
-        {name: "InverseOefeningen", description: "Oefeningen op inverses van matrices, bekijk hiervoor eerst de InverseTutorial"}];
+        name: "VermenigvuldigingOefening", description: "Oefeningen op vermenigvuldigen van matrices, bekijk hiervoor eerst de VermenigvuldigTutorial"},
+        {name: "DeterminantOefening", description: "Oefeningen op determinant van matrices, bekijk hiervoor eerst de DeterminantTutorial"},
+        {name: "InverseOefening", description: "Oefeningen op inverses van matrices, bekijk hiervoor eerst de InverseTutorial"}];
 
     static oefeningen = {//alle soorten oefeningen
-        "VermenigvuldigOefening": new VermenigvuldigOefening(1),
-        //"TransponeerTutorial": Object,
-        //"InverseTutorial": Object,
-        //"DeterminantTutorial": Object
+        "VermenigvuldigOefening": new VermenigvuldigOefening(new Matrix(3,3,true),new Matrix(3,3,true)),
+        //"TransponeerOefening":Object,
+        "InverseOefeningen": Object,
+        "DeterminantOefening": Object
     };
     oefening;
     tabel1 = document.querySelector("#tabel_m1");
     tabel2 = document.querySelector("#tabel_m2");
     tabel3 = document.querySelector("#tabel_m3");
-    tabellen = [this.tabel1, this.tabel2, this.tabel3];
+    tabellen = [this.tabel1, this.tabel2,this.tabel3];
 
     constructor() {
     }
 
     startOefening(naam){
-        this.oefening = OefeningPage.oefeningen[naam];
-        this.oefening.drawMatrix(this.tabellen[0]);
-
-
+        if(naam==="VermenigvuldigOefening"){
+            this.oefening = OefeningPage.oefeningen[naam];
+            for(let i=0; i< this.oefening.aantal_matrices; i++){
+                this.oefening.matrices[i].drawMatrix(this.tabellen[i]);
+            }
+        }
         }
 
-
-
 }
+
+
+
 let oef= new OefeningPage();
 
 
@@ -50,7 +53,8 @@ function showDescription() {
 }
 function init() {
     oef.startOefening(localStorage.getItem("selected_button"));//uit localstorage de juiste Oefening ophalen en starten
-    showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
+    //showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     //document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
 }
-//init();
+init();
+

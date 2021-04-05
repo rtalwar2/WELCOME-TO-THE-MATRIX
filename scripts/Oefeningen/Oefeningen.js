@@ -2,14 +2,16 @@ import Matrix from "../Matrix.js";
 
 
 export class Oefeningen {
-    aantal_oefeningen;
-    aantal_juist;
-    m1;
+    matrix1;
     aantal_matrices;
     data;
     finished= false;
+    matrices = [];
 
-    constructor(aantal) {
-        this.aantal_oefeningen=aantal;
+    constructor(m1) {
+        if (this.constructor === Oefeningen) {
+            throw new Error("Abstract classes can't be instantiated.");
+        }
+        this.matrix1=m1;
     }
 }
