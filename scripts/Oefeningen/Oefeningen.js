@@ -15,4 +15,12 @@ export class Oefeningen {
         }
         this.matrix1=m1;
     }
+
+    maakInvul(){
+        throw new Error("maakInvul needs to be implemented.");
+    }
+
+    checkOplossing(){
+        throw new Error("checkOplossing needs to be implemented.");
+    }
 }

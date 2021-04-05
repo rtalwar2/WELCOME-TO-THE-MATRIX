@@ -36,8 +36,8 @@ export default class Matrix {
                 result[i] = [];
                 for (let j = 0; j < matrix_2.matrix.length; j++) {
                     let sum = 0;
-                    for (let k = 0; k < this.matrix[0].size; k++) {
-                        sum += this.matrix[i][k] * matrix_2[k][j];
+                    for (let k = 0; k < this.matrix[0].length; k++) {
+                        sum += this.matrix[i][k] * matrix_2.matrix[k][j];
                     }
                     result[i][j] = sum;
                 }
