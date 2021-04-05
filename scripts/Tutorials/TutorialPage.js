@@ -39,7 +39,7 @@ export class TutorialPage {
 
 
     static tutorials = {//alle tutorials
-        "VermenigvuldigTutorial": [new VermenigvuldigTutorial(new Matrix(), new Matrix()),new VermenigvuldigTutorial(new Matrix(2,2), new Matrix(2,4))],
+        "VermenigvuldigTutorial": [new VermenigvuldigTutorial(new Matrix(3,3,true), new Matrix(3,3,true)),new VermenigvuldigTutorial(new Matrix(2,2), new Matrix(2,4))],
         "TransponeerTutorial":[ new TransponeerTutorial(new Matrix(2, 3))],
         "InverseTutorial": [Object],
         "DeterminantTutorial": [new DeterminantTutorial(new Matrix(3, 3)),new DeterminantTutorial(new Matrix(2, 2))]
