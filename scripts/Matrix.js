@@ -31,12 +31,10 @@ export default class Matrix {
 
     vermenigvuldigMatrix(matrix_2) {
         let result = []; //dubbele array
-        if (this.matrix.size !== 3 || this.matrix[0].size !== 3) return false;
-        else {
-        if (this.matrix.size === matrix_2[0].size) {
+        if (this.matrix.size === matrix_2.matrix.size) {
             for (let i = 0; i < this.matrix.size; i++) {
                 result[i] = [];
-                for (let j = 0; j < matrix_2[0].size; j++) {
+                for (let j = 0; j < matrix_2.matrix.size; j++) {
                     let sum = 0;
                     for (let k = 0; k < this.matrix[0].size; k++) {
                         sum += this.matrix[i][k] * matrix_2[k][j];
@@ -44,13 +42,18 @@ export default class Matrix {
                     result[i][j] = sum;
                 }
             }
-        } else {
-            return false;
         }
-        return new Matrix(result);
-    }
+        return result;
     }
 
+    importMatrix(dubbele_array){
+      for(let i=0;i<dubbele_array.length;i++){
+          for(let j=0;j<dubbele_array[i].length;j++){
+              this.matrix[i][j]=dubbele_array[i][j];
+          }
+      }
+        return this.matrix;
+    }
 
     drawMatrix(element) { //basis tekenfunctie, vult table aan
         let tabel = element;

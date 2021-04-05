@@ -8,7 +8,7 @@ export class OefeningPage {
     static alle_oefeningen = ["VermenigvuldigOefening","InverseOefening" , "DeterminantOefening","TransponeerOefening"];
     static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal
 
-        name: "VermenigvuldigingOefening", description: "Oefeningen op vermenigvuldigen van matrices, bekijk hiervoor eerst de VermenigvuldigTutorial"},
+        name: "VermenigvuldigOefening", description: "Oefeningen op vermenigvuldigen van matrices, bekijk hiervoor eerst de VermenigvuldigTutorial"},
         {name: "DeterminantOefening", description: "Oefeningen op determinant van matrices, bekijk hiervoor eerst de DeterminantTutorial"},
         {name: "InverseOefening", description: "Oefeningen op inverses van matrices, bekijk hiervoor eerst de InverseTutorial"}];
 

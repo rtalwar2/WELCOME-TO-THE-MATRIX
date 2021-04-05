@@ -8,6 +8,7 @@ export class Oefeningen {
     finished= false;
     matrices = [];
 
+
     constructor(m1) {
         if (this.constructor === Oefeningen) {
             throw new Error("Abstract classes can't be instantiated.");
