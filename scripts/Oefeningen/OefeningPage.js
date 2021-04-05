@@ -4,7 +4,7 @@ import {Oefeningen} from "./Oefeningen.js";
 import {VermenigvuldigOefening} from "./VermenigvuldigOefening.js";
 
 
-export class OefeningPage {
+    export class OefeningPage {
     static alle_oefeningen = ["VermenigvuldigOefening","InverseOefening" , "DeterminantOefening","TransponeerOefening"];
     static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal
 
@@ -37,17 +37,7 @@ export class OefeningPage {
         }
     }
 
-    maakInvul(){
-        throw new Error("This function needs to be implemented.");
-    }
-
 }
-
-
-
-let oef= new OefeningPage();
-
-
 function showDescription() {
     //in de modal de juiste beschijving steken ze worden opgehaald uit JSON alle_beschrijvingen van TutorialPage klasse
     document.querySelector(".modal-body").innerText = OefeningPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).description;
@@ -57,10 +47,17 @@ function showDescription() {
     document.querySelector("#init_modal").click();
 }
 function init() {
+    oef= new OefeningPage();
     oef.startOefening(localStorage.getItem("selected_button"));//uit localstorage de juiste Oefening ophalen en starten
     //showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     //document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
+    document.getElementById("check").addEventListener("click",function(){
+        oef.oefening.checkOplossing(oef.oefening);
+    });
+}
+let oef;
+if (window.location.pathname.split("/")[2] === "OefeningPage.html") {
+    init();
 }
 
-init();
 

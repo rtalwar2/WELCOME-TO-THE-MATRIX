@@ -31,13 +31,13 @@ export default class Matrix {
 
     vermenigvuldigMatrix(matrix_2) {
         let result = []; //dubbele array
-        if (this.matrix.size === matrix_2.matrix.size) {
-            for (let i = 0; i < this.matrix.size; i++) {
+        if (this.matrix.length === matrix_2.matrix.length) {
+            for (let i = 0; i < this.matrix.length; i++) {
                 result[i] = [];
-                for (let j = 0; j < matrix_2.matrix.size; j++) {
+                for (let j = 0; j < matrix_2.matrix.length; j++) {
                     let sum = 0;
-                    for (let k = 0; k < this.matrix[0].size; k++) {
-                        sum += this.matrix[i][k] * matrix_2[k][j];
+                    for (let k = 0; k < this.matrix[0].length; k++) {
+                        sum += this.matrix[i][k] * matrix_2.matrix[k][j];
                     }
                     result[i][j] = sum;
                 }
