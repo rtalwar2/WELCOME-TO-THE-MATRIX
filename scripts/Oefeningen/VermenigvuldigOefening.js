@@ -14,6 +14,8 @@ export class VermenigvuldigOefening extends Oefeningen {
         this.data = new Matrix(m1.aantalRijen, m2.aantalKolommen, "0");
         this.matrices.push(this.matrix1);
         this.matrices.push(this.matrix2);
+        console.log(m1);
+        console.log(m2);
         this.oplossing= m1.vermenigvuldigMatrix(m2);
         this.aantal_matrices = this.matrices.length;
     }
@@ -44,7 +46,7 @@ export class VermenigvuldigOefening extends Oefeningen {
 
 
     correct(invul) {
-    let bool = true;
+        let bool = true;
         for (let i = 0; i < this.oplossing.length; i++) {
             for (let j = 0; j < this.oplossing[0].length; j++) {
                 if (this.oplossing[i][j] !== invul[i][j]) {
@@ -86,8 +88,6 @@ export class VermenigvuldigOefening extends Oefeningen {
             var br = $('<br>')[0];
             form.appendChild(br);
         }
-
-        //knop om checkMatrix uit te voeren
     }
 
 }

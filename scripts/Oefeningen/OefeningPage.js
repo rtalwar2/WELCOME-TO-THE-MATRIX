@@ -2,6 +2,7 @@
 import Matrix from "../Matrix.js";
 import {Oefeningen} from "./Oefeningen.js";
 import {VermenigvuldigOefening} from "./VermenigvuldigOefening.js";
+import {DeterminantOefeningen} from "./DeterminantOefening.js";
 
 
     export class OefeningPage {
@@ -16,7 +17,7 @@ import {VermenigvuldigOefening} from "./VermenigvuldigOefening.js";
         "VermenigvuldigOefening": new VermenigvuldigOefening(new Matrix(3,3,true),new Matrix(3,3,true)),
         //"TransponeerOefening":Object,
         "InverseOefeningen": Object,
-        "DeterminantOefening": Object
+        "DeterminantOefening": new DeterminantOefeningen(new Matrix(3,3,true))
     };
     oefening;
     tabel1 = document.querySelector("#tabel_m1");
@@ -34,6 +35,11 @@ import {VermenigvuldigOefening} from "./VermenigvuldigOefening.js";
             for (let i = 0; i < this.oefening.aantal_matrices; i++) {
                 this.oefening.matrices[i].drawMatrix(this.tabellen[i]);
             }
+        }
+        if(naam === "DeterminantOefening"){
+            this.oefening = OefeningPage.oefeningen[naam];
+            this.oefening.maakInvul();
+            this.oefening.matrices[0].drawMatrix(this.tabellen[0]);
         }
     }
 
