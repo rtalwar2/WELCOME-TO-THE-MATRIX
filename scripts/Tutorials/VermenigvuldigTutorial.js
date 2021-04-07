@@ -11,7 +11,7 @@ export class VermenigvuldigTutorial extends Tutorial {
         super(m1);
         this.stapnummer = 0;
         this.matrix2 = m2;
-        this.data = new Matrix(m1.aantalRijen, m2.aantalKolommen, "0");
+        this.data = new Matrix(m1.aantalRijen, m2.aantalKolommen, false);
         this.matrices.push(this.matrix1);
         this.matrices.push(this.matrix2);
         this.aantal_matrices = this.matrices.length;
@@ -43,6 +43,7 @@ export class VermenigvuldigTutorial extends Tutorial {
         }
 
         this.som += this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2];
+
         this.tekst+=`${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} +`
         console.log(this.tekst);
         this.tekst.replace(/\+ $/,"");//werkt om een reden niet om eerste (of laatste) + teken te verwijderen
@@ -53,7 +54,5 @@ export class VermenigvuldigTutorial extends Tutorial {
             tekst: `${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} = ? --> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]}\n`
                 +`som= ${this.tekst} =(${this.som})`
         }
-
     }
-
 }

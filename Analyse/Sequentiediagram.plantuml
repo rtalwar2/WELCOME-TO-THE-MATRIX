@@ -4,8 +4,9 @@ autonumber
 actor Gebruiker
 participant MainProgram
 participant TutorialPage
-participant OefeningPage
 participant Tutorial
+participant VermenigvuldigTutorial
+participant OefeningPage
 participant Oefeningen
 participant Matrix
 participant Speler
@@ -34,9 +35,11 @@ MainProgram -> Speler: Speler(naam)
 activate Speler
 
 Speler -> localStorage: getItem(naam)
+activate localStorage
 localStorage -->> Speler: data over speler
 Speler -> Speler: saveData()
 Speler -> localStorage: setItem(naam, data)
+Speler -> localStorage: setItem("huidige speler", naam)
 
 MainProgram -> Speler: getData()
 Speler -->> MainProgram: Map<String,boolean>
@@ -48,9 +51,11 @@ Speler -->> MainProgram: Map<String,boolean>
 MainProgram -> MainProgram: haalKnoppen()
 
 MainProgram -> TutorialPage: TutorialPage.alle_beschrijvingen
+activate TutorialPage
 TutorialPage-->>MainProgram: returns alle_beschrijvingen
 
 MainProgram -> OefeningPage: OefeningPage.alle_oefeningen
+activate OefeningPage
 OefeningPage-->>MainProgram: returns alle_oefeningen
 
 MainProgram -->> MainProgram: generate html page
@@ -65,14 +70,12 @@ MainProgram -> MainProgram: ListenToKnop(event)
 MainProgram -> localStorage: setItem("selected_button", naam deelsysteem)
 
 
-opt  if deelsysteem is Tutorial
+opt  if deelsysteem is een Tutorial
         MainProgram -> TutorialPage: open TutorialPage
-        activate TutorialPage
         TutorialPage -->> TutorialPage: generate html page
     
-     else if deelsysteem is Oefening
+     else if deelsysteem is een Oefening
         MainProgram -> OefeningPage: open OefeningPage
-        activate OefeningPage
         OefeningPage -->> OefeningPage: generate html page
 
 end
@@ -85,31 +88,112 @@ deactivate OefeningPage
 
 TutorialPage -> TutorialPage: init()
 
+TutorialPage -> localStorage: getItem("selected_button")
+localStorage -->> TutorialPage: naam deelsysteem
+
+TutorialPage -> TutorialPage: startTutorial(naam deelsysteem, 0)
+
+opt  if deelsysteem is VermenigvuldigTutorial
+
+        loop subtutorial
 
 
-TutorialPage -> Matrix: create object matrix
-activate Matrix
-Matrix-->>TutorialPage:return matrix
-TutorialPage -> Tutorial: generate matrix
-activate Tutorial
-TutorialPage -->> TutorialPage:update beschrijving
-loop while tutorial not finished
-    opt nextStep
-    Gebruiker->TutorialPage: press next step button
-    else previousStep
-    Gebruiker->TutorialPage: press previous step button
+            TutorialPage -> Matrix: new Matrix(3, 3)
+            activate Matrix
+            TutorialPage -> Matrix: new Matrix(3, 3)
 
-end    
-    TutorialPage -> Tutorial: refresh(stapnummer: int) 
-    TutorialPage -> TutorialPage: update beschrijving
-    Tutorial-->>Matrix: create object matrix
-    Matrix-->> Tutorial: return matrix
-    Tutorial-->>TutorialPage: Matrix[,int,int]
-    ' afhankelijk van welke tutorial je doet kan de refresh methode andere data teruggeven
-    ' Er wordt een nieuw matrix object gemaakt en teruggegeven
-    TutorialPage -->> TutorialPage: generate html page
+            Matrix -->> TutorialPage: Matrix1
+            Matrix -->> TutorialPage: Matrix2
+
+            TutorialPage -> VermenigvuldigTutorial: new VermenigvuldigTutorial(Matrix1, Matrix2)
+            activate VermenigvuldigTutorial
+
+            VermenigvuldigTutorial -> Tutorial: constructor()
+            activate Tutorial
+            Tutorial -->> VermenigvuldigTutorial: constructor
+
+            VermenigvuldigTutorial -> Matrix: new Matrix(.,.,"0")
+            Matrix -->> VermenigvuldigTutorial: "0" Matrix
+
+
+    '        TutorialPage -> Matrix: new Matrix(2, 2)
+    '        TutorialPage -> Matrix: new Matrix(2, 4)
+    '
+    '        Matrix -->> TutorialPage: Matrix3
+    '        Matrix -->> TutorialPage: Matrix4
+    '
+    '        TutorialPage -> VermenigvuldigTutorial: new VermenigvuldigTutorial(Matrix3, Matrix4)
+    '        VermenigvuldigTutorial -> Tutorial: constructor()
+    '        Tutorial -->> VermenigvuldigTutorial: constructor
+    '
+    '        VermenigvuldigTutorial -> Matrix: new Matrix(.,.,"0")
+    '        Matrix -->> VermenigvuldigTutorial: "0" Matrix
+
+            loop foreach tutorial.matrices[i]
+                    TutorialPage -> VermenigvuldigTutorial: matrices[i]
+                    VermenigvuldigTutorial -> Tutorial: matrices[i]
+                    Tutorial -->> VermenigvuldigTutorial: matrices[i]
+                    VermenigvuldigTutorial -->> TutorialPage: matrices[i]
+
+                    TutorialPage -> Matrix: drawMatrix(.)
+
+            end
+
+            TutorialPage -> TutorialPage: showDescription()
+            TutorialPage -> localStorage: getItem("selected_button")
+            localStorage -->> TutorialPage: naam deelsysteem
+            TutorialPage -> localStorage: getItem("selected_button")
+            localStorage -->> TutorialPage: naam deelsysteem
+
+            loop while niet laatste stap
+                opt nextStep
+                    Gebruiker -> TutorialPage: klik op next
+
+                    TutorialPage -> TutorialPage: ListenToKnop(event)
+                    TutorialPage -> TutorialPage: changeStep()
+
+                    TutorialPage -> VermenigvuldigTutorial: refresh(tutorialPage)
+                    VermenigvuldigTutorial -->> TutorialPage: {finished:., data:., tekst:.}
+
+                    TutorialPage -> Matrix: drawMatrix(.)
+                    TutorialPage -> TutorialPage: updateBeschrijving(.)
+
+                end
+            end
+
+            TutorialPage -> localStorage: getItem("selected_button")
+            localStorage -->> TutorialPage: naam deelsysteem
+
+            TutorialPage -> TutorialPage: nextTutorial()
+
+        end
+
+        TutorialPage -> TutorialPage: endTutorial()
+
+        TutorialPage -> localStorage: getItem("selected_button")
+        localStorage -->> TutorialPage: naam deelsysteem
+
+        TutorialPage -> localStorage: getItem("huidige speler")
+        localStorage -->> TutorialPage: huidige speler
+
+        TutorialPage -> Speler: new Speler(spelernaam)
+
+        Speler -> localStorage: getItem(naam)
+        localStorage -->> Speler: data over speler
+        Speler -> localStorage: setItem("huidige speler", naam)
+
+        TutorialPage -> localStorage: getItem("selected_button")
+        localStorage -->> TutorialPage: naam deelsysteem
+
+        TutorialPage -> Speler: eindTutorialOefening(naam deelsysteem)
+        Speler -> Speler: saveData()
+        Speler -> localStorage: setItem(naam, data)
+
 end
-TutorialPage->TutorialPage:update buttons
+
+
+'Tot hier ===========================================================
+
 
 opt gebruiker pressed oefening button
     TutorialPage->OefeningPage:target button
@@ -122,6 +206,13 @@ TutorialPage->Speler:eindTutorialOefening(Tutorial naam)
 deactivate MainProgram
 deactivate TutorialPage
 deactivate Tutorial
+
+
+
+
+
+
+
 == Oefeningen == 
 
 OefeningPage-> Oefeningen: aantalOefeningen
