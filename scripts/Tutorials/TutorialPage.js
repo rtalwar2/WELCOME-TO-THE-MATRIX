@@ -44,6 +44,7 @@ export class TutorialPage {
         "InverseTutorial": [Object],
         "DeterminantTutorial": [new DeterminantTutorial(new Matrix(3, 3)),new DeterminantTutorial(new Matrix(2, 2))]
     }
+
     tutorial;//variabele voor huidige tutorial
     tabel1 = document.querySelector("#tabel_m1");
     tabel2 = document.querySelector("#tabel_m2");
@@ -89,7 +90,6 @@ export class TutorialPage {
         data.data.drawMatrix(this.tabel3);
         if (data.finished) {
             document.querySelector("#next_step").disabled = true;
-
             this.tutorialnumber++;
             console.log(this.tutorialnumber)
             if(this.tutorialnumber!==TutorialPage.tutorials[localStorage.getItem("selected_button")].length){
