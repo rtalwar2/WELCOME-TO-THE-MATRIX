@@ -40,10 +40,10 @@ export class TutorialPage {
 
 
     static tutorials = {//alle tutorials
-        "VermenigvuldigTutorial": [new VermenigvuldigTutorial(new Matrix(3,3,true), new Matrix(3,3,true)),new VermenigvuldigTutorial(new Matrix(2,2), new Matrix(2,4))],
-        "TransponeerTutorial":[ new TransponeerTutorial(new Matrix(2, 3))],
+        "VermenigvuldigTutorial": [new VermenigvuldigTutorial(new Matrix(3,3,true), new Matrix(3,3,true)),new VermenigvuldigTutorial(new Matrix(2,2,true), new Matrix(2,4,true))],
+        "TransponeerTutorial":[ new TransponeerTutorial(new Matrix(2, 3,true))],
         "InverseTutorial": [new InverseTutorial(new Matrix(3, 3, true))],
-        "DeterminantTutorial": [new DeterminantTutorial(new Matrix(3, 3)),new DeterminantTutorial(new Matrix(2, 2))]
+        "DeterminantTutorial": [new DeterminantTutorial(new Matrix(3, 3,true)),new DeterminantTutorial(new Matrix(2, 2,true))]
     }
     tutorial;//variabele voor huidige tutorial
     tabel1 = document.querySelector("#tabel_m1");
