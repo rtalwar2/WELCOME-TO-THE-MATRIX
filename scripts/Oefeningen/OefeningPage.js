@@ -3,6 +3,7 @@ import Matrix from "../Matrix.js";
 import {Oefeningen} from "./Oefeningen.js";
 import {VermenigvuldigOefening} from "./VermenigvuldigOefening.js";
 import {DeterminantOefeningen} from "./DeterminantOefening.js";
+import {Speler} from "../Speler.js";
 
 
     export class OefeningPage {
@@ -60,6 +61,13 @@ function init() {
     document.getElementById("check").addEventListener("click",function(){
         oef.oefening.checkOplossing(oef.oefening);
     });
+    document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
+}
+function terug(){
+    window.open("./main.html","_self");
+    let spelernaam = localStorage.getItem("huidige speler");
+    let speler = new Speler(spelernaam);
+    speler.eindTutorialOefening(localStorage.getItem("selected_button"));
 }
 let oef;
 if (window.location.pathname.split("/")[2] === "OefeningPage.html") {

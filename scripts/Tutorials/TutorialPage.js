@@ -127,6 +127,14 @@ function init() {
     tp.startTutorial(localStorage.getItem("selected_button"),0);//uit localstorage de juiste tutorial ophalen en starten
     showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
+    document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
+}
+function terug(){
+    let spelernaam = localStorage.getItem("huidige speler");
+    let speler = new Speler(spelernaam);
+    speler.eindTutorialOefening(localStorage.getItem("selected_button"));
+    window.open("./main.html","_self");
+
 }
 
 
