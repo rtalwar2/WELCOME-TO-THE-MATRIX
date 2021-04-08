@@ -47,3 +47,7 @@ canvas {
     border-width: thick;
     background-color: black;
 }
+.btn-outline-finished{
+    border-color: gold;
+    background-color: gold;
+}

@@ -8,7 +8,7 @@ export class TransponeerTutorial extends Tutorial {
     constructor(m1) {
         super(m1);
         this.stapnummer = 0;
-        this.data = new Matrix(m1.aantalKolommen, m1.aantalRijen, "x");
+        this.data = new Matrix(m1.aantalKolommen, m1.aantalRijen);
         this.matrices.push(this.matrix1);
         this.aantal_matrices = this.matrices.length;
     }

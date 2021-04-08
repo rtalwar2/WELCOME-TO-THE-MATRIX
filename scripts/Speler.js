@@ -16,7 +16,6 @@ export class Speler {
                     ["DeterminantOefening", false],
                     ["InverseOefening", false],
                     ["VermenigvuldigOefening", false]]);
-
             this.saveData();
         }else {                                                 //als speler wel bestaat
             let myJSON = localStorage.getItem(this.naam);
@@ -24,7 +23,6 @@ export class Speler {
         }
 
         localStorage.setItem("huidige speler", this.naam);
-
     }
 
     getData() {                      //Om data speler op te halen
@@ -35,7 +33,6 @@ export class Speler {
         this.tutorials_finished[naamTutOef] = true;
         this.saveData();
     }
-
 
     saveData() {                     //Om data naar local storage te sturen
         let myJSON = JSON.stringify(this.tutorials_finished);

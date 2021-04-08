@@ -8,7 +8,6 @@ export class InverseTutorial extends Tutorial {
     tekst="";
     matrix2;//de tweede matrix waar de determinant uit berekend wordt
     matrix3;//ONZICHTBARE derde matrix waar getransponeerde uit berekend wordt
-
     gr=[];
     gk=[];
     constructor(m1) {
@@ -69,9 +68,6 @@ export class InverseTutorial extends Tutorial {
                             this.matrix2.matrix[t][s] = this.matrix1.matrix[this.gr[t]][this.gk[s]];
                         }
                     }
-
-
-
                     // Juiste lijnen trekken
                     if(rij===this.rij1){
                         if(kolom!==this.kolom1)
@@ -81,24 +77,15 @@ export class InverseTutorial extends Tutorial {
                             this.addDiv(tutorialPage.tabel1.querySelector(`[data-id='id_${rij}-${kolom}']`),"vertical-line");
                         }
                     }
-
-
                     // Data matrix uitrekenen       Werkt nog niet doordat getDeterminant en getTransponneerde nog niet werken
                     // this.matrix3.matrix[this.rij1][this.kolom1] = this.matrix2.getDeterminant();
                     // this.data = this.matrix3.getTransponneerde();
-
                     //temp
                     this.matrix3.matrix[this.rij1][this.kolom1] = 1;
                     this.data = this.matrix3;
-
-
                 }
             }
         }
-
-
-
-
         let tabel2 = document.querySelector("#tabel_m2");   //Determinant tonen
         this.matrix2.drawMatrix(tabel2);
         // let testmatrix = new Matrix(3,2,false);

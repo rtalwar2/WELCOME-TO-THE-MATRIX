@@ -43,7 +43,6 @@ export class VermenigvuldigTutorial extends Tutorial {
         }
 
         this.som += this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2];
-
         this.tekst+=`${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} +`
         console.log(this.tekst);
         this.tekst.replace(/\+ $/,"");//werkt om een reden niet om eerste (of laatste) + teken te verwijderen
