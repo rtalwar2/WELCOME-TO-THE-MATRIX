@@ -32,3 +32,4 @@ Datum,Start,Einde,Plaats,Omschrijving
 07/04/21,14:00,14:30,Extern,Taakverdeling met groep
 08/04/21,12:00,13:18,Extern,werken aan display mainpage + speler onthouden
 08/04/21,13:30,15:40,Extern,werken aan display van tutorials
+08/04/21,17:30,21:25,Extern,display van vermenigvuldig oefening en determinant oefening aangepast + code gewijzigd van jquery naar javascript en enkele aanpassingen aan oefeningen scripts
