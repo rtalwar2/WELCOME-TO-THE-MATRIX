@@ -109,3 +109,7 @@ body{
 /*    !*content: "\00B7";*!*/
 /*    !*font-size: 1px;*!*/
 /*}*/
+
+p{
+    height: 15em;
+}

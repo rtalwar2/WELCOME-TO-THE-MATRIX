@@ -8,7 +8,7 @@ export class DeterminantTutorial extends Tutorial {
     constructor(m1) {
         super(m1);
         this.stapnummer = 0;
-        this.data = new Matrix(m1.aantalKolommen-1, m1.aantalRijen-1, "x");
+        this.data = new Matrix(m1.aantalKolommen-1, m1.aantalRijen-1);
         this.matrices.push(this.matrix1);
         this.aantal_matrices = this.matrices.length;
     }

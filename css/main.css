@@ -50,4 +50,6 @@ canvas {
 .btn-outline-finished{
     border-color: gold;
     background-color: gold;
+    color: black !important;
 }
+

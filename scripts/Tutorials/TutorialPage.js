@@ -11,7 +11,9 @@ export class TutorialPage {
     static alle_beschrijvingen = [
         {//deze beschrijvingen worden getoond in de modal
             name: "TransponeerTutorial",
-            description: "eerst algemene uitleg over transponeren van matrices"
+            description: "In de lineaire algebra is de getransponeerde matrix, meestal kortweg de getransponeerde genoemd, van een matrix {\\displaystyle A}A de matrix {\\displaystyle A^{\\text{T}}}{\\displaystyle A^{\\text{T}}}, ook geschreven als {\\displaystyle A^{tr},\\ ^{t}\\!\\!A}{\\displaystyle A^{tr},\\ ^{t}\\!\\!A} of {\\displaystyle A'}A' die ontstaat door een van de onderstaande equivalente acties uit te voeren:\n" +
+                "\n" +
+                "Schrijf de rijen van A als de kolommen van A^T"
         },
         {
             name: "InverseTutorial",
@@ -51,7 +53,6 @@ export class TutorialPage {
     tabel2 = document.querySelector("#tabel_m2");
     tabel3 = document.querySelector("#tabel_m3");
     tabellen = [this.tabel1, this.tabel2, this.tabel3];
-
     tutorialnumber=0;
 
     constructor() {
@@ -60,9 +61,15 @@ export class TutorialPage {
     startTutorial(naam,index) {
         document.querySelector("#next_step").disabled = false;
         this.tutorial = TutorialPage.tutorials[naam][index];//de juiste tutorial toegekend.
+        this.tutorial.drawMatrices(this);
+        this.tabel1 = document.querySelector("#tabel_m1");
+        this.tabel2 = document.querySelector("#tabel_m2");
+        this.tabel3 = document.querySelector("#tabel_m3");
+        this.tabellen = [this.tabel1, this.tabel2, this.tabel3];
         for (let i = 0; i < this.tutorial.aantal_matrices; i++) {//zodat er bij de juiste aantal matrices de juiste tabellen gecreerd worden
             this.tutorial.matrices[i].drawMatrix(this.tabellen[i]);
         }
+        this.tutorial.data.drawMatrix(this.tabel3);
     }
 
     updateBeschrijving(tekst) {
@@ -92,7 +99,6 @@ export class TutorialPage {
         if (data.finished) {
             document.querySelector("#next_step").disabled = true;
             this.tutorialnumber++;
-            console.log(this.tutorialnumber)
             if(this.tutorialnumber!==TutorialPage.tutorials[localStorage.getItem("selected_button")].length){
                 setTimeout(()=>{this.nextTutorial();
                 this.startTutorial(localStorage.getItem("selected_button"),this.tutorialnumber);}
@@ -107,9 +113,7 @@ export class TutorialPage {
         }
     }
 }
-
 let tp = new TutorialPage();
-
 function ListenToKnop(event) {
     tp.changeStep();
 }

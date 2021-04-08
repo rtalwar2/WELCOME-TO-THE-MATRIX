@@ -57,6 +57,7 @@ export default class Matrix {
 
     drawMatrix(element) { //basis tekenfunctie, vult table aan
         let tabel = element;
+        tabel.parentElement.classname="";
         tabel.parentElement.classList.add(`col-md-${this.aantalKolommen}`);
         tabel.innerText = "";
         for (let i in this.matrix) {

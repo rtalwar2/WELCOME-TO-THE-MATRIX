@@ -17,6 +17,28 @@ export class VermenigvuldigTutorial extends Tutorial {
         this.aantal_matrices = this.matrices.length;
     }
 
+    drawMatrices(){
+        document.querySelector("#matrices").innerHTML =
+            `<div class="row">
+                                    <div class="col-md-3"></div>
+                                    <div>
+                                        <table id="tabel_m2" class="table">
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div>
+                                        <table id="tabel_m1" class="table">
+                                        </table>
+                                    </div>
+                                    <div>
+                                        <table id="tabel_m3" class="table">
+                                        </table>
+                                    </div>
+                                </div>`
+
+    }
+
     refresh(tutorialPage) {//de logica van de vermenigvuldigtutorial
         document.querySelectorAll(".rood").forEach(value => value.classList.remove("rood"));//maakt de juite elementen rood
 
