@@ -49,16 +49,30 @@ export class DeterminantOefeningen extends Oefeningen{
         volgorde[kiesnummer] = valseOplossing2;
 
         let form = document.getElementById("frm");
+
         for(let i = 0;i<3;i++) {
+            let div=document.createElement("div");
+            div.classList.add("form-check");
             let label = document.createElement("label");
             let radio = document.createElement("input");
             radio.type = "radio";
+            radio.classList.add("form-check-input")
             radio.name = "oplossing";
             radio.value = volgorde[i];
-            label.appendChild(radio);
-            label.appendChild(document.createTextNode(volgorde[i]));
-            form.appendChild(label);
+            radio.id= `id_${volgorde[i]}`;
+            label.classList.add("form-check-label");
+            label.setAttribute("for",`id_${volgorde[i]}`);
+            label.innerText=volgorde[i];
+            div.appendChild(radio);
+            div.appendChild(label);
+            form.appendChild(div);
         }
+        `<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Default radio
+  </label>
+</div>`
     }
 
 }

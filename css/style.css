@@ -11,7 +11,6 @@
     padding: 50px 0;
 }
 
-
 .col-md-4 {
     margin: auto;
 }
@@ -112,4 +111,12 @@ body{
 
 p{
     height: 15em;
+}
+
+.matrix_cell{
+    width:2rem;
+}
+
+.u-center{
+    margin: 0 auto;
 }

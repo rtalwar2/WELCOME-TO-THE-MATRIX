@@ -31,7 +31,7 @@ export default class Matrix {
 
     vermenigvuldigMatrix(matrix_2) { // moet nog een check bijkomen
         let result = []; //dubbele array
-        if (this.matrix.length === matrix_2.matrix.length) {
+        if (this.aantalKolommen === matrix_2.aantalRijen) {
             for (let i = 0; i < this.matrix.length; i++) {
                 result[i] = [];
                 for (let j = 0; j < matrix_2.matrix.length; j++) {
