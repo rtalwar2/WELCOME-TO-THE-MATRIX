@@ -8,6 +8,7 @@ participant Tutorial
 participant VermenigvuldigTutorial
 participant OefeningPage
 participant Oefeningen
+participant VermenigvuldigOefening
 participant Matrix
 participant Speler
 participant localStorage
@@ -72,11 +73,11 @@ MainProgram -> localStorage: setItem("selected_button", naam deelsysteem)
 
 opt  if deelsysteem is een Tutorial
         MainProgram -> TutorialPage: open TutorialPage
-        TutorialPage -->> TutorialPage: generate html page
+        TutorialPage -->> TutorialPage: generate html page (stap 27)
     
      else if deelsysteem is een Oefening
         MainProgram -> OefeningPage: open OefeningPage
-        OefeningPage -->> OefeningPage: generate html page
+        OefeningPage -->> OefeningPage: generate html page (stap 88)
 
 end
 deactivate MainProgram
@@ -98,12 +99,9 @@ opt  if deelsysteem is VermenigvuldigTutorial
         loop subtutorial
 
 
-            TutorialPage -> Matrix: new Matrix(3, 3)
+            TutorialPage -> Matrix: new Matrix(3, 3, true)
             activate Matrix
-            TutorialPage -> Matrix: new Matrix(3, 3)
-
-            Matrix -->> TutorialPage: Matrix1
-            Matrix -->> TutorialPage: Matrix2
+            TutorialPage -> Matrix: new Matrix(3, 3, true)
 
             TutorialPage -> VermenigvuldigTutorial: new VermenigvuldigTutorial(Matrix1, Matrix2)
             activate VermenigvuldigTutorial
@@ -113,7 +111,6 @@ opt  if deelsysteem is VermenigvuldigTutorial
             Tutorial -->> VermenigvuldigTutorial: constructor
 
             VermenigvuldigTutorial -> Matrix: new Matrix(.,.,"0")
-            Matrix -->> VermenigvuldigTutorial: "0" Matrix
 
 
     '        TutorialPage -> Matrix: new Matrix(2, 2)
@@ -159,6 +156,32 @@ opt  if deelsysteem is VermenigvuldigTutorial
                     TutorialPage -> TutorialPage: updateBeschrijving(.)
 
                 end
+                opt exit
+                   Gebruiker -> TutorialPage: klik op exit
+
+                   TutorialPage -> TutorialPage: terug()
+
+                   TutorialPage -> localStorage: getItem("huidige speler")
+                   localStorage -->> TutorialPage: huidige speler
+
+                   TutorialPage -> Speler: new Speler(spelernaam)
+
+                   Speler -> localStorage: getItem(naam)
+                   localStorage -->> Speler: data over speler
+                   Speler -> localStorage: setItem("huidige speler", naam)
+
+                   TutorialPage -> localStorage: getItem("selected_button")
+                   localStorage -->> TutorialPage: naam deelsysteem
+
+                   TutorialPage -> Speler: eindTutorialOefening(naam deelsysteem)
+                   Speler -> Speler: saveData()
+                   Speler -> localStorage: setItem(naam, data)
+
+                   TutorialPage -> MainProgram: open Main (stap 2)
+                   activate MainProgram
+                   deactivate MainProgram
+
+                end
             end
 
             TutorialPage -> localStorage: getItem("selected_button")
@@ -192,14 +215,15 @@ opt  if deelsysteem is VermenigvuldigTutorial
 end
 
 
-'Tot hier ===========================================================
+' nog niet gemaakt
+== Koppeling naar andere pagina ==
 
 
 opt gebruiker pressed oefening button
-    TutorialPage->OefeningPage:target button
+    TutorialPage->OefeningPage: open OefeningPage (stap 88)
     activate OefeningPage
    else  gebruiker pressed main button
-   TutorialPage->MainProgram
+   TutorialPage->MainProgram: open Main (stap 2)
  activate MainProgram
 end
 TutorialPage->Speler:eindTutorialOefening(Tutorial naam)
@@ -213,25 +237,91 @@ deactivate Tutorial
 
 
 
-== Oefeningen == 
+== Oefeningen ==
 
-OefeningPage-> Oefeningen: aantalOefeningen
-activate Oefeningen
-loop foreach oefening in Oefeningen
-Oefeningen -> Matrix: genereer matrices
-Matrix -->> Oefeningen: return matrices
-Oefeningen -->> OefeningPage: return matrices voor oefening
-Gebruiker -> OefeningPage: invoer gebruiker
-OefeningPage -> Oefeningen: Correct(input:int)
-Oefeningen -> Matrix: [vermenigvuldigMatrix(matrix_2),getDeterminant(),getInverse(),getTransponneerde()]
-Matrix -->> Oefeningen: return oplossing
-Oefeningen -->> OefeningPage: boolean
-OefeningPage -->> OefeningPage: update html
-' Gebruiker->OefeningPage:hint pressed
-' OefeningPage->Oefeningen:show hint
-' Oefeningen-->>OefeningPage: return hint
+OefeningPage -> OefeningPage: init()
+OefeningPage -> OefeningPage: new OefeningPage()
+
+OefeningPage -> localStorage: getItem("selected_button")
+localStorage -->> OefeningPage: naam deelsysteem
+
+OefeningPage -> OefeningPage: startOefening(naam deelsysteem)
+opt if deelsysteem is VermenigvuldigOefening
+    OefeningPage -> Matrix: new Matrix(3, 3, true)
+    OefeningPage -> Matrix: new Matrix(3, 3, true)
+
+    OefeningPage -> VermenigvuldigOefening: new VermenigvuldigOefening(Matrix1, Matrix2)
+    activate VermenigvuldigOefening
+
+    VermenigvuldigOefening -> Oefeningen: constructor()
+    activate Oefeningen
+    Oefeningen -->> VermenigvuldigOefening: constructor
+
+    VermenigvuldigOefening -> Matrix: new Matrix(.,.,"0")
+    VermenigvuldigOefening -> Matrix: vermenigvuldigMatrix(.)
+
+    OefeningPage -> VermenigvuldigOefening: maakInvul()
+    loop foreach oefening.matrices[i]
+        OefeningPage -> VermenigvuldigOefening: matrices[i]
+        VermenigvuldigOefening -> Oefeningen: matrices[i]
+        Oefeningen -->> VermenigvuldigOefening: matrices[i]
+        VermenigvuldigOefening -->> OefeningPage: matrices[i]
+
+        OefeningPage -> Matrix: drawMatrix(.)
+
+    end
+
+    opt check
+       Gebruiker -> OefeningPage: klikt op Check
+       OefeningPage ->  VermenigvuldigOefening: checkOplossing(.)
+
+       VermenigvuldigOefening -> VermenigvuldigOefening: getMatrix()
+       VermenigvuldigOefening -> VermenigvuldigOefening: correct(.)
+       opt als juist
+            VermenigvuldigOefening -> Gebruiker: alert("goed")
+            else als fout
+            VermenigvuldigOefening -> Gebruiker: alert("slecht")
+
+       end
+
+    end
+    opt exit
+       Gebruiker -> OefeningPage: klik op exit
+
+       OefeningPage -> OefeningPage: terug()
+
+       OefeningPage -> localStorage: getItem("huidige speler")
+       localStorage -->> OefeningPage: huidige speler
+
+       OefeningPage -> Speler: new Speler(spelernaam)
+
+       Speler -> localStorage: getItem(naam)
+       localStorage -->> Speler: data over speler
+       Speler -> localStorage: setItem("huidige speler", naam)
+
+       OefeningPage -> localStorage: getItem("selected_button")
+       localStorage -->> OefeningPage: naam deelsysteem
+
+       OefeningPage -> Speler: eindTutorialOefening(naam deelsysteem)
+       Speler -> Speler: saveData()
+       Speler -> localStorage: setItem(naam, data)
+
+       OefeningPage -> MainProgram: open Main (stap 2)
+       activate MainProgram
+       deactivate MainProgram
+
+    end
+
+
+
+
 end
-OefeningPage->OefeningPage:update buttons
+
+
+
+' Nog niet gemmakt
+== Koppeling naar andere pagina ==
+
 
 opt gebruiker pressed Tutorial button
     TutorialPage<-OefeningPage:target button
@@ -242,16 +332,20 @@ opt gebruiker pressed Tutorial button
 end
 
 OefeningPage->Speler:eindTutorialOefening(Oefening naam)
-deactivate TutorialPage
-deactivate OefeningPage
-deactivate Oefeningen
+
+
+
 ==einde programma==
-deactivate Matrix
-deactivate Speler
+
+deactivate MainProgram
 deactivate TutorialPage
 deactivate Tutorial
+deactivate VermenigvuldigTutorial
 deactivate OefeningPage
 deactivate Oefeningen
-deactivate MainProgram
+deactivate VermenigvuldigOefening
+deactivate Matrix
+deactivate Speler
+deactivate localStorage
 @enduml
 
