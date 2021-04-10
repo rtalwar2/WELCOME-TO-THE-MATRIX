@@ -35,3 +35,4 @@ Datum,Start,Einde,Plaats,Omschrijving
 08/04/21,17:30,21:25,Extern,display van vermenigvuldig oefening en determinant oefening aangepast + code gewijzigd van jquery naar javascript en enkele aanpassingen aan oefeningen scripts
 09/04/21,10:00,11:56,Extern,display van vermenigvuldig oefening afwerken + functionaliteit toevoegen en bug oplossen
 10/04/21,15:00,15:53,Extern,get_determinant methode gemaakt
+10/04/21,10:10,11:28,Extern,visualisatie bij determinant tutorial verbeterd+ tostringmethode van matrix aangepast

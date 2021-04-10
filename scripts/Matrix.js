@@ -137,7 +137,7 @@ export default class Matrix {
             return mat[0][0];
 
         // To store cofactors
-        let temp ;
+        let temp;
 
         // To store sign multiplier
         let sign = 1;
@@ -145,8 +145,8 @@ export default class Matrix {
         // Iterate for each element of first row
         for (let f = 0; f < n; f++) {
             // Getting Cofactor of mat[0][f]
-            temp=this.getCofactor(mat, 0, f, n);
-            let element=mat[0][f];
+            temp = this.getCofactor(mat, 0, f, n);
+            let element = mat[0][f];
             D += sign * element * this.getDeterminant(temp, n - 1);
             // terms are to be added with
             // alternate sign
@@ -156,79 +156,86 @@ export default class Matrix {
     }
 
 
+    getInverse() {
 
-getInverse()
-{
+        let temp;
+        let hulpmatrix = [];
+        let result = this.matrix;
 
-    let temp;
-    let hulpmatrix = [];
-    let result = this.matrix;
+        for (let i = 0; i < this.matrix.length; i++)
+            hulpmatrix[i] = [];
 
-    for (let i = 0; i < this.matrix.length; i++)
-        hulpmatrix[i] = [];
+        for (let i = 0; i < this.matrix.length; i++)
+            for (let j = 0; j < this.matrix.length; j++) {
+                hulpmatrix[i][j] = 0;
+                if (i === j)
+                    hulpmatrix[i][j] = 1;
+            }
 
-    for (let i = 0; i < this.matrix.length; i++)
-        for (let j = 0; j < this.matrix.length; j++) {
-            hulpmatrix[i][j] = 0;
-            if (i === j)
-                hulpmatrix[i][j] = 1;
-        }
-
-    for (let k = 0; k < this.matrix.length; k++) {
-        temp = result[k][k];
-
-        for (let j = 0; j < this.matrix.length; j++) {
-            result[k][j] /= temp;
-            hulpmatrix[k][j] /= temp;
-        }
-
-        for (let i = k + 1; i < this.matrix.length; i++) {
-            temp = result[i][k];
+        for (let k = 0; k < this.matrix.length; k++) {
+            temp = result[k][k];
 
             for (let j = 0; j < this.matrix.length; j++) {
-                result[i][j] -= result[k][j] * temp;
-                hulpmatrix[i][j] -= hulpmatrix[k][j] * temp;
+                result[k][j] /= temp;
+                hulpmatrix[k][j] /= temp;
+            }
+
+            for (let i = k + 1; i < this.matrix.length; i++) {
+                temp = result[i][k];
+
+                for (let j = 0; j < this.matrix.length; j++) {
+                    result[i][j] -= result[k][j] * temp;
+                    hulpmatrix[i][j] -= hulpmatrix[k][j] * temp;
+                }
             }
         }
-    }
 
-    for (let k = this.matrix.length - 1; k > 0; k--) {
-        for (let i = k - 1; i >= 0; i--) {
-            temp = result[i][k];
+        for (let k = this.matrix.length - 1; k > 0; k--) {
+            for (let i = k - 1; i >= 0; i--) {
+                temp = result[i][k];
 
-            for (let j = 0; j < this.matrix.length; j++) {
-                result[i][j] -= result[k][j] * temp;
-                hulpmatrix[i][j] -= hulpmatrix[k][j] * temp;
+                for (let j = 0; j < this.matrix.length; j++) {
+                    result[i][j] -= result[k][j] * temp;
+                    hulpmatrix[i][j] -= hulpmatrix[k][j] * temp;
+                }
             }
         }
+
+        for (let i = 0; i < this.matrix.length; i++)
+            for (let j = 0; j < this.matrix.length; j++)
+                result[i][j] = Math.round(hulpmatrix[i][j]);
+        return result;
+
+
     }
 
-    for (let i = 0; i < this.matrix.length; i++)
-        for (let j = 0; j < this.matrix.length; j++)
-            result[i][j] = Math.round(hulpmatrix[i][j]);
-    return result;
+    toString() {
+        // let output = "|";
+        // for (let j = 0; j < this.aantalKolommen; j++) {
+        //     output += this.matrix[0][j];
+        // }
+        // output += "|\n";
+        //
+        // for (let i = 1; i < this.aantalRijen; i++) {
+        //     output += "\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|";
+        //     for (let j = 0; j < this.aantalKolommen; j++) {
+        //         output += this.matrix[i][j];
+        //     }
+        //     output += "|\n";
+        // }
+        // return output.replace(/(\n$)/, "");
+        let output = `<table class="inline"><tbody>`;
+        for (let i in this.matrix) {
+            output += `<tr>`
+            for (let j in this.matrix[i]) {
 
-
-}
-
-toString()
-{
-    let output = "|";
-    for (let j = 0; j < this.aantalKolommen; j++) {
-        output += this.matrix[0][j];
-    }
-    output += "|\n";
-
-    for (let i = 1; i < this.aantalRijen; i++) {
-        output += "\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|";
-        for (let j = 0; j < this.aantalKolommen; j++) {
-            output += this.matrix[i][j];
+                output += `<td>${this.matrix[i][j]}</td>`
+            }
+            output += `</tr>`
         }
-        output += "|\n";
+        output += `</tbody></table>`
+    return output
     }
-    return output.replace(/(\n$)/, "");
-    //return output
-}
 
 
 }

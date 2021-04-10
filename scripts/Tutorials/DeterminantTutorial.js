@@ -60,9 +60,10 @@ export class DeterminantTutorial extends Tutorial {
             }
         }
         this.tekst+=`${(-1)**(this.rij1+this.kolom1)} * ${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.data.toString()} =  ${(-1)**(this.rij1+this.kolom1)*this.matrix1.matrix[this.rij1][this.kolom1]} *`
-            +` ${this.data.getDeterminant()}=${(-1)**(this.rij1+this.kolom1)*this.matrix1.matrix[this.rij1][this.kolom1]*this.data.getDeterminant()}\n`
+            +` ${this.data.getDeterminant()}=${(-1)**(this.rij1+this.kolom1)*this.matrix1.matrix[this.rij1][this.kolom1]*this.data.getDeterminant()}<br>`
+
         this.determinant+=` ${(-1) ** (this.rij1 + this.kolom1) * this.matrix1.matrix[this.rij1][this.kolom1] * this.data.getDeterminant()}`
-        return {finished: this.finished, data: this.data, tekst:this.tekst +`\n\n som= ${this.determinant}`}
+        return {finished: this.finished, data: this.data, tekst:this.tekst +`<br><br> som= ${this.determinant}`}
     }
 
 }

@@ -73,7 +73,7 @@ export class TutorialPage {
     }
 
     updateBeschrijving(tekst) {
-        document.querySelector("p").innerText = tekst;
+        document.querySelector("p").innerHTML = tekst;
     }
 
     endTutorial() {//past de modal aan en laat hem verschijnen

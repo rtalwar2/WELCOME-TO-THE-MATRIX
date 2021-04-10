@@ -127,3 +127,6 @@ p{
 .left{
     margin-left: auto;
 }
+.inline{
+    display: inline-grid;
+}
