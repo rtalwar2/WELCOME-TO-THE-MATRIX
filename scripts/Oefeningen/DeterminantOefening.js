@@ -2,7 +2,7 @@ import {Oefeningen} from "./Oefeningen.js";
 import Matrix from "../Matrix.js";
 
 
-export class DeterminantOefeningen extends Oefeningen{
+export class DeterminantOefening extends Oefeningen{
 
     oplossing;
 

@@ -1,9 +1,9 @@
 import Matrix from "../Matrix.js";
 import {Oefeningen} from "./Oefeningen.js";
 import {VermenigvuldigOefening} from "./VermenigvuldigOefening.js";
-import {DeterminantOefeningen} from "./DeterminantOefening.js";
+import {DeterminantOefening} from "./DeterminantOefening.js";
 import {Speler} from "../Speler.js";
-import {InverseOefening} from "./InverseOefening";
+import {InverseOefening} from "./InverseOefening.js";
 
 
 export class OefeningPage {
@@ -25,8 +25,8 @@ export class OefeningPage {
     static oefeningen = {//alle soorten oefeningen
         "VermenigvuldigOefening": new VermenigvuldigOefening(new Matrix(3, 3, true), new Matrix(3, 3, true)),
         //"TransponeerOefening":Object,
-        //"InverseOefening": Object,
-        "DeterminantOefening": new DeterminantOefeningen(new Matrix(3, 3, true))
+        "InverseOefening": new InverseOefening(new Matrix(3,3,true)),
+        "DeterminantOefening": new DeterminantOefening(new Matrix(3, 3, true))
     };
     oefening;
     tabel1 = document.querySelector("#tabel_m1");

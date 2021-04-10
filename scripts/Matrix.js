@@ -159,6 +159,7 @@ export default class Matrix {
 
 getInverse()
 {
+
     let temp;
     let hulpmatrix = [];
     let result = this.matrix;
@@ -204,8 +205,10 @@ getInverse()
 
     for (let i = 0; i < this.matrix.length; i++)
         for (let j = 0; j < this.matrix.length; j++)
-            result[i][j] = hulpmatrix[i][j];
+            result[i][j] = Math.round(hulpmatrix[i][j]);
     return result;
+
+
 }
 
 toString()
@@ -226,4 +229,6 @@ toString()
     return output.replace(/(\n$)/, "");
     //return output
 }
+
+
 }
