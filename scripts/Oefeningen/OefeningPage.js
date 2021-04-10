@@ -25,7 +25,7 @@ export class OefeningPage {
     static oefeningen = {//alle soorten oefeningen
         "VermenigvuldigOefening": new VermenigvuldigOefening(new Matrix(3, 3, true), new Matrix(3, 3, true)),
         //"TransponeerOefening":Object,
-        "InverseOefening": Object,
+        //"InverseOefening": Object,
         "DeterminantOefening": new DeterminantOefeningen(new Matrix(3, 3, true))
     };
     oefening;

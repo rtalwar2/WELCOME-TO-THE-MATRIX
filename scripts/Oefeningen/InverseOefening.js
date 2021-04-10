@@ -2,16 +2,16 @@ import {Oefeningen} from "./Oefeningen.js";
 import Matrix from "../Matrix.js";
 
 
-export class InverseOefening extends Oefeningen {
+export class InverseOefening extends Oefeningen{
 
     oplossing;
 
-    constructor(m1) {
+    constructor(m1){
         super(m1);
         this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, false);
         this.matrices.push(this.matrix1);
         console.log(m1);
-        this.oplossing= m1.getInverse();
+        this.oplossing= m1.getDeterminant();
         this.aantal_matrices = this.matrices.length;
     }
 
@@ -19,12 +19,13 @@ export class InverseOefening extends Oefeningen {
 
     }
 
+
     checkOplossing(object) {
         let obj = object;
         let invul= obj.getOplossing();
         console.log(invul);
         console.log(this.oplossing);
-        let bool = (invul===this.oplossing);
+        let bool = (invul === this.oplossing)
         if (bool) {
             alert("goed");
         } else {
@@ -75,4 +76,3 @@ export class InverseOefening extends Oefeningen {
     }
 
 }
-
