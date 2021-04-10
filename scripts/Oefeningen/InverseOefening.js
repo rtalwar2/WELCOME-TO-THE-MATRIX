@@ -5,66 +5,26 @@ import Matrix from "../Matrix.js";
 export class InverseOefening extends Oefeningen {
 
     oplossing;
-    matrix2;
 
-    constructor(m1, m2) {
+    constructor(m1) {
         super(m1);
-        this.matrix2 = m2;
-
-        this.data = new Matrix(m1.aantalRijen, m2.aantalKolommen, "0");
+        this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, false);
         this.matrices.push(this.matrix1);
-        this.matrices.push(this.matrix2);
         console.log(m1);
-        console.log(m2);
-        this.oplossing= m1.vermenigvuldigMatrix(m2);
+        this.oplossing= m1.getInverse();
         this.aantal_matrices = this.matrices.length;
     }
 
+    getOplossing(){
 
-    getMatrix() {
-        var matrix_row = [];
-
-        var ind = 0;
-
-        $("#frm").contents().each(function (i, e) {
-            if (this.nodeName == "INPUT") {
-                if (!matrix_row[ind]) {
-                    matrix_row.push([]);
-                }
-                let value = $(this).val();
-                if(!value.isNaN){
-                    value = parseInt(value);
-                    matrix_row[ind].push(value);
-                }
-            } else {
-                ind++;
-            }
-        });
-
-        return matrix_row
     }
-
-
-    correct(invul) {
-        let bool = true;
-        for (let i = 0; i < this.oplossing.length; i++) {
-            for (let j = 0; j < this.oplossing[0].length; j++) {
-                if (this.oplossing[i][j] !== invul[i][j]) {
-                    bool= false;
-                    return bool;
-                }
-            }
-        }
-        return bool;
-    }
-
 
     checkOplossing(object) {
         let obj = object;
-        let invul= obj.getMatrix();
+        let invul= obj.getOplossing();
         console.log(invul);
         console.log(this.oplossing);
-        let bool = this.correct(invul);
+        let bool = (invul===this.oplossing);
         if (bool) {
             alert("goed");
         } else {
@@ -72,22 +32,46 @@ export class InverseOefening extends Oefeningen {
         }
     }
 
-    maakInvul() {//maak invultabel aan
-        var rows = 3;
-        var columns = 3;
-        var form = document.getElementById("frm");
-        for (var i = 0; i < rows; i++) {
-            for (var j = 0; j < columns; j++) {
-                var input = $('<input>')
-                    .attr({
-                        class: 'matrix_cell',
-                        value: i + j
-                    });
-                form.appendChild(input[0]);
-            }
-            var br = $('<br>')[0];
-            form.appendChild(br);
+    maakInvul() {
+        //volgorde random kiezen
+        let kiesnummers = [1,2,3];
+        let volgorde = [];
+        let kiesnummer = kiesnummers[Math.floor(Math.random()*2)];
+        kiesnummers.splice(kiesnummer-1, 1);
+        volgorde[kiesnummer] = this.oplossing;
+        let valseOplossing1 = this.oplossing + Math.floor(Math.random() * 10 - 5); //random getallen als valse oplossing
+        kiesnummer = kiesnummers[Math.floor(Math.random())];
+        kiesnummers.splice(kiesnummer-1,1);
+        volgorde[kiesnummer] = valseOplossing1;
+        let valseOplossing2 = this.oplossing + Math.floor(Math.random() * 10 - 5); //random getallen als valse oplossing +5 of -5 max
+        kiesnummer = kiesnummers[0];
+        volgorde[kiesnummer] = valseOplossing2;
+
+        let form = document.getElementById("frm");
+
+        for(let i = 0;i<3;i++) {
+            let div=document.createElement("div");
+            div.classList.add("form-check");
+            let label = document.createElement("label");
+            let radio = document.createElement("input");
+            radio.type = "radio";
+            radio.classList.add("form-check-input")
+            radio.name = "oplossing";
+            radio.value = volgorde[i];
+            radio.id= `id_${volgorde[i]}`;
+            label.classList.add("form-check-label");
+            label.setAttribute("for",`id_${volgorde[i]}`);
+            label.innerText=volgorde[i];
+            div.appendChild(radio);
+            div.appendChild(label);
+            form.appendChild(div);
         }
+        `<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Default radio
+  </label>
+</div>`
     }
 
 }
