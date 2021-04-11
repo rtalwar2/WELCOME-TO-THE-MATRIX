@@ -3,8 +3,6 @@ import Matrix from "../Matrix.js";
 
 export class InverseTutorial extends Tutorial {
 
-    kolom2 = 0;
-    som = 0;
     tekst="";
     matrix2;//de tweede matrix waar de determinant uit berekend wordt
     matrix3;//ONZICHTBARE derde matrix waar getransponeerde uit berekend wordt

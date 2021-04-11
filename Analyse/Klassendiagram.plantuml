@@ -9,29 +9,30 @@ class Matrix{
     + int aantalRijen
     + int aantalKolommen
     + int [][] matrix {readOnly}
-
-    + Matrix(aantalRijen: int, aantalKolommen: int, fill: [][])
-
+    __
+    + Matrix(aantalRijen: int=3, aantalKolommen: int=3, fill: String=null)
+    ..
     + vermenigvuldigMatrix(matrix_2: Matrix): Matrix
     + importMatrix(dubbele_array: [][]): Matrix
-    + drawMatrix(element: Table-Tag) : void
+    + drawMatrix(element: Table-Tag, hoofd: String): void
     + getTransponneerde(): Matrix
-    + getDeterminant(): int
+    + getCofactor(mat: [][], p: int, q: int, n: int): [][]
+    + getDeterminant(mat: [][]=this.matrix, n: int=this.aantalRijen): int
     + getInverse(): Matrix
     + toSring(): String
 }
 
 class TutorialPage{
-    - Map<naam:string, tutorials: Tutorial[]> tutorials
+    + Map<naam: String, beschrijvingen: String[]> alle_beschrijvingen
+    - Map<naam: String, tutorials: Tutorial[]> tutorials
     - Tutorial tutorial
     - HTML-Tag tabel1
     - HTML-Tag tabel2
     - HTML-Tag tabel3
     - HTML-Tag[] tabellen
     - int tutorialnummer
-    + Map<naam: string,beschrijvingen: string[]> alle_beschrijvingen
-
-    + startTutorial(naam:string, index: int): void
+    __
+    + startTutorial(naam: String, index: int): void
     + updateBeschrijving(tekst: String): void
     + endTutorial(): void
     + nextTutorial():void
@@ -39,28 +40,34 @@ class TutorialPage{
 }
 
 class OefeningPage{
-    + Map<naam: string,beschrijvingen: string[]> alle_oefeningen
-
-
-    + startTutorial(string): generate html
-    + updateBeschrijving(): void
+    + String[] alle_oefeningen
+    + Map<naam: String, beschrijvingen: String> alle_beschrijvingen
+    - Map<naam: String, oefeningen: Oefening> oefeningen
+    - Oefeningen oefening
+    - HTML-Tag tabel1
+    - HTML-Tag tabel2
+    - HTML-Tag tabel3
+    - HTML-Tag[] tabellen
+    __
+    + startOefening(naam: String): void
 }
 
 
-abstract Class Tutorial{
+abstract class Tutorial{
     - int stapNummer
     - Matrix matrix
     - int antal_matrices
     - Matrix matrix1
-    - {finished: bool,data: Matrix, tekst: String} data
-    - bool finished
+    - Matrix data
+    - boolean finished
     - int rij1
     - int kolom1
-    - [] matrices
-
+    - Matrix[] matrices
+    __
     + Tutorial(m1: Matrix)
-
-    + refresh(stapnummer: int): Matrix
+    ..
+    + refresh(stapnummer: int): Error
+    + drawMatrices(): void
 }
 
 class VermenigvuldigTutorial{
@@ -68,76 +75,101 @@ class VermenigvuldigTutorial{
     - int som
     - String tekst
     - Matrix matrix2
-
+    __
     + VermenigvuldigTutorial(m1: Matrix, m2: Matrix)
-
-    + refresh(tutorialpage: TutorialPage): {finished: boolean, data: Matrix, tekst: String}
+    ..
+    + drawMatrices(): void
+    + refresh(tutorialPage: TutorialPage): {finished: boolean, data: map<mat: Matrix, hoofding: String>, tekst: String}
 }
 
 class TransponneerTutorial{
-
+    __
     + TransponneerTutorial(m1: Matrix)
-
-    + refresh(tutorialpage: TutorialPage): {finished: boolean, data: Matrix, tekst: String}
-}
-
-class InverseTutorial{
-
-    + InverseTutorial(m1: Matrix)
-
-    + refresh(tutorialpage: TutorialPage): {finished: boolean, data: Matrix, tekst: String}
+    ..
+    + refresh(tutorialpage: TutorialPage): {finished: boolean, data: map<mat: Matrix, hoofding: String>, tekst: String}
 }
 
 class DeterminantTutorial{
     - String tekst
     - String determinant
-
+    __
     + DeterminantTutorial(m1: Matrix)
-
+    ..
     + addDiv(element: HTML-Tag, classe: HTML-class): void
-    + refresh(tutorialpage: TutorialPage): {finished: boolean, data: Matrix, tekst: String}
+    + refresh(tutorialpage: TutorialPage): {finished: boolean, data: map<mat: Matrix, hoofding: String>, tekst: String}
+}
+
+class InverseTutorial{
+    - String tekst
+    - Matrix matrix2
+    - Matrix matrix3
+    - [] gr
+    - [] gk
+    __
+    + InverseTutorial(m1: Matrix)
+    ..
+    + addDiv(element: HTML-Tag, classe: HTML-class): void
+    + refresh(tutorialpage: TutorialPage): {finished: boolean, data: map<mat: Matrix, hoofding: String>, tekst: String}
 }
 
 
-abstract Class Oefeningen{
-    - Matrix[] OefeningenReeks
-
-    + Oefeningen(aantalOefeningen: int)
-
-    + showHint(element: HTML-Tag ): void
-    + correct(antwoord : int): boolean
+abstract class Oefeningen{
+    - Matrix matrix1
+    - int aantal_matrices
+    - Matrix data
+    - boolean finished
+    - Matrix[] matrices
+    __
+    + Oefeningen(m1: Matrix)
+    ..
+    + maakInvul(): Error
+    + checkOplossing(): Error
 }
 
 class VermenigvuldigingOefening{
-
-    + VermenigvuldigingOefening(aantalOefeningen: int)
-
-    + correct(): boolean
+    - Matrix oplossing
+    - Matrix matrix2
+    __
+    + VermenigvuldigingOefening(m1: Matrix, m2: Matrix)
+    ..
+    + getMatrix(): Matrix
+    + correct(invul: Matrix): boolean
+    + checkOplossing(object: VermenigvuldigingOefening): void
+    + changeInvul(): void
+    + maakInvul(): void
+    + setHint(tekst: String): void
 }
 
 class DeterminantOefening{
-
-    + DeterminantOefening(aantalOefeningen : int)
-
-    + correct(): boolean
+    - int oplossing
+    __
+    + DeterminantOefening(m1: Matrix)
+    ..
+    + getOplossing(): int
+    + checkOplossing(object: VermenigvuldigingOefening): void
+    + maakInvul(): void
 }
 
 class InverseOefening{
-
-    + InverseOefening(aantalOefeningen: int)
-
-    + correct(): boolean
+    - Matrix oplossing
+    __
+    + InverseOefening(m1: Matrix)
+    ..
+    + checkOplossing(object: VermenigvuldigingOefening): void
+    + maakInvul(): void
+    + fout1(): Matrix
+    + fout2(): Matrix
 }
 
 
 class Speler{
     - String naam
-    - Map<String,boolean> tutorials_finished
-
-    + Speler(naam:string)
-
-    + getData(): Map<String,boolean>
-    + eindTutorialOefening(naamTutOef:String): void
+    - Map<String, boolean> tutorials_finished
+    __
+    + Speler(naam: String)
+    ..
+    + getData(): Map<String, boolean>
+    + eindTutorialOefening(naamTutOef: String): void
     + saveData(): void
 }
 

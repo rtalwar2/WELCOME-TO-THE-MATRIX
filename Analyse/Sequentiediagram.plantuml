@@ -24,29 +24,6 @@ activate MainProgram
 MainProgram -> MainProgram: init()
 
 
-
-== Speler Maken ==
-
-MainProgram -> MainProgram: spelerMaken()
-
-MainProgram -> Gebruiker: prompt(naam?)
-Gebruiker -->> MainProgram: naam
-
-MainProgram -> Speler: Speler(naam)
-activate Speler
-
-Speler -> localStorage: getItem(naam)
-activate localStorage
-localStorage -->> Speler: data over speler
-Speler -> Speler: saveData()
-Speler -> localStorage: setItem(naam, data)
-Speler -> localStorage: setItem("huidige speler", naam)
-
-MainProgram -> Speler: getData()
-Speler -->> MainProgram: Map<String,boolean>
-
-
-
 == HTML goed genereren ==
 
 MainProgram -> MainProgram: haalKnoppen()
@@ -60,6 +37,38 @@ activate OefeningPage
 OefeningPage-->>MainProgram: returns alle_oefeningen
 
 MainProgram -->> MainProgram: generate html page
+
+
+
+== Speler ==
+
+MainProgram -> localStorage: getItem("huidige speler")
+localStorage -->> MainProgram: huidige speler
+
+opt speler bestaat niet
+    MainProgram -> MainProgram: vraagNaam()
+
+    MainProgram -> Gebruiker: prompt(naam?)
+    Gebruiker -->> MainProgram: naam
+
+    MainProgram -> MainProgram: spelerMaken(naam)
+
+    else speler bestaat
+    MainProgram -> MainProgram: spelerMaken(huidige speler)
+end
+
+MainProgram -> Speler: Speler(naam)
+activate Speler
+
+Speler -> localStorage: getItem(naam)
+activate localStorage
+localStorage -->> Speler: data over speler
+Speler -> Speler: saveData()
+Speler -> localStorage: setItem(naam, data)
+Speler -> localStorage: setItem("huidige speler", naam)
+
+MainProgram -> Speler: getData()
+Speler -->> MainProgram: Map<String,boolean>
 
 
 
@@ -95,13 +104,10 @@ localStorage -->> TutorialPage: naam deelsysteem
 TutorialPage -> TutorialPage: startTutorial(naam deelsysteem, 0)
 
 opt  if deelsysteem is VermenigvuldigTutorial
-
         loop subtutorial
-
-
-            TutorialPage -> Matrix: new Matrix(3, 3, true)
+            TutorialPage -> Matrix: new Matrix(3, 3)
             activate Matrix
-            TutorialPage -> Matrix: new Matrix(3, 3, true)
+            TutorialPage -> Matrix: new Matrix(3, 3)
 
             TutorialPage -> VermenigvuldigTutorial: new VermenigvuldigTutorial(Matrix1, Matrix2)
             activate VermenigvuldigTutorial
@@ -112,19 +118,7 @@ opt  if deelsysteem is VermenigvuldigTutorial
 
             VermenigvuldigTutorial -> Matrix: new Matrix(.,.,"0")
 
-
-    '        TutorialPage -> Matrix: new Matrix(2, 2)
-    '        TutorialPage -> Matrix: new Matrix(2, 4)
-    '
-    '        Matrix -->> TutorialPage: Matrix3
-    '        Matrix -->> TutorialPage: Matrix4
-    '
-    '        TutorialPage -> VermenigvuldigTutorial: new VermenigvuldigTutorial(Matrix3, Matrix4)
-    '        VermenigvuldigTutorial -> Tutorial: constructor()
-    '        Tutorial -->> VermenigvuldigTutorial: constructor
-    '
-    '        VermenigvuldigTutorial -> Matrix: new Matrix(.,.,"0")
-    '        Matrix -->> VermenigvuldigTutorial: "0" Matrix
+            TutorialPage -> VermenigvuldigTutorial: drawMatrices(tutorialPage)
 
             loop foreach tutorial.matrices[i]
                     TutorialPage -> VermenigvuldigTutorial: matrices[i]
@@ -132,9 +126,9 @@ opt  if deelsysteem is VermenigvuldigTutorial
                     Tutorial -->> VermenigvuldigTutorial: matrices[i]
                     VermenigvuldigTutorial -->> TutorialPage: matrices[i]
 
-                    TutorialPage -> Matrix: drawMatrix(.)
-
+                    TutorialPage -> Matrix: drawMatrix(.,.)
             end
+            TutorialPage -> Matrix: drawMatrix(.,.)
 
             TutorialPage -> TutorialPage: showDescription()
             TutorialPage -> localStorage: getItem("selected_button")
@@ -152,7 +146,7 @@ opt  if deelsysteem is VermenigvuldigTutorial
                     TutorialPage -> VermenigvuldigTutorial: refresh(tutorialPage)
                     VermenigvuldigTutorial -->> TutorialPage: {finished:., data:., tekst:.}
 
-                    TutorialPage -> Matrix: drawMatrix(.)
+                    TutorialPage -> Matrix: drawMatrix(.,.)
                     TutorialPage -> TutorialPage: updateBeschrijving(.)
 
                 end
@@ -247,8 +241,8 @@ localStorage -->> OefeningPage: naam deelsysteem
 
 OefeningPage -> OefeningPage: startOefening(naam deelsysteem)
 opt if deelsysteem is VermenigvuldigOefening
-    OefeningPage -> Matrix: new Matrix(3, 3, true)
-    OefeningPage -> Matrix: new Matrix(3, 3, true)
+    OefeningPage -> Matrix: new Matrix(3, 3)
+    OefeningPage -> Matrix: new Matrix(3, 3)
 
     OefeningPage -> VermenigvuldigOefening: new VermenigvuldigOefening(Matrix1, Matrix2)
     activate VermenigvuldigOefening
@@ -257,10 +251,12 @@ opt if deelsysteem is VermenigvuldigOefening
     activate Oefeningen
     Oefeningen -->> VermenigvuldigOefening: constructor
 
-    VermenigvuldigOefening -> Matrix: new Matrix(.,.,"0")
+'    VermenigvuldigOefening -> Matrix: new Matrix(.,.,"0")
     VermenigvuldigOefening -> Matrix: vermenigvuldigMatrix(.)
 
     OefeningPage -> VermenigvuldigOefening: maakInvul()
+    VermenigvuldigOefening -> VermenigvuldigOefening: changeInvul()
+
     loop foreach oefening.matrices[i]
         OefeningPage -> VermenigvuldigOefening: matrices[i]
         VermenigvuldigOefening -> Oefeningen: matrices[i]
@@ -276,6 +272,7 @@ opt if deelsysteem is VermenigvuldigOefening
        OefeningPage ->  VermenigvuldigOefening: checkOplossing(.)
 
        VermenigvuldigOefening -> VermenigvuldigOefening: getMatrix()
+       VermenigvuldigOefening -> Matrix: new Matrix(.,.)
        VermenigvuldigOefening -> VermenigvuldigOefening: correct(.)
        opt als juist
             VermenigvuldigOefening -> Gebruiker: alert("goed")
