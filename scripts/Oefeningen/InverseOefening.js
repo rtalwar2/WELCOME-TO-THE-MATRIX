@@ -9,7 +9,7 @@ export class InverseOefening extends Oefeningen{
 
     constructor(m1){
         super(m1);
-        this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, false);
+        this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, "0");
         this.matrices.push(this.matrix1);
 
         console.log(m1);

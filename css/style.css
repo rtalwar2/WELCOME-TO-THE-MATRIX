@@ -130,3 +130,8 @@ p{
 .inline{
     display: inline-grid;
 }
+
+th{
+    color: white;
+    border: 0px solid black!important;
+}

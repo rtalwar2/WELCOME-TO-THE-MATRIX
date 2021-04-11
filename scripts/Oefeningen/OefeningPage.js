@@ -23,10 +23,10 @@ export class OefeningPage {
         }];
 
     static oefeningen = {//alle soorten oefeningen
-        "VermenigvuldigOefening": new VermenigvuldigOefening(new Matrix(3, 3, true), new Matrix(3, 3, true)),
+        "VermenigvuldigOefening": new VermenigvuldigOefening(new Matrix(3, 3), new Matrix(3, 3)),
         //"TransponeerOefening":Object,
-        "InverseOefening": new InverseOefening(new Matrix(3,3,true)),
-        "DeterminantOefening": new DeterminantOefening(new Matrix(3, 3, true))
+        "InverseOefening": new InverseOefening(new Matrix(3,3)),
+        "DeterminantOefening": new DeterminantOefening(new Matrix(3, 3))
     };
     oefening;
     tabel1 = document.querySelector("#tabel_m1");

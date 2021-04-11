@@ -42,10 +42,10 @@ export class TutorialPage {
 
 
     static tutorials = {//alle tutorials
-        "VermenigvuldigTutorial": [new VermenigvuldigTutorial(new Matrix(3,3,true), new Matrix(3,3,true)),new VermenigvuldigTutorial(new Matrix(2,2,true), new Matrix(2,4,true))],
-        "TransponeerTutorial":[ new TransponeerTutorial(new Matrix(2, 3,true))],
-        "InverseTutorial": [new InverseTutorial(new Matrix(3, 3, true))],
-        "DeterminantTutorial": [new DeterminantTutorial(new Matrix(3, 3,true)),new DeterminantTutorial(new Matrix(2, 2,true))]
+        "VermenigvuldigTutorial": [new VermenigvuldigTutorial(new Matrix(3,3), new Matrix(3,3)),new VermenigvuldigTutorial(new Matrix(2,2), new Matrix(2,4))],
+        "TransponeerTutorial":[ new TransponeerTutorial(new Matrix(2, 3))],
+        "InverseTutorial": [new InverseTutorial(new Matrix(3, 3))],
+        "DeterminantTutorial": [new DeterminantTutorial(new Matrix(3, 3)),new DeterminantTutorial(new Matrix(2, 2))]
     }
 
     tutorial;//variabele voor huidige tutorial
@@ -67,9 +67,9 @@ export class TutorialPage {
         this.tabel3 = document.querySelector("#tabel_m3");
         this.tabellen = [this.tabel1, this.tabel2, this.tabel3];
         for (let i = 0; i < this.tutorial.aantal_matrices; i++) {//zodat er bij de juiste aantal matrices de juiste tabellen gecreerd worden
-            this.tutorial.matrices[i].drawMatrix(this.tabellen[i]);
+            this.tutorial.matrices[i].drawMatrix(this.tabellen[i],`matrix${i+1}`);
         }
-        this.tutorial.data.drawMatrix(this.tabel3);
+        this.tutorial.data.drawMatrix(this.tabel3,"--");
     }
 
     updateBeschrijving(tekst) {
@@ -95,7 +95,7 @@ export class TutorialPage {
         let data = this.tutorial.refresh(this);//de refresh methode krijgt een verwijzing naar de klasse mee zodat die de juiste tabel kan roodkleuren
         //data van vorm {finished:boolean,data:een matrix, tekst:"de best passende beschrijving bij de huidige bewerking"}
         //proberen om dit voor elke tutorial zo te krijgen
-        data.data.drawMatrix(this.tabel3);
+        data.data.mat.drawMatrix(this.tabel3,data.data.hoofding);
         if (data.finished) {
             document.querySelector("#next_step").disabled = true;
             this.tutorialnumber++;
@@ -138,7 +138,6 @@ function terug(){
     let speler = new Speler(spelernaam);
     speler.eindTutorialOefening(localStorage.getItem("selected_button"));
     window.open("./main.html","_self");
-
 }
 
 

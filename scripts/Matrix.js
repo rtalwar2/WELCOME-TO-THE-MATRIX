@@ -6,17 +6,17 @@ export default class Matrix {
     // }
 
 
-    constructor(aantalRijen = 3, aantalKolommen = 3, fill = false) {
+    constructor(aantalRijen = 3, aantalKolommen = 3, fill = null) {
         this.aantalRijen = aantalRijen;
         this.aantalKolommen = aantalKolommen;
         this.matrix = new Array(aantalRijen);
         for (let i = 0; i < aantalRijen; i++) {
             this.matrix[i] = new Array(aantalKolommen);
         }
-        if (!fill) {
+        if (fill!=null) {
             for (let i = 0; i < this.aantalRijen; i++) {
                 for (let j = 0; j < this.aantalKolommen; j++) {
-                    this.matrix[i][j] = 0;
+                    this.matrix[i][j] = fill;
                 }
             }
         } else {
@@ -55,11 +55,20 @@ export default class Matrix {
         return this.matrix;
     }
 
-    drawMatrix(element) { //basis tekenfunctie, vult table aan
+    drawMatrix(element,hoofd=null) { //basis tekenfunctie, vult table aan
         let tabel = element;
         tabel.parentElement.classname = "";
         tabel.parentElement.classList.add(`col-md-${this.aantalKolommen}`);
         tabel.innerText = "";
+        if (hoofd!=null){
+            let tr = document.createElement("tr");
+
+            let th = document.createElement("th");
+            th.colSpan=this.aantalKolommen;
+            th.innerText=hoofd;
+            tr.appendChild(th);
+            tabel.appendChild(tr);
+        }
         for (let i in this.matrix) {
             let tr = document.createElement("tr");
             for (let j in this.matrix[i]) {
@@ -86,13 +95,11 @@ export default class Matrix {
         // element.appendChild(table);
     }
 
-    getTransponneerde() {//kan eenvoudiger
-        let hulpmatrix = this.matrix;
-        for (let i = 0; i < this.length; i++) {
-            for (let j = 0; j < i; j++) {
-                let temp = hulpmatrix[i][j];
-                hulpmatrix[i][j] = hulpmatrix[j][i];
-                hulpmatrix[j][i] = temp;
+    getTransponneerde() {
+        let hulpmatrix = new Matrix(this.aantalRijen,this.aantalKolommen,"x");
+        for (let i = 0; i < this.aantalRijen; i++) {
+            for (let j = 0; j <this.aantalKolommen; j++) {
+                hulpmatrix.matrix[i][j] = this.matrix[j][i];
             }
         }
         return hulpmatrix;

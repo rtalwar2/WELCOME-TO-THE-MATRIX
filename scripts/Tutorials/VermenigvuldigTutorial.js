@@ -11,7 +11,7 @@ export class VermenigvuldigTutorial extends Tutorial {
         super(m1);
         this.stapnummer = 0;
         this.matrix2 = m2;
-        this.data = new Matrix(m1.aantalRijen, m2.aantalKolommen, false);
+        this.data = new Matrix(m1.aantalRijen, m2.aantalKolommen, "0");
         this.matrices.push(this.matrix1);
         this.matrices.push(this.matrix2);
         this.aantal_matrices = this.matrices.length;
@@ -20,7 +20,7 @@ export class VermenigvuldigTutorial extends Tutorial {
     drawMatrices(){
         document.querySelector("#matrices").innerHTML =
             `<div class="row">
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-${this.matrix1.aantalKolommen}"></div>
                                     <div>
                                         <table id="tabel_m2" class="table">
                                         </table>
@@ -71,7 +71,7 @@ export class VermenigvuldigTutorial extends Tutorial {
         console.log(this.tekst);
         return {
             finished: this.finished,
-            data: this.data,
+            data: {mat:this.data,hoofding:"product"},
             tekst: `${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} = ? --> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]}\n`
                 +`som= ${this.tekst} =(${this.som})`
         }

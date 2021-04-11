@@ -13,9 +13,9 @@ export class InverseTutorial extends Tutorial {
     constructor(m1) {
         super(m1);
         this.stapnummer = 0;
-        this.matrix2 = new Matrix(m1.aantalRijen-1, m1.aantalKolommen-1, false);
-        this.matrix3 = new Matrix(m1.aantalRijen, m1.aantalKolommen, false);
-        this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, false);
+        this.matrix2 = new Matrix(m1.aantalRijen-1, m1.aantalKolommen-1, "0");
+        this.matrix3 = new Matrix(m1.aantalRijen, m1.aantalKolommen, "x");
+        this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, "x");
         this.matrices.push(this.matrix1);
         this.matrices.push(this.matrix2);
         this.aantal_matrices = this.matrices.length;
@@ -78,16 +78,16 @@ export class InverseTutorial extends Tutorial {
                         }
                     }
                     // Data matrix uitrekenen       Werkt nog niet doordat getDeterminant en getTransponneerde nog niet werken
-                    // this.matrix3.matrix[this.rij1][this.kolom1] = this.matrix2.getDeterminant();
-                    // this.data = this.matrix3.getTransponneerde();
-                    //temp
-                    this.matrix3.matrix[this.rij1][this.kolom1] = 1;
-                    this.data = this.matrix3;
+                     this.matrix3.matrix[this.rij1][this.kolom1] = this.matrix2.getDeterminant();
+                     this.data = this.matrix3.getTransponneerde();
+                    // //temp
+                    // this.matrix3.matrix[this.rij1][this.kolom1] = 1;
+                    // this.data = this.matrix3;
                 }
             }
         }
         let tabel2 = document.querySelector("#tabel_m2");   //Determinant tonen
-        this.matrix2.drawMatrix(tabel2);
+        this.matrix2.drawMatrix(tabel2,"cofactor");
         // let testmatrix = new Matrix(3,2,false);
         // testmatrix.drawMatrix(tabel2);
         // this.matrix1.importMatrix([[1,2,3],[4,5,6],[7,8,9]]);
@@ -96,8 +96,9 @@ export class InverseTutorial extends Tutorial {
 
         return {
             finished: this.finished,
-            data: this.data,
+            data: {mat:this.matrix3,hoofding:"adj moet nog getransponeerd worden"},
+            //data: {mat:this.data,hoofding:"adjunct"},
             tekst: this.tekst
-        }
+        }//om de inverse te bekomen moet de adjunct nog gedeeld worden door de determinant
     }
 }
