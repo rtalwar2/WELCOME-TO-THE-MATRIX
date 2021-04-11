@@ -35,7 +35,7 @@ export class VermenigvuldigOefening extends Oefeningen {
            // console.log(`${rij} ${kolom}`)
             output.matrix[rij][kolom]=parseInt(value.value);
             kolom++;
-        })
+        });
         return output.matrix
     }
 
@@ -122,7 +122,7 @@ export class VermenigvuldigOefening extends Oefeningen {
             <label for="kolommen">aantal kolommen:</label><input class="left" type="number" id="kolommen" min="1" max="5">
 
         </div>`
-    var form = document.getElementById("frm");
+    let form = document.getElementById("frm");
         let row1=document.createElement("div");
         row1.classList.add("row");
         let input1=document.createElement("input");
@@ -181,7 +181,39 @@ export class VermenigvuldigOefening extends Oefeningen {
                         </tr>
                       </tbody>
                     </table>
-                  </div>`
+                  </div>`;
+        let hint= "Rij 1 (matrix 1) x kolom 1 (matrix 2):\n";
+        let table1 = document.createElement("table");
+        let tr = document.createElement("tr");
+        table1.appendChild(tr);
+        let table2 = document.createElement("table");
+        for(let i = 0;i<this.matrix1.matrix[0].length;i++){
+            if(i!==this.matrix1.matrix[0].length-1)
+            hint += "" + this.matrix1.matrix[0][i] + " x " + this.matrix2.matrix[i][0] + " + ";
+            else{
+                hint += "" + this.matrix1.matrix[0][i]+ " x " + this.matrix2.matrix[i][0];
+            }
+            let td = document.createElement("td");
+            td.innerText = this.matrix1.matrix[0][i];
+            tr.appendChild(td);
+            let tr2 = document.createElement("tr");
+            let td2 = document.createElement("td");
+            td2.innerText = this.matrix2.matrix[i][0];
+            tr2.appendChild(td2);
+            table2.appendChild(tr2);
+        }
+        let div = document.createElement("div");
+        div.innerHTML = hint;
+        div.appendChild(table1);
+        div.appendChild(table2);
+        this.setHint(div);
+    }
+
+    setHint(tekst){
+        //vul de hintknop correct in
+        $('[data-toggle="popover"]').attr('data-content',tekst.innerHTML);
+        //let content = document.getElementById('popovercontent');
+        //content.appendChild(tekst);
     }
 
 }

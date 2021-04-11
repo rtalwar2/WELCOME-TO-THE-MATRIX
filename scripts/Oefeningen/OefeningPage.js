@@ -33,7 +33,6 @@ export class OefeningPage {
     tabel2 = document.querySelector("#tabel_m2");
     tabel3 = document.querySelector("#tabel_m3");
     tabellen = [this.tabel1, this.tabel2, this.tabel3];
-
     constructor() {
     }
 
@@ -64,6 +63,12 @@ function init() {
         oef.oefening.checkOplossing(oef.oefening);
     });
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
+    //initialiseer popover (hintknop)
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            html: true
+        });
+    });
 }
 
 function terug() {

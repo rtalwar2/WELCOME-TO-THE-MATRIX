@@ -49,7 +49,8 @@ export class DeterminantOefening extends Oefeningen{
         // volgorde[kiesnummer] = valseOplossing2;
         let volgorde=[this.oplossing,+Math.floor(this.oplossing*((Math.random()%0.2)+2)),this.oplossing*-1+Math.floor(Math.random() * 10) - 5];
         volgorde=volgorde.sort((a, b) => 0.5 - Math.random());
-        console.log(volgorde)
+        console.log(volgorde);
+        //kan 2 dezelfde oplossingen geven
         let form = document.getElementById("frm");
 
         for(let i = 0;i<3;i++) {

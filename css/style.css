@@ -131,6 +131,10 @@ p{
     display: inline-grid;
 }
 
+#popovercontent{
+    display:none
+}
+
 th{
     color: white;
     border: 0px solid black!important;

@@ -80,7 +80,10 @@ function spelerMaken(naamSpeler) {
     console.log(dataSpeler);
     document.querySelectorAll("button").forEach(value => value.classList.remove("btn-outline-finished"))
     for (let key in dataSpeler) {
-        document.querySelector(`#${key}`).classList.add("btn-outline-finished")
+        let data = document.querySelector(`#${key}`);
+        if(data != null) {//gaf error als data=null
+            data.classList.add("btn-outline-finished");
+        }
     }
     document.querySelector("#account").innerText = `Welkom ${naamSpeler}`;
 
@@ -88,7 +91,7 @@ function spelerMaken(naamSpeler) {
 
 function vraagNaam() {
     let naamSpeler = window.prompt("Naam?");
-    spelerMaken(naamSpeler)
+    spelerMaken(naamSpeler);
 }
 
 init();
