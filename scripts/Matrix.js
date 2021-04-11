@@ -13,7 +13,7 @@ export default class Matrix {
         for (let i = 0; i < aantalRijen; i++) {
             this.matrix[i] = new Array(aantalKolommen);
         }
-        if (fill!=null) {
+        if (fill != null) {
             for (let i = 0; i < this.aantalRijen; i++) {
                 for (let j = 0; j < this.aantalKolommen; j++) {
                     this.matrix[i][j] = fill;
@@ -22,7 +22,7 @@ export default class Matrix {
         } else {
             for (let i = 0; i < this.aantalRijen; i++) {
                 for (let j = 0; j < this.aantalKolommen; j++) {
-                    this.matrix[i][j] = Math.floor(Math.random() * 10)-4;
+                    this.matrix[i][j] = Math.floor(Math.random() * 10) - 4;
                 }
             }
         }
@@ -55,17 +55,17 @@ export default class Matrix {
         return this.matrix;
     }
 
-    drawMatrix(element,hoofd=null) { //basis tekenfunctie, vult table aan
+    drawMatrix(element, hoofd = null) { //basis tekenfunctie, vult table aan
         let tabel = element;
         tabel.parentElement.classname = "";
         tabel.parentElement.classList.add(`col-md-${this.aantalKolommen}`);
         tabel.innerText = "";
-        if (hoofd!=null){
+        if (hoofd != null) {
             let tr = document.createElement("tr");
 
             let th = document.createElement("th");
-            th.colSpan=this.aantalKolommen;
-            th.innerText=hoofd;
+            th.colSpan = this.aantalKolommen;
+            th.innerText = hoofd;
             tr.appendChild(th);
             tabel.appendChild(tr);
         }
@@ -96,9 +96,9 @@ export default class Matrix {
     }
 
     getTransponneerde() {
-        let hulpmatrix = new Matrix(this.aantalRijen,this.aantalKolommen,"x");
+        let hulpmatrix = new Matrix(this.aantalRijen, this.aantalKolommen, "x");
         for (let i = 0; i < this.aantalRijen; i++) {
-            for (let j = 0; j <this.aantalKolommen; j++) {
+            for (let j = 0; j < this.aantalKolommen; j++) {
                 hulpmatrix.matrix[i][j] = this.matrix[j][i];
             }
         }
@@ -162,58 +162,55 @@ export default class Matrix {
         return D;
     }
 
-
-    getInverse() {
-
+// Function to get adjunct of A[N][N] in adj[N][N].
+    adjunct(A = this.matrix, n = this.aantalRijen) {
+        let adj = new Matrix(n,n);
+        if (n == 1) {
+            adj.matrix[0][0] = 1;
+            return adj;
+        }
+// temp is used to store cofactors of A[][]
+        let sign = 1;
         let temp;
-        let hulpmatrix = [];
-        let result = this.matrix;
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                // Get cofactor of A[i][j]
+                temp = this.getCofactor(A, i, j, n);
 
-        for (let i = 0; i < this.matrix.length; i++)
-            hulpmatrix[i] = [];
+                // sign of adj[j][i] positive if sum of row
+                // and column indexes is even.
+                sign = ((i + j) % 2 == 0) ? 1 : -1;
 
-        for (let i = 0; i < this.matrix.length; i++)
-            for (let j = 0; j < this.matrix.length; j++) {
-                hulpmatrix[i][j] = 0;
-                if (i === j)
-                    hulpmatrix[i][j] = 1;
-            }
-
-        for (let k = 0; k < this.matrix.length; k++) {
-            temp = result[k][k];
-
-            for (let j = 0; j < this.matrix.length; j++) {
-                result[k][j] /= temp;
-                hulpmatrix[k][j] /= temp;
-            }
-
-            for (let i = k + 1; i < this.matrix.length; i++) {
-                temp = result[i][k];
-
-                for (let j = 0; j < this.matrix.length; j++) {
-                    result[i][j] -= result[k][j] * temp;
-                    hulpmatrix[i][j] -= hulpmatrix[k][j] * temp;
-                }
+                // Interchanging rows and columns to get the
+                // transpose of the cofactor matrix
+                adj.matrix[j][i] = (sign) * (this.getDeterminant(temp, n - 1));
             }
         }
+        return adj;
+    }
 
-        for (let k = this.matrix.length - 1; k > 0; k--) {
-            for (let i = k - 1; i >= 0; i--) {
-                temp = result[i][k];
-
-                for (let j = 0; j < this.matrix.length; j++) {
-                    result[i][j] -= result[k][j] * temp;
-                    hulpmatrix[i][j] -= hulpmatrix[k][j] * temp;
-                }
-            }
+// Function to calculate and store inverse, returns false if
+// matrix is singular
+    getInverse(A = this.matrix, n=this.aantalRijen) {
+        // Find determinant of A[][]
+        let det = this.getDeterminant();
+        if (det == 0) {
+            console.log("Singular matrix, can't find its inverse");
+            return false;
         }
 
-        for (let i = 0; i < this.matrix.length; i++)
-            for (let j = 0; j < this.matrix.length; j++)
-                result[i][j] = Math.round(hulpmatrix[i][j]);
-        return result;
+// Find adjunct
+        let adj;
+        adj = this.adjunct();
 
-
+        let inverse = new Matrix(n,n);
+// Find Inverse using formula "inverse(A) = adj(A)/det(A)"
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                inverse.matrix[i][j] = adj.matrix[i][j] / det;
+            }
+        }
+        return {determinant:det,adjunct:adj,inverse:inverse};
     }
 
     toString() {
@@ -241,7 +238,7 @@ export default class Matrix {
             output += `</tr>`
         }
         output += `</tbody></table>`
-    return output
+        return output
     }
 
 

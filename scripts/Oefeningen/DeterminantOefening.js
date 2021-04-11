@@ -19,7 +19,6 @@ export class DeterminantOefening extends Oefeningen{
         return document.querySelector('input[name="oplossing"]:checked').value;
     }
 
-
     checkOplossing(object) {
         let obj = object;
         let invul= obj.getOplossing();

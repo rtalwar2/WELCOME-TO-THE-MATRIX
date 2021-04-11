@@ -11,10 +11,9 @@ export class InverseOefening extends Oefeningen{
         super(m1);
         this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, "0");
         this.matrices.push(this.matrix1);
-
         console.log(m1);
-        //this.oplossing= m1.getInverse();
-        //console.log(this.oplossing);
+        this.oplossing= m1.getInverse();
+        console.log(this.oplossing);
         this.aantal_matrices = this.matrices.length;
         this.determinant= m1.getDeterminant();
     }
@@ -66,7 +65,7 @@ export class InverseOefening extends Oefeningen{
             radio.id= `id_${volgorde[i]}`;
             label.classList.add("form-check-label");
             label.setAttribute("for",`id_${volgorde[i]}`);
-            label.innerText=volgorde[i];
+            label.innerHTML=`1/${this.oplossing.determinant} * ${this.oplossing.adjunct}`;
             div.appendChild(radio);
             div.appendChild(label);
             form.appendChild(div);
@@ -78,6 +77,7 @@ export class InverseOefening extends Oefeningen{
   </label>
 </div>`
     }
+
     fout1(){
         this.fout=this.oplossing;
         for(let i=0;i<this.oplossing.aantalRijen;i++){

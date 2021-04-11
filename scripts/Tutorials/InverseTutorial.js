@@ -41,6 +41,7 @@ export class InverseTutorial extends Tutorial {
         if (this.rij1 === this.matrix1.aantalRijen) {
             this.rij1 = 0;
             this.finished = true;
+
         }
         else {
             tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij1}-${this.kolom1}']`).classList.add("rood");         //maakt de juiste elementen rood
@@ -94,8 +95,8 @@ export class InverseTutorial extends Tutorial {
 
         return {
             finished: this.finished,
-            data: {mat:this.matrix3,hoofding:"adj moet nog getransponeerd worden"},
-            //data: {mat:this.data,hoofding:"adjunct"},
+            //data: {mat:this.matrix3,hoofding:"adj moet nog getransponeerd worden"},
+            data: {mat:this.data,hoofding:"adjunct"},
             tekst: this.tekst
         }//om de inverse te bekomen moet de adjunct nog gedeeld worden door de determinant
     }
