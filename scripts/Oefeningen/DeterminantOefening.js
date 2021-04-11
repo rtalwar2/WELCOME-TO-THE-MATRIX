@@ -35,19 +35,21 @@ export class DeterminantOefening extends Oefeningen{
 
     maakInvul() {
         //volgorde random kiezen
-        let kiesnummers = [1,2,3];
-        let volgorde = [];
-        let kiesnummer = kiesnummers[Math.floor(Math.random()*2)];
-        kiesnummers.splice(kiesnummer-1, 1);
-        volgorde[kiesnummer] = this.oplossing;
-        let valseOplossing1 = this.oplossing + Math.floor(Math.random() * 10 - 5); //random getallen als valse oplossing
-        kiesnummer = kiesnummers[Math.floor(Math.random())];
-        kiesnummers.splice(kiesnummer-1,1);
-        volgorde[kiesnummer] = valseOplossing1;
-        let valseOplossing2 = this.oplossing + Math.floor(Math.random() * 10 - 5); //random getallen als valse oplossing +5 of -5 max
-        kiesnummer = kiesnummers[0];
-        volgorde[kiesnummer] = valseOplossing2;
-
+        // let kiesnummers = [1,2,3];
+        // let volgorde = [];
+        // let kiesnummer = kiesnummers[Math.floor(Math.random()*2)];
+        // kiesnummers.splice(kiesnummer-1, 1);
+        // volgorde[kiesnummer] = this.oplossing;
+        // let valseOplossing1 = this.oplossing + Math.floor(Math.random() * 10 - 5); //random getallen als valse oplossing
+        // kiesnummer = kiesnummers[Math.floor(Math.random())];
+        // kiesnummers.splice(kiesnummer-1,1);
+        // volgorde[kiesnummer] = valseOplossing1;
+        // let valseOplossing2 = this.oplossing + Math.floor(Math.random() * 10 - 5); //random getallen als valse oplossing +5 of -5 max
+        // kiesnummer = kiesnummers[0];
+        // volgorde[kiesnummer] = valseOplossing2;
+        let volgorde=[this.oplossing,+Math.floor(this.oplossing*((Math.random()%0.2)+1)),this.oplossing*-1+Math.floor(Math.random() * 10) - 5];
+        volgorde=volgorde.sort((a, b) => 0.5 - Math.random());
+        console.log(volgorde)
         let form = document.getElementById("frm");
 
         for(let i = 0;i<3;i++) {

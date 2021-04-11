@@ -22,7 +22,7 @@ export default class Matrix {
         } else {
             for (let i = 0; i < this.aantalRijen; i++) {
                 for (let j = 0; j < this.aantalKolommen; j++) {
-                    this.matrix[i][j] = Math.floor(Math.random() * 10);
+                    this.matrix[i][j] = Math.floor(Math.random() * 10)-4;
                 }
             }
         }
@@ -140,7 +140,7 @@ export default class Matrix {
         let temp;
 
         // To store sign multiplier
-        let sign = 1;
+        let sign = 1; //meegegeven aan constructor zodat je bij determinantoefening snel een verkeersde oplossing kan bedenken toch niet
 
         // Iterate for each element of first row
         for (let f = 0; f < n; f++) {
