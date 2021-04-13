@@ -29,6 +29,16 @@ export default class Matrix {
 
     }
 
+    copyMatrix() {
+        let copy = new Matrix(this.aantalRijen, this.aantalKolommen);
+        for (let i = 0; i < this.aantalRijen; i++){
+            for (let j = 0; j < this.aantalKolommen; j++){
+                copy.matrix[i][j] = this.matrix[i][j];
+            }
+        }
+        return copy;
+    }
+
     vermenigvuldigMatrix(matrix_2) { // moet nog een check bijkomen
         let result = []; //dubbele array
         if (this.aantalKolommen === matrix_2.aantalRijen) {
