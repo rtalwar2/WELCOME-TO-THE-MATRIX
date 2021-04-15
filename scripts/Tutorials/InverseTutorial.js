@@ -106,9 +106,16 @@ export class InverseTutorial extends Tutorial {
             this.matrix2 = this.data;
             let tabel2 = document.querySelector("#tabel_m2");   //Determinant tonen
             this.matrix2.drawMatrix(tabel2,"adjunct");
-            this.data = this.matrix1.getInverse().inverse;
+            for(let i=0;i<this.data.aantalRijen;i++){
+                for(let j=0;j<this.data.aantalKolommen;j++){
+                    this.data.matrix[i][j]+=`/${this.matrix1.getDeterminant()}`;
+                }
+            }
+            //this.data = this.matrix1.getInverse().inverse;
             this.tekst = "adjunct delen door determinant matrix1 \nDet = " + this.det;
             hoofdingData = "Inverse";
+            this.finished = true;
+
 
         } else {
             this.finished = true;

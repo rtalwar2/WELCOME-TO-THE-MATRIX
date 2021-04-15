@@ -109,9 +109,9 @@ export class TutorialPage {
                 oef = "DeterminantOefening";
                 break;
         }
-        localStorage.setItem("selected_button", oef);
         $("#js_modalbutton").unbind();
         $( "#js_modalbutton" ).click(function () {
+            localStorage.setItem("selected_button", oef);
             console.log("joepie");
             if (oef.includes("main")){
                 window.open("./main.html", "_self");
