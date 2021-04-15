@@ -79,20 +79,20 @@ export class TutorialPage {
         document.querySelector("p").innerHTML = tekst;
     }
 
-    startOefening() {
-        console.log("joepie");
-        if (localStorage.getItem("selected_button").contains("main")){
-            window.open("./main.html", "_self");
-        }
-        else {
-            window.open("./OefeningPage.html", "_self");
-        }
-    }
+    // startOefening() {
+    //     console.log("joepie");
+    //     if (localStorage.getItem("selected_button").toString().contains("main")){
+    //         window.open("./main.html", "_self");
+    //     }
+    //     else {
+    //         window.open("./OefeningPage.html", "_self");
+    //     }
+    // }
 
     endTutorial() {//past de modal aan en laat hem verschijnen
         document.querySelector(".modal-body").innerText = "Ben je klaar voor de oefening?";
         document.querySelector("#exampleModalLabel").innerText = localStorage.getItem("selected_button") + " afgewerkt!";
-        //document.querySelector("#init_modal").click();
+        document.querySelector("#init_modal").click();
 
         let spelernaam = localStorage.getItem("huidige speler");
         let speler = new Speler(spelernaam);
@@ -110,26 +110,26 @@ export class TutorialPage {
                 break;
         }
         localStorage.setItem("selected_button", oef);
-        // $("#js_modalbutton").unbind();
-        // $( "#js_modalbutton" ).click(function () {
-        //     console.log("joepie");
-        //     this.startO
-        //     if (localStorage.getItem("selected_button").contains("main")){
-        //         window.open("./main.html", "_self");
-        //     }
-        //     else {
-        //         window.open("./OefeningPage.html", "_self");
-        //     }
-        // });
+        $("#js_modalbutton").unbind();
+        $( "#js_modalbutton" ).click(function () {
+            console.log("joepie");
+            if (oef.includes("main")){
+                window.open("./main.html", "_self");
+            }
+            else {
+                window.open("./OefeningPage.html", "_self");
+            }
+        });
         // let knop = document.querySelector("#js_modalbutton");
         // console.log(knop);
         // knop.addEventListener("hover",this.startOefening);
         // knop.addEventListener("click",this.startOefening);
         // console.log(knop);
-        if(confirm("Ben je klaar voor de oefening?")){
-
-            this.startOefening;//HELP ME please!!!
-        }
+        //console.log(tp);
+        // if(confirm("Ben je klaar voor de oefening?")){
+        //     console.log(tp);
+        //     this.startOefening();//HELP ME please!!!
+        // }
     }
 
     nextTutorial() {
@@ -154,7 +154,10 @@ export class TutorialPage {
                     }
                     , 2000);
             } else {
-                setTimeout(this.endTutorial, 2000);
+                setTimeout(() => {
+                        this.endTutorial();
+                    }
+                    , 2000);
             }
 
         } else {

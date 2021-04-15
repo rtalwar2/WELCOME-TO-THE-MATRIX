@@ -158,7 +158,6 @@ export class VermenigvuldigOefening extends Oefeningen {
         input2.addEventListener("change",this.changeInvul);
 
     this.changeInvul();
-
         `<div class="col-md-2">
                     <table class="table">
                       <tbody class="col-md-8">
