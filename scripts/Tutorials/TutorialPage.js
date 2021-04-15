@@ -126,8 +126,9 @@ export class TutorialPage {
         // knop.addEventListener("hover",this.startOefening);
         // knop.addEventListener("click",this.startOefening);
         // console.log(knop);
-        if(window.confirm("Ben je klaar voor de oefening?")){
-            this.startOefening();//HELP ME please!!!
+        if(confirm("Ben je klaar voor de oefening?")){
+
+            this.startOefening;//HELP ME please!!!
         }
     }
 
