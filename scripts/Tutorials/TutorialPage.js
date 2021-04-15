@@ -6,6 +6,9 @@ import {InverseTutorial} from "./InverseTutorial.js";
 
 import {Speler} from "../Speler.js";
 import {DeterminantTutorial} from "./DeterminantTutorial.js";
+import {VermenigvuldigOefening} from "../Oefeningen/VermenigvuldigOefening.js";
+import {InverseOefening} from "../Oefeningen/InverseOefening.js";
+import {DeterminantOefening} from "../Oefeningen/DeterminantOefening.js";
 
 export class TutorialPage {
     static alle_beschrijvingen = [
@@ -42,10 +45,10 @@ export class TutorialPage {
 
 
     static tutorials = {//alle tutorials
-        "VermenigvuldigTutorial": [new VermenigvuldigTutorial(new Matrix(3,3), new Matrix(3,3)),new VermenigvuldigTutorial(new Matrix(2,2), new Matrix(2,4))],
-        "TransponeerTutorial":[ new TransponeerTutorial(new Matrix(2, 3))],
+        "VermenigvuldigTutorial": [new VermenigvuldigTutorial(new Matrix(3, 3), new Matrix(3, 3)), new VermenigvuldigTutorial(new Matrix(2, 2), new Matrix(2, 4))],
+        "TransponeerTutorial": [new TransponeerTutorial(new Matrix(2, 3))],
         "InverseTutorial": [new InverseTutorial(new Matrix(3, 3))],
-        "DeterminantTutorial": [new DeterminantTutorial(new Matrix(3, 3)),new DeterminantTutorial(new Matrix(2, 2))]
+        "DeterminantTutorial": [new DeterminantTutorial(new Matrix(3, 3)), new DeterminantTutorial(new Matrix(2, 2))]
     }
 
     tutorial;//variabele voor huidige tutorial
@@ -53,12 +56,12 @@ export class TutorialPage {
     tabel2 = document.querySelector("#tabel_m2");
     tabel3 = document.querySelector("#tabel_m3");
     tabellen = [this.tabel1, this.tabel2, this.tabel3];
-    tutorialnumber=0;
+    tutorialnumber = 0;
 
     constructor() {
     }
 
-    startTutorial(naam,index) {
+    startTutorial(naam, index) {
         document.querySelector("#next_step").disabled = false;
         this.tutorial = TutorialPage.tutorials[naam][index];//de juiste tutorial toegekend.
         this.tutorial.drawMatrices(this);
@@ -67,24 +70,68 @@ export class TutorialPage {
         this.tabel3 = document.querySelector("#tabel_m3");
         this.tabellen = [this.tabel1, this.tabel2, this.tabel3];
         for (let i = 0; i < this.tutorial.aantal_matrices; i++) {//zodat er bij de juiste aantal matrices de juiste tabellen gecreerd worden
-            this.tutorial.matrices[i].drawMatrix(this.tabellen[i],`matrix${i+1}`);
+            this.tutorial.matrices[i].drawMatrix(this.tabellen[i], `matrix${i + 1}`);
         }
-        this.tutorial.data.drawMatrix(this.tabel3,"--");
+        this.tutorial.data.drawMatrix(this.tabel3, "--");
     }
 
     updateBeschrijving(tekst) {
         document.querySelector("p").innerHTML = tekst;
     }
 
+    startOefening() {
+        console.log("joepie");
+        if (localStorage.getItem("selected_button").contains("main")){
+            window.open("./main.html", "_self");
+        }
+        else {
+            window.open("./OefeningPage.html", "_self");
+        }
+    }
+
     endTutorial() {//past de modal aan en laat hem verschijnen
         document.querySelector(".modal-body").innerText = "Ben je klaar voor de oefening?";
         document.querySelector("#exampleModalLabel").innerText = localStorage.getItem("selected_button") + " afgewerkt!";
-        document.querySelector("#init_modal").click();
+        //document.querySelector("#init_modal").click();
+
         let spelernaam = localStorage.getItem("huidige speler");
         let speler = new Speler(spelernaam);
         speler.eindTutorialOefening(localStorage.getItem("selected_button"));
+        let oef = "main";
+        switch (localStorage.getItem("selected_button")) {
+            case "VermenigvuldigTutorial":
+                oef = "VermenigvuldigOefening"
+                break;
+            case "InverseTutorial":
+                oef = "InverseOefening";
+                break;
+            case "DeterminantTutorial":
+                oef = "DeterminantOefening";
+                break;
+        }
+        localStorage.setItem("selected_button", oef);
+        // $("#js_modalbutton").unbind();
+        // $( "#js_modalbutton" ).click(function () {
+        //     console.log("joepie");
+        //     this.startO
+        //     if (localStorage.getItem("selected_button").contains("main")){
+        //         window.open("./main.html", "_self");
+        //     }
+        //     else {
+        //         window.open("./OefeningPage.html", "_self");
+        //     }
+        // });
+        // let knop = document.querySelector("#js_modalbutton");
+        // console.log(knop);
+        // knop.addEventListener("hover",this.startOefening);
+        // knop.addEventListener("click",this.startOefening);
+        // console.log(knop);
+        if(window.confirm("Ben je klaar voor de oefening?")){
+            this.startOefening();//HELP ME please!!!
+        }
     }
-    nextTutorial(){
+
+    nextTutorial() {
         document.querySelector(".modal-body").innerText = "klaar voor het volgende deel?";
         document.querySelector("#exampleModalLabel").innerText = localStorage.getItem("selected_button") +
             ` ${this.tutorialnumber}/${TutorialPage.tutorials[localStorage.getItem("selected_button")].length} afgewerkt!`;
@@ -95,16 +142,17 @@ export class TutorialPage {
         let data = this.tutorial.refresh(this);//de refresh methode krijgt een verwijzing naar de klasse mee zodat die de juiste tabel kan roodkleuren
         //data van vorm {finished:boolean,data:een matrix, tekst:"de best passende beschrijving bij de huidige bewerking"}
         //proberen om dit voor elke tutorial zo te krijgen
-        data.data.mat.drawMatrix(this.tabel3,data.data.hoofding);
+        data.data.mat.drawMatrix(this.tabel3, data.data.hoofding);
         if (data.finished) {
             document.querySelector("#next_step").disabled = true;
             this.tutorialnumber++;
-            if(this.tutorialnumber!==TutorialPage.tutorials[localStorage.getItem("selected_button")].length){
-                setTimeout(()=>{this.nextTutorial();
-                this.startTutorial(localStorage.getItem("selected_button"),this.tutorialnumber);}
-            , 2000);
-            }
-            else{
+            if (this.tutorialnumber !== TutorialPage.tutorials[localStorage.getItem("selected_button")].length) {
+                setTimeout(() => {
+                        this.nextTutorial();
+                        this.startTutorial(localStorage.getItem("selected_button"), this.tutorialnumber);
+                    }
+                    , 2000);
+            } else {
                 setTimeout(this.endTutorial, 2000);
             }
 
@@ -113,7 +161,9 @@ export class TutorialPage {
         }
     }
 }
+
 let tp = new TutorialPage();
+
 function ListenToKnop(event) {
     tp.changeStep();
 }
@@ -128,16 +178,17 @@ function showDescription() {
 }
 
 function init() {
-    tp.startTutorial(localStorage.getItem("selected_button"),0);//uit localstorage de juiste tutorial ophalen en starten
+    tp.startTutorial(localStorage.getItem("selected_button"), 0);//uit localstorage de juiste tutorial ophalen en starten
     showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
 }
-function terug(){
+
+function terug() {
     let spelernaam = localStorage.getItem("huidige speler");
     let speler = new Speler(spelernaam);
     speler.eindTutorialOefening(localStorage.getItem("selected_button"));
-    window.open("./main.html","_self");
+    window.open("./main.html", "_self");
 }
 
 
