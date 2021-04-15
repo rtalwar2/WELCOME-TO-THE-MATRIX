@@ -12,13 +12,15 @@ class Matrix{
     __
     + Matrix(aantalRijen: int=3, aantalKolommen: int=3, fill: String=null)
     ..
+    + copyMatrix(): Matrix
     + vermenigvuldigMatrix(matrix_2: Matrix): Matrix
-    + importMatrix(dubbele_array: [][]): Matrix
-    + drawMatrix(element: Table-Tag, hoofd: String): void
+    + importMatrix(dubbele_array: [][]): [][]
+    + drawMatrix(element: Table-Tag, hoofd: String=null): void
     + getTransponneerde(): Matrix
     + getCofactor(mat: [][], p: int, q: int, n: int): [][]
     + getDeterminant(mat: [][]=this.matrix, n: int=this.aantalRijen): int
-    + getInverse(): Matrix
+    + adjunct(A: [][]=this.matrix, n: int=this.aantalRijen): Matrix
+    + getInverse(A: [][]=this.matrix, n: int=this.aantalRijen): {determinant: int, adjunct: Matrix, inverse: Matrix} of false
     + toSring(): String
 }
 
