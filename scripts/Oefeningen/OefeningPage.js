@@ -23,12 +23,14 @@ export class OefeningPage {
         }];
 
     static oefeningen = {//alle soorten oefeningen
-        "VermenigvuldigOefening": new VermenigvuldigOefening(new Matrix(3, 3), new Matrix(3, 3)),
+        "VermenigvuldigOefening": [new VermenigvuldigOefening(new Matrix(3, 3), new Matrix(3, 3)), new VermenigvuldigOefening(new Matrix(3,3),new Matrix(3,3))],
         //"TransponeerOefening":Object,
-        "InverseOefening": new InverseOefening(new Matrix(3,3)),
-        "DeterminantOefening": new DeterminantOefening(new Matrix(3, 3))
+        "InverseOefening": [new InverseOefening(new Matrix(3,3)),new InverseOefening(new Matrix(3,3))],
+        "DeterminantOefening": [new DeterminantOefening(new Matrix(3, 3)),new DeterminantOefening(new Matrix(3,3))]
     };
     oefening;
+    oefeningindex;
+    naam;
     tabel1 = document.querySelector("#tabel_m1");
     tabel2 = document.querySelector("#tabel_m2");
     tabel3 = document.querySelector("#tabel_m3");
@@ -37,11 +39,35 @@ export class OefeningPage {
     }
 
     startOefening(naam) {
-        this.oefening = OefeningPage.oefeningen[naam];
+        this.oefeningindex = 0;
+        this.naam = naam;
+        this.oefening = OefeningPage.oefeningen[naam][this.oefeningindex];
         this.oefening.maakInvul();
         for (let i = 0; i < this.oefening.aantal_matrices; i++) {
             this.oefening.matrices[i].drawMatrix(this.tabellen[i]);
         }
+    }
+
+    checkOefening(){
+        return this.oefening.checkOplossing(oef.oefening);
+    }
+
+    nextOefening(){
+        this.oefeningindex++;
+        if(this.oefeningindex < OefeningPage.oefeningen[this.naam].length) {
+            this.oefening = OefeningPage.oefeningen[this.naam][this.oefeningindex];
+            this.oefening.maakInvul();
+            for (let i = 0; i < this.oefening.aantal_matrices; i++) {
+                this.oefening.matrices[i].drawMatrix(this.tabellen[i]);
+            }
+        }
+        else{this.eindeOefening();
+        }
+    }
+
+    eindeOefening(){
+        alert('oefening klaar!');
+        terug();
     }
 }
 
@@ -60,7 +86,13 @@ function init() {
     //showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     //document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
     document.getElementById("check").addEventListener("click", function () {
-        oef.oefening.checkOplossing(oef.oefening);
+        let correct = oef.checkOefening();
+        if (correct){
+            oef.nextOefening();
+        }
+        else{
+            alert('fout');
+        }
     });
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
     //initialiseer popover (hintknop)

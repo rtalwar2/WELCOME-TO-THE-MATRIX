@@ -65,18 +65,16 @@ export class VermenigvuldigOefening extends Oefeningen {
     checkOplossing(object) {
         let obj = object;
         let invul= obj.getMatrix();
-        let bool = this.correct(invul);
-        if (bool) {
-            alert("goed");
-        } else {
-            alert("slecht");
-        }
+        return this.correct(invul);
     }
 
     changeInvul(){
         var rows = document.querySelector("#rijen").value;
         var columns = document.querySelector("#kolommen").value;
         var form = document.getElementById("frm");
+
+        //clear invul van vorige oefening
+        form.innerHTML = '';
 
         // for (let i = 0; i < rows; i++) {
         //     for (let j = 0; j < columns; j++) {
