@@ -8,6 +8,9 @@ export class InverseOefening extends Oefeningen{
     oplossing;
 
     constructor(m1){
+        while(m1.getDeterminant()===0){
+            m1=new Matrix(3,3);
+        }
         super(m1);
         this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, "0");
         this.matrices.push(this.matrix1);
@@ -19,16 +22,17 @@ export class InverseOefening extends Oefeningen{
     }
 
     getOplossing(){
-
+        return document.querySelector('input[name="oplossing"]:checked').value;
     }
 
 
     checkOplossing(object) {
         let obj = object;
         let invul = obj.getOplossing();
-
-        console.log(this.oplossing.matrix);
-        let bool = (invul === this.oplossing)
+        console.log(invul);
+        console.log(this.oplossing.adjunct.matrix);
+        this
+        let bool = (invul === "1")
         if (bool) {
             alert("goed");
         } else {
@@ -37,19 +41,20 @@ export class InverseOefening extends Oefeningen{
     }
 
     maakInvul() {
-        //volgorde random kiezen
-        let kiesnummers = [1,2,3];
+
+        //let kiesnummers = [1,2,3];
         let volgorde = [];
-        let kiesnummer = kiesnummers[Math.floor(Math.random()*2)];
-        kiesnummers.splice(kiesnummer-1, 1);
-        volgorde[kiesnummer] = this.oplossing;
+        //let kiesnummer = kiesnummers[Math.floor(Math.random()*2)];
+        //kiesnummers.splice(kiesnummer-1, 1);
+        volgorde[1] = this.oplossing;
         let valseOplossing1 = this.fout1();
-        kiesnummer = kiesnummers[Math.floor(Math.random())];
-        kiesnummers.splice(kiesnummer-1,1);
-        volgorde[kiesnummer] = valseOplossing1;
-        let valseOplossing2 = this.fout2(); //random getallen als valse oplossing +5 of -5 max
-        kiesnummer = kiesnummers[0];
-        volgorde[kiesnummer] = valseOplossing2;
+        //kiesnummer = kiesnummers[Math.floor(Math.random())];
+        //kiesnummers.splice(kiesnummer-1,1);
+        volgorde[0] = valseOplossing1;
+        let valseOplossing2 = this.fout2();
+        //kiesnummer = kiesnummers[0];
+        volgorde[2] = valseOplossing2;
+        console.log(volgorde);
 
         let form = document.getElementById("frm");
 
@@ -61,11 +66,11 @@ export class InverseOefening extends Oefeningen{
             radio.type = "radio";
             radio.classList.add("form-check-input")
             radio.name = "oplossing";
-            radio.value = volgorde[i];
+            radio.value = i;
             radio.id= `id_${volgorde[i]}`;
             label.classList.add("form-check-label");
             label.setAttribute("for",`id_${volgorde[i]}`);
-            label.innerHTML=`1/${this.oplossing.determinant} * ${this.oplossing.adjunct}`;
+            label.innerHTML=`1/${this.oplossing.determinant} * ${volgorde[i].adjunct}`;
             div.appendChild(radio);
             div.appendChild(label);
             form.appendChild(div);
@@ -79,18 +84,29 @@ export class InverseOefening extends Oefeningen{
     }
 
     fout1(){
-        this.fout=this.oplossing;
-        for(let i=0;i<this.oplossing.aantalRijen;i++){
-            for(let j=0;j<this.oplossing.aantalKolommen;i++){
-                this.fout[i][j]*=this.determinant;
+       this.fout=JSON.parse(JSON.stringify(this.oplossing));
+       this.fout.adjunct= new Matrix();
+       this.fout.inverse=new Matrix();
+       let hulp= JSON.parse(JSON.stringify(this.oplossing.adjunct));
+       let hulpinv=JSON.parse(JSON.stringify(this.oplossing.inverse));
+        for(let i=0;i<this.matrix1.aantalRijen;i++){
+            for(let j=0;j<this.matrix1.aantalKolommen;j++){
+                this.fout.adjunct.matrix[i][j]= hulp.matrix[i][j]*(-1);
+                this.fout.inverse.matrix[i][j]=hulpinv.matrix[i][j]*(-1);
             }
         }
         return this.fout;
     }
     fout2(){
-        for(let i=0;i<this.oplossing.aantalRijen;i++){
-            for(let j=0;j<this.oplossing.aantalKolommen;i++){
-                this.fout[i][j]=this.oplossing.getTransponneerde()[i][j];
+        this.fout=JSON.parse(JSON.stringify(this.oplossing));
+        this.fout.adjunct=new Matrix();
+        this.fout.inverse=new Matrix();
+        let trans= this.oplossing.adjunct.getTransponneerde();
+        let hulpinv=this.oplossing.inverse.getTransponneerde();
+        for(let i=0;i<this.matrix1.aantalRijen;i++){
+            for(let j=0;j<this.matrix1.aantalKolommen;j++){
+                this.fout.adjunct.matrix[i][j]=trans.matrix[i][j];
+                this.fout.inverse.matrix[i][j]=hulpinv.matrix[i][j];
             }
         }
         return this.fout;
