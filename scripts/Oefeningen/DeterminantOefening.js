@@ -41,8 +41,23 @@ export class DeterminantOefening extends Oefeningen{
         // let valseOplossing2 = this.oplossing + Math.floor(Math.random() * 10 - 5); //random getallen als valse oplossing +5 of -5 max
         // kiesnummer = kiesnummers[0];
         // volgorde[kiesnummer] = valseOplossing2;
-
-        let volgorde=[this.oplossing,+Math.floor(this.oplossing*((Math.random()%0.2)+2)),this.oplossing*-1+Math.floor(Math.random() * 10) - 5];
+        //+Math.floor(this.oplossing*((Math.random()%0.2)+2))
+        //this.oplossing*-1+Math.floor(Math.random() * 10) - 5
+        console.log("Oplossing  "+this.oplossing);
+        console.log("Matrix 1 "+this.matrix1.matrix);
+        let eerste_fout= this.fout1();
+        let tweede_fout= this.fout2();
+        while(eerste_fout === this.oplossing || tweede_fout === this.oplossing || eerste_fout=== tweede_fout){
+           this.matrices.pop();
+            this.matrix1= new Matrix();
+            this.matrices.push(this.matrix1);
+           this.oplossing= this.matrix1.getDeterminant();
+           console.log("Matrix 2 "+this.matrix1.matrix);
+           console.log("nieuwe matrix "+this.oplossing);
+            eerste_fout= this.fout1();
+            tweede_fout= this.fout2();
+        }
+        let volgorde=[this.oplossing,eerste_fout,tweede_fout];
         volgorde=volgorde.sort((a, b) => 0.5 - Math.random());
         console.log(volgorde);
         //kan 2 dezelfde oplossingen geven
@@ -85,4 +100,61 @@ export class DeterminantOefening extends Oefeningen{
         //content.appendChild(tekst);
     }
 
+    fout1(){
+        let hulp=JSON.parse(JSON.stringify(this.matrix1));
+        this.fout= new Matrix();
+
+        for(let i=0;i<this.matrix1.aantalRijen;i++){
+            for(let j=0;j<this.matrix1.aantalKolommen;j++){
+                this.fout.matrix[i][j]= hulp.matrix[i][j];
+            }
+        }
+        let D = 0;
+        if (this.fout.aantalRijen === 1)
+            return this.fout[0][0];
+        let temp;
+        let sign = 1;
+
+        for (let f = 0; f < this.fout.aantalRijen; f++) {
+
+            temp = this.fout.getCofactor(this.fout.matrix, 0, f,this.fout.aantalRijen );
+            //let element = this.fout.matrix[0][f];
+            D += sign  * this.fout.getDeterminant(temp, this.fout.aantalRijen - 1);
+            // terms are to be added with
+            // alternate sign
+            sign = -sign;
+        }
+        console.log("Fout1  "+D);
+        return D;
+    }
+    fout2(){
+        let hulp=JSON.parse(JSON.stringify(this.matrix1));
+        this.fout= new Matrix();
+
+        for(let i=0;i<this.matrix1.aantalRijen;i++){
+            for(let j=0;j<this.matrix1.aantalKolommen;j++){
+                this.fout.matrix[i][j]= hulp.matrix[i][j];
+            }
+        }
+        let D = 0;
+        if (this.fout.aantalRijen === 1)
+            return this.fout[0][0];
+        let temp;
+        let sign = 1;
+
+        for (let f = 0; f < this.fout.aantalRijen; f++) {
+
+            temp = this.fout.getCofactor(this.fout.matrix, 0, f,this.fout.aantalRijen );
+            let element = this.fout.matrix[0][f];
+            D += sign * element * this.fout.getDeterminant(temp, this.fout.aantalRijen - 1);
+            // terms are to be added with
+            // alternate sign
+
+        }
+        console.log("Fout2  "+D);
+        return D;
+    }
+
 }
+
+
