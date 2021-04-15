@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Matrix tutorial</title>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script defer type="module" src="./scripts/Bitcoins.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <header>
+                <h1>Toepassing: Decrypt the wallet’ </h1>
+            </header>
+            <main>
+                <section>
+                    <article>
+                        <div class="row">
+                        <p>Hill cipher is a polygraphic substitution cipher based on linear algebra. Each letter is represented by a number
+                            modulo 26. Often the simple scheme A = 0, B = 1, …, Z = 25 is used, but this is not an essential feature of the cipher.
+                            To encrypt a message, each block of n letters (considered as an n-component vector) is multiplied by an invertible n × n matrix,
+                            against modulus 26. To decrypt the message, each block is multiplied by the inverse of the matrix used for encryption.
+                            The matrix used for encryption is the cipher key, and it should be chosen randomly from the set of invertible n × n matrices (modulo 26).</p>
+                            <table id="js_alfabet" class="table table-dark table-striped">
+<!--                                <tbody>-->
+<!--                                <tr>-->
+<!--                                    <td>1</td>-->
+<!--                                    <td>2</td>-->
+<!--                                    <td>3</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>4</td>-->
+<!--                                    <td>5</td>-->
+<!--                                    <td>6</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>7</td>-->
+<!--                                    <td>8</td>-->
+<!--                                    <td>9</td>-->
+<!--                                </tr>-->
+<!--                                </tbody>-->
+                            </table>
+                            <h3>voorbeeld</h3>
+                            <div class="container-md">
+                                <p>Consider the message 'ACT', and the key below (or "GYB/NQK/URP" in letters):</p>
+                            </div>
+                            in letters:
+                            <div class="col-md-3">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>G</td>
+                                        <td>Y</td>
+                                        <td>B</td>
+                                    </tr>
+                                    <tr>
+                                        <td>N</td>
+                                        <td>Q</td>
+                                        <td>K</td>
+                                    </tr>
+                                    <tr>
+                                        <td>U</td>
+                                        <td>R</td>
+                                        <td>P</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            in cijfers:
+                            <div class="col-md-3">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>24</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13</td>
+                                        <td>16</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>17</td>
+                                        <td>15</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="container-md">
+                                <p>Thus the enciphered vector is given by:</p>
+                            </div>
+                            in letters:
+                            <div class="col-md-1">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>A</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>C</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>T</td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            in cijfers:
+                            <div class="col-md-1">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>19</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="container-md">
+                                <p>Thus the enciphered vector is given by:</p>
+                            </div>
+
+                            <div class="col-md-3">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>24</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13</td>
+                                        <td>16</td>
+                                        <td>10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>17</td>
+                                        <td>15</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            *                            <div class="col-md-1">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                            =
+                            <div class="col-md-1">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>67</td>
+                                    </tr>
+                                    <tr>
+                                        <td>222</td>
+                                    </tr>
+                                    <tr>
+                                        <td>319</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            =
+                            <div class="col-md-1">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>15</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>(mod 26)
+                            <div class="container-md">
+                                <p>which corresponds to a ciphertext of 'POH'</p>
+                            </div>
+                            in cijfers:
+                            <div class="col-md-1">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>15</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            in letters:
+                            <div class="col-md-1">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>P</td>
+                                    </tr>
+                                    <tr>
+                                        <td>O</td>
+                                    </tr>
+                                    <tr>
+                                        <td>H</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                             </div>
+                        <div class="row">
+                            <h3>Jouw taak</h3>
+                            <p>De computerwetenschappers aan de Ugent zijn erin geslaagd om de BitcoinWallet van de beruchte Osama bin Laden de onderscheppen. Het enige wat nu tussen ons en het geld staat is de geheime code.
+                                Deze code is geincrypteerd met behulp van Hill Cipher encryptie en het is nu jouw taak om de dode de decrypteren en het geld te bemachtigen</p>
+                        </div>
+                            <p id="js_code">gecodeerd wachtwoord: jladnnad</p>
+                        <div class="row">
+
+
+                                <table id="js_encoder" class="table">
+<!--                                    <tbody>-->
+<!--                                    <tr>-->
+<!--                                        <td>1</td>-->
+<!--                                        <td>2</td>-->
+<!--                                        <td>3</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>4</td>-->
+<!--                                        <td>5</td>-->
+<!--                                        <td>6</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>7</td>-->
+<!--                                        <td>8</td>-->
+<!--                                        <td>9</td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+                                </table>
+                            </div>
+<!--                            <div>-->
+<!--                                <table class="table">-->
+<!--                                    <tbody>-->
+<!--                                    &lt;!&ndash; <tr>-->
+<!--                                                <td>1</td>-->
+<!--                                                <td>2</td>-->
+<!--                                                <td>3</td>-->
+<!--                                              </tr>-->
+<!--                                              <tr>-->
+<!--                                                <td>4</td>-->
+<!--                                                <td>5</td>-->
+<!--                                                <td >6</td>-->
+<!--                                              </tr>-->
+<!--                                              <tr>-->
+<!--                                                <td>7</td>-->
+<!--                                                <td>8</td>-->
+<!--                                                <td>9</td>-->
+<!--                                              </tr> &ndash;&gt;-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                            </div>-->
+<!--                            <p class="col-md-8">-->
+<!--                                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium-->
+<!--                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore-->
+<!--                                veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam-->
+<!--                                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia-->
+<!--                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque-->
+<!--                                porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci-->
+<!--                                velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore-->
+<!--                                magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum-->
+<!--                                exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi-->
+<!--                                consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit-->
+<!--                                esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo-->
+<!--                                voluptas nulla pariatur?"-->
+<!--                            </p>-->
+<!--                            <div class="col-md-2">-->
+<!--                                <table class="table">-->
+<!--                                    <tbody class="col-md-8">-->
+<!--                                    <tr>-->
+<!--                                        <td><input type="text" /></td>-->
+<!--                                        <td><input type="text" /></td>-->
+<!--                                        <td><input type="text" /></td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td><input type="text" /></td>-->
+<!--                                        <td><input type="text" /></td>-->
+<!--                                        <td><input type="text" /></td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td><input type="text" /></td>-->
+<!--                                        <td><input type="text" /></td>-->
+<!--                                        <td><input type="text" /></td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </article>
+                    <input
+                            placeholder="password"
+                            type="text"
+                    />
+                    <input type="button" id="js_open" value="open wallet" />
+                </section>
+            </main>
+            <footer id="final_footer">
+                <p>
+                    Team-10 <time datetime="2020-02-24">24 februari 2020</time> <br />
+                    <i>Terms and conditions apply</i> &copy;
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+</body>
+</html>
