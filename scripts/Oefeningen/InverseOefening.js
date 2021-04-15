@@ -22,7 +22,7 @@ export class InverseOefening extends Oefeningen{
     }
 
     getOplossing(){
-        return document.querySelector('input[name="oplossing"]:checked').value;
+        return JSON.parse(document.querySelector('input[name="oplossing"]:checked').value);
     }
 
 
@@ -31,9 +31,15 @@ export class InverseOefening extends Oefeningen{
         let invul = obj.getOplossing();
         console.log(invul);
         console.log(this.oplossing.adjunct.matrix);
-        this
-        let bool = (invul === "1")
-        if (bool) {
+        let bool= true;
+        for(let i=0;i<this.oplossing.adjunct.aantalRijen;i++){
+            for(let j=0;j<this.oplossing.adjunct.aantalKolommen;j++){
+                if (invul.adjunct.matrix[i][j] !== this.oplossing.adjunct.matrix[i][j]){
+                   bool=false;
+                }
+            }
+        }
+        if(bool===true){
             alert("goed");
         } else {
             alert("slecht");
@@ -46,16 +52,22 @@ export class InverseOefening extends Oefeningen{
         let volgorde = [];
         //let kiesnummer = kiesnummers[Math.floor(Math.random()*2)];
         //kiesnummers.splice(kiesnummer-1, 1);
-        volgorde[1] = this.oplossing;
+        volgorde[0] = this.oplossing;
         let valseOplossing1 = this.fout1();
         //kiesnummer = kiesnummers[Math.floor(Math.random())];
         //kiesnummers.splice(kiesnummer-1,1);
-        volgorde[0] = valseOplossing1;
+        volgorde[1] = valseOplossing1;
         let valseOplossing2 = this.fout2();
         //kiesnummer = kiesnummers[0];
         volgorde[2] = valseOplossing2;
         console.log(volgorde);
-
+        for (let i = volgorde.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            let temp = volgorde[i];
+            volgorde[i] = volgorde[j];
+            volgorde[j] = temp;
+        }
+        console.log(volgorde);
         let form = document.getElementById("frm");
 
         for(let i = 0;i<3;i++) {
@@ -66,7 +78,7 @@ export class InverseOefening extends Oefeningen{
             radio.type = "radio";
             radio.classList.add("form-check-input")
             radio.name = "oplossing";
-            radio.value = i;
+            radio.value = JSON.stringify(volgorde[i]);
             radio.id= `id_${volgorde[i]}`;
             label.classList.add("form-check-label");
             label.setAttribute("for",`id_${volgorde[i]}`);
