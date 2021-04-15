@@ -39,11 +39,7 @@ export class InverseOefening extends Oefeningen{
                 }
             }
         }
-        if(bool===true){
-            alert("goed");
-        } else {
-            alert("slecht");
-        }
+        return bool;
     }
 
     maakInvul() {
@@ -69,6 +65,9 @@ export class InverseOefening extends Oefeningen{
         }
         console.log(volgorde);
         let form = document.getElementById("frm");
+
+        //clear invul van vorige oefening
+        form.innerHTML = '';
 
         for(let i = 0;i<3;i++) {
             let div=document.createElement("div");

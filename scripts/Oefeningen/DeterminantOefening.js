@@ -24,12 +24,7 @@ export class DeterminantOefening extends Oefeningen{
         let invul= obj.getOplossing();
         console.log(invul);
         console.log(this.oplossing);
-        let bool = (invul == this.oplossing)//moet anders werkt het niet
-        if (bool) {
-            alert("goed");
-        } else {
-            alert("slecht");
-        }
+        return invul == this.oplossing//moet anders werkt het niet
     }
 
     maakInvul() {
@@ -46,11 +41,15 @@ export class DeterminantOefening extends Oefeningen{
         // let valseOplossing2 = this.oplossing + Math.floor(Math.random() * 10 - 5); //random getallen als valse oplossing +5 of -5 max
         // kiesnummer = kiesnummers[0];
         // volgorde[kiesnummer] = valseOplossing2;
+
         let volgorde=[this.oplossing,+Math.floor(this.oplossing*((Math.random()%0.2)+2)),this.oplossing*-1+Math.floor(Math.random() * 10) - 5];
         volgorde=volgorde.sort((a, b) => 0.5 - Math.random());
         console.log(volgorde);
         //kan 2 dezelfde oplossingen geven
         let form = document.getElementById("frm");
+
+        //clear invul van vorige oefening
+        form.innerHTML = '';
 
         for(let i = 0;i<3;i++) {
             let div=document.createElement("div");
@@ -75,6 +74,15 @@ export class DeterminantOefening extends Oefeningen{
     Default radio
   </label>
 </div>`
+        //hint aanmaken
+        let div = document.createElement('div');
+    }
+
+    setHint(tekst){
+        //vul de hintknop correct in
+        $('[data-toggle="popover"]').attr('data-content',tekst.innerHTML);
+        //let content = document.getElementById('popovercontent');
+        //content.appendChild(tekst);
     }
 
 }
