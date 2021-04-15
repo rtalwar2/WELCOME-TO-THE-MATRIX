@@ -8,7 +8,11 @@ export class InverseTutorial extends Tutorial {
     matrix3;//ONZICHTBARE derde matrix waar getransponeerde uit berekend wordt
     gr=[];
     gk=[];
+    det;
     constructor(m1) {
+        while(m1.getDeterminant()===0){
+            m1=new Matrix(m1.aantalRijen,m1.aantalKolommen);
+        }
         super(m1);
         this.stapnummer = 0;
         this.matrix2 = new Matrix(m1.aantalRijen-1, m1.aantalKolommen-1, "0");
@@ -17,6 +21,7 @@ export class InverseTutorial extends Tutorial {
         this.matrices.push(this.matrix1);
         this.matrices.push(this.matrix2);
         this.aantal_matrices = this.matrices.length;
+        this.det = m1.getDeterminant()
     }
 
     addDiv(element,classe){
@@ -84,29 +89,35 @@ export class InverseTutorial extends Tutorial {
             this.data = this.matrix3.copyMatrix();              // data is copie van matrix3 van vorige stap
             this.matrix3.matrix[this.rij1][this.kolom1] = this.matrix2.getDeterminant();
             this.tekst = "determinant cofactor berekenen en in \"adjunct\" invullen"
+
         }else if (this.stapnummer === 10){
             this.data = this.matrix3;
             this.tekst = "volgende stap transponeren"
 
-        }else if (this.stapnummer > 10){
-            this.matrix1 = this.matrix3;
+        }else if (this.stapnummer === 11){
+            this.matrix2 = this.matrix3;
             this.data = this.matrix3.getTransponneerde();
-            let tabel1 = document.querySelector("#tabel_m1");   //Adjunct links tonen
-            this.matrix1.drawMatrix(tabel1,"\"adjunct\"");
+            let tabel2 = document.querySelector("#tabel_m2");   //Determinant tonen
+            this.matrix2.drawMatrix(tabel2,"\"adjunct\"");
             hoofdingData = "adjunct"
-            document.querySelectorAll("#tabel_m2").forEach(value => value.parentElement.removeChild(value));    // matrix 2 verwijderen
-            this.tekst = "nu nog delen door determinant"
-        }else {
-            // om de inverse te bekomen moet de adjunct nog gedeeld worden door de determinant
+            this.tekst = "nu nog delen door determinant matrix1"
+
+        }else if (this.stapnummer === 12){
+            this.matrix2 = this.data;
+            let tabel2 = document.querySelector("#tabel_m2");   //Determinant tonen
+            this.matrix2.drawMatrix(tabel2,"adjunct");
+            this.data = this.matrix1.getInverse().inverse;
+            this.tekst = "adjunct delen door determinant matrix1 \nDet = " + this.det;
+            hoofdingData = "Inverse";
+
+        } else {
             this.finished = true;
         }
 
-
         return {
             finished: this.finished,
-            //data: {mat:this.matrix3,hoofding:"adj moet nog getransponeerd worden"},
             data: {mat:this.data,hoofding: hoofdingData},
             tekst: this.tekst
-        }//om de inverse te bekomen moet de adjunct nog gedeeld worden door de determinant
+        }
     }
 }
