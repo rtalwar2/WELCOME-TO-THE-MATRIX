@@ -72,6 +72,7 @@ function hint_init(){
         div.appendChild(t_matrixn);
     }
 }
+
 function hint_uitleg(){
     let oef = document.querySelector("#oefening");
     let p = document.createElement("p");            //uitlegvak maken
@@ -111,7 +112,7 @@ function hint3(){
     for (let n = 0; n < matrices.length; n++){
         oef.removeChild(document.querySelector(".vector"));
     }
-    uitleg_hint = "Om de decoder te vinden moet de encoder geinverteerd worden"
+    uitleg_hint = "Om de decoder te vinden moet de encoder geinverteerd worden en elementsgewijs %26"
 }
 
 function hint4(){
@@ -141,7 +142,12 @@ function init(){
         encoder=new Matrix();
         determinant=encoder.getDeterminant();
     }
-    decoder=encoder.getInverse().inverse;
+    decoder=encoder.getInverse().adjunct;
+    for(let i=0;i<encoder.aantalRijen;i++){
+        for(let j=0;j<encoder.aantalKolommen;j++){
+            decoder.matrix[i][j]+=`/${encoder.getDeterminant()}`;
+        }
+    }
     encoded_key="pindakaas";//momenteel hardgecodeerd, kan random worden of iets dat een coole tekst wordt als je het decodeerd
     showAlfabet_table();    //LET OP: alleen keys kiezen die meervoud van 3 zijn
     showData();
