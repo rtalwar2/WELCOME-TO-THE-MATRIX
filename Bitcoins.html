@@ -260,7 +260,7 @@
                                 een geheel getal ‘x’ zodat. (a*x) %m =1</p>
                             <p>vb: determinant = 3, m = 11<br>
                                 MMI: 4<br>
-                                Want (4*3) % 11 = 1<br>
+                                Want (3*4) % 11 = 1<br>
                                 <b>LET OP</b> men zou kunnen denken dat 15 ook een geldig resultaat is aangezien "(15*3)
                                 % 11"
                                 =1, maar 15 behoort niet tot de verzameling {1, 2, ... 10} dus is geen geldig antwoord
@@ -289,31 +289,16 @@
                                 Deze code is geincrypteerd met behulp van Hill Cipher encryptie en het is nu jouw taak
                                 om de dode de decrypteren en het geld te bemachtigen</p>
                         </div>
-
-                        <p id="js_code">gecodeerd wachtwoord: jladnnad</p>
+                        <p id="js_timer"><input type="button" id="js_timer_start" value="START"/></p>
+                        <p id="js_code">gecodeerd wachtwoord: </p>
                         <div id="oefening" class="row">
                             <div class="col-md-3">
                                 <table id="js_encoder" class="table">
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <td>6</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                    </tr>
-                                    </tbody>
                                 </table>
                             </div>
+                            <div id="js_hints" class=" col-md-9 row">
 
+                            </div>
                         </div>
 
 
@@ -323,7 +308,7 @@
                             type="text"
                     />
                     <input type="button" id="js_open" value="open wallet"/>
-                    <button id="hint" type="button" class="btn btn-outline-primary">Hint</button>
+                    <button id="hint" disabled type="button" class="btn btn-outline-primary">Hint</button>
                 </section>
             </main>
             <footer id="final_footer">
