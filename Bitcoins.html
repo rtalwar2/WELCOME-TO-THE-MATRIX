@@ -36,23 +36,6 @@
                                 The matrix used for encryption is the cipher key, and it should be chosen randomly from
                                 the set of invertible n × n matrices (modulo 26).</p>
                             <table id="js_alfabet" class="table table-dark table-striped">
-                                <!--                                <tbody>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td>1</td>-->
-                                <!--                                    <td>2</td>-->
-                                <!--                                    <td>3</td>-->
-                                <!--                                </tr>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td>4</td>-->
-                                <!--                                    <td>5</td>-->
-                                <!--                                    <td>6</td>-->
-                                <!--                                </tr>-->
-                                <!--                                <tr>-->
-                                <!--                                    <td>7</td>-->
-                                <!--                                    <td>8</td>-->
-                                <!--                                    <td>9</td>-->
-                                <!--                                </tr>-->
-                                <!--                                </tbody>-->
                             </table>
                             <h3>voorbeeld</h3>
                             <div class="container-md">
@@ -105,7 +88,7 @@
 
                             </div>
                             <div class="container-md">
-                                <p>Thus the enciphered vector is given by:</p>
+                                <p>Since 'A' is 0, 'C' is 2 and 'T' is 19, the message is the vector:</p>
                             </div>
                             in letters:
                             <div class="col-md-1">
@@ -259,6 +242,46 @@
                             </div>
                         </div>
                         <div class="row">
+                            <h3>Decryptie</h3>
+                            <p>Decryptie gebeurd op dezelfde manier als encrypyie maar dan met de inverse van de key. om
+                                de inverse van de key(de decoder) de berekenen volstaat het hier niet om gewoon de
+                                inverse te berekenen van de encoder
+                                maar moet er gewerkt worden met de %26 inverse. Die wordt berekend door ipv de adjunct
+                                de delen door de determinant de
+                                ,adjunct de vermenigvuldigen met de Modular Multiplicative Inverse(MMI) van de
+                                determinant en uiteindelijk elk element %26.<br>
+                                <i><b>opgelet indien je na %26 een negatief getal uitkomt moet je er 26 bij
+                                    optellen!</b></i>
+                                vb -268 % 26 = -8 =>18
+                            </p>
+                            <h4>definitie modular multiplicative inverse</h4>
+                            <p>Voor twee gegeven gehele getallen ‘a’ en ‘m’, wordt de modulaire multiplicatieve inverse
+                                van ‘a’ onder modulo ‘m’ gedefinieerd als
+                                een geheel getal ‘x’ zodat. (a*x) %m =1</p>
+                            <p>vb: determinant = 3, m = 11<br>
+                                MMI: 4<br>
+                                Want (4*3) % 11 = 1<br>
+                                <b>LET OP</b> men zou kunnen denken dat 15 ook een geldig resultaat is aangezien "(15*3)
+                                % 11"
+                                =1, maar 15 behoort niet tot de verzameling {1, 2, ... 10} dus is geen geldig antwoord
+                                <br>aangezien dit berekenen een nogal lastig karwijtje kan worden(zeker met %26!),
+                                kun je onderstaande MMI calcularor gebruiken</p>
+                        </div>
+                        <form action="">
+                            <div class="form-group">
+                                <label for="js_input_MMI_calculator">determinant:</label>
+                                <input class="form-control" id="js_input_MMI_calculator" type="number">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="js_output_MMI_calculator">MMI:</label>
+                                <input class="form-control" readonly id="js_output_MMI_calculator" type="number">
+
+                            </div>
+                        </form>
+
+
+                        <div class="row">
                             <h3>Jouw taak</h3>
                             <p>De computerwetenschappers aan de Ugent zijn erin geslaagd om de BitcoinWallet van de
                                 beruchte Osama bin Laden de onderscheppen. Het enige wat nu tussen ons en het geld staat
@@ -266,6 +289,7 @@
                                 Deze code is geincrypteerd met behulp van Hill Cipher encryptie en het is nu jouw taak
                                 om de dode de decrypteren en het geld te bemachtigen</p>
                         </div>
+
                         <p id="js_code">gecodeerd wachtwoord: jladnnad</p>
                         <div id="oefening" class="row">
                             <div class="col-md-3">
@@ -289,71 +313,10 @@
                                     </tbody>
                                 </table>
                             </div>
-<!--                            hint:-->
-<!--                            <div class="col-md-3">-->
-<!--                                <table id="hint_tabel" class="table">-->
-<!--                                    <tbody>-->
-<!--                                    <tr>-->
-<!--                                        <td>1</td>-->
-<!--                                        <td>2</td>-->
-<!--                                        <td>3</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>4</td>-->
-<!--                                        <td>5</td>-->
-<!--                                        <td>6</td>-->
-<!--                                    </tr>-->
-<!--                                    <tr>-->
-<!--                                        <td>7</td>-->
-<!--                                        <td>8</td>-->
-<!--                                        <td>9</td>-->
-<!--                                    </tr>-->
-<!--                                    </tbody>-->
-<!--                                </table>-->
-<!--                            </div>-->
+
                         </div>
 
 
-
-
-
-
-                        <!--                            <p class="col-md-8">-->
-                        <!--                                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium-->
-                        <!--                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore-->
-                        <!--                                veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam-->
-                        <!--                                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia-->
-                        <!--                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque-->
-                        <!--                                porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci-->
-                        <!--                                velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore-->
-                        <!--                                magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum-->
-                        <!--                                exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi-->
-                        <!--                                consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit-->
-                        <!--                                esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo-->
-                        <!--                                voluptas nulla pariatur?"-->
-                        <!--                            </p>-->
-                        <!--                            <div class="col-md-2">-->
-                        <!--                                <table class="table">-->
-                        <!--                                    <tbody class="col-md-8">-->
-                        <!--                                    <tr>-->
-                        <!--                                        <td><input type="text" /></td>-->
-                        <!--                                        <td><input type="text" /></td>-->
-                        <!--                                        <td><input type="text" /></td>-->
-                        <!--                                    </tr>-->
-                        <!--                                    <tr>-->
-                        <!--                                        <td><input type="text" /></td>-->
-                        <!--                                        <td><input type="text" /></td>-->
-                        <!--                                        <td><input type="text" /></td>-->
-                        <!--                                    </tr>-->
-                        <!--                                    <tr>-->
-                        <!--                                        <td><input type="text" /></td>-->
-                        <!--                                        <td><input type="text" /></td>-->
-                        <!--                                        <td><input type="text" /></td>-->
-                        <!--                                    </tr>-->
-                        <!--                                    </tbody>-->
-                        <!--                                </table>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
                     </article>
                     <input
                             placeholder="password"

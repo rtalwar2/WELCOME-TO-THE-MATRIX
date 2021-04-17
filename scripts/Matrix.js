@@ -42,9 +42,9 @@ export default class Matrix {
     vermenigvuldigMatrix(matrix_2) { // moet nog een check bijkomen
         let result = []; //dubbele array
         if (this.aantalKolommen === matrix_2.aantalRijen) {
-            for (let i = 0; i < this.matrix.length; i++) {
+            for (let i = 0; i < this.aantalRijen; i++) {
                 result[i] = [];
-                for (let j = 0; j < matrix_2.matrix.length; j++) {
+                for (let j = 0; j < matrix_2.aantalKolommen; j++) {
                     let sum = 0;
                     for (let k = 0; k < this.matrix[0].length; k++) {
                         sum += this.matrix[i][k] * matrix_2.matrix[k][j];

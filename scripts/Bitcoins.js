@@ -9,63 +9,66 @@ let tijdelijk;
 let n = 0;
 let uitleg_hint;
 let eind_opl = [];
-let alphabet = [ 'A', 'B', 'C', 'D', 'E',
+let alphabet = ['A', 'B', 'C', 'D', 'E',
     'F', 'G', 'H', 'I', 'J',
     'K', 'L', 'M', 'N', 'O',
     'P', 'Q', 'R', 'S', 'T',
     'U', 'V', 'W', 'X', 'Y',
-    'Z' ];
-function showAlfabet_table(){//voor het gemak met innerhtml gedaan maar moet aangepast worden! kan wel op einde wanneer alles klaar is
+    'Z'];
 
-    let inset_text=`
+function showAlfabet_table() {//voor het gemak met innerhtml gedaan maar moet aangepast worden! kan wel op einde wanneer alles klaar is
+
+    let inset_text = `
     <tbody>`
-    let row1="<tr><th>letter</th>";
-    let row2="<tr><th>nummer</th>"
-        for(let i=0;i<26;i++){
-            row1+=`<td>${alphabet[i]}</td>`
-            row2+=`<td>${i}</td>`
-        }
-    row1+=`</tr>`
-    row2+=`</tr>`
-        inset_text+=row1;
-        inset_text+=row2;
-        inset_text+=`</tbody>`
-    document.querySelector("#js_alfabet").innerHTML=inset_text;
+    let row1 = "<tr><th>letter</th>";
+    let row2 = "<tr><th>nummer</th>"
+    for (let i = 0; i < 26; i++) {
+        row1 += `<td>${alphabet[i]}</td>`
+        row2 += `<td>${i}</td>`
+    }
+    row1 += `</tr>`
+    row2 += `</tr>`
+    inset_text += row1;
+    inset_text += row2;
+    inset_text += `</tbody>`
+    document.querySelector("#js_alfabet").innerHTML = inset_text;
 }
 
-function showData(){
-    document.querySelector("#js_code").innerText=`gecodeerd wachtwoord: ${encoded_key}`
-    let tabel=document.querySelector("#js_encoder");
-    encoder.drawMatrix(tabel,"ENCODER");
+function showData() {
+    document.querySelector("#js_code").innerText = `gecodeerd wachtwoord: ${encoded_key}`
+    let tabel = document.querySelector("#js_encoder");
+    encoder.drawMatrix(tabel, "ENCODER");
 }
 
-function hint(){
+function hint() {
     hint_nr++;
     let r = (4 + matrices.length * 4);
-    if (hint_nr === 1){
+    if (hint_nr === 1) {
         hint_init();
         hint1();
         hint_uitleg();
-    }else if (hint_nr === 2){
+    } else if (hint_nr === 2) {
         hint2();
-    }else if (hint_nr === 3){
+    } else if (hint_nr === 3) {
         hint3();
-    }else if (hint_nr === 4){
+    } else if (hint_nr === 4) {
         hint4();
-    }else if (hint_nr <= 4 + (matrices.length*4)){
+    } else if (hint_nr <= 4 + (matrices.length * 4)) {
         // let t = (hint_nr-4)%4
-        if ((hint_nr-4)%4 ===  1){
+        if ((hint_nr - 4) % 4 === 1) {
             n++;
-            if (n !== 1){terug4()}
+            if (n !== 1) {
+                terug4()
+            }
             hint5(n);
-        }else if ((hint_nr-4)%4 ===  2){
+        } else if ((hint_nr - 4) % 4 === 2) {
             hint6(n);
-        }else if ((hint_nr-4)%4 ===  3){
+        } else if ((hint_nr - 4) % 4 === 3) {
             hint7(n);
-        }else if ((hint_nr-4)%4 ===  0){
+        } else if ((hint_nr - 4) % 4 === 0) {
             hint8(n);
         }
-    }else if (hint_nr > 4 + (matrices.length*4)){
+    } else if (hint_nr > 4 + (matrices.length * 4)) {
         hint9();
     }
 
@@ -73,13 +76,13 @@ function hint(){
     document.querySelector("#uitleg").innerText = uitleg_hint;
 }
 
-function hint_init(){
+function hint_init() {
     let oef = document.querySelector("#oefening");
     let titel = document.createElement('h4');       //titel maken
     titel.innerText = "Hint:";
     oef.appendChild(titel);
 
-    for (let n = 1; n <= encoded_key.length/3; n++){        //tabellen maken
+    for (let n = 1; n <= encoded_key.length / 3; n++) {        //tabellen maken
         let div = document.createElement("div");
         div.className = "col-md-1";
         div.classList.add("vector");
@@ -92,18 +95,18 @@ function hint_init(){
     }
 }
 
-function hint_uitleg(){
+function hint_uitleg() {
     let oef = document.querySelector("#oefening");
     let p = document.createElement("p");            //uitlegvak maken
     p.id = "uitleg";
     oef.appendChild(p);
 }
 
-function hint1(){
-    for (let n = 1; n <= encoded_key.length/3; n++){
+function hint1() {
+    for (let n = 1; n <= encoded_key.length / 3; n++) {
         let matrixn = new Matrix(3, 1);
-        for (let i = (n-1)*3; i < n*3; i++){                // matrices invullen enciphered vector in letters
-            matrixn.matrix[i-((n-1)*3)][0] = encoded_key.charAt(i).toUpperCase();
+        for (let i = (n - 1) * 3; i < n * 3; i++) {                // matrices invullen enciphered vector in letters
+            matrixn.matrix[i - ((n - 1) * 3)][0] = encoded_key.charAt(i).toUpperCase();
         }
         matrices.push(matrixn);
         let t_matrixn = document.querySelector("#vector" + n);
@@ -115,26 +118,26 @@ function hint1(){
     hint_knop.innerText = "Volgende Hint";
 }
 
-function hint2(){
-    for (let n = 0; n < matrices.length; n++){
-        for (let i = 0; i < 3; i++){
+function hint2() {
+    for (let n = 0; n < matrices.length; n++) {
+        for (let i = 0; i < 3; i++) {
             matrices[n].matrix[i][0] = alphabet.indexOf(matrices[n].matrix[i][0]);  // letters omzetten in cijfers
         }
-        let t_matrixn = document.querySelector("#vector" + (n+1));
+        let t_matrixn = document.querySelector("#vector" + (n + 1));
         matrices[n].drawMatrix(t_matrixn, t_matrixn.id);
     }
     uitleg_hint = "enciphered vector in cijfers";
 }
 
-function hint3(){
+function hint3() {
     let oef = document.querySelector("#oefening");
-    for (let n = 0; n < matrices.length; n++){
+    for (let n = 0; n < matrices.length; n++) {
         oef.removeChild(document.querySelector(".vector"));
     }
-    uitleg_hint = "Om de decoder te vinden moet de encoder geinverteerd worden en elementsgewijs %26"
+    uitleg_hint = `Om de decoder te vinden moet de encoder %26-geinverteerd worden en elementsgewijs %26.\nDeterminant:${encoder.getDeterminant()}\nMMI van determinant:${modInverse(encoder.getDeterminant())}`
 }
 
-function hint4(){
+function hint4() {
     let oef = document.querySelector("#oefening");
     let div = document.createElement("div");
     div.className = "col-md-3";
@@ -150,7 +153,7 @@ function hint4(){
     uitleg_hint = "Dit is de inverse van de encoder:"
 }
 
-function hint5(n){
+function hint5(n) {
     let oef = document.querySelector("#oefening");
     let p = document.createElement("p");
     p.className = "rm";
@@ -168,12 +171,12 @@ function hint5(n){
     t_matrixn.id = "matrix1-1";
     div.appendChild(t_matrixn);
 
-    matrices[n-1].drawMatrix(t_matrixn, "vector" + n);
+    matrices[n - 1].drawMatrix(t_matrixn, "vector" + n);
 
     uitleg_hint = "Nu decoder maal vector" + n;
 }
 
-function hint6(n){
+function hint6(n) {
     let oef = document.querySelector("#oefening");
     let p = document.createElement("p");
     // p.className = "rm";
@@ -193,7 +196,7 @@ function hint6(n){
     div.appendChild(t_matrixn);
 
     let opl = new Matrix(3, 1);
-    let array = decoder.vermenigvuldigMatrix(matrices[n-1]);      // Werkt niet ?
+    let array = decoder.vermenigvuldigMatrix(matrices[n - 1]);      // Werkt niet ?
     opl.importMatrix(array);
 
     tijdelijk = opl;
@@ -202,14 +205,13 @@ function hint6(n){
     uitleg_hint = "decoder maal vector" + n;
 }
 
-function hint7(n){
+function hint7(n) {
     let oef = document.querySelector("#oefening");
     document.querySelectorAll(".rm").forEach(value => oef.removeChild(value));
 
-    let opl = new Matrix(3, 1);
-    for (let i = 0; i < 3; i++){
-        let t = opl.matrix[i][0];
-        opl.matrix[i][0] = t%26;
+    let opl = tijdelijk.copyMatrix();
+    for (let i = 0; i < 3; i++) {
+        opl.matrix[i][0] %= 26;
     }
 
     let t_tijdelijk = document.querySelector("#matrix1-1");
@@ -222,9 +224,9 @@ function hint7(n){
     tijdelijk = opl;
 }
 
-function hint8(n){
+function hint8(n) {
     let opl = new Matrix(3, 1);
-    for (let i = 0; i < 3; i++){
+    for (let i = 0; i < 3; i++) {
         opl.matrix[i][0] = alphabet[tijdelijk.matrix[i][0]];
         eind_opl.push(alphabet[tijdelijk.matrix[i][0]]);
     }
@@ -237,7 +239,7 @@ function hint8(n){
     opl.drawMatrix(t_opl, "oplossing in letters vector" + n);
 }
 
-function terug4(){
+function terug4() {
     let oef = document.querySelector("#oefening");
 
     // om terug gelijk na hint4 te zijn
@@ -256,31 +258,87 @@ function terug4(){
 
 }
 
-function hint9(){
+function hint9() {
     let oef = document.querySelector("#oefening");
     document.querySelectorAll(".rm2").forEach(value => oef.removeChild(value));
-    uitleg_hint = eind_opl;
+    uitleg_hint = "";
+    eind_opl.forEach(value => uitleg_hint+=value);
 
     let hint_knop = document.querySelector("#hint");
     hint_knop.innerText = "Geen Hints meer, dit is letterlijk de oplossing";
-
+    hint_knop.disabled=true;
 }
 
-function init(){
-    console.log("hallo");
-    encoder=new Matrix();
-    let determinant=encoder.getDeterminant();
-    while(determinant===0||determinant%26===0){
-        encoder=new Matrix();
-        determinant=encoder.getDeterminant();
+
+//////////////////////////////////////
+
+// Iterative Javascript program to find modular
+// inverse using extended Euclid algorithm <<dkit algoritme wordt gebruikt om de mmi de berekenen
+
+// Returns modulo inverse of a with respect
+// to m using extended Euclid Algorithm
+// Assumption: a and m are coprimes, i.e.,
+// gcd(a, m) = 1
+function modInverse(a, m = 26) {
+    let m0 = m;
+    let y = 0;
+    let x = 1;
+    if (m == 1)
+        return 0;
+    while (a > 1) {
+
+        // q is quotient
+        let q = parseInt(a / m);
+        let t = m;
+
+        // m is remainder now,
+        // process same as
+        // Euclid's algo
+        m = a % m;
+        a = t;
+        t = y;
+
+        // Update y and x
+        y = x - q * y;
+        x = t;
     }
-    decoder=encoder.getInverse().adjunct;
-    for(let i=0;i<encoder.aantalRijen;i++){
-        for(let j=0;j<encoder.aantalKolommen;j++){
-            decoder.matrix[i][j]+=`/${encoder.getDeterminant()}`;
+
+    // Make x positive
+    if (x < 0)
+        x += m0;
+    return x;
+}
+
+
+// This code is contributed by _saurabh_jaiswal
+///////////////////////////////////////////////
+
+function ShowMMI(event){
+    let input=event.target.value;
+    document.querySelector("#js_output_MMI_calculator").value=modInverse(input);
+}
+
+function init() {
+    console.log("hallo");
+    encoder = new Matrix();
+    let determinant = encoder.getDeterminant();
+    while (determinant === 0 || determinant % 26 === 0) {
+        encoder = new Matrix();
+        determinant = encoder.getDeterminant();
+    }
+    encoder.importMatrix([[6,24,1],[13,16,10],[20,17,15]]);
+    decoder = encoder.getInverse().adjunct;
+    for (let i = 0; i < encoder.aantalRijen; i++) {
+        for (let j = 0; j < encoder.aantalKolommen; j++) {
+            decoder.matrix[i][j] *= modInverse(encoder.getDeterminant());
+            decoder.matrix[i][j] %= 26;
+            if(decoder.matrix[i][j]<0){//enkel positieve getallen bij modulo van negatief getal
+                decoder.matrix[i][j]+=26;
+            }
         }
     }
-    encoded_key="pindakaas";//momenteel hardgecodeerd, kan random worden of iets dat een coole tekst wordt als je het decodeerd
+    document.querySelector("#js_input_MMI_calculator").addEventListener("input",ShowMMI);
+    encoded_key = "poh";//momenteel hardgecodeerd, kan random worden of iets dat een coole tekst wordt als je het decodeerd
     showAlfabet_table();    //LET OP: alleen keys kiezen die meervoud van 3 zijn
     showData();
     document.getElementById("hint").addEventListener("click", hint);

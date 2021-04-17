@@ -1,3 +1,4 @@
+import Matrix from "../../scripts/Matrix.js";
 
 let matrix;
 let matrix2;
@@ -69,13 +70,32 @@ function showsecondMatrix(matrix){
 
 function init(){
 console.log("script geladen");
-matrix=[[1,2,3],[4,5,66],[7,8,5]];
-matrix2=[[1,5],[2,5],[3,3]];
-showfirstMatrix(matrix);//matrix tonen
-showsecondMatrix(matrix2);//metrix tonen
-document.querySelector("#next").addEventListener("click",showNextStep)
-document.querySelector(`#id_${rij}-${kolom}`).classList.add("rood");//zodat eerste elementen al gekleurd zijn
-document.querySelector(`#id2_${rij2}-${kolom2}`).classList.add("rood");
+let m = new Matrix();
+
+let matrixkey=[[6,24,1],[13,16,10],[20,17,15]];
+m.importMatrix(matrixkey)
+    m.drawMatrix(document.querySelector("#js_table"));
+    console.log(`determinant=${m.getDeterminant()}`);
+    console.log(`determinant%26=${m.getDeterminant()%26}`);
+    console.log(`Modular Multiplicative Inverse %26=${25}`);
+
+let m2=m.getInverse().adjunct
+    for(let i=0;i<m.aantalRijen;i++){
+        for(let j=0;j<m.aantalKolommen;j++){
+            m2.matrix[i][j]*=25;
+            m2.matrix[i][j]%=26;
+            if(m2.matrix[i][j]<0){
+                m2.matrix[i][j]+=26;
+            }
+        }
+    }
+    m2.drawMatrix(document.querySelector("#js_table2"))
+// matrix2=[[1,5],[2,5],[3,3]];
+// showfirstMatrix(matrix);//matrix tonen
+// showsecondMatrix(matrix2);//metrix tonen
+// document.querySelector("#next").addEventListener("click",showNextStep)
+// document.querySelector(`#id_${rij}-${kolom}`).classList.add("rood");//zodat eerste elementen al gekleurd zijn
+// document.querySelector(`#id2_${rij2}-${kolom2}`).classList.add("rood");
 }
 
 init();

@@ -139,3 +139,7 @@ th{
     color: white;
     border: 0px solid black!important;
 }
+.form-control{
+    display: inline-block;
+    width: auto;
+}
