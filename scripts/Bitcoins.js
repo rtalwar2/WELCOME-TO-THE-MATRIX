@@ -3,12 +3,12 @@ import Matrix from "./Matrix.js";
 let encoder;
 let decoder;
 let encoded_key;
-let hint_nr = 0;
-let matrices = [];
-let tijdelijk;
-let n = 0;
-let uitleg_hint;
-let eind_opl = [];
+let hint_nr = 0;    // aantal keer op hintknop geklikt
+let matrices = [];  // lijst vectoren die waaruit het codewoord bestaat (eerst in letters dan in cijfers)
+let tijdelijk;      // tijdelijke variabele om vorige versie vector op te slaan
+let n = 0;          // duidt aan welke vector nu verwerkt wordt
+let uitleg_hint;    // uitleg dat per hint getoond wordt
+let eind_opl = [];  // lijst letters eindoplossing
 let alphabet = [ 'A', 'B', 'C', 'D', 'E',
     'F', 'G', 'H', 'I', 'J',
     'K', 'L', 'M', 'N', 'O',
@@ -41,7 +41,7 @@ function showData(){
 
 function hint(){
     hint_nr++;
-    let r = (4 + matrices.length * 4);
+    // let test = (4 + matrices.length * 4);
     if (hint_nr === 1){
         hint_init();
         hint1();
@@ -53,7 +53,7 @@ function hint(){
     }else if (hint_nr === 4){
         hint4();
     }else if (hint_nr <= 4 + (matrices.length*4)){
-        // let t = (hint_nr-4)%4
+        // let test = (hint_nr-4)%4
         if ((hint_nr-4)%4 ===  1){
             n++;
             if (n !== 1){terug4()}
@@ -75,11 +75,11 @@ function hint(){
 
 function hint_init(){
     let oef = document.querySelector("#oefening");
-    let titel = document.createElement('h4');       //titel maken
+    let titel = document.createElement('h4');       // titel maken
     titel.innerText = "Hint:";
     oef.appendChild(titel);
 
-    for (let n = 1; n <= encoded_key.length/3; n++){        //tabellen maken
+    for (let n = 1; n <= encoded_key.length/3; n++){        // tabellen maken voor vectoren
         let div = document.createElement("div");
         div.className = "col-md-1";
         div.classList.add("vector");
@@ -94,7 +94,7 @@ function hint_init(){
 
 function hint_uitleg(){
     let oef = document.querySelector("#oefening");
-    let p = document.createElement("p");            //uitlegvak maken
+    let p = document.createElement("p");            // uitlegvak maken
     p.id = "uitleg";
     oef.appendChild(p);
 }
@@ -102,12 +102,12 @@ function hint_uitleg(){
 function hint1(){
     for (let n = 1; n <= encoded_key.length/3; n++){
         let matrixn = new Matrix(3, 1);
-        for (let i = (n-1)*3; i < n*3; i++){                // matrices invullen enciphered vector in letters
+        for (let i = (n-1)*3; i < n*3; i++){                // vectoren invullen met codewoord in letters
             matrixn.matrix[i-((n-1)*3)][0] = encoded_key.charAt(i).toUpperCase();
         }
         matrices.push(matrixn);
         let t_matrixn = document.querySelector("#vector" + n);
-        matrixn.drawMatrix(t_matrixn, t_matrixn.id);
+        matrixn.drawMatrix(t_matrixn, t_matrixn.id);        // vectoren tekenen
     }
     uitleg_hint = "enciphered vector in letters";
 
@@ -118,7 +118,7 @@ function hint1(){
 function hint2(){
     for (let n = 0; n < matrices.length; n++){
         for (let i = 0; i < 3; i++){
-            matrices[n].matrix[i][0] = alphabet.indexOf(matrices[n].matrix[i][0]);  // letters omzetten in cijfers
+            matrices[n].matrix[i][0] = alphabet.indexOf(matrices[n].matrix[i][0]);  // letters in vectoren omzetten in cijfers
         }
         let t_matrixn = document.querySelector("#vector" + (n+1));
         matrices[n].drawMatrix(t_matrixn, t_matrixn.id);
@@ -128,7 +128,7 @@ function hint2(){
 
 function hint3(){
     let oef = document.querySelector("#oefening");
-    for (let n = 0; n < matrices.length; n++){
+    for (let n = 0; n < matrices.length; n++){                      // vectoren van scherm verwijderen
         oef.removeChild(document.querySelector(".vector"));
     }
     uitleg_hint = "Om de decoder te vinden moet de encoder geinverteerd worden en elementsgewijs %26"
@@ -136,7 +136,7 @@ function hint3(){
 
 function hint4(){
     let oef = document.querySelector("#oefening");
-    let div = document.createElement("div");
+    let div = document.createElement("div");                // tabel maken voor decoder matrix
     div.className = "col-md-3";
     div.classList.add("rm");
     oef.appendChild(div);
@@ -145,19 +145,19 @@ function hint4(){
     t_matrix.className = "table";
     div.appendChild(t_matrix);
 
-    decoder.drawMatrix(t_matrix, "DECODER");
+    decoder.drawMatrix(t_matrix, "DECODER");                    // decoder tekenen
 
     uitleg_hint = "Dit is de inverse van de encoder:"
 }
 
 function hint5(n){
     let oef = document.querySelector("#oefening");
-    let p = document.createElement("p");
+    let p = document.createElement("p");                    // p element maken om bewerking te tonen
     p.className = "rm";
     p.innerText = "*";
     oef.appendChild(p);
 
-    let div = document.createElement("div");
+    let div = document.createElement("div");                // tabel maken voor vector
     div.className = "col-md-1";
     // div.classList.add("rm");
     oef.appendChild(div);
@@ -168,21 +168,21 @@ function hint5(n){
     t_matrixn.id = "matrix1-1";
     div.appendChild(t_matrixn);
 
-    matrices[n-1].drawMatrix(t_matrixn, "vector" + n);
+    matrices[n-1].drawMatrix(t_matrixn, "vector" + n);          // juiste vector tekenen
 
     uitleg_hint = "Nu decoder maal vector" + n;
 }
 
 function hint6(n){
     let oef = document.querySelector("#oefening");
-    let p = document.createElement("p");
+    let p = document.createElement("p");                       // p element maken om bewerking te tonen
     // p.className = "rm";
     p.id = "bewerking";
     p.classList.add("rm2");
     p.innerText = "=";
     oef.appendChild(p);
 
-    let div = document.createElement("div");
+    let div = document.createElement("div");                // tabel maken voor tweede vector, vector met oplossing in cijfers
     div.className = "col-md-1";
     div.classList.add("rm2");
     oef.appendChild(div);
@@ -197,35 +197,35 @@ function hint6(n){
     opl.importMatrix(array);
 
     tijdelijk = opl;
-    opl.drawMatrix(t_matrixn, "voor-oplossing vector" + n);
+    opl.drawMatrix(t_matrixn, "voor-oplossing vector" + n);     // vector met oplossing in cijfers tekenen
 
     uitleg_hint = "decoder maal vector" + n;
 }
 
 function hint7(n){
     let oef = document.querySelector("#oefening");
-    document.querySelectorAll(".rm").forEach(value => oef.removeChild(value));
+    document.querySelectorAll(".rm").forEach(value => oef.removeChild(value));  // vectoren en bewerkingen van scherm verwijderen
 
     let opl = new Matrix(3, 1);
-    for (let i = 0; i < 3; i++){
+    for (let i = 0; i < 3; i++){                                       // vector met oplossing mod 26
         let t = opl.matrix[i][0];
         opl.matrix[i][0] = t%26;
     }
 
     let t_tijdelijk = document.querySelector("#matrix1-1");
-    tijdelijk.drawMatrix(t_tijdelijk, "voor-oplossing vector" + n);
+    tijdelijk.drawMatrix(t_tijdelijk, "voor-oplossing vector" + n); // vector met oplossing in cijfers tekenen
 
-    document.querySelector("#bewerking").innerText = "mod 26";
+    document.querySelector("#bewerking").innerText = "mod 26";  // juist bewerking tonen
 
     let t_opl = document.querySelector("#matrix2-1");
-    opl.drawMatrix(t_opl, "oplossing in cijfers vector" + n);
+    opl.drawMatrix(t_opl, "oplossing in cijfers vector" + n);   // vector met oplossing in cijfers mod 26 tekenen
     tijdelijk = opl;
 }
 
 function hint8(n){
     let opl = new Matrix(3, 1);
     for (let i = 0; i < 3; i++){
-        opl.matrix[i][0] = alphabet[tijdelijk.matrix[i][0]];
+        opl.matrix[i][0] = alphabet[tijdelijk.matrix[i][0]];        // vector met oplossing in cijfers omzetten naar letters
         eind_opl.push(alphabet[tijdelijk.matrix[i][0]]);
     }
     let t_tijdelijk = document.querySelector("#matrix1-1");
@@ -239,11 +239,9 @@ function hint8(n){
 
 function terug4(){
     let oef = document.querySelector("#oefening");
+    document.querySelectorAll(".rm2").forEach(value => oef.removeChild(value)); // dingen van scherm verwijderen om terug gelijk na hint4 te zijn
 
-    // om terug gelijk na hint4 te zijn
-    document.querySelectorAll(".rm2").forEach(value => oef.removeChild(value));
-
-    let div = document.createElement("div");
+    let div = document.createElement("div");        // tabel voor decoder maken
     div.className = "col-md-3";
     div.classList.add("rm");
     oef.appendChild(div);
@@ -252,14 +250,14 @@ function terug4(){
     t_matrix.className = "table";
     div.appendChild(t_matrix);
 
-    decoder.drawMatrix(t_matrix, "DECODER");
+    decoder.drawMatrix(t_matrix, "DECODER");        // decoder tekenen
 
 }
 
 function hint9(){
     let oef = document.querySelector("#oefening");
-    document.querySelectorAll(".rm2").forEach(value => oef.removeChild(value));
-    uitleg_hint = eind_opl;
+    document.querySelectorAll(".rm2").forEach(value => oef.removeChild(value)); // alles wat nog overbleef van scherm verwijderen
+    uitleg_hint = eind_opl;                                         // eindoplossing tonen
 
     let hint_knop = document.querySelector("#hint");
     hint_knop.innerText = "Geen Hints meer, dit is letterlijk de oplossing";
