@@ -334,9 +334,11 @@ function showTime() {
     let sec = tijd - min * 60;
     p.innerText = `${min}:${sec}`;
     tijd--;
+    console.log(tijd)
     if(tijd==0){
         encoded_key = "andere";//nieuwe key kan random maar moet veelvoud van 3 letters hebben
-        document.querySelector("#js_hints").innerTest="";//hints leegmaken
+        document.querySelector("#js_hints").innerText="";//hints leegmaken
+        showData();
          hint_nr = 0;    //alles wat te maken heeft met de hints resetten
          matrices = [];
          n = 0;
@@ -347,7 +349,7 @@ function showTime() {
 }
 
 function startTimer() {
-    tijd = 300; //5 minuten
+    tijd = 10; //5 minuten
     setInterval(showTime, 1000);
     showData();
     document.querySelector("#hint").disabled = false;
