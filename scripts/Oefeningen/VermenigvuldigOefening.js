@@ -206,12 +206,6 @@ export class VermenigvuldigOefening extends Oefeningen {
         this.setHint(div);
     }
 
-    setHint(tekst){
-        //vul de hintknop correct in
-        $('[data-toggle="popover"]').attr('data-content',tekst.innerHTML);
-        //let content = document.getElementById('popovercontent');
-        //content.appendChild(tekst);
-    }
 
 }
 

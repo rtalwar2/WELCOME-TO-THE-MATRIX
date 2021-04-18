@@ -55,13 +55,15 @@ export class OefeningPage {
     nextOefening(){
         this.oefeningindex++;
         if(this.oefeningindex < OefeningPage.oefeningen[this.naam].length) {
+            //oefening klaar
             this.oefening = OefeningPage.oefeningen[this.naam][this.oefeningindex];
             this.oefening.maakInvul();
             for (let i = 0; i < this.oefening.aantal_matrices; i++) {
                 this.oefening.matrices[i].drawMatrix(this.tabellen[i]);
             }
         }
-        else{this.eindeOefening();
+        else{
+            this.eindeOefening();
         }
     }
 
@@ -88,7 +90,10 @@ function init() {
     document.getElementById("check").addEventListener("click", function () {
         let correct = oef.checkOefening();
         if (correct){
-            oef.nextOefening();
+            document.querySelector(".modal-body").innerText = "klaar voor de volgende oefening?";
+            document.querySelector("#exampleModalLabel").innerText = "Juist!";
+            document.querySelector("#init_modal").click();
+            document.querySelector("#next").addEventListener("click",function(){oef.nextOefening()});//2 keer?
         }
         else{
             alert('fout');

@@ -23,4 +23,11 @@ export class Oefeningen {
     checkOplossing(){
         throw new Error("checkOplossing needs to be implemented.");
     }
+
+    setHint(tekst){
+        //vul de hintknop correct in
+        $('[data-toggle="popover"]').attr('data-content',tekst.innerHTML);
+        //let content = document.getElementById('popovercontent');
+        //content.appendChild(tekst);
+    }
 }

@@ -92,6 +92,12 @@ export class InverseOefening extends Oefeningen{
     Default radio
   </label>
 </div>`
+        //hint aanmaken
+        let div = document.createElement("div");
+        let hint = "inv(A) = adj(A)/det(A)";
+        //op deze manier tonen of simpeler? https://nl.wikipedia.org/wiki/Geadjugeerde_matrix
+        div.innerHTML = hint;
+        this.setHint(div);
     }
 
     fout1(){

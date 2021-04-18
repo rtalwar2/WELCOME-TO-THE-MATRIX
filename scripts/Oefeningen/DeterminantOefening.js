@@ -89,15 +89,49 @@ export class DeterminantOefening extends Oefeningen{
     Default radio
   </label>
 </div>`
-        //hint aanmaken
+        //hint aanmaken --- kan korter met minder hardgecodeerde code, 3x hetzelfde
         let div = document.createElement('div');
-    }
-
-    setHint(tekst){
-        //vul de hintknop correct in
-        $('[data-toggle="popover"]').attr('data-content',tekst.innerHTML);
-        //let content = document.getElementById('popovercontent');
-        //content.appendChild(tekst);
+        let hint = "+ (" + this.matrix1.matrix[0][0] + ") * ";
+        let table = document.createElement("table");
+        for(let i = 0;i<2;i++) {
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.innerHTML = this.matrix1.matrix[1+i][1];
+            tr.appendChild(td1);
+            let td2 = document.createElement("td");
+            td2.innerHTML = this.matrix1.matrix[1+i][2];
+            tr.appendChild(td2);
+            table.appendChild(tr);
+        }
+        div.innerHTML = hint;
+        div.appendChild(table);
+        div.innerHTML += "- (" + this.matrix1.matrix[0][1] + ") * ";
+        let table1 = document.createElement("table");
+        for(let i = 0;i<2;i++) {
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.innerHTML = this.matrix1.matrix[1+i][0];
+            tr.appendChild(td1);
+            let td2 = document.createElement("td");
+            td2.innerHTML = this.matrix1.matrix[1+i][2];
+            tr.appendChild(td2);
+            table1.appendChild(tr);
+        }
+        div.append(table1);
+        div.innerHTML += "+ (" + this.matrix1.matrix[0][2] + ") * ";
+        let table2 = document.createElement("table");
+        for(let i = 0;i<2;i++) {
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.innerHTML = this.matrix1.matrix[1+i][0];
+            tr.appendChild(td1);
+            let td2 = document.createElement("td");
+            td2.innerHTML = this.matrix1.matrix[1+i][1];
+            tr.appendChild(td2);
+            table2.appendChild(tr);
+        }
+        div.append(table2);
+        this.setHint(div)
     }
 
     fout1(){
