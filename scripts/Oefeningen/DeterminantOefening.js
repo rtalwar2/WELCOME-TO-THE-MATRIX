@@ -72,7 +72,7 @@ export class DeterminantOefening extends Oefeningen{
             let label = document.createElement("label");
             let radio = document.createElement("input");
             radio.type = "radio";
-            radio.classList.add("form-check-input")
+            radio.classList.add("form-check-input");
             radio.name = "oplossing";
             radio.value = volgorde[i];
             radio.id= `id_${volgorde[i]}`;

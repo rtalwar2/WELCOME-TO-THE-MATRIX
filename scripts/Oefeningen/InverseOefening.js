@@ -94,9 +94,38 @@ export class InverseOefening extends Oefeningen{
 </div>`
         //hint aanmaken
         let div = document.createElement("div");
-        let hint = "inv(A) = adj(A)/det(A)";
-        //op deze manier tonen of simpeler? https://nl.wikipedia.org/wiki/Geadjugeerde_matrix
+        let hint = "inv(A) = adj(A)/det(A) met adj(A) = ";
+
+        let table = document.createElement("table");
+        for(let i = 0; i<this.matrix1.matrix.length;i++){
+            let tr = document.createElement("tr");
+            for(let j = 0;j<this.matrix1.matrix.length;j++){
+                let td = document.createElement("td");
+                let newtable = document.createElement("table");
+                for(let k = 0;k<this.matrix1.matrix.length;k++){
+                    let newtr = document.createElement("tr");
+                    for(let l = 0;l<this.matrix1.matrix.length;l++){
+                        let newtd = document.createElement("td");
+                        if(i===k&&j===l){
+                            newtd.innerHTML = "1";
+                        }
+                        else if(i===k || j===l){
+                            newtd.innerHTML = "0";
+                        }
+                        else{
+                            newtd.innerHTML = "" + this.matrix1.matrix[k][l];
+                        }
+                        newtr.appendChild(newtd);
+                    }
+                    newtable.appendChild(newtr);
+                }
+                td.appendChild(newtable);
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
         div.innerHTML = hint;
+        div.appendChild(table);
         this.setHint(div);
     }
 
