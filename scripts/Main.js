@@ -7,17 +7,23 @@ function ListenToKnop(event) {
     let target = event.target.innerText
     console.log(event)
     localStorage.setItem("selected_button", target);//opschrift van de knop opslaan in local storage
-    if (target.includes("Oefening")) {
+    if (target.includes("wallet")) {
+        window.open("./Bitcoins.html", "_self");
+
+    } else if (target.includes("simulatie")) {
+        window.open("./.html", "_self");
+
+    } else if (target.includes("Oefening")) {
         window.open("./OefeningPage.html", "_self");
-    } else {
+    }
+    if (target.includes("Tutorial")) {
         window.open("./TutorialPage.html", "_self"); //naar TutorialPage gaan, moet later gewijzigd worden met Oefeningenpage,
         // kan gemakkelijk door bij invoegen van knoppen aan elke knop data-page="./TutorialPage.html" of data-page="./OefeningPage.html" toe te voegen
-
     }
 }
 
 function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en OefeningenPage klassen
-    let alle_teksten = [];
+    let alle_teksten = ["Crack the wallet", "Zombie simulatie"];
     for (let i of TutorialPage.alle_beschrijvingen) {
         alle_teksten.push(i.name);
     }
@@ -32,7 +38,7 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
         button1.type = "button";
         button1.classList.add(...["btn", "btn-outline-success"]);
         button1.innerText = alle_teksten[i];
-        button1.id=alle_teksten[i];
+        button1.id = alle_teksten[i];
         content.appendChild(button1);
         let content2 = document.createElement("div");
         content2.classList.add(...["col-md-6", "nav", "justify-content-center"]);
@@ -81,7 +87,7 @@ function spelerMaken(naamSpeler) {
     document.querySelectorAll("button").forEach(value => value.classList.remove("btn-outline-finished"))
     for (let key in dataSpeler) {
         let data = document.querySelector(`#${key}`);
-        if(data != null) {//gaf error als data=null
+        if (data != null) {//gaf error als data=null
             data.classList.add("btn-outline-finished");
         }
     }
