@@ -72,19 +72,6 @@ export class VermenigvuldigOefening extends Oefeningen {
         var rows = document.querySelector("#rijen").value;
         var columns = document.querySelector("#kolommen").value;
         var form = document.getElementById("frm");
-
-        //clear invul van vorige oefening
-        form.innerHTML = '';
-
-        // for (let i = 0; i < rows; i++) {
-        //     for (let j = 0; j < columns; j++) {
-        //         let input=document.createElement("input");
-        //         input.classList.add("matrix_cell");
-        //         input.value=parseInt(i*j);
-        //         form.appendChild(input);
-        //     }
-        // }
-
         let tabel = document.createElement("table");
         tabel.classList.add("u-center");
         tabel.id="input_tabel";
@@ -106,13 +93,12 @@ export class VermenigvuldigOefening extends Oefeningen {
      //   console.log(document.querySelector("#input_tabel"))
         if(document.querySelector("#input_tabel")!=null){
             form.removeChild(document.querySelector("#input_tabel"));
-
         }
         form.appendChild(tabel);
     }
 
     maakInvul() {
-`        <div class="row">
+        `        <div class="row">
             <label for="rijen">aantal rijen:</label><input class="left" type="number" id="rijen" min="1" max="5">
 
         </div>
@@ -120,44 +106,45 @@ export class VermenigvuldigOefening extends Oefeningen {
             <label for="kolommen">aantal kolommen:</label><input class="left" type="number" id="kolommen" min="1" max="5">
 
         </div>`
-    let form = document.getElementById("frm");
-        let row1=document.createElement("div");
+        let form = document.getElementById("frm");
+        let row1 = document.createElement("div");
         row1.classList.add("row");
-        let input1=document.createElement("input");
-        input1.type="number";
+        let input1 = document.createElement("input");
+        input1.type = "number";
         input1.classList.add("left");
-        input1.id="rijen";
-        input1.min="1";
-        input1.max="5";
-        input1.value=5;
-        let label1=document.createElement("label");
+        input1.id = "rijen";
+        input1.min = "1";
+        input1.max = "5";
+        input1.value = 5;
+        let label1 = document.createElement("label");
 
-        label1.setAttribute("for","rijen");
-        label1.innerText="aantal rijen:";
+        label1.setAttribute("for", "rijen");
+        label1.innerText = "aantal rijen:";
 
-        let row2=document.createElement("div");
+        let row2 = document.createElement("div");
         row2.classList.add("row");
-        let input2=document.createElement("input");
-        input2.type="number";
+        let input2 = document.createElement("input");
+        input2.type = "number";
         input2.classList.add("left");
-        input2.id="kolommen";
-        input2.value=2;
-        input2.min="1";
-        input2.max="5";
-        let label2=document.createElement("label");
+        input2.id = "kolommen";
+        input2.value = 2;
+        input2.min = "1";
+        input2.max = "5";
+        let label2 = document.createElement("label");
 
-        label2.setAttribute("for","kolommen");
-        label2.innerText="aantal kolommen:";
+        label2.setAttribute("for", "kolommen");
+        label2.innerText = "aantal kolommen:";
         row1.appendChild(label1);
         row1.appendChild(input1)
         row2.appendChild(label2);
         row2.appendChild(input2)
         form.appendChild(row1);
         form.appendChild(row2);
-        input1.addEventListener("change",this.changeInvul);
-        input2.addEventListener("change",this.changeInvul);
+        input1.addEventListener("change", this.changeInvul);
+        input2.addEventListener("change", this.changeInvul);
 
-    this.changeInvul();
+        this.changeInvul();
+
         `<div class="col-md-2">
                     <table class="table">
                       <tbody class="col-md-8">
