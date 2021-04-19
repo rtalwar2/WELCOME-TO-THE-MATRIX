@@ -84,11 +84,9 @@ MainProgram -> localStorage: setItem("selected_button", naam deelsysteem)
 opt  if deelsysteem is een Tutorial
         MainProgram -> TutorialPage: open TutorialPage
         TutorialPage -->> TutorialPage: generate html page (stap 27)
-    
      else if deelsysteem is een Oefening
         MainProgram -> OefeningPage: open OefeningPage
-        OefeningPage -->> OefeningPage: generate html page (stap 88)
-
+        OefeningPage -->> OefeningPage: generate html page (stap 97)
 end
 deactivate MainProgram
 
@@ -149,7 +147,6 @@ opt  if deelsysteem is VermenigvuldigTutorial
 
                     TutorialPage -> Matrix: drawMatrix(.,.)
                     TutorialPage -> TutorialPage: updateBeschrijving(.)
-
                 end
                 opt exit
                    Gebruiker -> TutorialPage: klik op exit
@@ -175,7 +172,6 @@ opt  if deelsysteem is VermenigvuldigTutorial
                    TutorialPage -> MainProgram: open Main (stap 2)
                    activate MainProgram
                    deactivate MainProgram
-
                 end
             end
 
@@ -183,48 +179,49 @@ opt  if deelsysteem is VermenigvuldigTutorial
             localStorage -->> TutorialPage: naam deelsysteem
 
             TutorialPage -> TutorialPage: nextTutorial()
-
         end
-
-        TutorialPage -> TutorialPage: endTutorial()
-
-        TutorialPage -> localStorage: getItem("selected_button")
-        localStorage -->> TutorialPage: naam deelsysteem
-
-        TutorialPage -> localStorage: getItem("huidige speler")
-        localStorage -->> TutorialPage: huidige speler
-
-        TutorialPage -> Speler: new Speler(spelernaam)
-
-        Speler -> localStorage: getItem(naam)
-        localStorage -->> Speler: data over speler
-        Speler -> localStorage: setItem("huidige speler", naam)
-
-        TutorialPage -> localStorage: getItem("selected_button")
-        localStorage -->> TutorialPage: naam deelsysteem
-
-        TutorialPage -> Speler: eindTutorialOefening(naam deelsysteem)
-        Speler -> Speler: saveData()
-        Speler -> localStorage: setItem(naam, data)
-
 end
+TutorialPage -> TutorialPage: endTutorial()
 
+TutorialPage -> localStorage: getItem("selected_button")
+localStorage -->> TutorialPage: naam deelsysteem
 
-' nog niet gemaakt
+TutorialPage -> localStorage: getItem("huidige speler")
+localStorage -->> TutorialPage: huidige speler
+
+TutorialPage -> Speler: new Speler(spelernaam)
+
+Speler -> localStorage: getItem(naam)
+localStorage -->> Speler: data over speler
+Speler -> localStorage: setItem("huidige speler", naam)
+
+TutorialPage -> localStorage: getItem("selected_button")
+localStorage -->> TutorialPage: naam deelsysteem
+
+TutorialPage -> Speler: eindTutorialOefening(naam deelsysteem)
+Speler -> Speler: saveData()
+Speler -> localStorage: setItem(naam, data)
+
+TutorialPage -> localStorage: getItem("selected_button")
+localStorage -->> TutorialPage: naam deelsysteem
+
 == Koppeling naar andere pagina ==
 
 
-opt gebruiker pressed oefening button
-    TutorialPage->OefeningPage: open OefeningPage (stap 88)
-    activate OefeningPage
-   else  gebruiker pressed main button
-   TutorialPage->MainProgram: open Main (stap 2)
- activate MainProgram
+opt gebruiker kiest voor oefening
+        Gebruiker -> TutorialPage: klikt op oefening
+        TutorialPage -> OefeningPage: open OefeningPage (stap 97)
+        activate OefeningPage
+   else  gebruiker kiest mainPage
+       Gebruiker -> TutorialPage: klikt op Main
+       TutorialPage -> MainProgram: open Main (stap 2)
+       activate MainProgram
 end
-TutorialPage->Speler:eindTutorialOefening(Tutorial naam)
+
 deactivate MainProgram
 deactivate TutorialPage
 deactivate Tutorial
+deactivate VermenigvuldigTutorial
 
 
 
@@ -265,7 +262,6 @@ opt if deelsysteem is VermenigvuldigOefening
         VermenigvuldigOefening -->> OefeningPage: matrices[i]
 
         OefeningPage -> Matrix: drawMatrix(.)
-
     end
 
     opt check
@@ -279,7 +275,6 @@ opt if deelsysteem is VermenigvuldigOefening
             VermenigvuldigOefening -> Gebruiker: alert("goed")
             else als fout
             VermenigvuldigOefening -> Gebruiker: alert("slecht")
-
        end
 
     end
@@ -307,29 +302,8 @@ opt if deelsysteem is VermenigvuldigOefening
        OefeningPage -> MainProgram: open Main (stap 2)
        activate MainProgram
        deactivate MainProgram
-
     end
-
-
-
-
 end
-
-
-
-' Nog niet gemmakt
-== Koppeling naar andere pagina ==
-
-
-opt gebruiker pressed Tutorial button
-    TutorialPage<-OefeningPage:target button
-    activate TutorialPage
-   else  gebruiker pressed main button
-   OefeningPage->MainProgram
- activate MainProgram
-end
-
-OefeningPage->Speler:eindTutorialOefening(Oefening naam)
 
 
 
@@ -354,14 +328,12 @@ Bitcoins -> Bitcoins: showAlfabet_table()
 Bitcoins -> Bitcoins: showData()
 Bitcoins -> Matrix: drawMatrix()
 
-
 opt MMI calculator
     Gebruiker -> Bitcoins: vult determinant in
     Bitcoins -> Bitcoins: ShowMMI()
     Bitcoins -> Bitcoins: modInverse()
 
 end
-
 
 opt hint
     Gebruiker -> Bitcoins: klik op hint
@@ -417,7 +389,6 @@ end
 
 opt passwoord cotroleren
     Gebruiker -> Bitcoins: vult passwoord in en drukt op "open wallet"
-
 end
 
 

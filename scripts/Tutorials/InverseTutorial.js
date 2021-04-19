@@ -87,7 +87,7 @@ export class InverseTutorial extends Tutorial {
             this.matrix2.drawMatrix(tabel2,"cofactor");
 
             this.data = this.matrix3.copyMatrix();              // data is copie van matrix3 van vorige stap
-            this.matrix3.matrix[this.rij1][this.kolom1] = this.matrix2.getDeterminant();
+            this.matrix3.matrix[this.rij1][this.kolom1] = this.matrix2.getDeterminant() * (-1)**(this.rij1 + this.kolom1);
             this.tekst = "determinant cofactor berekenen en in \"adjunct\" invullen"
 
         }else if (this.stapnummer === 10){
