@@ -71,6 +71,7 @@ export class InverseOefening extends Oefeningen{
 
         for(let i = 0;i<3;i++) {
             let div=document.createElement("div");
+            div.id="opl";
             div.classList.add("form-check");
             let label = document.createElement("label");
             let radio = document.createElement("input");

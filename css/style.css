@@ -7,7 +7,7 @@
     bottom:0;
     position: fixed;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 1%;
 
 }
 .margin-bottom{
@@ -56,6 +56,7 @@ table td {
 }
 .modal-footer{
     border-top-color: black;
+
 }
 
 h1{
@@ -148,21 +149,26 @@ th{
 }
 .col-md-7{
     font-size: x-large;
-    margin-left: 10%;
+    margin-left: 5%;
+
 }
 .col-md-3{
     margin-top: 2%;
     font-size: x-large;
     margin-bottom: 5%;
-    margin-left: 5%;
+    margin-right: 2%;
 
 
+}
+.col-md-11{
+    font-size: x-large;
 }
 section{
     margin-top: 5%;
 }
 #frm{
-    font-size: large;
+    font-size: x-large;
+    margin-bottom: 30%;
 }
 .form-control{
     display: inline-block;
@@ -185,20 +191,31 @@ section{
 .mt_6em{
     margin-top: 6em;
 }
-.col-md-2{
+.col-md-4{
     margin-top: 2%;
     margin-left: 10%;
     margin-bottom: 5%;
 }
-#tabel_m3{
+.col-md-2{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 5%;
+
+}
+.col-md-1{
+    margin-top: 2%;
     margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+#tabel_m3{
+    margin-left: 25%;
 }
 #tabel_m2{
     margin-left: 5%;
+    margin-right: 5%;
 }
-.row{
-    height:40%;
-}
+
 
 #fouttekst{
     display:none;
@@ -206,9 +223,18 @@ section{
 }
 
 #formcontent{
-    height:5rem
+    height: 5rem
 }
 
 #kleur{
     color: #26b71e;
+}
+p span :last-child{
+    color: greenyellow;
+}
+#opl{
+    margin-bottom: 5%;
+}
+.form-check {
+    position: center;
 }

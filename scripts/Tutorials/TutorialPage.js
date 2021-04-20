@@ -178,6 +178,7 @@ function showDescription() {
 
 function init() {
     document.getElementById("header").innerText=TutorialPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).name;
+    document.getElementById("uitleg").innerText=TutorialPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).uitlegb;
     tp.startTutorial(localStorage.getItem("selected_button"), 0);//uit localstorage de juiste tutorial ophalen en starten
     showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
