@@ -67,23 +67,6 @@ body{
     color:white;
 }
 
-/*table {*/
-/*    border-collapse: collapse;*/
-/*}*/
-
-/*td {*/
-/*    position: relative;*/
-/*    !*padding: 5px 10px;*!*/
-/*}*/
-
-/*tr.strikeout td:before {*/
-/*    content: " ";*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    left: 0;*/
-/*    border-bottom: 1px solid #28a745;*/
-/*    width: 100%;*/
-/*}*/
 .vertical-line{
     width:0px;
     z-index:10011;
@@ -102,19 +85,7 @@ body{
     left: 0;
     width: 100%;
 }
-/*tr.strikeout td:before {*/
-/*    content: " ";*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    left: 0;*/
-/*    border-bottom: 1px solid #28a745;*/
-/*    width: 100%;*/
-/*}*/
 
-/*tr.strikeout td:after {*/
-/*    !*content: "\00B7";*!*/
-/*    !*font-size: 1px;*!*/
-/*}*/
 
 .uitleg{
     height: 15em;
@@ -146,18 +117,18 @@ th{
     color: white;
     border: 0px solid black!important;
 }
-.col-md-7{
-    font-size: x-large;
-    margin-left: 10%;
-}
-.col-md-3{
-    margin-top: 2%;
-    font-size: x-large;
-    margin-bottom: 5%;
-    margin-left: 5%;
+/*.col-md-7{ maak er aparte klassen van en voeg toe waar nodig anders verandert de layout op de vreemde plaatsen*/
+/*    font-size: x-large;*/
+/*    margin-left: 10%;*/
+/*}*/
+/*.col-md-3{*/
+/*    margin-top: 2%;*/
+/*    font-size: x-large;*/
+/*    margin-bottom: 5%;*/
+/*    margin-left: 5%;*/
 
 
-}
+/*}*/
 section{
     margin-top: 5%;
 }
@@ -185,20 +156,20 @@ section{
 .mt_6em{
     margin-top: 6em;
 }
-.col-md-2{
-    margin-top: 2%;
-    margin-left: 10%;
-    margin-bottom: 5%;
-}
-#tabel_m3{
-    margin-left: 5%;
-}
-#tabel_m2{
-    margin-left: 5%;
-}
-.row{
-    height:40%;
-}
+/*.col-md-2{  maak er aparte klassen van en voeg toe waar nodig anders verandert de layout op vreemde plaatsen*/
+/*    margin-top: 2%;*/
+/*    margin-left: 10%;*/
+/*    margin-bottom: 5%;*/
+/*}*/
+/*#tabel_m3{*/
+/*    margin-left: 5%;*/
+/*}*/
+/*#tabel_m2{*/
+/*    margin-left: 5%;*/
+/*}*/
+/*.row{*/
+/*    height:40%;*/
+/*}*/
 
 #fouttekst{
     display:none;
