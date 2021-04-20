@@ -25,18 +25,7 @@ export class TutorialPage {
         {
             name: "VermenigvuldigTutorial",
             description: "eerst algemene uitleg over vermenigvuldigen van matrices\n\n" +
-                "\"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium\n" +
-                "                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore\n" +
-                "                                veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam\n" +
-                "                                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia\n" +
-                "                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque\n" +
-                "                                porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci\n" +
-                "                                velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore\n" +
-                "                                magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum\n" +
-                "                                exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi\n" +
-                "                                consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit\n" +
-                "                                esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo\n" +
-                "                                voluptas nulla pariatur?\""
+                "In de lineaire algebra is matrixvermenigvuldiging een bewerking tussen twee matrices die als resultaat een nieuwe matrix, aangeduid als het (matrix)product van die twee, oplevert. Vatten we de beide matrices op als lineaire afbeeldingen, dan is het matrixproduct de lineaire afbeelding die hoort bij de samenstelling van de beide lineaire afbeeldingen."
         },
         {
             name: "DeterminantTutorial",
