@@ -1,4 +1,5 @@
 import Matrix from "./Matrix.js";
+import {Speler} from "./Speler.js";
 
 let tijd;
 let encoder;
@@ -380,7 +381,15 @@ function init() {
     document.querySelector("#js_timer_start").addEventListener("click", startTimer);
     //showData();
     document.getElementById("hint").addEventListener("click", hint);
-
+    document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
 }
+
+function terug() {
+    let spelernaam = localStorage.getItem("huidige speler");
+    let speler = new Speler(spelernaam);
+    speler.eindTutorialOefening(localStorage.getItem("selected_button"));
+    window.open("./main.html", "_self");
+}
+
 
 init();
