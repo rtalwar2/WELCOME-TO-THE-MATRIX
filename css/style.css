@@ -163,3 +163,8 @@ th{
 .popover  td:last-child {
     border-right: 1px solid black;
 }
+
+#fouttekst{
+    display:none;
+    color: red;
+}
