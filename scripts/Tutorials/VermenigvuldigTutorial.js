@@ -77,8 +77,8 @@ export class VermenigvuldigTutorial extends Tutorial {
         return {
             finished: this.finished,
             data: {mat:this.data,hoofding:"product"},
-            tekst: this.uitleg + `<br> ${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} = ? --> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]} <br>`
-                + `<br>som = ${this.tekst} = (${this.som})`
+            tekst: this.uitleg + `<br> <h3>${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} ==> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]}</h3> <br>`
+                + `<br> <h3>Som = ${this.tekst} = (${this.som})</h3>`
         }
     }
 }
