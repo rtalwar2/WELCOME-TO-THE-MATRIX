@@ -2,12 +2,16 @@
     height: 65px;/*kleiner gemaakt omdat er soms overlap is met de exit/next/hint knoppen, was 150px en padding  van final_footer p was 50*/
     color: lightgray;
     background-color: black;
-    margin-top: 50px;
     /* line-height: 20px; */
     text-align: center;
     bottom:0;
     position: fixed;
     width: 100%;
+    margin-top: 50px;
+
+}
+.margin-bottom{
+    margin-bottom: 150px;
 }
 
 #final_footer p {
