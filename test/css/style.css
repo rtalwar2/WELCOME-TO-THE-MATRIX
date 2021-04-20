@@ -27,8 +27,11 @@ table td{
     text-align: center;
         padding: 0.75rem 0.75rem;
         /* padding-right: -5px; */
-    
+
 }
 .rood{
     background-color: pink;
+}
+#tabel_m1{
+    font-size: x-large;
 }

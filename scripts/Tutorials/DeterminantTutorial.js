@@ -28,9 +28,20 @@ export class DeterminantTutorial extends Tutorial {
         this.kolom1++;
         if (this.kolom1 === this.matrix1.aantalKolommen) {
             this.finished = true;
-            tutorialPage.updateBeschrijving(this.tekst +`\n\n som= ${this.determinant} = ${this.matrix1.getDeterminant()}`)
+            let oplossing = this.matrix1.getDeterminant();
+            this.tekst = "De uitkomst is "+ oplossing +".";
+            tutorialPage.updateBeschrijving(this.tekst +`<br/> som = ${this.determinant} = ${oplossing}`)
         }
         else {
+            if(this.kolom1 === 0) {
+                this.tekst = `Stap 1: we nemen het <div id="kleur">eerste</div> element als cofactor. De overblijvende 2x2 matrix is de minor. We doen <div id="kleur">+1</div> * cofactor * det(minor):<br/>`
+            }
+            else if(this.kolom1 === 1){
+                this.tekst =  `Stap 2: we nemen het <div id="kleur">tweede</div> element als cofactor. De overblijvende 2x2 matrix is de minor. We doen <div id="kleur">-1</div> * cofactor * det(minor):<br/>`
+            }
+            else if(this.kolom1 === 2){
+                this.tekst = `Stap 3: we nemen het <div id="kleur">derde</div> element als cofactor. De overblijvende 2x2 matrix is de minor. We doen <div id="kleur">+1</div> * cofactor * det(minor):<br/>`
+            }
 
             //this.addDiv(tutorialPage.tabel1.querySelector(`[data-id='id_${0}-${this.kolom1}']`),"vertical-line");
             tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij1}-${this.kolom1}']`).classList.add("rood");//maakt de juite elementen rood
@@ -63,7 +74,7 @@ export class DeterminantTutorial extends Tutorial {
             +` ${this.data.getDeterminant()}=${(-1)**(this.rij1+this.kolom1)*this.matrix1.matrix[this.rij1][this.kolom1]*this.data.getDeterminant()}<br>`
 
         this.determinant+=` ${(-1) ** (this.rij1 + this.kolom1) * this.matrix1.matrix[this.rij1][this.kolom1] * this.data.getDeterminant()}`
-        return {finished: this.finished, data: {mat:this.data,hoofding:"MINOR"}, tekst:this.tekst +`<br><br> som= ${this.determinant}`}
+        return {finished: this.finished, data: {mat:this.data,hoofding:"MINOR"}, tekst:this.tekst +`<br><br> som = ${this.determinant}`}
     }
 
 }

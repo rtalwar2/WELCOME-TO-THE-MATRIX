@@ -68,8 +68,9 @@ export class OefeningPage {
     }
 
     eindeOefening(){
-        alert('oefening klaar!');
-        terug();
+        document.querySelector(".modal-body").innerText = "Oefening klaar! Klik op \"Klaar\" om terug te gaan naar de hoofdpagina.";
+        document.querySelector("#next").innerText = "Klaar";
+        document.querySelector("#next").addEventListener("click",function(){terug();});
     }
 }
 
@@ -84,19 +85,24 @@ function showDescription() {
 
 function init() {
     oef = new OefeningPage();
+    document.getElementById("header").innerText= OefeningPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).name;
     oef.startOefening(localStorage.getItem("selected_button"));//uit localstorage de juiste Oefening ophalen en starten
     //showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     //document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
+    document.querySelector(".modal-body").innerText = "klaar voor de volgende oefening?";
+    document.querySelector("#exampleModalLabel").innerText = "Juist!";
     document.getElementById("check").addEventListener("click", function () {
         let correct = oef.checkOefening();
         if (correct){
-            document.querySelector(".modal-body").innerText = "klaar voor de volgende oefening?";
-            document.querySelector("#exampleModalLabel").innerText = "Juist!";
             document.querySelector("#init_modal").click();
-            document.querySelector("#next").addEventListener("click",function(){oef.nextOefening()});//2 keer?
+            oef.nextOefening();
         }
         else{
-            alert('fout');
+            //kan met jquery fadeout maar dan kunnen we niet slim versie van jquery gebruiken
+            document.querySelector("#fouttekst").style.display = "block";
+            setTimeout(function(){
+                document.querySelector("#fouttekst").style.display = "none";
+            },2000)
         }
     });
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
