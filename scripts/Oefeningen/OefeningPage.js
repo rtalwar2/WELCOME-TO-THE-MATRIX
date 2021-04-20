@@ -84,6 +84,7 @@ function showDescription() {
 
 function init() {
     oef = new OefeningPage();
+    document.getElementById("header").innerText= OefeningPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).name;
     oef.startOefening(localStorage.getItem("selected_button"));//uit localstorage de juiste Oefening ophalen en starten
     //showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     //document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop

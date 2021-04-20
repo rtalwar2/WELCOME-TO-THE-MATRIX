@@ -23,11 +23,11 @@
 }
 
 td:first-child {
-    border-left: 1px solid white;
+    border-left: 3px solid white;
 }
 
 td:last-child {
-    border-right: 1px solid white;
+    border-right: 3px solid white;
 }
 
 table td {
@@ -146,6 +146,24 @@ th{
     color: white;
     border: 0px solid black!important;
 }
+.col-md-7{
+    font-size: x-large;
+    margin-left: 10%;
+}
+.col-md-3{
+    margin-top: 2%;
+    font-size: x-large;
+    margin-bottom: 5%;
+    margin-left: 5%;
+
+
+}
+section{
+    margin-top: 5%;
+}
+#frm{
+    font-size: large;
+}
 .form-control{
     display: inline-block;
     width: auto;
@@ -162,6 +180,20 @@ th{
 
 .popover  td:last-child {
     border-right: 1px solid black;
+}
+.col-md-2{
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
+#tabel_m3{
+    margin-left: 5%;
+}
+#tabel_m2{
+    margin-left: 5%;
+}
+.row{
+    height:40%;
 }
 
 #fouttekst{

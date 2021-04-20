@@ -5,8 +5,7 @@ export class VermenigvuldigTutorial extends Tutorial {
 
     kolom2 = 0;
     som = 0;
-    tekst = "";
-    uitleg = "";
+    tekst="";
     matrix2;//de tweede matrix waarmee vermenigvuldigd wordt
     constructor(m1, m2) {
         super(m1);
@@ -18,7 +17,7 @@ export class VermenigvuldigTutorial extends Tutorial {
         this.aantal_matrices = this.matrices.length;
     }
 
-    drawMatrices() {
+    drawMatrices(){
         document.querySelector("#matrices").innerHTML =
             `<div class="row">
                                     <div class="col-md-${this.matrix1.aantalKolommen}"></div>
@@ -49,7 +48,7 @@ export class VermenigvuldigTutorial extends Tutorial {
             this.data.matrix[this.rij1][this.kolom2] = this.som;
             this.rij1++;
             this.som = 0;
-            this.tekst = "";
+            this.tekst="";
         }
 
         if (this.rij1 === this.matrix1.aantalRijen) {
@@ -59,24 +58,22 @@ export class VermenigvuldigTutorial extends Tutorial {
 
         if (this.kolom2 === this.matrix2.aantalKolommen) {
             this.finished = true;
-        } else {//als de tutorial niet gedaan is, kleur de juiste elementen
+        }
+        else {//als de tutorial niet gedaan is, kleur de juiste elementen
             tutorialPage.tabel1.querySelector(`[data-id='id_${this.rij1}-${this.kolom1}']`).classList.add("rood");
             tutorialPage.tabel2.querySelector(`[data-id='id_${this.kolom1}-${this.kolom2}']`).classList.add("rood");
         }
 
         this.som += this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2];
-        if (this.kolom1 !== 0) {
-            this.tekst += " + "
-        }
-        this.tekst += `${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]}`
-
-        this.uitleg = "Als je rij" + `${this.rij1 + 1}` + " van marix 1 en kolom" + `${this.kolom2 + 1}` + " van matrix 2 element per element vermenigvuldigt en daar de som van neemt krijg je het getal op positie " + `(${this.rij1 + 1},${this.kolom2 + 1})` + " in de product-matrix:" + `<br>`;
-
+        this.tekst+=`${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} +`
+        console.log(this.tekst);
+        this.tekst.replace(/\+ $/,"");//werkt om een reden niet om eerste (of laatste) + teken te verwijderen
+        console.log(this.tekst);
         return {
             finished: this.finished,
-            data: {mat: this.data, hoofding: "product"},
-            tekst: this.uitleg + `${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} = ? --> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]} <br>`
-                + `som = ${this.tekst} = (${this.som})`
+            data: {mat:this.data,hoofding:"product"},
+            tekst: `${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} = ? --> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]}<br>`
+                +`<br>som= ${this.tekst} = (${this.som})`
         }
     }
 }
