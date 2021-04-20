@@ -69,6 +69,7 @@ export class OefeningPage {
 
     eindeOefening(){
         document.querySelector(".modal-body").innerText = "Oefening klaar! Klik op \"Klaar\" om terug te gaan naar de hoofdpagina.";
+        document.querySelector("#next").innerText = "Klaar";
         document.querySelector("#next").addEventListener("click",function(){terug();});
     }
 }

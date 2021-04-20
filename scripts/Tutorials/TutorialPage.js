@@ -32,9 +32,11 @@ export class TutorialPage {
         },
         {
             name: "DeterminantTutorial",
-            description: "eerst algemene uitleg over determinanten van matrices",
+            description: "De determinant van een vierkante matrix is een speciaal getal dat kan worden berekend uit de elementen van die matrix. De determinant van een matrix 1 wordt aangeduid door det(A), det A of door |A|.<br/><br/>" +
+                "Om de determinant te berekenen van een 2x2 matrix, vermenigvuldig je volgens de diagonalen: <br/>" +
+                "det(A) = <table><tr><td>a</td><td>b</td></tr><tr><td>c</td><td>d</td></tr></table> = a*d-b*c",
             uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
-        }];
+            }];
 
 
     static tutorials = {//alle tutorials
@@ -42,7 +44,7 @@ export class TutorialPage {
         "TransponeerTutorial": [new TransponeerTutorial(new Matrix(2, 3))],
         "InverseTutorial": [new InverseTutorial(new Matrix(3, 3))],
         "DeterminantTutorial": [new DeterminantTutorial(new Matrix(3, 3)), new DeterminantTutorial(new Matrix(2, 2))]
-    }
+    };
 
     tutorial;//variabele voor huidige tutorial
     tabel1 = document.querySelector("#tabel_m1");
@@ -93,7 +95,7 @@ export class TutorialPage {
         let oef = "main";
         switch (localStorage.getItem("selected_button")) {
             case "VermenigvuldigTutorial":
-                oef = "VermenigvuldigOefening"
+                oef = "VermenigvuldigOefening";
                 break;
             case "InverseTutorial":
                 oef = "InverseOefening";
@@ -167,7 +169,7 @@ function ListenToKnop(event) {
 
 function showDescription() {
     //in de modal de juiste beschijving steken ze worden opgehaald uit JSON alle_beschrijvingen van TutorialPage klasse
-    document.querySelector(".modal-body").innerText = TutorialPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).description;
+    document.querySelector(".modal-body").innerHTML = TutorialPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).description;
     //in de modal juiste titel plaatsen
     document.querySelector("#exampleModalLabel").innerText = localStorage.getItem("selected_button");
     //er zit een onzichtbare knop in de html die moet worden aangeklikt om de modal dte doen verschijnen, ik heb het niet zonder knop kunnen doen
@@ -176,7 +178,6 @@ function showDescription() {
 
 function init() {
     document.getElementById("header").innerText=TutorialPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).name;
-    document.getElementById("uitleg").innerText=TutorialPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).uitlegb;
     tp.startTutorial(localStorage.getItem("selected_button"), 0);//uit localstorage de juiste tutorial ophalen en starten
     showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop

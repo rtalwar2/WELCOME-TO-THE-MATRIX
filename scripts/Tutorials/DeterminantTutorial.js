@@ -28,7 +28,7 @@ export class DeterminantTutorial extends Tutorial {
         this.kolom1++;
         if (this.kolom1 === this.matrix1.aantalKolommen) {
             this.finished = true;
-            tutorialPage.updateBeschrijving(this.tekst +`\n\n som= ${this.determinant} = ${this.matrix1.getDeterminant()}`)
+            tutorialPage.updateBeschrijving(this.tekst +`\n\n som = ${this.determinant} = ${this.matrix1.getDeterminant()}`)
         }
         else {
 
@@ -63,7 +63,7 @@ export class DeterminantTutorial extends Tutorial {
             +` ${this.data.getDeterminant()}=${(-1)**(this.rij1+this.kolom1)*this.matrix1.matrix[this.rij1][this.kolom1]*this.data.getDeterminant()}<br>`
 
         this.determinant+=` ${(-1) ** (this.rij1 + this.kolom1) * this.matrix1.matrix[this.rij1][this.kolom1] * this.data.getDeterminant()}`
-        return {finished: this.finished, data: {mat:this.data,hoofding:"MINOR"}, tekst:this.tekst +`<br><br> som= ${this.determinant}`}
+        return {finished: this.finished, data: {mat:this.data,hoofding:"MINOR"}, tekst:this.tekst +`<br><br> som = ${this.determinant}`}
     }
 
 }
