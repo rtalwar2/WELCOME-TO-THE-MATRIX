@@ -16,20 +16,24 @@ export class TutorialPage {
             name: "TransponeerTutorial",
             description: "In de lineaire algebra is de getransponeerde matrix, meestal kortweg de getransponeerde genoemd, van een matrix {\\displaystyle A}A de matrix {\\displaystyle A^{\\text{T}}}{\\displaystyle A^{\\text{T}}}, ook geschreven als {\\displaystyle A^{tr},\\ ^{t}\\!\\!A}{\\displaystyle A^{tr},\\ ^{t}\\!\\!A} of {\\displaystyle A'}A' die ontstaat door een van de onderstaande equivalente acties uit te voeren:\n" +
                 "\n" +
-                "Schrijf de rijen van A als de kolommen van A^T"
+                "Schrijf de rijen van A als de kolommen van A^T",
+            uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
         },
         {
             name: "InverseTutorial",
-            description: "eerst algemene uitleg over inverteren van matrices"
+            description: "eerst algemene uitleg over inverteren van matrices",
+            uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
         },
         {
             name: "VermenigvuldigTutorial",
             description: "eerst algemene uitleg over vermenigvuldigen van matrices\n\n" +
-                "In de lineaire algebra is matrixvermenigvuldiging een bewerking tussen twee matrices die als resultaat een nieuwe matrix, aangeduid als het (matrix)product van die twee, oplevert. Vatten we de beide matrices op als lineaire afbeeldingen, dan is het matrixproduct de lineaire afbeelding die hoort bij de samenstelling van de beide lineaire afbeeldingen."
+                "In de lineaire algebra is matrixvermenigvuldiging een bewerking tussen twee matrices die als resultaat een nieuwe matrix, aangeduid als het (matrix)product van die twee, oplevert. Vatten we de beide matrices op als lineaire afbeeldingen, dan is het matrixproduct de lineaire afbeelding die hoort bij de samenstelling van de beide lineaire afbeeldingen.",
+            uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
         },
         {
             name: "DeterminantTutorial",
-            description: "eerst algemene uitleg over determinanten van matrices"
+            description: "eerst algemene uitleg over determinanten van matrices",
+            uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
         }];
 
 
@@ -172,6 +176,7 @@ function showDescription() {
 
 function init() {
     document.getElementById("header").innerText=TutorialPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).name;
+    document.getElementById("uitleg").innerText=TutorialPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).uitlegb;
     tp.startTutorial(localStorage.getItem("selected_button"), 0);//uit localstorage de juiste tutorial ophalen en starten
     showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
     document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop

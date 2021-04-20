@@ -6,6 +6,7 @@ export class VermenigvuldigTutorial extends Tutorial {
     kolom2 = 0;
     som = 0;
     tekst="";
+    uitleg="";
     matrix2;//de tweede matrix waarmee vermenigvuldigd wordt
     constructor(m1, m2) {
         super(m1);
@@ -65,15 +66,19 @@ export class VermenigvuldigTutorial extends Tutorial {
         }
 
         this.som += this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2];
-        this.tekst+=`${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} +`
-        console.log(this.tekst);
-        this.tekst.replace(/\+ $/,"");//werkt om een reden niet om eerste (of laatste) + teken te verwijderen
-        console.log(this.tekst);
+        if(this.kolom1 !== 0){
+            this.tekst += " + ";
+        }
+
+        this.tekst+=`${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} `
+
+        this.uitleg= "Als je de rij "+ `${this.rij1 + 1}`+ " van matrix 1 en kolom "+ `${this.kolom2 + 1}` + " van matrix 2 element per element vermenigvuldigt en daar de som van neemt krijg je het getal op positie " + `(${this.rij1 + 1},${this.kolom2 + 1})` + " in de product-matrix:" + `<br>`;
+
         return {
             finished: this.finished,
             data: {mat:this.data,hoofding:"product"},
-            tekst: `${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} = ? --> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]}<br>`
-                +`<br>som= ${this.tekst} = (${this.som})`
+            tekst: this.uitleg + `<br> ${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} = ? --> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]} <br>`
+                + `<br>som = ${this.tekst} = (${this.som})`
         }
     }
 }
