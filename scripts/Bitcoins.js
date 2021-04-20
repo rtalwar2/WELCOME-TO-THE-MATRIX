@@ -165,6 +165,7 @@ function hint5(n) {
     let row = document.querySelector(".vectoren");
     let p = document.createElement("p");                    // p element maken om bewerking te tonen
     p.className = "rm";
+    p.classList.add("mt_6em");
     p.innerText = "*";
     row.appendChild(p);
 
@@ -190,7 +191,7 @@ function hint6(n) {
     let p = document.createElement("p");                       // p element maken om bewerking te tonen
     // p.className = "rm";
     p.id = "bewerking";
-    p.classList.add("rm2");
+    p.classList.add("rm2","mt_6em");
     p.innerText = "=";
     row.appendChild(p);
 

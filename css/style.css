@@ -163,3 +163,6 @@ th{
 .popover  td:last-child {
     border-right: 1px solid black;
 }
+.mt_6em{
+    margin-top: 6em;
+}
