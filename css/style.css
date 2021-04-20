@@ -119,24 +119,24 @@ th{
     border: 0px solid black!important;
 }
 
-/*.col-md-7{ maak er aparte klassen van en voeg toe waar nodig anders verandert de layout op de vreemde plaatsen*/
+/*maak er aparte klassen van en voeg toe waar nodig anders verandert de layout op de vreemde plaatsen*/
 
-.col-md-7{
-    font-size: x-large;
-    margin-left: 5%;
+/*.col-md-7{*/
+/*    font-size: x-large;*/
+/*    margin-left: 5%;*/
 
-}
-.col-md-3{
-    margin-top: 2%;
-    font-size: x-large;
-    margin-bottom: 5%;
-    margin-right: 2%;
+/*}*/
+/*.col-md-3{*/
+/*    margin-top: 2%;*/
+/*    font-size: x-large;*/
+/*    margin-bottom: 5%;*/
+/*    margin-right: 2%;*/
 
 
-}
-.col-md-11{
-    font-size: x-large;
-}
+/*}*/
+/*.col-md-11{*/
+/*    font-size: x-large;*/
+/*}*/
 
 
 
@@ -168,31 +168,31 @@ section{
 .mt_6em{
     margin-top: 6em;
 }
-/*.col-md-7{ maak er aparte klassen van en voeg toe waar nodig anders verandert de layout op de vreemde plaatsen*/
-.col-md-4{
-    margin-top: 2%;
-    margin-left: 10%;
-    margin-bottom: 5%;
-}
-.col-md-2{
-    margin-top: 2%;
-    margin-left: 2%;
-    margin-right: 5%;
+/* maak er aparte klassen van en voeg toe waar nodig anders verandert de layout op de vreemde plaatsen*/
+/*.col-md-4{*/
+/*    margin-top: 2%;*/
+/*    margin-left: 10%;*/
+/*    margin-bottom: 5%;*/
+/*}*/
+/*.col-md-2{*/
+/*    margin-top: 2%;*/
+/*    margin-left: 2%;*/
+/*    margin-right: 5%;*/
 
-}
-.col-md-1{
-    margin-top: 2%;
-    margin-left: 5%;
-    margin-bottom: 5%;
-}
+/*}*/
+/*.col-md-1{*/
+/*    margin-top: 2%;*/
+/*    margin-left: 5%;*/
+/*    margin-bottom: 5%;*/
+/*}*/
 
-#tabel_m3{
-    margin-left: 25%;
-}
-#tabel_m2{
-    margin-left: 5%;
-    margin-right: 5%;
-}
+/*#tabel_m3{*/
+/*    margin-left: 25%;*/
+/*}*/
+/*#tabel_m2{*/
+/*    margin-left: 5%;*/
+/*    margin-right: 5%;*/
+/*}*/
 
 #fouttekst{
     display:none;
