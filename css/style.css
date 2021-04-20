@@ -146,6 +146,16 @@ th{
     display: inline-block;
     width: auto;
 }
+.popover{
+    max-width: none;
+}
 .popover td{
     color:black;
+}
+.popover  td:first-child {
+    border-left: 1px solid black;
+}
+
+.popover  td:last-child {
+    border-right: 1px solid black;
 }
