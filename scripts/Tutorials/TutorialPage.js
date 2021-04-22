@@ -21,7 +21,19 @@ export class TutorialPage {
         },
         {
             name: "InverseTutorial",
-            description: "eerst algemene uitleg over inverteren van matrices",
+            description: "In de lineaire algebra worden er veelvuldig matrices geinverteerd.<br><br> Een n x n-matrix <bold>A</bold> is inverteerbaar, indien er een n x n-matrix <bold>B</bold> bestaat zodanig dat\n" +
+                "\n" +
+                "A*B=B*A=I " +
+                "<br>Hierin is I de eenheidsmatrix van orde n.<br><br> Niet iedere matrix heeft een inverse. Een matrix heeft alleen een inverse als de determinant van de matrix verschillend is van 0. Als de inverse bestaatdan noemt men de matrix inverteerbaar." +
+                "<br><br>Het daadwerkelijk berekenen van de inverse van een matrix is vaak een bewerkelijke opgave met veel numerieke moeilijkheden. Dat komt doordat de betrokken matrices meestal grote afmetingen hebben. Er is veel onderzoek gedaan, zowel theoretisch als praktisch, naar het ontwikkelen van algoritmen om een matrix te inverteren.\n" +
+                "\n" +
+                "De inverse van de vierkante matrix {\\displaystyle A}A kan berekend worden met de formule\n" +
+                "\n" +
+                "{\\displaystyle A^{-1}={\\frac {1}{\\det(A)}}{\\rm {{adj}(A)}}}A^{-1} = \\frac{1}{\\det(A)}\\rm{adj}(A)\n" +
+                "Hierin is {\\displaystyle \\det(A)}\\det(A) de determinant van {\\displaystyle A}A en {\\displaystyle {\\rm {{adj}(A)}}}\\rm{adj}(A) de geadjugeerde van {\\displaystyle A}A.//" +
+                "" +
+                "############ga nog afwerken" ,
+            
             uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
         },
         {
