@@ -79,9 +79,9 @@ export class InverseOefening extends Oefeningen{
             radio.classList.add("form-check-input")
             radio.name = "oplossing";
             radio.value = JSON.stringify(volgorde[i]);
-            radio.id= `id_${volgorde[i]}`;
+            radio.id= `id_${i}`;
             label.classList.add("form-check-label");
-            label.setAttribute("for",`id_${volgorde[i]}`);
+            label.setAttribute("for",`id_${i}`);
             label.innerHTML=`1/${this.oplossing.determinant} * ${volgorde[i].adjunct}`;
             div.appendChild(radio);
             div.appendChild(label);
