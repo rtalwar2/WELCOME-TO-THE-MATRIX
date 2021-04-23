@@ -24,15 +24,10 @@ export class TutorialPage {
             description: "In de lineaire algebra worden er veelvuldig matrices geinverteerd.<br><br> Een n x n-matrix <bold>A</bold> is inverteerbaar, indien er een n x n-matrix <bold>B</bold> bestaat zodanig dat\n" +
                 "\n" +
                 "A*B=B*A=I " +
-                "<br>Hierin is I de eenheidsmatrix van orde n.<br><br> Niet iedere matrix heeft een inverse. Een matrix heeft alleen een inverse als de determinant van de matrix verschillend is van 0. Als de inverse bestaatdan noemt men de matrix inverteerbaar." +
-                "<br><br>Het daadwerkelijk berekenen van de inverse van een matrix is vaak een bewerkelijke opgave met veel numerieke moeilijkheden. Dat komt doordat de betrokken matrices meestal grote afmetingen hebben. Er is veel onderzoek gedaan, zowel theoretisch als praktisch, naar het ontwikkelen van algoritmen om een matrix te inverteren.\n" +
-                "\n" +
-                "De inverse van de vierkante matrix {\\displaystyle A}A kan berekend worden met de formule\n" +
-                "\n" +
-                "{\\displaystyle A^{-1}={\\frac {1}{\\det(A)}}{\\rm {{adj}(A)}}}A^{-1} = \\frac{1}{\\det(A)}\\rm{adj}(A)\n" +
-                "Hierin is {\\displaystyle \\det(A)}\\det(A) de determinant van {\\displaystyle A}A en {\\displaystyle {\\rm {{adj}(A)}}}\\rm{adj}(A) de geadjugeerde van {\\displaystyle A}A.//" +
-                "" +
-                "############ga nog afwerken" ,
+                "<br>Hierin is I de eenheidsmatrix van orde n.<br><br> Niet iedere matrix heeft een inverse. Een matrix heeft alleen een inverse als de determinant van de matrix verschillend is van 0. Als de inverse bestaat dan noemt men de matrix inverteerbaar." +
+                "<br><br>Het daadwerkelijk berekenen van de inverse van een matrix kan op verschillende methoden. In deze tutorial wordt de algemene definitie gebruikt om de inverse te berekenen.<br/><br/> A^-1=1/det(A) * adj(A).<br/><br/>" +
+                "Hierin is det(A) de determinant van A en adj(a) de adjunct van A.  <br/><br/> De adjunct van een vierkante matrix kun je verkrijgen door elk element in de matrix te vervangen door zijn corresponderende cofactor en vervolgens de bekomen matrix te transponeren." +
+                "<br/> <br/> In formule: adj(A)[j,i] = (−1)^(i+j) M[i,j] = C[i,j] met M[i,j] de minor van het element a[i,j]",
             
             uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
         },
@@ -45,7 +40,8 @@ export class TutorialPage {
         {
             name: "DeterminantTutorial",
             description: "De determinant van een vierkante matrix is een speciaal getal dat kan worden berekend uit de elementen van die matrix. De determinant van een matrix 1 wordt aangeduid door det(A), det A of door |A|.<br/><br/>" +
-                "Om de determinant te berekenen van een 2x2 matrix, vermenigvuldig je volgens de diagonalen: <br/>" +
+                "##########nog uitleg over minor en cofactor zo van elk element vermenigvuldigen met zijn cofactor en bij een 2*2 matrix is dat eenvoudig<br><br> cofactor bereken je door elementen in zelfde rij en kolom te schrappen en dan recursief determinant van bekomen matrix te berekenen vermenigvuldigd met het element=> minor en die minor*juiste teken => cofactor dit heb ik snel getypt, is nog klad, moet in mooie tekst gegoten worden<br><br>" +
+                " de determinant te berekenen van een 2x2 matrix, vermenigvuldig je volgens de diagonalen: <br/>" +
                 "det(A) = <table><tr><td>a</td><td>b</td></tr><tr><td>c</td><td>d</td></tr></table> = a*d-b*c",
             uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
             }];
