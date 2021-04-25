@@ -217,13 +217,20 @@ section{
 }*/
 
 #tabel_m3{
-    margin-left: 25%;
+    font-size: x-large;
+    margin-left:25%;
 }
 #tabel_m2{
+    font-size: x-large;
     margin-left: 5%;
-    margin-right: 5%;
-}
+    margin-right: 15%;
 
+}
+#tabel_m1{
+    font-size: x-large;
+    margin-right: 10%;
+
+}
 
 #fouttekst{
     display:none;
