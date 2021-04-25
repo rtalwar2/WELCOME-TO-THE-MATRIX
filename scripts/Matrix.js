@@ -68,7 +68,7 @@ export default class Matrix {
     drawMatrix(element, hoofd = null) { //basis tekenfunctie, vult table aan
         let tabel = element;
         tabel.parentElement.classname = "";
-        tabel.parentElement.classList.add(`col-md-${this.aantalKolommen}`);
+        tabel.parentElement.classList.add(`col-md-${this.aantalKolommen*2}`);
         tabel.innerText = "";
         if (hoofd != null) {
             let tr = document.createElement("tr");

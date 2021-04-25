@@ -21,7 +21,7 @@ export class VermenigvuldigTutorial extends Tutorial {
     drawMatrices(){
         document.querySelector("#matrices").innerHTML =
             `<div class="row">
-                                    <div class="col-md-${this.matrix1.aantalKolommen}"></div>
+                                    <div class="col-${this.matrix1.aantalKolommen*2}"></div>
                                     <div>
                                         <table id="tabel_m2" class="table">
                                         </table>
@@ -77,8 +77,8 @@ export class VermenigvuldigTutorial extends Tutorial {
         return {
             finished: this.finished,
             data: {mat:this.data,hoofding:"product"},
-            tekst: this.uitleg + `<br> <h3>${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} ==> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]}</h3> <br>`
-                + `<br> <h3>Som = ${this.tekst} = (${this.som})</h3>`
+            tekst: this.uitleg + `<br> <p>${this.matrix1.matrix[this.rij1][this.kolom1]} * ${this.matrix2.matrix[this.kolom1][this.kolom2]} ==> ${this.matrix1.matrix[this.rij1][this.kolom1] * this.matrix2.matrix[this.kolom1][this.kolom2]}</p> <br>`
+                + `<br> <p>Som = ${this.tekst} = (${this.som})</p>`
         }
     }
 }

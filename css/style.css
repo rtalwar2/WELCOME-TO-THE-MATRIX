@@ -7,7 +7,6 @@
     bottom:0;
     position: fixed;
     width: 100%;
-    margin-top: 1%;
 
 }
 .margin-bottom{
@@ -24,11 +23,11 @@
 }*/
 
 td:first-child {
-    border-left: 3px solid white;
+    border-left: 2px solid white;
 }
 
 td:last-child {
-    border-right: 3px solid white;
+    border-right: 2px solid white;
 }
 
 table td {
@@ -38,6 +37,10 @@ table td {
     color:white;
     /*padding-right: -5px;*/
     position: relative;
+}
+.table td{
+    font-size: 32px;
+
 }
 
 .rood {
@@ -121,6 +124,7 @@ body{
 
 .uitleg{
     height: 15em;
+    font-size: 20px;
 }
 
 .matrix_cell{
@@ -170,10 +174,10 @@ th{
 section{
     margin-top: 5%;
 }
-#frm{
-    font-size: x-large;
-    margin-bottom: 30%;
-}
+/*#frm{*/
+/*    font-size: x-large;*/
+/*    margin-bottom: 30%;*/
+/*}*/
 .form-control{
     display: inline-block;
     width: auto;
@@ -216,30 +220,29 @@ section{
     margin-bottom: 5%;
 }*/
 
-#tabel_m3{
-    font-size: x-large;
-    margin-left:25%;
-}
-#tabel_m2{
-    font-size: x-large;
-    margin-left: 5%;
-    margin-right: 15%;
+/*#tabel_m3{*/
+/*    font-size: x-large;*/
+/*    margin-left:25%;*/
+/*}*/
+/*#tabel_m2{*/
+/*    font-size: x-large;*/
+/*    margin-left: 5%;*/
+/*    margin-right: 15%;*/
 
-}
-#tabel_m1{
-    font-size: x-large;
-    margin-right: 10%;
-
-}
+/*}*/
+/*#tabel_m1{*/
+/*    font-size: x-large;*/
+/*    margin-right: 10%;*/
+/*}*/
 
 #fouttekst{
     display:none;
     color: red;
 }
 
-#formcontent{
-    height: 5rem
-}
+/*#formcontent{*/
+/*    height: 5rem*/
+/*}*/
 
 #kleur{
     color: #26b71e;
@@ -250,12 +253,12 @@ section{
 #kleur3{
     color: #b74040;
 }
-p span :last-child{
+p span:last-child{
     color: greenyellow;
 }
 #opl{
     margin-bottom: 5%;
 }
 .form-check {
-    position: center;
+    font-size: 24px;
 }

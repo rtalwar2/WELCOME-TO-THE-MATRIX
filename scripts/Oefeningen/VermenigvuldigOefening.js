@@ -80,7 +80,7 @@ export class VermenigvuldigOefening extends Oefeningen {
         tabel.classList.add("u-center");
         tabel.id="input_tabel";
         form.parentElement.classList.remove(...form.parentElement.classList);
-        form.parentElement.classList.add(`col-md-${columns}`);
+        form.parentElement.classList.add(`col-md-${columns*2}`);
         tabel.innerText = "";
         for (let i=0;i<rows;i++) {
             let tr = document.createElement("tr");
