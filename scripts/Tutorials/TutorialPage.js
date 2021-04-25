@@ -37,7 +37,7 @@ export class TutorialPage {
             name: "VermenigvuldigTutorial",
             description: "eerst algemene uitleg over vermenigvuldigen van matrices\n\n" +
                 "In de lineaire algebra is matrixvermenigvuldiging een bewerking tussen twee matrices die als resultaat een nieuwe matrix, aangeduid als het (matrix)product van die twee, oplevert. Vatten we de beide matrices op als lineaire afbeeldingen, dan is het matrixproduct de lineaire afbeelding die hoort bij de samenstelling van de beide lineaire afbeeldingen.",
-            uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
+            uitlegb: "Als we de bewerking matrix1 * matrix2 stap voor stap uitvoeren dan bouwen we de oplossing in de productmatrix."
         },
         {
             name: "DeterminantTutorial",
