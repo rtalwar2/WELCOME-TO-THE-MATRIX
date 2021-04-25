@@ -57,13 +57,16 @@ export class InverseOefening extends Oefeningen{
         //kiesnummer = kiesnummers[0];
         volgorde[2] = valseOplossing2;
         console.log(volgorde);
-        for (let i = volgorde.length - 1; i > 0; i--) {
+        /*for (let i = volgorde.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
             let temp = volgorde[i];
             volgorde[i] = volgorde[j];
             volgorde[j] = temp;
-        }
-        console.log(volgorde);
+        }*/
+        let volgorde_nieuw=[this.oplossing,this.fout1(),this.fout2()];
+        volgorde_nieuw=volgorde_nieuw.sort((a, b) => 0.5 - Math.random());
+        console.log(volgorde_nieuw);
+        volgorde= volgorde_nieuw;
         let form = document.getElementById("frm");
 
         //clear invul van vorige oefening
