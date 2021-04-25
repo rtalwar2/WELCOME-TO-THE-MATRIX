@@ -79,6 +79,7 @@ export default class Matrix {
             tr.appendChild(th);
             tabel.appendChild(tr);
         }
+        
         for (let i in this.matrix) {
             let tr = document.createElement("tr");
             for (let j in this.matrix[i]) {

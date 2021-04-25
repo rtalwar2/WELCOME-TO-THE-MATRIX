@@ -17,6 +17,7 @@
 #final_footer p {
     padding: 10px 0;
 }
+
 /*
 .col-md-4 {
     margin: auto;
@@ -147,7 +148,8 @@ body{
 th{
     color: white;
     border: 0px solid black!important;
-}/*
+}
+/*
 .col-md-7{
     font-size: x-large;
     margin-left: 5%;
@@ -164,6 +166,7 @@ th{
 .col-md-11{
     font-size: x-large;
 }*/
+
 section{
     margin-top: 5%;
 }
@@ -192,7 +195,8 @@ section{
 .mt_6em{
     margin-top: 6em;
 
-}/*
+}
+/*
 .col-md-4{
     margin-top: 2%;
     margin-left: 10%;
