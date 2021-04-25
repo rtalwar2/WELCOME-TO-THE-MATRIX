@@ -22,7 +22,13 @@ export class InverseOefening extends Oefeningen{
     }
 
     getOplossing(){
-        return JSON.parse(document.querySelector('input[name="oplossing"]:checked').value);
+        let oplossing = document.querySelector('input[name="oplossing"]:checked');
+        if(oplossing !== null) {
+            return JSON.parse(oplossing.value);
+        }
+        else{
+            return null;
+        }
     }
 
 
@@ -31,6 +37,7 @@ export class InverseOefening extends Oefeningen{
         let invul = obj.getOplossing();
         console.log(invul);
         console.log(this.oplossing.adjunct.matrix);
+        if(invul === null) return false;
         let bool= true;
         for(let i=0;i<this.oplossing.adjunct.aantalRijen;i++){
             for(let j=0;j<this.oplossing.adjunct.aantalKolommen;j++){

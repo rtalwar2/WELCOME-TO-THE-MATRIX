@@ -16,7 +16,13 @@ export class DeterminantOefening extends Oefeningen{
     }
 
     getOplossing(){
-        return document.querySelector('input[name="oplossing"]:checked').value;
+        let oplossing = document.querySelector('input[name="oplossing"]:checked');
+        if(oplossing !== null) {
+            return oplossing.value;
+        }
+        else{
+            return null;
+        }
     }
 
     checkOplossing(object) {
