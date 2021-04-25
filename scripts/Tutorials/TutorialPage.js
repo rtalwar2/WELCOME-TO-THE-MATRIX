@@ -14,9 +14,7 @@ export class TutorialPage {
     static alle_beschrijvingen = [
         {//deze beschrijvingen worden getoond in de modal
             name: "TransponeerTutorial",
-            description: "In de lineaire algebra is de getransponeerde matrix, meestal kortweg de getransponeerde genoemd, van een matrix {\\displaystyle A}A de matrix {\\displaystyle A^{\\text{T}}}{\\displaystyle A^{\\text{T}}}, ook geschreven als {\\displaystyle A^{tr},\\ ^{t}\\!\\!A}{\\displaystyle A^{tr},\\ ^{t}\\!\\!A} of {\\displaystyle A'}A' die ontstaat door een van de onderstaande equivalente acties uit te voeren:\n" +
-                "\n" +
-                "Schrijf de rijen van A als de kolommen van A^T",
+            description: "Dit is een van de korte Tutorials die uitlegt hoe je een matrix moet transponeren. <br> De getransponeerde matrix A^t van een matrix A kun je heel eenvoudig berekenen door de rijen van A te schrijven als de kolommen van A^t. Dit wordt wel duidelijk met de tutorial.",
             uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
         },
         {
@@ -27,10 +25,7 @@ export class TutorialPage {
                 "<br>Hierin is I de eenheidsmatrix van orde n.<br><br> Niet iedere matrix heeft een inverse. Een matrix heeft alleen een inverse als de determinant van de matrix verschillend is van 0. Als de inverse bestaat dan noemt men de matrix inverteerbaar." +
                 "<br><br>Het daadwerkelijk berekenen van de inverse van een matrix kan op verschillende methoden. In deze tutorial wordt de algemene definitie gebruikt om de inverse te berekenen.<br/><br/> A^-1=1/det(A) * adj(A).<br/><br/>" +
                 "Hierin is det(A) de determinant van A en adj(a) de adjunct van A.  <br/><br/> De adjunct van een vierkante matrix kun je verkrijgen door elk element in de matrix te vervangen door zijn corresponderende cofactor en vervolgens de bekomen matrix te transponeren." +
-                "<br/> <br/> In formule: adj(A)[j,i] = (−1)^(i+j) M[i,j] = C[i,j] met M[i,j] de minor van het element a[i,j]<br><br>" +
-                //ga ik nog wijzigen
-                "<img src=\"https://wikimedia.org/api/rest_v1/media/math/render/svg/ee743b65bd39866cf2ee4348a26a231265ca80bf\" class=\"mwe-math-fallback-image-inline\" aria-hidden=\"true\" style=\"vertical-align: -13.838ex; width:97.734ex; height:29.343ex;\" alt=\"{\\displaystyle \\operatorname {adj} A={\\begin{pmatrix}{\\begin{vmatrix}1&amp;0&amp;0\\\\0&amp;-3&amp;2\\\\0&amp;0&amp;1\\end{vmatrix}}&amp;{\\begin{vmatrix}0&amp;1&amp;0\\\\1&amp;0&amp;2\\\\3&amp;0&amp;1\\end{vmatrix}}&amp;{\\begin{vmatrix}0&amp;0&amp;1\\\\1&amp;-3&amp;0\\\\3&amp;0&amp;0\\end{vmatrix}}\\\\{\\begin{vmatrix}0&amp;-1&amp;0\\\\1&amp;0&amp;0\\\\0&amp;0&amp;1\\end{vmatrix}}&amp;{\\begin{vmatrix}2&amp;0&amp;0\\\\0&amp;1&amp;0\\\\3&amp;0&amp;1\\end{vmatrix}}&amp;{\\begin{vmatrix}2&amp;-1&amp;0\\\\0&amp;0&amp;1\\\\3&amp;0&amp;0\\end{vmatrix}}\\\\{\\begin{vmatrix}0&amp;-1&amp;0\\\\0&amp;-3&amp;2\\\\1&amp;0&amp;0\\end{vmatrix}}&amp;{\\begin{vmatrix}2&amp;0&amp;0\\\\1&amp;0&amp;2\\\\0&amp;1&amp;0\\end{vmatrix}}&amp;{\\begin{vmatrix}2&amp;-1&amp;0\\\\1&amp;-3&amp;0\\\\0&amp;0&amp;1\\end{vmatrix}}\\end{pmatrix}}^{T}={\\begin{pmatrix}-3&amp;5&amp;9\\\\1&amp;2&amp;-3\\\\-2&amp;-4&amp;-5\\end{pmatrix}}^{T}={\\begin{pmatrix}-3&amp;1&amp;-2\\\\5&amp;2&amp;-4\\\\9&amp;-3&amp;-5\\end{pmatrix}}}\">",
-            
+                "<br/> <br/> In formule: adj(A)[j,i] = (−1)^(i+j) M[i,j] = C[i,j] met M[i,j] de minor van het element a[i,j]<br><br>",
             uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
         },
         {

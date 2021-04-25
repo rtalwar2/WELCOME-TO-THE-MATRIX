@@ -29,7 +29,7 @@ export class TransponeerTutorial extends Tutorial {
             //     //die timeout is er zodat de klasse rood pas wordt toegevoegd nadat de matrix in de html is geladen
             this.data.matrix[this.kolom1][this.rij1] = this.matrix1.matrix[this.rij1][this.kolom1];
         }
-        return {finished: this.finished, data: {mat:this.data,hoofding:"getransponeerde"}, tekst: `rij ${this.rij1} wordt kolom ${this.rij1}`}
+        return {finished: this.finished, data: {mat:this.data,hoofding:"getransponeerde"}, tekst: `rij ${this.rij1+1} wordt kolom ${this.rij1+1}`}
     }
 
 }
