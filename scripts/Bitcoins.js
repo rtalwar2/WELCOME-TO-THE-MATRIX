@@ -12,6 +12,7 @@ let tijdelijk;      // tijdelijke variabele om vorige versie vector op te slaan
 let n = 0;          // duidt aan welke vector nu verwerkt wordt
 let uitleg_hint;    // uitleg dat per hint getoond wordt
 let eind_opl = [];  // lijst letters eindoplossing
+let einde_hints = false
 let alphabet = ['A', 'B', 'C', 'D', 'E',
     'F', 'G', 'H', 'I', 'J',
     'K', 'L', 'M', 'N', 'O',
@@ -84,10 +85,10 @@ function hint_init() {
     let oef = document.querySelector("#js_hints");
     let titel = document.createElement('h4');       // titel maken
     titel.innerText = "Hint:";
-    let row1=document.createElement("div");
+    let row1 = document.createElement("div");
     row1.classList.add("row");
-    let row2=document.createElement("div");
-    row2.classList.add("row","vectoren");
+    let row2 = document.createElement("div");
+    row2.classList.add("row", "vectoren");
     row1.appendChild(titel);
     oef.appendChild(row1);
     oef.appendChild(row2)
@@ -192,7 +193,7 @@ function hint6(n) {
     let p = document.createElement("p");                       // p element maken om bewerking te tonen
     // p.className = "rm";
     p.id = "bewerking";
-    p.classList.add("rm2","mt_6em");
+    p.classList.add("rm2", "mt_6em");
     p.innerText = "=";
     row.appendChild(p);
 
@@ -232,7 +233,7 @@ function hint7(n) {
     document.querySelector("#bewerking").innerText = "mod 26";  // juist bewerking tonen
 
     let t_opl = document.querySelector("#matrix2-1");
-    opl.drawMatrix(t_opl, "v" + n+ " %26");   // vector met oplossing in cijfers mod 26 tekenen
+    opl.drawMatrix(t_opl, "v" + n + " %26");   // vector met oplossing in cijfers mod 26 tekenen
     tijdelijk = opl;
 }
 
@@ -244,7 +245,7 @@ function hint8(n) {
         eind_opl.push(alphabet[tijdelijk.matrix[i][0]]);
     }
     let t_tijdelijk = document.querySelector("#matrix1-1");
-    tijdelijk.drawMatrix(t_tijdelijk, "v" + n+" %26");
+    tijdelijk.drawMatrix(t_tijdelijk, "v" + n + " %26");
 
     document.querySelector("#bewerking").innerText = "omzetten";
 
@@ -279,6 +280,7 @@ function hint9() {
     let hint_knop = document.querySelector("#hint");
     hint_knop.innerText = "Geen Hints meer, dit is letterlijk de oplossing";
     hint_knop.disabled = true;
+    einde_hints = true;
 }
 
 
@@ -335,7 +337,7 @@ function showTime() {
     let sec = tijd - min * 60;
     p.innerText = `${min}:${sec}`;
     tijd--;
-    console.log(tijd)
+    // console.log(tijd)
     if (tijd == 0) {
         encoded_key = "andere";//nieuwe key kan random maar moet veelvoud van 3 letters hebben
         document.querySelector("#js_hints").innerText = "";//hints leegmaken
@@ -380,8 +382,47 @@ function init() {
     showAlfabet_table();    //LET OP: alleen keys kiezen die meervoud van 3 zijn
     document.querySelector("#js_timer_start").addEventListener("click", startTimer);
     //showData();
+    document.getElementById("js_open").addEventListener("click", check);
     document.getElementById("hint").addEventListener("click", hint);
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
+}
+
+function check() {
+    let input = document.getElementById("js_input_passwoord").value.toUpperCase();
+    console.log(input);
+    if (input.length !== encoded_key.length) {
+        window.alert("fout");
+    } else if (input === decode()) {
+        window.alert("juist");
+    } else window.alert("fout");
+}
+
+function decode() {
+    let hint_pos = hint_nr;
+    let oplossing = "";
+    while (!einde_hints) {
+        hint()
+    }
+    eind_opl.forEach(value => oplossing += value);
+
+    document.getElementById("js_hints").innerText = "";
+    hint_nr = 0;
+    matrices = [];
+    tijdelijk = [];
+    n = 0;
+    uitleg_hint = "";
+    eind_opl = [];
+    einde_hints = false
+    let hint_knop = document.querySelector("#hint");
+    hint_knop.disabled = false;
+    hint_knop.innerText = "Hint";
+
+    while (hint_nr !== hint_pos) {
+        hint();
+        console.log(einde_hints);
+    }
+
+    return oplossing
 }
 
 function terug() {

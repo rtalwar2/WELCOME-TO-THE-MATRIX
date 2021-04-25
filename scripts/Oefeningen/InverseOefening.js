@@ -33,12 +33,15 @@ export class InverseOefening extends Oefeningen {
         }
     }
 
+
     getOplossing() {
         return JSON.parse(document.querySelector('input[name="oplossing"]:checked').value);
+
     }
 
 
     checkOplossing(object) {
+
         // let obj = object;
         // console.log("hff")
         // console.log(obj)
@@ -50,6 +53,7 @@ export class InverseOefening extends Oefeningen {
         } else {
             if (this.strikvraag == false && invul.includes("oplossing")) {
                 bool = true;
+
             }
         }
         // console.log(invul);
