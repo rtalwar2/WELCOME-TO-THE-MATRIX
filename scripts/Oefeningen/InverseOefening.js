@@ -166,8 +166,8 @@ export class InverseOefening extends Oefeningen {
 
     fout1() {
         this.fout = JSON.parse(JSON.stringify(this.oplossing));
-        this.fout.adjunct = new Matrix(this.oplossing.aantalKolommen, this.oplossing.aantalKolommen);
-        this.fout.inverse = new Matrix(this.oplossing.aantalKolommen, this.oplossing.aantalKolommen);
+        this.fout.adjunct = new Matrix(this.oplossing.adjunct.aantalKolommen, this.oplossing.adjunct.aantalKolommen);
+        this.fout.inverse = new Matrix(this.oplossing.inverse.aantalKolommen, this.oplossing.inverse.aantalKolommen);
         let hulp = JSON.parse(JSON.stringify(this.oplossing.adjunct));
         let hulpinv = JSON.parse(JSON.stringify(this.oplossing.inverse));
         console.log(this.oplossing)
@@ -182,8 +182,8 @@ export class InverseOefening extends Oefeningen {
 
     fout2() {
         this.fout = JSON.parse(JSON.stringify(this.oplossing));
-        this.fout.adjunct = new Matrix(this.oplossing.aantalKolommen, this.oplossing.aantalKolommen);
-        this.fout.inverse = new Matrix(this.oplossing.aantalKolommen, this.oplossing.aantalKolommen);
+        this.fout.adjunct = new Matrix(this.oplossing.adjunct.aantalKolommen, this.oplossing.adjunct.aantalKolommen);
+        this.fout.inverse = new Matrix(this.oplossing.inverse.aantalKolommen, this.oplossing.inverse.aantalKolommen);
         let trans = this.oplossing.adjunct.getTransponneerde();
         let hulpinv = this.oplossing.inverse.getTransponneerde();
         for (let i = 0; i < this.matrix1.aantalRijen; i++) {
