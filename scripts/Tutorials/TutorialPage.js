@@ -37,10 +37,12 @@ export class TutorialPage {
         {
             name: "DeterminantTutorial",
             description: "De determinant van een vierkante matrix is een speciaal getal dat kan worden berekend uit de elementen van die matrix. De determinant van een matrix 1 wordt aangeduid door det(A), det A of door |A|.<br/><br/>" +
-                "##########nog uitleg over minor en cofactor zo van elk element vermenigvuldigen met zijn cofactor en bij een 2*2 matrix is dat eenvoudig<br><br> cofactor bereken je door elementen in zelfde rij en kolom te schrappen en dan recursief determinant van bekomen matrix te berekenen vermenigvuldigd met het element=> minor en die minor*juiste teken => cofactor dit heb ik snel getypt, is nog klad, moet in mooie tekst gegoten worden<br><br>" +
-                " de determinant te berekenen van een 2x2 matrix, vermenigvuldig je volgens de diagonalen: <br/>" +
-                "det(A) = <table><tr><td>a</td><td>b</td></tr><tr><td>c</td><td>d</td></tr></table> = a*d-b*c",
-            uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
+                "De eerste stap bij het berekenen van een matrix is om de <span id='kleur'>cofactor</span> te vinden. De cofactor vind je als je één kolom en één rij schrapt. De overgebleven matrix noemen we dan de <span id='kleur'>minor</span>. Bij een 3x3 matrix is het eerste element (links boven) de cofactor. Als we dan de rij en de kolom schrappen van dit element, vormen de overgebleven elementen de minor, een 2x2 matrix. <br><br>De uiteindelijke bewerking voor deze matrix =" +
+                " <br><span id='kleur'>cofactor x juiste teken x determinant(minor)</span><br> Dit 'juiste teken' hangt af van welke cofactor er wordt gekozen. Voor een 3x3 matrix zijn dit de tekens:<br>" +
+                "<table><tr><td>+1</td><td>-1</td><td>+1</td></tr><tr><td>-1</td><td>+1</td><td>-1</td></tr><tr><td>+1</td><td>-1</td><td>+1</td></tr></table><br>De volledige bewerking is dan:<br><span id='kleur'>+1 x (cofactor x det(minor1))</span><span id='kleur2'> - 1 x (cofactor x det(minor2))</span><span id='kleur3'> + 1 x (cofactor) x det(minor3))</span><br>" +
+                "Om de determinant te berekenen van een 2x2 matrix (de minor) vermenigvuldigen we volgens de diagonalen:<br/>" +
+                "det(A) = <table><tr><td>a</td><td>b</td></tr><tr><td>c</td><td>d</td></tr></table> = <span id='kleur'>a x d</span> - <span id='kleur2'>b x c</span>",
+            uitlegb: "Hier geven we een voorbeeld van hoe men een determinant berekent, stap voor stap. We berekenen de determinant van matrix1 en gebruiken de kleinere 2x2 matrix als minor.\n\nKlik op 'next' om naar de volgende stap te gaan."
             }];
 
 

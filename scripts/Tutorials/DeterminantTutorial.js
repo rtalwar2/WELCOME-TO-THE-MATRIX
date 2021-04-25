@@ -34,13 +34,13 @@ export class DeterminantTutorial extends Tutorial {
         }
         else {
             if(this.kolom1 === 0) {
-                this.tekst = `Stap 1: we nemen het <div id="kleur">eerste</div> element als cofactor. De overblijvende 2x2 matrix is de minor. We doen <div id="kleur">+1</div> * cofactor * det(minor):<br/>`
+                this.tekst = `Stap 1: we nemen het <div id="kleur">eerste</div> element als cofactor. De overblijvende matrix is de minor. We doen <div id="kleur">+1</div> * cofactor * det(minor):<br/>`
             }
             else if(this.kolom1 === 1){
-                this.tekst =  `Stap 2: we nemen het <div id="kleur">tweede</div> element als cofactor. De overblijvende 2x2 matrix is de minor. We doen <div id="kleur">-1</div> * cofactor * det(minor):<br/>`
+                this.tekst =  `Stap 2: we nemen het <div id="kleur">tweede</div> element als cofactor. De overblijvende matrix is de minor. We doen <div id="kleur">-1</div> * cofactor * det(minor):<br/>`
             }
             else if(this.kolom1 === 2){
-                this.tekst = `Stap 3: we nemen het <div id="kleur">derde</div> element als cofactor. De overblijvende 2x2 matrix is de minor. We doen <div id="kleur">+1</div> * cofactor * det(minor):<br/>`
+                this.tekst = `Stap 3: we nemen het <div id="kleur">derde</div> element als cofactor. De overblijvende matrix is de minor. We doen <div id="kleur">+1</div> * cofactor * det(minor):<br/>`
             }
 
             //this.addDiv(tutorialPage.tabel1.querySelector(`[data-id='id_${0}-${this.kolom1}']`),"vertical-line");
