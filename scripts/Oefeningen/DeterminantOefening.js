@@ -23,6 +23,7 @@ export class DeterminantOefening extends Oefeningen{
         else{
             return null;
         }
+
     }
 
     checkOplossing(object) {
