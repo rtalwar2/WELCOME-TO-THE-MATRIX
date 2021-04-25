@@ -229,6 +229,12 @@ section{
 #kleur{
     color: #26b71e;
 }
+#kleur2{
+    color: #464eb7;
+}
+#kleur3{
+    color: #b74040;
+}
 p span :last-child{
     color: greenyellow;
 }
