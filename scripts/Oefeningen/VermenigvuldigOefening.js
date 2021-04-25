@@ -45,21 +45,25 @@ export class VermenigvuldigOefening extends Oefeningen {
         // console.log(document.querySelector("#rijen").value)
         // console.log(this.oplossing[0].length)
         // console.log(document.querySelector("#kolommen").value)
-        if((this.oplossing.length!=document.querySelector("#rijen").value)&&(this.oplossing[0].length!=document.querySelector("#kolommen").value)){ //moet met != ipv !==
-            // console.log("ik geraak eerste tot hier!")
-            return false;
-        }
-        // console.log("ik geraak tot hier!")
+        if(this.oplossing.length!=0) {
+            if ((this.oplossing.length != document.querySelector("#rijen").value) || (this.oplossing[0].length != document.querySelector("#kolommen").value)) { //moet met != ipv !==
+                // console.log("ik geraak eerste tot hier!")
+                return false;
+            }
+            // console.log("ik geraak tot hier!")
 
-        for (let i = 0; i < this.oplossing.length; i++) {
-            for (let j = 0; j < this.oplossing[0].length; j++) {
-                console.log(` check if ${this.oplossing[i][j]} == ${invul[i][j]}`)
-                if (this.oplossing[i][j] !== invul[i][j]) {
-                    return false;
+            for (let i = 0; i < this.oplossing.length; i++) {
+                for (let j = 0; j < this.oplossing[0].length; j++) {
+                    console.log(` check if ${this.oplossing[i][j]} == ${invul[i][j]}`)
+                    if (this.oplossing[i][j] !== invul[i][j]) {
+                        return false;
+                    }
                 }
             }
+            return true;
         }
-        return true;
+        return invul.length==1&&invul[0]==0;
+
     }
 
     checkOplossing(object) {
@@ -166,31 +170,40 @@ export class VermenigvuldigOefening extends Oefeningen {
                       </tbody>
                     </table>
                   </div>`;
-        let hint= "Rij 1 (matrix 1) x kolom 1 (matrix 2):\n";
-        let table1 = document.createElement("table");
-        let tr = document.createElement("tr");
-        table1.appendChild(tr);
-        let table2 = document.createElement("table");
-        for(let i = 0;i<this.matrix1.matrix[0].length;i++){
-            if(i!==this.matrix1.matrix[0].length-1)
-            hint += "" + this.matrix1.matrix[0][i] + " x " + this.matrix2.matrix[i][0] + " + ";
-            else{
-                hint += "" + this.matrix1.matrix[0][i]+ " x " + this.matrix2.matrix[i][0];
-            }
-            let td = document.createElement("td");
-            td.innerText = this.matrix1.matrix[0][i];
-            tr.appendChild(td);
-            let tr2 = document.createElement("tr");
-            let td2 = document.createElement("td");
-            td2.innerText = this.matrix2.matrix[i][0];
-            tr2.appendChild(td2);
-            table2.appendChild(tr2);
-        }
         let div = document.createElement("div");
-        div.innerHTML = hint;
-        div.appendChild(table1);
-        div.appendChild(table2);
+
+        if(this.oplossing.length!=0) {
+            let hint = "Rij 1 (matrix 1) x kolom 1 (matrix 2):\n";
+            let table1 = document.createElement("table");
+            let tr = document.createElement("tr");
+            table1.appendChild(tr);
+            let table2 = document.createElement("table");
+            for (let i = 0; i < this.matrix1.aantalKolommen; i++) {
+                if (i !== this.matrix1.matrix[0].length - 1)
+                    hint += "" + this.matrix1.matrix[0][i] + " x " + this.matrix2.matrix[i][0] + " + ";
+                else {
+                    hint += "" + this.matrix1.matrix[0][i] + " x " + this.matrix2.matrix[i][0];
+                }
+                let td = document.createElement("td");
+                td.innerText = this.matrix1.matrix[0][i];
+                tr.appendChild(td);
+                let tr2 = document.createElement("tr");
+                let td2 = document.createElement("td");
+                td2.innerText = this.matrix2.matrix[i][0];
+                tr2.appendChild(td2);
+                table2.appendChild(tr2);
+            }
+            div.appendChild(table1);
+            div.appendChild(table2);
+            this.setHint(div);
+
+        }
+        else {
+            div.innerHTML = "kan je deze matrices wel vermenigvuldigen? indien niet, antwoord dan met een 1*1 matrix met waarde 0";
+        }
         this.setHint(div);
+
+
     }
 
 

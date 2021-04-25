@@ -23,9 +23,9 @@ export class OefeningPage {
         }];
 
     static oefeningen = {//alle soorten oefeningen
-        "VermenigvuldigOefening": [new VermenigvuldigOefening(new Matrix(3, 3), new Matrix(3, 3)), new VermenigvuldigOefening(new Matrix(3,3),new Matrix(3,3))],
+        "VermenigvuldigOefening": [new VermenigvuldigOefening(new Matrix(3, 3), new Matrix(3, 3)), new VermenigvuldigOefening(new Matrix(3,2),new Matrix(3,2))],
         //"TransponeerOefening":Object,
-        "InverseOefening": [new InverseOefening(new Matrix(3,3)),new InverseOefening(new Matrix(3,3))],
+        "InverseOefening": [new InverseOefening(new Matrix(2,2),true),new InverseOefening(new Matrix(2,2),true),new InverseOefening(new Matrix(3,3))],
         "DeterminantOefening": [new DeterminantOefening(new Matrix(3, 3)),new DeterminantOefening(new Matrix(3,3))]
     };
     oefening;
