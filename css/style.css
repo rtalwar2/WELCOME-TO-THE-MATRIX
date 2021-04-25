@@ -197,12 +197,14 @@ section{
     margin-bottom: 5%;
 }
 .col-md-2{
+    font-size: x-large;
     margin-top: 2%;
     margin-left: 2%;
     margin-right: 5%;
 
 }
 .col-md-1{
+    font-size: x-large;
     margin-top: 2%;
     margin-left: 5%;
     margin-bottom: 5%;
