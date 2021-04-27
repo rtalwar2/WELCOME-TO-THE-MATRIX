@@ -30,9 +30,11 @@ export class TutorialPage {
         },
         {
             name: "VermenigvuldigTutorial",
-            description: "eerst algemene uitleg over vermenigvuldigen van matrices\n\n" +
-                "In de lineaire algebra is matrixvermenigvuldiging een bewerking tussen twee matrices die als resultaat een nieuwe matrix, aangeduid als het (matrix)product van die twee, oplevert. Vatten we de beide matrices op als lineaire afbeeldingen, dan is het matrixproduct de lineaire afbeelding die hoort bij de samenstelling van de beide lineaire afbeeldingen.",
-            uitlegb: "Als we de bewerking matrix1 * matrix2 stap voor stap uitvoeren dan bouwen we de oplossing in de productmatrix."
+            description: "In de lineaire algebra is matrixvermenigvuldiging een bewerking tussen twee matrices die als resultaat een nieuwe matrix, aangeduid als het (matrix)product van die twee, oplevert.<br><br>" +
+                "Matrixvermenigvuldiging van een matrix <span class='kleur'>A</span> met een matrix <span class='kleur2'>B</span> met product <span class='kleur3'>AB</span> is alleen mogelijk als het aantal kolommen van de eerste matrix gelijk is aan het aantal rijen van de tweede matrix. <br><br>" +
+                "Stel daarom dat <span class='kleur'>A</span> een  m x n -matrix is en <span class='kleur2'>B</span> een n x p -matrix. Het matrixproduct <span class='kleur3'>AB</span> is dan een m x p -matrix.<br><br>" +
+                "Elk element <span class='kleur3'>(AB)ij</span> is de som van ",
+            uitlegb: "Als we de bewerking matrix1 * matrix2 stap voor stap uitvoeren dan bouwen we de oplossing in de productmatrix.\n\nKlik op 'next' om naar de volgende stap te gaan."
         },
         {
             name: "DeterminantTutorial",
