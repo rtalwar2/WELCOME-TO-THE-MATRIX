@@ -22,15 +22,17 @@ function init_matrices(){
 function init(){
     init_matrices();
     Vermenigvuldig(matrix2);
+    stapcache[0] = matrix_opl;
     //Slider init
     let slider = document.getElementById("range");
     slider.oninput = function() {
-        if(stapcache[slider.value] === null) {
+        if(stapcache[slider.value] === undefined) {
             stapcache[index] = matrix_opl;
             Vermenigvuldig(matrix_opl);
             index = slider.value;
         }
         else{
+            console.log(stapcache[slider.value]);
             toonOplossing(stapcache[slider.value]);
         }
         console.clear();
