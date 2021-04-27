@@ -20,7 +20,7 @@ export class InverseOefening extends Oefeningen {
         this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, "0");
         this.matrices.push(this.matrix1);
         this.strikvraag = strikvraag;
-        this.oplossing = m1.getInverse()
+        this.oplossing = m1.getInverse();
         this.aantal_matrices = this.matrices.length;
         this.determinant = m1.getDeterminant();
 
