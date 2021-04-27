@@ -244,13 +244,13 @@ section{
 /*    height: 5rem*/
 /*}*/
 
-#kleur{
+.kleur{
     color: #26b71e;
 }
-#kleur2{
+.kleur2{
     color: #464eb7;
 }
-#kleur3{
+.kleur3{
     color: #b74040;
 }
 p span:last-child{
