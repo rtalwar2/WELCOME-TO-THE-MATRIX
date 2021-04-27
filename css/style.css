@@ -253,6 +253,9 @@ section{
 .kleur3{
     color: #b74040;
 }
+.kleur4{
+    color: #37a9a9;
+}
 p span:last-child{
     color: greenyellow;
 }

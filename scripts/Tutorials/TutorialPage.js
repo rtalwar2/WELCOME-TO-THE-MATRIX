@@ -37,15 +37,26 @@ export class TutorialPage {
         {
             name: "DeterminantTutorial",
             description: "De determinant van een vierkante matrix is een speciaal getal dat kan worden berekend uit de elementen van die matrix. De determinant van een matrix 1 wordt aangeduid door det(A), det A of door |A|.<br/><br/>" +
-                "De eerste stap bij het berekenen van een matrix is om de <span class='kleur'>cofactor</span> te vinden. De cofactor vind je als je één kolom en één rij schrapt. De overgebleven matrix noemen we dan de <span class='kleur'>minor</span>. Bij een 3x3 matrix is het eerste element (links boven) de cofactor. Als we dan de rij en de kolom schrappen van dit element, vormen de overgebleven elementen de minor, een 2x2 matrix. <br><br>De uiteindelijke bewerking voor deze matrix =" +
-                " <br><span class='kleur'>cofactor x juiste teken x determinant(minor)</span><br> Dit 'juiste teken' hangt af van welke cofactor er wordt gekozen. Voor een 3x3 matrix zijn dit de tekens:<br>" +
-                "<table><tr><td>+1</td><td>-1</td><td>+1</td></tr><tr><td>-1</td><td>+1</td><td>-1</td></tr><tr><td>+1</td><td>-1</td><td>+1</td></tr></table><br>De volledige bewerking is dan:<br><span class='kleur'>+1 x (cofactor x det(minor1))</span><span class='kleur2'> - 1 x (cofactor x det(minor2))</span><span class='kleur3'> + 1 x (cofactor) x det(minor3))</span><br>" +
-                "Om de determinant te berekenen van een 2x2 matrix (de minor) vermenigvuldigen we volgens de diagonalen:<br/>" +
-                "det(A) = <table><tr><td>a</td><td>b</td></tr><tr><td>c</td><td>d</td></tr></table> = <span class='kleur'>a x d</span> - <span class='kleur2'>b x c</span>",
+                "De eerste stap bij het berekenen van een matrix is om de <span class='kleur'>minor</span> te vinden van een element. De <span class='kleur'>minor</span> van een element is de determinant van de matrix die overblijft als alle elementen in dezelfde rij en kolom als dat element geschrapt worden." +
+                " Zoals je ziet moet je een determinant berekenen om de determinant te kunnen berekenen, klinkt vreemd toch? Maar het komt wel inorde ;) want indien je matrix " +
+                "een 1 x 1 matrix is, is de determinant het element zelf.<br><br> Uiteindelijk moet je de <span class='kleur'>minor</span> vermenigvuldigen met het juiste teken.  " +
+                "Dan bekom je de <span class='kleur'>cofactor</span> van het element. " +
+                "Het juiste teken vind je door de formule (-1)^(rij+kolom). " +
+                "Stel ik bereken de cofactor van element op rij 1 en kolom 1 dan is het teken bij dat ik bij de minor moet plaatsen (-1)² = 1 dus posifief." +
+                "<br><br>Voor een 3x3 matrix zijn dit de tekens:<br>" +
+                "<table><tr><td>+1</td><td>-1</td><td>+1</td></tr><tr><td>-1</td><td>+1</td><td>-1</td></tr><tr><td>+1</td><td>-1</td><td>+1</td></tr></table><br>"+
+                " <br>"+
+                "De determinant te berekenen doe je door te ontwikkelen naar een rij of kolom. In deze tutorial wordt er altijd ontwikkeld naar de eerste rij maar " +
+                "dat mag je gerust zelf kiezen. " +
+                "De bewerking die je moet uivoeren is alle  elementen in de rij waarin je ontwikkeld vermenigvuldigen met hun corresponderende cofactor en optellen. <br>" +
+                "Om de determinant te berekenen van een 2x2 matrix te berekenen moet je hetzelfde stappenplan volgen maar uiteindelijk zal je zelf tot de ondestaande formule komen." +
+                " Je vermenigvuldigd de elementen volgens de diagonalen en trekt ze val elkaar af:<br/><br>" +
+                "det(A) = <table><tr><td><span class='kleur'>a <span></td><td><span class='kleur2'>b <span> </td></tr><tr><td><span class='kleur4'>c</span></td><td><span class='kleur3'>d</span>" +
+                "</td></tr></table> = " +
+                "<span class='kleur'>a</span> * <span class='kleur3'>cofactor(a)</span> + <span class='kleur2'>b</span> * <span class='kleur4'>cofactor(b)</span><br>"+
+                "= <span class='kleur'>a</span> * <span class='kleur3'>d</span> - <span class='kleur2'>b</span> * <span class='kleur4'>c</span><br>",
             uitlegb: "Hier geven we een voorbeeld van hoe men een determinant berekent, stap voor stap. We berekenen de determinant van matrix1 en gebruiken de kleinere 2x2 matrix als minor.\n\nKlik op 'next' om naar de volgende stap te gaan."
             }];
-
-
     static tutorials = {//alle tutorials
         "VermenigvuldigTutorial": [new VermenigvuldigTutorial(new Matrix(3, 3), new Matrix(3, 3)), new VermenigvuldigTutorial(new Matrix(2, 2), new Matrix(2, 4))],
         "TransponeerTutorial": [new TransponeerTutorial(new Matrix(2, 3))],
@@ -202,6 +213,7 @@ function terug() {
 
 //de eerste methode die wordt uitgevoerd, extra controleren of we niet om de mainPage zitten omdat de klasse TutorialPage daar
 // wordt geimporteerd werd deze code automatisch uitgevoerd.
-if (window.location.pathname.split("/")[2] === "TutorialPage.html") {
+let arr=window.location.pathname.split("/");
+if (arr[arr.length-1] === "TutorialPage.html") {
     init();
 }

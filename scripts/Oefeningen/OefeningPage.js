@@ -122,7 +122,8 @@ function terug() {
 }
 
 let oef;
-if (window.location.pathname.split("/")[2] === "OefeningPage.html") {
+let arr=window.location.pathname.split("/");
+if (arr[arr.length-1] === "OefeningPage.html") {
     init();
 }
 
