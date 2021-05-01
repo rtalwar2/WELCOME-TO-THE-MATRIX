@@ -26,7 +26,7 @@ export class OefeningPage {
         "VermenigvuldigOefening": [new VermenigvuldigOefening(new Matrix(3, 3), new Matrix(3, 3)), new VermenigvuldigOefening(new Matrix(3,2),new Matrix(3,2))],
         //"TransponeerOefening":Object,
         "InverseOefening": [new InverseOefening(new Matrix(2,2),true),new InverseOefening(new Matrix(2,2),true),new InverseOefening(new Matrix(3,3))],
-        "DeterminantOefening": [new DeterminantOefening(new Matrix(3, 3)),new DeterminantOefening(new Matrix(3,3))]
+        "DeterminantOefening": [new DeterminantOefening(new Matrix(2, 2)),new DeterminantOefening(new Matrix(3,3)),new DeterminantOefening(new Matrix(3, 2))]
     };
     oefening;
     oefeningindex;
