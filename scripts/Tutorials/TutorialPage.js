@@ -12,10 +12,11 @@ import {DeterminantOefening} from "../Oefeningen/DeterminantOefening.js";
 
 export class TutorialPage {
     static alle_beschrijvingen = [
-        {//deze beschrijvingen worden getoond in de modal
+        {//descriptions worden getoond in de modal
+         //uitlegb in "stap 0"
             name: "TransponeerTutorial",
-            description: "Dit is een van de korte Tutorials die uitlegt hoe je een matrix moet transponeren. <br> De getransponeerde matrix A^t van een matrix A kun je heel eenvoudig berekenen door de rijen van A te schrijven als de kolommen van A^t. Dit wordt wel duidelijk met de tutorial.",
-            uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
+            description: "Dit is een korte Tutorial die uitlegt hoe je een matrix moet transponeren. <br> De getransponeerde matrix A^t van een matrix A kun je heel eenvoudig berekenen door de rijen van A te schrijven als de kolommen van A^t. Dit wordt wel duidelijk met de tutorial.",
+            uitlegb: "Klik op 'next' om de matrix stap voor stap te transponeren."
         },
         {
             name: "InverseTutorial",
@@ -33,7 +34,10 @@ export class TutorialPage {
             description: "In de lineaire algebra is matrixvermenigvuldiging een bewerking tussen twee matrices die als resultaat een nieuwe matrix, aangeduid als het (matrix)product van die twee, oplevert.<br><br>" +
                 "Matrixvermenigvuldiging van een matrix <span class='kleur'>A</span> met een matrix <span class='kleur2'>B</span> met product <span class='kleur3'>AB</span> is alleen mogelijk als het aantal kolommen van de eerste matrix gelijk is aan het aantal rijen van de tweede matrix. <br><br>" +
                 "Stel daarom dat <span class='kleur'>A</span> een  m x n -matrix is en <span class='kleur2'>B</span> een n x p -matrix. Het matrixproduct <span class='kleur3'>AB</span> is dan een m x p -matrix.<br><br>" +
-                "Elk element <span class='kleur3'>(AB)ij</span> is de som van ",
+                "Elk element <span class='kleur3'>(AB)ij</span> is de som van de een aan een vermenigvuldiging van de <span class='kleur'>rij i van A</span> en <span class='kleur2'>kolom j van B</span>.<br><br>" +
+                "Bijvoorbeeld voor matrix <span class='kleur'>A</span> <table><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr></table>" +
+                "en matrix <span class='kleur2'>B</span> <table><tr><td>4</td><td>3</td></tr><tr><td>2</td><td>1</td></tr></table>" +
+                "is het element <span class='kleur3'>(AB)11</span> = <span class='kleur'>1</span>*<span class='kleur2'>4</span> + <span class='kleur'>2</span>*<span class='kleur2'>2</span> = <span class='kleur3'>8</span>",
             uitlegb: "Als we de bewerking matrix1 * matrix2 stap voor stap uitvoeren dan bouwen we de oplossing in de productmatrix.\n\nKlik op 'next' om naar de volgende stap te gaan."
         },
         {
