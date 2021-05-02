@@ -61,12 +61,21 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
         document.querySelector("nav").appendChild(row);
     }
 }
-
+function showDescription() {
+    console.log("fhdhdhf")
+    //in de modal de juiste beschijving steken ze worden opgehaald uit JSON alle_beschrijvingen van TutorialPage klasse
+   // document.querySelector(".modal-body").innerText = "bob";
+    //in de modal juiste titel plaatsen
+   // document.querySelector("#exampleModalLabel").innerText = "jggkghkg"
+    //er zit een onzichtbare knop in de html die moet worden aangeklikt om de modal dte doen verschijnen, ik heb het niet zonder knop kunnen doen
+    document.querySelector("#init_modal").click();
+}
 function init() {
     haalKnoppen();
 
     if (localStorage.getItem("huidige speler") == null) {
         vraagNaam();
+
     } else {
         spelerMaken(localStorage.getItem("huidige speler"));
     }
@@ -98,6 +107,7 @@ function spelerMaken(naamSpeler) {
 function vraagNaam() {
     let naamSpeler = window.prompt("Naam?");
     spelerMaken(naamSpeler);
+    showDescription();
 }
 
 init();

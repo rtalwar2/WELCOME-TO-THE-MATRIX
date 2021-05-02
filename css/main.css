@@ -55,4 +55,15 @@ canvas {
     background-color: gold;
     color: black !important;
 }
+.modal-content{
+    background-color: #252525;
+    text-decoration-color: #b7b7b7;
+}
 
+.modal-header{
+    border-bottom-color: black;
+}
+.modal-footer{
+    border-top-color: black;
+
+}
