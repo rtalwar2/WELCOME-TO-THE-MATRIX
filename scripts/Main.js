@@ -4,14 +4,14 @@ import {Speler} from "./Speler.js";
 
 
 function ListenToKnop(event) {
-    let target = event.target.innerText
-    console.log(event)
+    let target = event.target.innerText;
+    console.log(event);
     localStorage.setItem("selected_button", target);//opschrift van de knop opslaan in local storage
     if (target.includes("wallet")) {
         window.open("./Bitcoins.html", "_self");
 
     } else if (target.includes("simulatie")) {
-        window.open("./.html", "_self");
+        window.open("./markov.html", "_self");
 
     } else if (target.includes("Oefening")) {
         window.open("./OefeningPage.html", "_self");
