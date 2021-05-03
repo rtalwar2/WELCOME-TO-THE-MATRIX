@@ -7,7 +7,7 @@ import {InverseOefening} from "./InverseOefening.js";
 
 
 export class OefeningPage {
-    static alle_oefeningen = ["VermenigvuldigOefening", "InverseOefening", "DeterminantOefening", "TransponeerOefening"];
+    static alle_oefeningen = ["VermenigvuldigOefening", "InverseOefening", "DeterminantOefening"];  //, "TransponeerOefening"
     static alle_beschrijvingen = [{//deze beschrijvingen worden getoond in de modal
 
         name: "VermenigvuldigOefening",
