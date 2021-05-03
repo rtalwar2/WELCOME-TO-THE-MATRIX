@@ -3,6 +3,8 @@
 } */
 body{
     color: white;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 h1{
     text-align: center;
@@ -67,3 +69,4 @@ canvas {
     border-top-color: black;
 
 }
+

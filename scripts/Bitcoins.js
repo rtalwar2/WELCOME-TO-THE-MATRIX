@@ -86,6 +86,7 @@ function hint_init() {
     let titel = document.createElement('h4');       // titel maken
     titel.innerText = "Hint:";
     let row1 = document.createElement("div");
+    row1.id="hint_title"
     row1.classList.add("row");
     let row2 = document.createElement("div");
     row2.classList.add("row", "vectoren");
@@ -108,10 +109,10 @@ function hint_init() {
 }
 
 function hint_uitleg() {
-    let row = document.querySelector(".vectoren");
+    //let row = document.querySelector(".vectoren");
     let p = document.createElement("p");            // uitlegvak maken
     p.id = "uitleg";
-    row.appendChild(p);
+    document.querySelector("#hint_title").appendChild(p);
 }
 
 function hint1() {
