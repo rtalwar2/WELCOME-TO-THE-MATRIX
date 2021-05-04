@@ -15,7 +15,9 @@ export class Speler {
                     ["DeterminantTutorial", false],
                     ["DeterminantOefening", false],
                     ["InverseOefening", false],
-                    ["VermenigvuldigOefening", false]]);
+                    ["VermenigvuldigOefening", false],
+                    ["Zombie simulatie", false],
+                    ["Crack the wallet", false]]);
             this.saveData();
         }else {                                                 //als speler wel bestaat
             let myJSON = localStorage.getItem(this.naam);
