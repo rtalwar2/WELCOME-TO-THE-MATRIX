@@ -290,6 +290,7 @@ p span:last-child{
     transition: opacity .2s;
 }
 
+
 @media (min-width: 768px){
     .uitleg{
         height: 15em;
