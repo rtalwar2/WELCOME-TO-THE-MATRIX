@@ -109,7 +109,12 @@ export class TutorialPage {
     // }
 
     endTutorial() {//past de modal aan en laat hem verschijnen
-        document.querySelector(".modal-body").innerText = "Ben je klaar voor de oefening?";
+        if (localStorage.getItem("selected_button") === "TransponeerTutorial"){
+            document.querySelector(".modal-body").innerText = "Tutorial afgewerkt!";
+            document.querySelector("#js_modalbutton").innerText = "Exit";
+        }else {
+            document.querySelector(".modal-body").innerText = "Ben je klaar voor de oefening?";
+        }
         document.querySelector("#exampleModalLabel").innerText = localStorage.getItem("selected_button") + " afgewerkt!";
         document.querySelector("#init_modal").click();
 
