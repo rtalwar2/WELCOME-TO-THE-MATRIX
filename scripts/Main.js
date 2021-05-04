@@ -29,7 +29,7 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
     }
     alle_teksten.push(...OefeningPage.alle_oefeningen); //gaf error omdat die de js van oefeningpage effectief uitvoerde en vond bepaalde elementen van de html niet
     alle_teksten.sort();
-    for (let i in alle_teksten.slice(0, (alle_teksten.length / 2)+1)) {//per 2 de knoppen invoegen zodat ze mooi naast elkaar komen
+    for (let i in alle_teksten.slice(0, (alle_teksten.length / 2))) {//per 2 de knoppen invoegen zodat ze mooi naast elkaar komen
         let row = document.createElement("div");//wel een PROBLEEM bij oneven aantal knoppen
         row.classList.add("row");
         let content = document.createElement("div");
@@ -60,6 +60,21 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
         // </div>`
         document.querySelector("nav").appendChild(row);
     }
+    console.log(alle_teksten)
+    let lengte=Math.round(alle_teksten.length / 2)
+    let row = document.createElement("div");//wel een PROBLEEM bij oneven aantal knoppen
+    row.classList.add("row");
+    let content = document.createElement("div");
+    content.classList.add(...["col-md-12", "nav", "justify-content-center"]);
+    let button1 = document.createElement("button");
+    button1.type = "button";
+    button1.classList.add(...["btn", "btn-outline-success"]);
+    button1.innerText = alle_teksten[lengte-1];
+    button1.id = alle_teksten[lengte-2];
+    content.appendChild(button1);
+    row.appendChild(content);
+    document.querySelector("nav").appendChild(row);
+
 }
 function showDescription() {
     console.log("fhdhdhf")
