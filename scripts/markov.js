@@ -71,6 +71,7 @@ function init(){
     });
     toonOplossing(oplossingcache[0]);
     console.log(allex);
+    document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
 }
 
 function update(){
@@ -115,6 +116,12 @@ function Vermenigvuldig(matrix){
     opl[1][0] = Math.round(opl[1][0]*10000)/10000;*/
     matrix_opl.importMatrix(opl);
     return matrix_opl;
+}
+function terug() {
+    let spelernaam = localStorage.getItem("huidige speler");
+    let speler = new Speler(spelernaam);
+    speler.eindTutorialOefening(localStorage.getItem("selected_button"));
+    window.open("./main.html", "_self");
 }
 
 let arr=window.location.pathname.split("/");
