@@ -7,6 +7,7 @@ let oplossingcache = [];
 let index = 0;
 let allex = [];
 let alley = [];
+
 function init_matrices(){
     //Matrixen aanmaken
     matrix2.matrix[0][0] = 100;
@@ -19,8 +20,15 @@ function init_matrices(){
     matrix2.drawMatrix(toestandsmatrix,"Toestandsmatrix");
 }
 
+function terug() {
+    let spelernaam = localStorage.getItem("huidige speler");
+    let speler = new Speler(spelernaam);
+    speler.eindTutorialOefening(localStorage.getItem("selected_button"));
+    window.open("./main.html", "_self");
+}
 
 function init(){
+    document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
     init_matrices();
     Vermenigvuldig(matrix2);
     oplossingcache[0] = matrix2;
@@ -31,7 +39,7 @@ function init(){
     }
 
     let sliderSteps = [];
-    for(let i = 0; i<matrix2.matrix[0][0];i++){
+    for(let i = 0; i<50;i++){
         sliderSteps.push({
             method: 'animate',
             label: i,
@@ -46,18 +54,24 @@ function init(){
         x:allex,
         y:alley,
         mode:'markers',
+        hoverinfo:'skip'
     }], {
         xaxis:{
-            range:[0,10]
+            range:[1,10],
+            visible:false
         },
         yaxis:{
-            range:[0,10]
+            range:[0,10],
+            visible:false
         },
+        color:'black',
+        plot_bgcolor:'black',
+        paper_bgcolor:'black',
         sliders: [{
             pad: {l: 130, t: 55},
             currentvalue: {
                 visible: true,
-                prefix: 'Jaar:',
+                prefix: 'Jaar: ',
                 xanchor: 'right',
                 font: {size: 20, color: '#666'}
             },
@@ -82,7 +96,7 @@ function update(){
             duration: 300
         },
         frame: {
-            duration: 0,
+            duration: 300,
             redraw: false
         }
     });
@@ -91,12 +105,12 @@ function update(){
 
 function bereken(){
     for(let i = 0;i<matrix2.matrix[0][0];i++){
-        if(i<=oplossingcache[index].matrix[0][0]){
+        if(i<=oplossingcache[index].matrix[0][0] && allex[i]>4){
             allex[i] = (Math.random())+3;
             alley[i] = (Math.random()*6)+3;
         }
-        else{
-            allex[i] = (Math.random())+9;
+        else if(i>oplossingcache[index].matrix[0][0] && allex[i]<4){
+            allex[i] = (Math.random())+7;
             alley[i] = (Math.random()*6)+3;
         }
     }
