@@ -3,12 +3,13 @@ import {Speler} from "./Speler.js";
 
 let matrix1 = new Matrix(2,2,0);//overgangsmatrix
 let matrix2 = new Matrix(2,1,0);//toestandsmatrix
-let matrix_opl;
-let stapcache = [];
-let index;
+let oplossingcache = [];
+let index = 0;
+let allex = [];
+let alley = [];
 function init_matrices(){
     //Matrixen aanmaken
-    matrix2.matrix[0][0] = 10000;
+    matrix2.matrix[0][0] = 100;
     matrix1.importMatrix([[0.8,0.1],[0.2,0.9]]);//hardgecodeerd
 
     let overgangsmatrix = document.querySelector("#table1");
@@ -22,47 +23,98 @@ function init_matrices(){
 function init(){
     init_matrices();
     Vermenigvuldig(matrix2);
-    stapcache[1] = matrix_opl;
-    //Slider init
-    let slider = document.getElementById("range");
-    slider.oninput = function() {
-        console.clear();
-        if(stapcache[slider.value] === undefined) {
-            stapcache[index] = matrix_opl;
-            Vermenigvuldig(matrix_opl);
-            index = slider.value;
+    oplossingcache[0] = matrix2;
+    for(let i = 0;i<matrix2.matrix[0][0];i++){
+        oplossingcache[i+1] = Vermenigvuldig(oplossingcache[i]);
+        allex[i] = (Math.random())+3;
+        alley[i] = (Math.random()*6)+3;
+    }
+
+    let sliderSteps = [];
+    for(let i = 0; i<matrix2.matrix[0][0];i++){
+        sliderSteps.push({
+            method: 'animate',
+            label: i,
+            args: [i, {
+                mode: 'immediate',
+                transition: {duration: 300},
+                frame: {duration: 300, redraw: false},
+            }]
+        });
+    }
+    Plotly.newPlot('plot', [{
+        x:allex,
+        y:alley,
+        mode:'markers',
+    }], {
+        xaxis:{
+            range:[0,10]
+        },
+        yaxis:{
+            range:[0,10]
+        },
+        sliders: [{
+            pad: {l: 130, t: 55},
+            currentvalue: {
+                visible: true,
+                prefix: 'Jaar:',
+                xanchor: 'right',
+                font: {size: 20, color: '#666'}
+            },
+            steps: sliderSteps
+        }]
+    });
+    document.querySelector('#plot').on('plotly_sliderchange',function(e){
+        index = e.step.label;
+        toonOplossing(oplossingcache[index]);
+        requestAnimationFrame(update);
+    });
+    toonOplossing(oplossingcache[0]);
+    console.log(allex);
+}
+
+function update(){
+    bereken();
+    Plotly.animate('plot', {
+        data: [{x: allex, y: alley}]
+    }, {
+        transition: {
+            duration: 300
+        },
+        frame: {
+            duration: 0,
+            redraw: false
+        }
+    });
+
+}
+
+function bereken(){
+    for(let i = 0;i<matrix2.matrix[0][0];i++){
+        if(i<=oplossingcache[index].matrix[0][0]){
+            allex[i] = (Math.random())+3;
+            alley[i] = (Math.random()*6)+3;
         }
         else{
-            console.log(stapcache[slider.value]);
-            matrix_opl = stapcache[slider.value];
-            toonOplossing(stapcache[slider.value]);
+            allex[i] = (Math.random())+9;
+            alley[i] = (Math.random()*6)+3;
         }
-        console.log(stapcache);
     }
 }
 
 function toonOplossing(matrix){
     let oplossing= document.querySelector("#table3");
     matrix.drawMatrix(oplossing,"Oplossing");
-    console.log(matrix_opl.matrix);
-    Plotly.newPlot('plot', [{
-        x:["Mensen","Zombies"],
-        y: [matrix_opl.matrix[0][0],matrix_opl.matrix[1][0]],
-        type:'bar'
-    }], {
-        plot_bgcolor: "#000000",
-        paper_bgcolor:"#000000"
-    });
 }
 
 function Vermenigvuldig(matrix){
-    matrix_opl= new Matrix(2,1,0);
+    let matrix_opl= new Matrix(2,1,0);
     let opl = matrix1.vermenigvuldigMatrix(matrix);
     //hardgecodeerd voor 2x1 af te ronden
     /*opl[0][0] = Math.round(opl[0][0]*10000)/10000;
     opl[1][0] = Math.round(opl[1][0]*10000)/10000;*/
     matrix_opl.importMatrix(opl);
-    toonOplossing(matrix_opl);
+    return matrix_opl;
 }
 
 let arr=window.location.pathname.split("/");
