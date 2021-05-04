@@ -70,7 +70,7 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
     button1.type = "button";
     button1.classList.add(...["btn", "btn-outline-success"]);
     button1.innerText = alle_teksten[lengte-1];
-    button1.id = alle_teksten[lengte-2];
+    button1.id = alle_teksten[lengte-1];
     content.appendChild(button1);
     row.appendChild(content);
     document.querySelector("nav").appendChild(row);
