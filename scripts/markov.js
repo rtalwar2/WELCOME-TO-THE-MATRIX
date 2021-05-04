@@ -20,12 +20,6 @@ function init_matrices(){
     matrix2.drawMatrix(toestandsmatrix,"Toestandsmatrix");
 }
 
-function terug() {
-    let spelernaam = localStorage.getItem("huidige speler");
-    let speler = new Speler(spelernaam);
-    speler.eindTutorialOefening(localStorage.getItem("selected_button"));
-    window.open("./main.html", "_self");
-}
 
 function init(){
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
@@ -56,12 +50,16 @@ function init(){
         mode:'markers',
         hoverinfo:'skip'
     }], {
+        title:{
+            text:'Mensen                                                            Zombies',
+            font:{color:'#E0E0E0'}
+        },
         xaxis:{
             range:[1,10],
             visible:false
         },
         yaxis:{
-            range:[0,10],
+            range:[0,9],
             visible:false
         },
         color:'black',
@@ -69,11 +67,14 @@ function init(){
         paper_bgcolor:'black',
         sliders: [{
             pad: {l: 130, t: 55},
+            font:{
+                color:'#E0E0E0',
+            },
             currentvalue: {
                 visible: true,
                 prefix: 'Jaar: ',
                 xanchor: 'right',
-                font: {size: 20, color: '#666'}
+                font: {size: 20, color: '#E0E0E0'}
             },
             steps: sliderSteps
         }]
@@ -84,7 +85,6 @@ function init(){
         requestAnimationFrame(update);
     });
     toonOplossing(oplossingcache[0]);
-    console.log(allex);
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
 }
 
@@ -94,14 +94,14 @@ function update(){
         data: [{x: allex, y: alley}]
     }, {
         transition: {
-            duration: 300
+            duration: 200
         },
         frame: {
-            duration: 300,
+            duration: 200,
             redraw: false
         }
     });
-
+    //promise error komt van te snel te veranderen van index
 }
 
 function bereken(){
