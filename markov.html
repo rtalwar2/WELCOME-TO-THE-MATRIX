@@ -27,17 +27,26 @@
                     <article>
                         <div class="row">
                             <p>
-                                Een Markovketen beschrijft een systeem dat zich door een aantal toestanden beweegt en stapsgewijs overgangen vertoont van de ene naar de andere (of dezelfde) toestand.
-                                De specifieke Markov-eigenschap houdt daarbij in dat: "de toekomst gegeven het heden niet afhangt van het verleden".
-                                Dat betekent dat als het systeem zich in een bepaalde toestand bevindt, het toekomstige gedrag van het systeem
-                                slechts afhangen van de huidige toestand en niet van de weg waarlangs deze toestand tot stand is gekomen.
+                                Een Markovketen beschrijft een systeem dat zich door een aantal toestanden beweegt en
+                                stapsgewijs overgangen vertoont van de ene naar de andere (of dezelfde) toestand.
+                                De specifieke Markov-eigenschap houdt daarbij in dat: "de toekomst gegeven het heden
+                                niet afhangt van het verleden".
+                                Dat betekent dat als het systeem zich in een bepaalde toestand bevindt, het toekomstige
+                                gedrag van het systeem
+                                slechts afhangen van de huidige toestand en niet van de weg waarlangs deze toestand tot
+                                stand is gekomen.
                             </p>
                             <h3>Verhaal:</h3>
-                            <p>De inmiddels overleden terrorist Osama heeft niet enkel zijn bitcoin wallet achtergelaten maar ook enkele volgelingen die een plan klaar hebben
-                                om oorlog te voeren met het westen. Volgens onze spionnen zijn we te weten gekomen dat zijn eerste volgeling (Admiral General Aladeen) recent kernwapens
+                            <p>De inmiddels overleden terrorist Osama heeft niet enkel zijn bitcoin wallet achtergelaten
+                                maar ook enkele volgelingen die een plan klaar hebben
+                                om oorlog te voeren met het westen. Volgens onze spionnen zijn we te weten gekomen dat
+                                zijn eerste volgeling (Admiral General Aladeen) recent kernwapens
                                 heeft gekocht uit Noord-Korea. (＃°Д°)
-                            Het is jouw taak om uit te zoeken welke scenarios er zich kunnen voordoen door hen te simuleren. In de toestandmatrix begin je altijd met 100 mensen en 0 zombies en de oplossings matrix geeft je de toestand van het volgend jaar.
-                            Dus door meerdere matrix verminigvuldigingen achter elkaar uit te voeren kun je zien waarnaar het system evolueert in de toekomst</p><br/>
+                                Het is jouw taak om uit te zoeken welke scenarios er zich kunnen voordoen door hen te
+                                simuleren. In de toestandmatrix begin je altijd met 100 mensen en 0 zombies en de
+                                oplossings matrix geeft je de toestand van het volgend jaar.
+                                Dus door meerdere matrix verminigvuldigingen achter elkaar uit te voeren kun je zien
+                                waarnaar het system evolueert in de toekomst.</p><br/>
                             <div class="col-md-3">
                                 <table id="table1"></table>
                             </div>
@@ -49,8 +58,52 @@
                             </div>
                         </div>
                         <div id="plot"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                    Het systeem nadert naar:
+                                </p>
+                                <table id="oplossing"></table>
+                            </div>
+                            <div class="col-md-12">
+                            <p>Om zelf de uitkomst van een systeem te kunnen voorspellen kan je hier zelf je matrixen
+                                kiezen:</p></div>
+                            <div class="col-md-4">
+                                <table>
+                                    <tr>
+                                        <th>Overgangsmatrix</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" class="matrix_cell"/></td>
+                                        <td><input type="text" class="matrix_cell"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" class="matrix_cell"/></td>
+                                        <td><input type="text" class="matrix_cell"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-4">
+                                <table>
+                                    <tr>
+                                        <th>Toestandsmatrix</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="matrix_cell"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="matrix_cell"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-4">
+                                <table id="oplossing2"></table>
+                            </div>
+                        </div>
+                        <button id="mainPage" type="button" class="btn btn-outline-success">Exit</button>
+                        <button id="bekeren" type="button" class="btn btn-outline-success float-right">Bereken</button>
+
                     </article>
-                    <button id="mainPage" type="button" class="btn btn-outline-success">Exit</button>
                 </section>
             </main>
         </div>
@@ -63,5 +116,6 @@
         <br/>
         <i>Terms and conditions apply</i> &copy;
     </p>
-</footer></body>
+</footer>
+</body>
 </html>
