@@ -10,6 +10,7 @@ participant OefeningPage
 participant Oefeningen
 participant VermenigvuldigOefening
 participant Bitcoins
+participant Markov
 participant Matrix
 participant Speler
 participant localStorage
@@ -28,48 +29,51 @@ MainProgram -> MainProgram: init()
 == HTML goed genereren ==
 
 MainProgram -> MainProgram: haalKnoppen()
+    MainProgram -> TutorialPage: TutorialPage.alle_beschrijvingen
+        activate TutorialPage
+        TutorialPage-->>MainProgram: returns alle_beschrijvingen
 
-MainProgram -> TutorialPage: TutorialPage.alle_beschrijvingen
-activate TutorialPage
-TutorialPage-->>MainProgram: returns alle_beschrijvingen
-
-MainProgram -> OefeningPage: OefeningPage.alle_oefeningen
-activate OefeningPage
-OefeningPage-->>MainProgram: returns alle_oefeningen
-
-MainProgram -->> MainProgram: generate html page
-
+    MainProgram -> OefeningPage: OefeningPage.alle_oefeningen
+        activate OefeningPage
+        OefeningPage-->>MainProgram: returns alle_oefeningen
 
 
 == Speler ==
 
 MainProgram -> localStorage: getItem("huidige speler")
-localStorage -->> MainProgram: huidige speler
+    localStorage -->> MainProgram: huidige speler
 
-opt speler bestaat niet
-    MainProgram -> MainProgram: vraagNaam()
-
-    MainProgram -> Gebruiker: prompt(naam?)
-    Gebruiker -->> MainProgram: naam
-
-    MainProgram -> MainProgram: spelerMaken(naam)
+opt geen speler opgeslagen
+        MainProgram -> MainProgram: vraagNaam()
+            MainProgram -> Gebruiker: prompt(naam?)
+            Gebruiker -->> MainProgram: naam
+            MainProgram -> MainProgram: spelerMaken(naam)
+                MainProgram -> Speler: Speler(naam)
+                    activate Speler
+                    Speler -> localStorage: getItem(naam)
+                    activate localStorage
+                    localStorage -->> Speler: data over speler
+                    Speler -> Speler: saveData()
+                        Speler -> localStorage: setItem(naam, data)
+                        Speler -> localStorage: setItem("huidige speler", naam)
+                MainProgram -> Speler: getData()
+                Speler -->> MainProgram: Map<String,boolean>
+            MainProgram -> MainProgram: showDescription()
 
     else speler bestaat
-    MainProgram -> MainProgram: spelerMaken(huidige speler)
+        MainProgram -> MainProgram: spelerMaken(huidige speler)
+            MainProgram -> Speler: Speler(huidige speler)
+                Speler -> localStorage: getItem(naam)
+                localStorage -->> Speler: data over speler
+                Speler -> Speler: saveData()
+                    Speler -> localStorage: setItem(naam, data)
+                    Speler -> localStorage: setItem("huidige speler", naam)
+            MainProgram -> Speler: getData()
+            Speler -->> MainProgram: Map<String,boolean>
 end
 
-MainProgram -> Speler: Speler(naam)
-activate Speler
 
-Speler -> localStorage: getItem(naam)
-activate localStorage
-localStorage -->> Speler: data over speler
-Speler -> Speler: saveData()
-Speler -> localStorage: setItem(naam, data)
-Speler -> localStorage: setItem("huidige speler", naam)
-
-MainProgram -> Speler: getData()
-Speler -->> MainProgram: Map<String,boolean>
+MainProgram -->> MainProgram: generate html page
 
 
 
@@ -78,159 +82,148 @@ Speler -->> MainProgram: Map<String,boolean>
 Gebruiker -> MainProgram: Kiest Deelsysteem
 
 MainProgram -> MainProgram: ListenToKnop(event)
-MainProgram -> localStorage: setItem("selected_button", naam deelsysteem)
+    MainProgram -> localStorage: setItem("selected_button", naam deelsysteem)
 
-
-opt  if deelsysteem is een Tutorial
-        MainProgram -> TutorialPage: open TutorialPage
-        TutorialPage -->> TutorialPage: generate html page (stap **)
-     else if deelsysteem is een Oefening
-        MainProgram -> OefeningPage: open OefeningPage
-        OefeningPage -->> OefeningPage: generate html page (stap **)
-     else if deelsysteem is Bitcoins
-        MainProgram -> Bitcoins: open Bitcoins
-        Bitcoins -->> Bitcoins: generate html page (stap **)
-     else if deelsysteem is Zombies
-        MainProgram -> Zombies: open Zombies
-        Zombies -->> Zombies: generate html page (stap **)
-end
+    opt  if deelsysteem is een Tutorial
+            MainProgram -> TutorialPage: open TutorialPage
+            TutorialPage -->> TutorialPage: generate html page (Sequentiediagram_tutorials)
+         else if deelsysteem is een Oefening
+            MainProgram -> OefeningPage: open OefeningPage
+            OefeningPage -->> OefeningPage: generate html page (Sequentiediagram_oefeningen)
+         else if deelsysteem is Bitcoins
+            MainProgram -> Bitcoins: open Bitcoins
+            activate Bitcoins
+            Bitcoins -->> Bitcoins: generate html page (Sequentiediagram_bitcoins)
+         else if deelsysteem is Markov
+            MainProgram -> Markov: open Markov
+            activate Markov
+            Markov -->> Markov: generate html page (Sequentiediagram_markov)
+    end
 deactivate MainProgram
 
 
 
 == Tutorials  ==
 deactivate OefeningPage
-
+deactivate Bitcoins
+deactivate Markov
 TutorialPage -> TutorialPage: init()
 
 TutorialPage -> localStorage: getItem("selected_button")
-localStorage -->> TutorialPage: naam deelsysteem
+    localStorage -->> TutorialPage: naam deelsysteem
 
 TutorialPage -> TutorialPage: startTutorial(naam deelsysteem, 0)
+    opt  if deelsysteem is VermenigvuldigTutorial
+            loop subtutorial
+                TutorialPage -> Matrix: new Matrix(3, 3)
+                    activate Matrix
+                TutorialPage -> Matrix: new Matrix(3, 3)
 
-opt  if deelsysteem is VermenigvuldigTutorial
-        loop subtutorial
-            TutorialPage -> Matrix: new Matrix(3, 3)
-            activate Matrix
-            TutorialPage -> Matrix: new Matrix(3, 3)
+                TutorialPage -> VermenigvuldigTutorial: new VermenigvuldigTutorial(Matrix1, Matrix2)
+                    activate VermenigvuldigTutorial
+                    VermenigvuldigTutorial -> Tutorial: constructor()
+                        activate Tutorial
+                        Tutorial -->> VermenigvuldigTutorial: constructor
+                    VermenigvuldigTutorial -> Matrix: new Matrix(.,.,"0")
 
-            TutorialPage -> VermenigvuldigTutorial: new VermenigvuldigTutorial(Matrix1, Matrix2)
-            activate VermenigvuldigTutorial
+                TutorialPage -> VermenigvuldigTutorial: drawMatrices(tutorialPage)
 
-            VermenigvuldigTutorial -> Tutorial: constructor()
-            activate Tutorial
-            Tutorial -->> VermenigvuldigTutorial: constructor
+                loop foreach tutorial.matrices[i]
+                        TutorialPage -> VermenigvuldigTutorial: matrices[i]
+                        VermenigvuldigTutorial -> Tutorial: matrices[i]
+                        Tutorial -->> VermenigvuldigTutorial: matrices[i]
+                        VermenigvuldigTutorial -->> TutorialPage: matrices[i]
 
-            VermenigvuldigTutorial -> Matrix: new Matrix(.,.,"0")
-
-            TutorialPage -> VermenigvuldigTutorial: drawMatrices(tutorialPage)
-
-            loop foreach tutorial.matrices[i]
-                    TutorialPage -> VermenigvuldigTutorial: matrices[i]
-                    VermenigvuldigTutorial -> Tutorial: matrices[i]
-                    Tutorial -->> VermenigvuldigTutorial: matrices[i]
-                    VermenigvuldigTutorial -->> TutorialPage: matrices[i]
-
-                    TutorialPage -> Matrix: drawMatrix(.,.)
-            end
-            TutorialPage -> Matrix: drawMatrix(.,.)
-
-            TutorialPage -> TutorialPage: showDescription()
-            TutorialPage -> localStorage: getItem("selected_button")
-            localStorage -->> TutorialPage: naam deelsysteem
-            TutorialPage -> localStorage: getItem("selected_button")
-            localStorage -->> TutorialPage: naam deelsysteem
-
-            loop while niet laatste stap
-                opt nextStep
-                    Gebruiker -> TutorialPage: klik op next
-
-                    TutorialPage -> TutorialPage: ListenToKnop(event)
-                    TutorialPage -> TutorialPage: changeStep()
-
-                    TutorialPage -> VermenigvuldigTutorial: refresh(tutorialPage)
-                    VermenigvuldigTutorial -->> TutorialPage: {finished:., data:., tekst:.}
-
-                    TutorialPage -> Matrix: drawMatrix(.,.)
-                    TutorialPage -> TutorialPage: updateBeschrijving(.)
+                        TutorialPage -> Matrix: drawMatrix(.,.)
                 end
-                opt exit
-                   Gebruiker -> TutorialPage: klik op exit
+                TutorialPage -> Matrix: drawMatrix(.,.)
 
-                   TutorialPage -> TutorialPage: terug()
 
-                   TutorialPage -> localStorage: getItem("huidige speler")
-                   localStorage -->> TutorialPage: huidige speler
+                TutorialPage -> TutorialPage: showDescription()
+                    TutorialPage -> localStorage: getItem("selected_button")
+                        localStorage -->> TutorialPage: naam deelsysteem
+                    TutorialPage -> localStorage: getItem("selected_button")
+                        localStorage -->> TutorialPage: naam deelsysteem
 
-                   TutorialPage -> Speler: new Speler(spelernaam)
+                loop while niet laatste stap
+                    opt nextStep
+                        Gebruiker -> TutorialPage: klik op next
+                        TutorialPage -> TutorialPage: ListenToKnop(event)
+                            TutorialPage -> TutorialPage: changeStep()
+                                TutorialPage -> VermenigvuldigTutorial: refresh(tutorialPage)
+                                    VermenigvuldigTutorial -->> TutorialPage: {finished:., data:., tekst:.}
+                                TutorialPage -> Matrix: drawMatrix(.,.)
+                                TutorialPage -> TutorialPage: updateBeschrijving(.)
+                    end
 
-                   Speler -> localStorage: getItem(naam)
-                   localStorage -->> Speler: data over speler
-                   Speler -> localStorage: setItem("huidige speler", naam)
-
-                   TutorialPage -> localStorage: getItem("selected_button")
-                   localStorage -->> TutorialPage: naam deelsysteem
-
-                   TutorialPage -> Speler: eindTutorialOefening(naam deelsysteem)
-                   Speler -> Speler: saveData()
-                   Speler -> localStorage: setItem(naam, data)
-
-                   TutorialPage -> MainProgram: open Main (stap 2)
-                   activate MainProgram
-                   deactivate MainProgram
                 end
+
+                TutorialPage -> localStorage: getItem("selected_button")
+                    localStorage -->> TutorialPage: naam deelsysteem
+
+                TutorialPage -> TutorialPage: nextTutorial()
+                    TutorialPage -> localStorage: getItem("selected_button")
+                        localStorage -->> TutorialPage: naam deelsysteem
             end
+    end
 
-            TutorialPage -> localStorage: getItem("selected_button")
-            localStorage -->> TutorialPage: naam deelsysteem
-
-            TutorialPage -> TutorialPage: nextTutorial()
-        end
-end
 TutorialPage -> TutorialPage: endTutorial()
+    TutorialPage -> localStorage: getItem("selected_button")
+        localStorage -->> TutorialPage: naam deelsysteem
 
-TutorialPage -> localStorage: getItem("selected_button")
-localStorage -->> TutorialPage: naam deelsysteem
+    TutorialPage -> localStorage: getItem("huidige speler")
+        localStorage -->> TutorialPage: huidige speler
 
-TutorialPage -> localStorage: getItem("huidige speler")
-localStorage -->> TutorialPage: huidige speler
+    TutorialPage -> Speler: new Speler(spelernaam)
+        Speler -> localStorage: getItem(naam)
+            localStorage -->> Speler: data over speler
+        Speler -> localStorage: setItem("huidige speler", naam)
 
-TutorialPage -> Speler: new Speler(spelernaam)
+    TutorialPage -> localStorage: getItem("selected_button")
+        localStorage -->> TutorialPage: naam deelsysteem
 
-Speler -> localStorage: getItem(naam)
-localStorage -->> Speler: data over speler
-Speler -> localStorage: setItem("huidige speler", naam)
+    TutorialPage -> Speler: eindTutorialOefening(naam deelsysteem)
+        Speler -> Speler: saveData()
+            Speler -> localStorage: setItem(naam, data)
 
-TutorialPage -> localStorage: getItem("selected_button")
-localStorage -->> TutorialPage: naam deelsysteem
-
-TutorialPage -> Speler: eindTutorialOefening(naam deelsysteem)
-Speler -> Speler: saveData()
-Speler -> localStorage: setItem(naam, data)
-
-TutorialPage -> localStorage: getItem("selected_button")
-localStorage -->> TutorialPage: naam deelsysteem
+    TutorialPage -> localStorage: getItem("selected_button")
+        localStorage -->> TutorialPage: naam deelsysteem
 
 == Koppeling naar andere pagina ==
 
+opt exit
+   Gebruiker -> TutorialPage: klikt op exit
+   TutorialPage -> TutorialPage: terug()
+       TutorialPage -> localStorage: getItem("huidige speler")
+           localStorage -->> TutorialPage: huidige speler
 
-opt gebruiker kiest voor oefening
-        Gebruiker -> TutorialPage: klikt op oefening
-        TutorialPage -> OefeningPage: open OefeningPage (stap 97)
-        activate OefeningPage
-   else  gebruiker kiest mainPage
-       Gebruiker -> TutorialPage: klikt op Main
-       TutorialPage -> MainProgram: open Main (stap 2)
+       TutorialPage -> Speler: new Speler(spelernaam)
+           Speler -> localStorage: getItem(naam)
+               localStorage -->> Speler: data over speler
+           Speler -> localStorage: setItem("huidige speler", naam)
+
+       TutorialPage -> localStorage: getItem("selected_button")
+           localStorage -->> TutorialPage: naam deelsysteem
+
+       TutorialPage -> Speler: eindTutorialOefening(naam deelsysteem)
+           Speler -> Speler: saveData()
+               Speler -> localStorage: setItem(naam, data)
+
+       TutorialPage -> MainProgram: open Main (Sequentiediagram_startup)
        activate MainProgram
+       deactivate MainProgram
+end
+
+opt gebruiker kiest om naar de oefening te gaan
+    Gebruiker -> TutorialPage: klikt op "laten we beginnen"
+    TutorialPage -> OefeningPage: open OefeningPage (Sequentiediagram_oefeningen)
+    activate OefeningPage
 end
 
 deactivate MainProgram
 deactivate TutorialPage
 deactivate Tutorial
 deactivate VermenigvuldigTutorial
-
-
-
 
 
 

@@ -1,0 +1,105 @@
+@startuml
+autonumber
+
+actor Gebruiker
+participant MainProgram
+participant TutorialPage
+participant Tutorial
+participant VermenigvuldigTutorial
+participant OefeningPage
+participant Oefeningen
+participant VermenigvuldigOefening
+participant Bitcoins
+participant Markov
+participant Matrix
+participant Speler
+participant localStorage
+
+
+
+
+== Startup Program ==
+
+Gebruiker ->  MainProgram: Open Main
+activate MainProgram
+
+MainProgram -> MainProgram: init()
+
+
+== HTML goed genereren ==
+
+MainProgram -> MainProgram: haalKnoppen()
+    MainProgram -> TutorialPage: TutorialPage.alle_beschrijvingen
+        activate TutorialPage
+        TutorialPage-->>MainProgram: returns alle_beschrijvingen
+
+    MainProgram -> OefeningPage: OefeningPage.alle_oefeningen
+        activate OefeningPage
+        OefeningPage-->>MainProgram: returns alle_oefeningen
+
+
+== Speler ==
+
+MainProgram -> localStorage: getItem("huidige speler")
+    localStorage -->> MainProgram: huidige speler
+
+opt geen speler opgeslagen
+        MainProgram -> MainProgram: vraagNaam()
+            MainProgram -> Gebruiker: prompt(naam?)
+            Gebruiker -->> MainProgram: naam
+            MainProgram -> MainProgram: spelerMaken(naam)
+                MainProgram -> Speler: Speler(naam)
+                    activate Speler
+                    Speler -> localStorage: getItem(naam)
+                    activate localStorage
+                    localStorage -->> Speler: data over speler
+                    Speler -> Speler: saveData()
+                        Speler -> localStorage: setItem(naam, data)
+                        Speler -> localStorage: setItem("huidige speler", naam)
+                MainProgram -> Speler: getData()
+                Speler -->> MainProgram: Map<String,boolean>
+            MainProgram -> MainProgram: showDescription()
+
+    else speler bestaat
+        MainProgram -> MainProgram: spelerMaken(huidige speler)
+            MainProgram -> Speler: Speler(huidige speler)
+                Speler -> localStorage: getItem(naam)
+                localStorage -->> Speler: data over speler
+                Speler -> Speler: saveData()
+                    Speler -> localStorage: setItem(naam, data)
+                    Speler -> localStorage: setItem("huidige speler", naam)
+            MainProgram -> Speler: getData()
+            Speler -->> MainProgram: Map<String,boolean>
+end
+
+
+MainProgram -->> MainProgram: generate html page
+
+
+
+== Kies Deelsysteem ==
+
+Gebruiker -> MainProgram: Kiest Deelsysteem
+
+MainProgram -> MainProgram: ListenToKnop(event)
+    MainProgram -> localStorage: setItem("selected_button", naam deelsysteem)
+
+    opt  if deelsysteem is een Tutorial
+            MainProgram -> TutorialPage: open TutorialPage
+            TutorialPage -->> TutorialPage: generate html page (Sequentiediagram_tutorials)
+         else if deelsysteem is een Oefening
+            MainProgram -> OefeningPage: open OefeningPage
+            OefeningPage -->> OefeningPage: generate html page (Sequentiediagram_oefeningen)
+         else if deelsysteem is Bitcoins
+            MainProgram -> Bitcoins: open Bitcoins
+            activate Bitcoins
+            Bitcoins -->> Bitcoins: generate html page (Sequentiediagram_bitcoins)
+         else if deelsysteem is Markov
+            MainProgram -> Markov: open Markov
+            activate Markov
+            Markov -->> Markov: generate html page (Sequentiediagram_markov)
+    end
+deactivate MainProgram
+
+
+@enduml

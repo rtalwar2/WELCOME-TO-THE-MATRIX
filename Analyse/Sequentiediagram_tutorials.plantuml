@@ -1,0 +1,145 @@
+@startuml
+autonumber
+
+actor Gebruiker
+participant MainProgram
+participant TutorialPage
+participant Tutorial
+participant VermenigvuldigTutorial
+participant OefeningPage
+participant Oefeningen
+participant VermenigvuldigOefening
+participant Bitcoins
+participant Markov
+participant Matrix
+participant Speler
+participant localStorage
+
+activate TutorialPage
+activate localStorage
+activate Speler
+
+== Tutorials  ==
+
+TutorialPage -> TutorialPage: init()
+
+TutorialPage -> localStorage: getItem("selected_button")
+    localStorage -->> TutorialPage: naam deelsysteem
+
+TutorialPage -> TutorialPage: startTutorial(naam deelsysteem, 0)
+    opt  if deelsysteem is VermenigvuldigTutorial
+            loop subtutorial
+                TutorialPage -> Matrix: new Matrix(3, 3)
+                    activate Matrix
+                TutorialPage -> Matrix: new Matrix(3, 3)
+
+                TutorialPage -> VermenigvuldigTutorial: new VermenigvuldigTutorial(Matrix1, Matrix2)
+                    activate VermenigvuldigTutorial
+                    VermenigvuldigTutorial -> Tutorial: constructor()
+                        activate Tutorial
+                        Tutorial -->> VermenigvuldigTutorial: constructor
+                    VermenigvuldigTutorial -> Matrix: new Matrix(.,.,"0")
+
+                TutorialPage -> VermenigvuldigTutorial: drawMatrices(tutorialPage)
+
+                loop foreach tutorial.matrices[i]
+                        TutorialPage -> VermenigvuldigTutorial: matrices[i]
+                        VermenigvuldigTutorial -> Tutorial: matrices[i]
+                        Tutorial -->> VermenigvuldigTutorial: matrices[i]
+                        VermenigvuldigTutorial -->> TutorialPage: matrices[i]
+
+                        TutorialPage -> Matrix: drawMatrix(.,.)
+                end
+                TutorialPage -> Matrix: drawMatrix(.,.)
+
+
+                TutorialPage -> TutorialPage: showDescription()
+                    TutorialPage -> localStorage: getItem("selected_button")
+                        localStorage -->> TutorialPage: naam deelsysteem
+                    TutorialPage -> localStorage: getItem("selected_button")
+                        localStorage -->> TutorialPage: naam deelsysteem
+
+                loop while niet laatste stap
+                    opt nextStep
+                        Gebruiker -> TutorialPage: klik op next
+                        TutorialPage -> TutorialPage: ListenToKnop(event)
+                            TutorialPage -> TutorialPage: changeStep()
+                                TutorialPage -> VermenigvuldigTutorial: refresh(tutorialPage)
+                                    VermenigvuldigTutorial -->> TutorialPage: {finished:., data:., tekst:.}
+                                TutorialPage -> Matrix: drawMatrix(.,.)
+                                TutorialPage -> TutorialPage: updateBeschrijving(.)
+                    end
+
+                end
+
+                TutorialPage -> localStorage: getItem("selected_button")
+                    localStorage -->> TutorialPage: naam deelsysteem
+
+                TutorialPage -> TutorialPage: nextTutorial()
+                    TutorialPage -> localStorage: getItem("selected_button")
+                        localStorage -->> TutorialPage: naam deelsysteem
+            end
+    end
+
+TutorialPage -> TutorialPage: endTutorial()
+    TutorialPage -> localStorage: getItem("selected_button")
+        localStorage -->> TutorialPage: naam deelsysteem
+
+    TutorialPage -> localStorage: getItem("huidige speler")
+        localStorage -->> TutorialPage: huidige speler
+
+    TutorialPage -> Speler: new Speler(spelernaam)
+        Speler -> localStorage: getItem(naam)
+            localStorage -->> Speler: data over speler
+        Speler -> localStorage: setItem("huidige speler", naam)
+
+    TutorialPage -> localStorage: getItem("selected_button")
+        localStorage -->> TutorialPage: naam deelsysteem
+
+    TutorialPage -> Speler: eindTutorialOefening(naam deelsysteem)
+        Speler -> Speler: saveData()
+            Speler -> localStorage: setItem(naam, data)
+
+    TutorialPage -> localStorage: getItem("selected_button")
+        localStorage -->> TutorialPage: naam deelsysteem
+
+== Koppeling naar andere pagina ==
+
+opt exit
+   Gebruiker -> TutorialPage: klikt op exit
+   TutorialPage -> TutorialPage: terug()
+       TutorialPage -> localStorage: getItem("huidige speler")
+           localStorage -->> TutorialPage: huidige speler
+
+       TutorialPage -> Speler: new Speler(spelernaam)
+           Speler -> localStorage: getItem(naam)
+               localStorage -->> Speler: data over speler
+           Speler -> localStorage: setItem("huidige speler", naam)
+
+       TutorialPage -> localStorage: getItem("selected_button")
+           localStorage -->> TutorialPage: naam deelsysteem
+
+       TutorialPage -> Speler: eindTutorialOefening(naam deelsysteem)
+           Speler -> Speler: saveData()
+               Speler -> localStorage: setItem(naam, data)
+
+       TutorialPage -> MainProgram: open Main (Sequentiediagram_startup)
+       activate MainProgram
+       deactivate MainProgram
+end
+
+opt gebruiker kiest om naar de oefening te gaan
+    Gebruiker -> TutorialPage: klikt op "laten we beginnen"
+    TutorialPage -> OefeningPage: open OefeningPage (Sequentiediagram_oefeningen)
+    activate OefeningPage
+end
+
+deactivate MainProgram
+deactivate TutorialPage
+deactivate Tutorial
+deactivate VermenigvuldigTutorial
+
+
+
+
+@enduml

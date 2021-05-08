@@ -1,0 +1,97 @@
+@startuml
+autonumber
+
+actor Gebruiker
+participant MainProgram
+participant TutorialPage
+participant Tutorial
+participant VermenigvuldigTutorial
+participant OefeningPage
+participant Oefeningen
+participant VermenigvuldigOefening
+participant Bitcoins
+participant Matrix
+participant Speler
+participant localStorage
+
+
+
+
+== Oefeningen ==
+activate OefeningPage
+
+OefeningPage -> OefeningPage: init()
+OefeningPage -> OefeningPage: new OefeningPage()
+
+OefeningPage -> localStorage: getItem("selected_button")
+localStorage -->> OefeningPage: naam deelsysteem
+
+OefeningPage -> OefeningPage: startOefening(naam deelsysteem)
+opt if deelsysteem is VermenigvuldigOefening
+    OefeningPage -> Matrix: new Matrix(3, 3)
+    OefeningPage -> Matrix: new Matrix(3, 3)
+
+    OefeningPage -> VermenigvuldigOefening: new VermenigvuldigOefening(Matrix1, Matrix2)
+    activate VermenigvuldigOefening
+
+    VermenigvuldigOefening -> Oefeningen: constructor()
+    activate Oefeningen
+    Oefeningen -->> VermenigvuldigOefening: constructor
+
+'    VermenigvuldigOefening -> Matrix: new Matrix(.,.,"0")
+    VermenigvuldigOefening -> Matrix: vermenigvuldigMatrix(.)
+
+    OefeningPage -> VermenigvuldigOefening: maakInvul()
+    VermenigvuldigOefening -> VermenigvuldigOefening: changeInvul()
+
+    loop foreach oefening.matrices[i]
+        OefeningPage -> VermenigvuldigOefening: matrices[i]
+        VermenigvuldigOefening -> Oefeningen: matrices[i]
+        Oefeningen -->> VermenigvuldigOefening: matrices[i]
+        VermenigvuldigOefening -->> OefeningPage: matrices[i]
+
+        OefeningPage -> Matrix: drawMatrix(.)
+    end
+
+    opt check
+       Gebruiker -> OefeningPage: klikt op Check
+       OefeningPage ->  VermenigvuldigOefening: checkOplossing(.)
+
+       VermenigvuldigOefening -> VermenigvuldigOefening: getMatrix()
+       VermenigvuldigOefening -> Matrix: new Matrix(.,.)
+       VermenigvuldigOefening -> VermenigvuldigOefening: correct(.)
+       opt als juist
+            VermenigvuldigOefening -> Gebruiker: alert("goed")
+            else als fout
+            VermenigvuldigOefening -> Gebruiker: alert("slecht")
+       end
+
+    end
+    opt exit
+       Gebruiker -> OefeningPage: klik op exit
+
+       OefeningPage -> OefeningPage: terug()
+
+       OefeningPage -> localStorage: getItem("huidige speler")
+       localStorage -->> OefeningPage: huidige speler
+
+       OefeningPage -> Speler: new Speler(spelernaam)
+
+       Speler -> localStorage: getItem(naam)
+       localStorage -->> Speler: data over speler
+       Speler -> localStorage: setItem("huidige speler", naam)
+
+       OefeningPage -> localStorage: getItem("selected_button")
+       localStorage -->> OefeningPage: naam deelsysteem
+
+       OefeningPage -> Speler: eindTutorialOefening(naam deelsysteem)
+       Speler -> Speler: saveData()
+       Speler -> localStorage: setItem(naam, data)
+
+       OefeningPage -> MainProgram: open Main (stap 2)
+       activate MainProgram
+       deactivate MainProgram
+    end
+end
+
+@enduml

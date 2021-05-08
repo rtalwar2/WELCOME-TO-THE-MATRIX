@@ -8,7 +8,7 @@ skinparam ClassAttributeIconSize 0
 class Matrix{
     + int aantalRijen
     + int aantalKolommen
-    + int [][] matrix {readOnly}
+    + int [][] matrix
     __
     + Matrix(aantalRijen: int=3, aantalKolommen: int=3, fill: String=null)
     ..
@@ -21,11 +21,11 @@ class Matrix{
     + getDeterminant(mat: [][]=this.matrix, n: int=this.aantalRijen): int
     + adjunct(A: [][]=this.matrix, n: int=this.aantalRijen): Matrix
     + getInverse(A: [][]=this.matrix, n: int=this.aantalRijen): {determinant: int, adjunct: Matrix, inverse: Matrix} of false
-    + toSring(): String
+    + toString(): String
 }
 
 class TutorialPage{
-    + Map<naam: String, beschrijvingen: String[]> alle_beschrijvingen
+    + Map<name: String, description: String, uitlegb: String> alle_beschrijvingen
     - Map<naam: String, tutorials: Tutorial[]> tutorials
     - Tutorial tutorial
     - HTML-Tag tabel1
@@ -34,6 +34,8 @@ class TutorialPage{
     - HTML-Tag[] tabellen
     - int tutorialnummer
     __
+    + constructor()
+    ..
     + startTutorial(naam: String, index: int): void
     + updateBeschrijving(tekst: String): void
     + endTutorial(): void
@@ -43,15 +45,22 @@ class TutorialPage{
 
 class OefeningPage{
     + String[] alle_oefeningen
-    + Map<naam: String, beschrijvingen: String> alle_beschrijvingen
-    - Map<naam: String, oefeningen: Oefening> oefeningen
+    + Map<name: String, description: String> alle_beschrijvingen
+    - Map<naam: String, oefeningen: Oefening[]> oefeningen
     - Oefeningen oefening
+    - int oefeningindex
+    - String naam
     - HTML-Tag tabel1
     - HTML-Tag tabel2
     - HTML-Tag tabel3
     - HTML-Tag[] tabellen
     __
+    + constructor()
+    ..
     + startOefening(naam: String): void
+    + checkOefening(): boolean
+    + nextOefening(): void
+    + eindeOefening(): void
 }
 
 
@@ -76,6 +85,7 @@ class VermenigvuldigTutorial{
     - int kolom2
     - int som
     - String tekst
+    - String uitleg
     - Matrix matrix2
     __
     + VermenigvuldigTutorial(m1: Matrix, m2: Matrix)
@@ -107,6 +117,7 @@ class InverseTutorial{
     - Matrix matrix3
     - [] gr
     - [] gk
+    - int det
     __
     + InverseTutorial(m1: Matrix)
     ..
@@ -126,6 +137,7 @@ abstract class Oefeningen{
     ..
     + maakInvul(): Error
     + checkOplossing(): Error
+    + setHint(tekst: String): void
 }
 
 class VermenigvuldigingOefening{
@@ -136,10 +148,9 @@ class VermenigvuldigingOefening{
     ..
     + getMatrix(): Matrix
     + correct(invul: Matrix): boolean
-    + checkOplossing(object: VermenigvuldigingOefening): void
+    + checkOplossing(object: VermenigvuldigingOefening): boolean
     + changeInvul(): void
     + maakInvul(): void
-    + setHint(tekst: String): void
 }
 
 class DeterminantOefening{
@@ -148,16 +159,19 @@ class DeterminantOefening{
     + DeterminantOefening(m1: Matrix)
     ..
     + getOplossing(): int
-    + checkOplossing(object: VermenigvuldigingOefening): void
+    + checkOplossing(object: VermenigvuldigingOefening): boolean
     + maakInvul(): void
+    + fout1(): int
+    + fout2(): int
 }
 
 class InverseOefening{
     - Matrix oplossing
     __
-    + InverseOefening(m1: Matrix)
+    + InverseOefening(m1: Matrix, strikvraag: boolean)
     ..
-    + checkOplossing(object: VermenigvuldigingOefening): void
+    + getOplossing(): String
+    + checkOplossing(object: VermenigvuldigingOefening): boolean
     + maakInvul(): void
     + fout1(): Matrix
     + fout2(): Matrix

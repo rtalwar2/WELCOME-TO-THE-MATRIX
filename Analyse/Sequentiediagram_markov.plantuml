@@ -1,0 +1,21 @@
+@startuml
+autonumber
+
+actor Gebruiker
+participant MainProgram
+participant TutorialPage
+participant Tutorial
+participant VermenigvuldigTutorial
+participant OefeningPage
+participant Oefeningen
+participant VermenigvuldigOefening
+participant Bitcoins
+participant Matrix
+participant Speler
+participant localStorage
+
+
+
+
+
+@enduml
