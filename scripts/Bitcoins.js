@@ -5,6 +5,7 @@ let tijd;
 let encoder;
 let decoder;
 let encoded_key;
+let timer;
 
 let hint_nr = 0;    // aantal keer op hintknop geklikt
 let matrices = [];  // lijst vectoren die waaruit het codewoord bestaat (eerst in letters dan in cijfers)
@@ -20,7 +21,7 @@ let alphabet = ['A', 'B', 'C', 'D', 'E',
     'U', 'V', 'W', 'X', 'Y',
     'Z'];
 
-function showAlfabet_table() {//voor het gemak met innerhtml gedaan maar moet aangepast worden! kan wel op einde wanneer alles klaar is
+function showAlfabet_table() {
 
     let inset_text = `
     <tbody>`
@@ -340,7 +341,7 @@ function showTime() {
     tijd--;
     // console.log(tijd)
     if (tijd == 0) {
-        encoded_key = "andere";//nieuwe key kan random maar moet veelvoud van 3 letters hebben
+        encoded_key = make_encoder_key();//nieuwe key kan random maar moet veelvoud van 3 letters hebben
         document.querySelector("#js_hints").innerText = "";//hints leegmaken
         showData();
         hint_nr = 0;    //alles wat te maken heeft met de hints resetten
@@ -348,13 +349,25 @@ function showTime() {
         n = 0;
         uitleg_hint = "";
         eind_opl = [];
-        tijd = 300;
+        tijd = 30;
     }
 }
+function make_encoder_key() {
+    let result           = [];
+    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let charactersLength = characters.length;
+    for ( var i = 0; i < 6; i++ ) {
+        result.push(characters.charAt(Math.floor(Math.random() *
+            26)));
+    }
+    return result.join('');
+}
+
+console.log(make_encoder_key());
 
 function startTimer() {
-    tijd = 300; //5 minuten
-    setInterval(showTime, 1000);
+    tijd = 30; //5 minuten
+    timer=setInterval(showTime, 1000);
     showData();
     document.querySelector("#hint").disabled = false;
 }
@@ -379,7 +392,7 @@ function init() {
         }
     }
     document.querySelector("#js_input_MMI_calculator").addEventListener("input", ShowMMI);
-    encoded_key = "abcdef";//momenteel hardgecodeerd, kan random worden of iets dat een coole tekst wordt als je het decodeerd
+    encoded_key = make_encoder_key();//momenteel hardgecodeerd, kan random worden of iets dat een coole tekst wordt als je het decodeerd
     showAlfabet_table();    //LET OP: alleen keys kiezen die meervoud van 3 zijn
     document.querySelector("#js_timer_start").addEventListener("click", startTimer);
     //showData();
@@ -395,6 +408,9 @@ function check() {
         window.alert("fout");
     } else if (input === decode()) {
         window.alert("juist");
+        clearInterval(timer);
+        let p = document.querySelector("#js_timer");
+        p.innerText="FEEST! (～￣▽￣)～ "
     } else window.alert("fout");
 }
 
