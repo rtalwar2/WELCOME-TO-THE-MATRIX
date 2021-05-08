@@ -36,3 +36,5 @@ Datum,Start,Einde,Plaats,Omschrijving
 02/05/21,10:00,11:00,Extern,Afspraak met groep
 03/05/21,18:00,22:00,Extern,Markov met plotly verder afwerken
 04/05/21,08:00,10:15,Contacturen,Modal mainpage + markovpage afwerken
+06/05/21,17:00,20:00,Extern,Markov eigen input toevoegen
+07/05/21,21:00,23:00,Extern,Functionaliteit eigen input
