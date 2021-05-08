@@ -20,7 +20,7 @@ export class TutorialPage {
         },
         {
             name: "InverseTutorial",
-            description: "In de lineaire algebra worden er veelvuldig matrices geinverteerd.<br><br> Een n x n-matrix <bold>A</bold> is inverteerbaar, indien er een n x n-matrix <bold>B</bold> bestaat zodanig dat\n" +
+            description: "LET OP: Het is aangeraden om eerst de Determinant tutorial te voltooien voordat met begint aan de inverse tutorial.<br><br>In de lineaire algebra worden er veelvuldig matrices geinverteerd.<br><br> Een n x n-matrix <bold>A</bold> is inverteerbaar, indien er een n x n-matrix <bold>B</bold> bestaat zodanig dat\n" +
                 "\n" +
                 "A*B=B*A=I " +
                 "<br>Hierin is I de eenheidsmatrix van orde n.<br><br> Niet iedere matrix heeft een inverse. Een matrix heeft alleen een inverse als de determinant van de matrix verschillend is van 0. Als de inverse bestaat dan noemt men de matrix inverteerbaar." +

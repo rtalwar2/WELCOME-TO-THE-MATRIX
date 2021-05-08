@@ -75,3 +75,8 @@ canvas {
     position: fixed;
     /*float: right;*/
 }
+@media (max-width: 768px){
+    .row div:first-child{
+        margin-bottom: 1em!important;
+    }
+}

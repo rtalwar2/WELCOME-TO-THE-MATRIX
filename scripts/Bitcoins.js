@@ -353,7 +353,7 @@ function showTime() {
 }
 
 function startTimer() {
-    tijd = 3000; //5 minuten
+    tijd = 300; //5 minuten
     setInterval(showTime, 1000);
     showData();
     document.querySelector("#hint").disabled = false;

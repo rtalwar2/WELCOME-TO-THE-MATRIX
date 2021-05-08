@@ -74,7 +74,6 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
     content.appendChild(button1);
     row.appendChild(content);
     document.querySelector("nav").appendChild(row);
-
 }
 function showDescription() {
     console.log("fhdhdhf")
