@@ -367,7 +367,7 @@ function init() {
         encoder = new Matrix();
         determinant = encoder.getDeterminant();
     }
-    encoder.importMatrix([[6, 24, 1], [13, 16, 10], [20, 17, 15]]);
+    //encoder.importMatrix([[6, 24, 1], [13, 16, 10], [20, 17, 15]]);
     decoder = encoder.getInverse().adjunct;
     for (let i = 0; i < encoder.aantalRijen; i++) {
         for (let j = 0; j < encoder.aantalKolommen; j++) {
