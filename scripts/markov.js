@@ -10,21 +10,41 @@ let alley = [];
 let AANTAL = 100;
 let STAPAANTAL = 30;
 
+
 function init_matrices(){
     //Matrixen aanmaken
-    matrix2.matrix[0][0] = AANTAL;
-    matrix1.importMatrix([[0.8,0.1],[0.2,0.9]]);//hardgecodeerd
 
-    let overgangsmatrix = document.querySelector("#table1");
+    matrix2.matrix[0][0] = AANTAL;
+    let arr=document.querySelector("#table1").querySelectorAll(`[data-id]`);
+    //console.log(arr)
+   // arr.forEach(value => console.log(value.value))
+    console.log("matrix eerst");
+    console.log(matrix1.matrix)
+    let k=0;
+    let r=0;
+    for(let i=0;i<arr.length;i++){
+        matrix1.matrix[r][k]=arr[i].value;
+        k++;
+        if(k==2){
+            r++;k=0;
+        }
+    }
+    console.log("matrix na")
+    console.log(matrix1.matrix)
+    //matrix1.importMatrix([[0.8,0.1],[0.2,0.9]]);//hardgecodeerd
+
+    //let overgangsmatrix = document.querySelector("#table1");
     let toestandsmatrix = document.querySelector("#table2");
 
-    matrix1.drawMatrix(overgangsmatrix,"Overgangsmatrix");
-    matrix2.drawMatrix(toestandsmatrix,"Toestandsmatrix");
+    //matrix1.drawMatrix(overgangsmatrix,"Overgangsmatrix");
+    matrix2.drawMatrix(toestandsmatrix,"Toestandsmatrix (jaar 0)");
 }
 
 
 function init(){
+
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
+    document.querySelectorAll(".inp").forEach(value => value.addEventListener("change",reinitialize));
     init_matrices();
     oplossingcache[0] = matrix2;
     //genereer alle oplossingen
@@ -83,10 +103,10 @@ function init(){
     });
     document.querySelector('#plot').on('plotly_sliderchange',function(e){
         index = parseInt(e.step.label);
-        toonOplossing(oplossingcache[index],oplossingcache[index+1]);
+        toonOplossing(oplossingcache[index],oplossingcache[index+1],index);
         requestAnimationFrame(update);
     });
-    toonOplossing(oplossingcache[0],oplossingcache[1]);
+    toonOplossing(oplossingcache[0],oplossingcache[1],0);
 
     //oplossing invullen
     let oplossing = oplossingcache[AANTAL-1].matrix;
@@ -101,37 +121,25 @@ function init(){
         opltable.appendChild(tr);
     }
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
-    document.getElementById("bereken").addEventListener("click",eigenmatrix);
+    //document.getElementById("bereken").addEventListener("click",eigenmatrix);
 }
 
-function eigenmatrix(){
-
+function reinitialize(event){
+    let input=event.target;
+    let output=document.querySelectorAll(`[data-id='${input.dataset.id}']`)[1];
+    console.log(output)
+    output.value=Math.round( 10-parseFloat(input.value)*10)/10;
+console.log("opnieuw")
+    init_matrices();
+    oplossingcache[0] = matrix2;
+    //genereer alle oplossingen
+    for(let i = 0;i<STAPAANTAL;i++){
+        oplossingcache[i+1] = Vermenigvuldig(oplossingcache[i]);
+        allex[i] = (Math.random())+3;
+        alley[i] = (Math.random()*6)+3;
+    }
 }
 
-function getMatrix() { //gekopieerd van vermenigvuldigoefening
-    let rij = 0;
-    let kolom = 0;
-    let input1=new Matrix(2,1);
-    let teller = 0;
-    //console.log(output)
-    document.querySelectorAll(".matrix_cell").forEach(  value => {
-        if(teller < 4) {
-            //console.log(`kolom= ${kolom}`)
-            if (kolom == 2) {//moet met == ipv === anders werkt het niet
-                rij++;
-                kolom = 0;
-            }
-            console.log(`${value}`);
-            input1.matrix[rij][kolom] = parseInt(value.value);
-            kolom++;
-        }
-        else{
-
-        }
-        teller++;
-    });
-    return output.matrix
-}
 
 function update(){
     bereken();
@@ -164,11 +172,11 @@ function bereken(){
     }
 }
 
-function toonOplossing(matrix1,matrix2){
+function toonOplossing(matrix1,matrix2,beginjaar){
     let toestandsmatrix = document.querySelector("#table2");
-    matrix1.drawMatrix(toestandsmatrix,"Toestandsmatrix");
+    matrix1.drawMatrix(toestandsmatrix,`Toestandsmatrix (jaar ${beginjaar})`);
     let oplossing= document.querySelector("#table3");
-    matrix2.drawMatrix(oplossing,"Oplossing");
+    matrix2.drawMatrix(oplossing,`Oplossing (jaar ${beginjaar+1})`);
 }
 
 function Vermenigvuldig(matrix){
@@ -186,6 +194,8 @@ function terug() {
     speler.eindTutorialOefening(localStorage.getItem("selected_button"));
     window.open("./main.html", "_self");
 }
+
+
 
 let arr=window.location.pathname.split("/");
 if (arr[arr.length-1] === "markov.html") {

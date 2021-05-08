@@ -46,9 +46,14 @@
                                 simuleren. In de toestandmatrix begin je altijd met 100 mensen en 0 zombies en de
                                 oplossings matrix geeft je de toestand van het volgend jaar.
                                 Dus door meerdere matrix verminigvuldigingen achter elkaar uit te voeren kun je zien
-                                waarnaar het system evolueert in de toekomst.</p><br/>
-                            <div class="col-md-3">
-                                <table id="table1"></table>
+                                waarnaar het system evolueert in de toekomst.<i> Een verduidelijking voor de symbolen (Z=zombie,M=mens) in de Overgangsmatrix: M=>M betekend de kans dat een mens het jaar erna nog altijd een mens is.
+                            Z=>M is de kans dat een zombie na een jaar geneest en terug een mens wordt.</i></p><br/>
+                            <div class="col-md-4">
+                                <table id="table1">
+                                    <tr><th colspan="2">Overgangsmatrix</th></tr>
+                                    <tr><td>M=>M<input max="1" min="0" step="0.1" class="inp matrix_cell" data-id="1" type="number" value="0.8"></td><td>Z=>M<input max="1" min="0" step="0.1" class="inp matrix_cell" data-id="2" type="number" value="0.1"></td></tr>
+                                    <tr><td>M=>Z<input class="uitp matrix_cell" data-id="1" type="number" value="0.2" disabled></td><td>Z=>Z<input class="uitp matrix_cell" data-id="2" type="number" value="0.9" disabled></td></tr>
+                                </table>
                             </div>
                             <div class="col-md-3">
                                 <table id="table2"></table>
@@ -58,48 +63,7 @@
                             </div>
                         </div>
                         <div id="plot"></div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p>
-                                    Het systeem nadert naar:
-                                </p>
-                                <table id="oplossing"></table>
-                            </div>
-                            <div class="col-md-12">
-                            <p>Om zelf de uitkomst van een systeem te kunnen voorspellen kan je hier zelf je matrixen
-                                kiezen:</p></div>
-                            <div class="col-md-4">
-                                <table>
-                                    <tr>
-                                        <th>Overgangsmatrix</th>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="text" class="matrix_cell"/></td>
-                                        <td><input type="text" class="matrix_cell"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="text" class="matrix_cell"/></td>
-                                        <td><input type="text" class="matrix_cell"/></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-4">
-                                <table>
-                                    <tr>
-                                        <th>Toestandsmatrix</th>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="matrix_cell"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="matrix_cell"/></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-4">
-                                <table id="oplossing2"></table>
-                            </div>
-                        </div>
+
                         <button id="mainPage" type="button" class="btn btn-outline-success">Exit</button>
                         <button id="bekeren" type="button" class="btn btn-outline-success float-right">Bereken</button>
 
