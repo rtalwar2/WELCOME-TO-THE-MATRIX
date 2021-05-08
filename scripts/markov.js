@@ -10,10 +10,16 @@ let alley = [];
 let AANTAL = 100;
 let STAPAANTAL = 30;
 
-function init_matrices(){
-    //Matrixen aanmaken
+function first_init(){
     matrix2.matrix[0][0] = AANTAL;
     matrix1.importMatrix([[0.8,0.1],[0.2,0.9]]);//hardgecodeerd
+    document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
+    document.getElementById("bereken").addEventListener("click",eigenmatrix);
+
+}
+
+
+function init_matrices(){
 
     let overgangsmatrix = document.querySelector("#table1");
     let toestandsmatrix = document.querySelector("#table2");
@@ -24,7 +30,6 @@ function init_matrices(){
 
 
 function init(){
-    document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
     init_matrices();
     oplossingcache[0] = matrix2;
     //genereer alle oplossingen
@@ -46,6 +51,7 @@ function init(){
             }]
         });
     }
+    Plotly.purge('plot');
     Plotly.newPlot('plot', [{
         x:allex,
         y:alley,
@@ -81,56 +87,51 @@ function init(){
             steps: sliderSteps
         }]
     });
+    toonOplossing(oplossingcache[0],oplossingcache[1]);
+
     document.querySelector('#plot').on('plotly_sliderchange',function(e){
         index = parseInt(e.step.label);
         toonOplossing(oplossingcache[index],oplossingcache[index+1]);
         requestAnimationFrame(update);
     });
-    toonOplossing(oplossingcache[0],oplossingcache[1]);
-
     //oplossing invullen
-    let oplossing = oplossingcache[AANTAL-1].matrix;
+    let oplossing = oplossingcache[AANTAL-1];
     let opltable = document.querySelector("#oplossing");
-    for(let i = 0;i<oplossing.length;i++){
-        let tr = document.createElement("tr");
-        for(let j = 0;j<oplossing[i].length;j++){
-            let td = document.createElement("td");
-            td.innerHTML = oplossing[i][j];
-            tr.appendChild(td);
-        }
-        opltable.appendChild(tr);
-    }
-    document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
-    document.getElementById("bereken").addEventListener("click",eigenmatrix);
+    oplossing.drawMatrix(opltable);
 }
 
 function eigenmatrix(){
-
+    let matrixen = getMatrixen();
+    matrix1 = matrixen[0];
+    matrix2 = matrixen[1];
+    init();
 }
 
-function getMatrix() { //gekopieerd van vermenigvuldigoefening
+function getMatrixen() { //gekopieerd van vermenigvuldigoefening,aangepast (hardgecodeerd) voor deze toepassing
     let rij = 0;
     let kolom = 0;
-    let input1=new Matrix(2,1);
+    let input1=new Matrix(2,2);
+    let input2=new Matrix(2,1);
     let teller = 0;
     //console.log(output)
     document.querySelectorAll(".matrix_cell").forEach(  value => {
         if(teller < 4) {
             //console.log(`kolom= ${kolom}`)
-            if (kolom == 2) {//moet met == ipv === anders werkt het niet
+            if (kolom === 2) {//moet met == ipv === anders werkt het niet
                 rij++;
                 kolom = 0;
             }
-            console.log(`${value}`);
-            input1.matrix[rij][kolom] = parseInt(value.value);
+            console.log("rij:" + rij + " kolom:" + kolom + " teller:"+teller);
+            input1.matrix[rij][kolom] = parseFloat(value.value);
             kolom++;
         }
         else{
-
+            if(teller === 4) input2.matrix[0][0] = parseInt(value.value);
+            if(teller === 5) input2.matrix[1][0] = parseInt(value.value);
         }
         teller++;
     });
-    return output.matrix
+    return [input1,input2]
 }
 
 function update(){
@@ -146,8 +147,6 @@ function update(){
             redraw: false
         }
     });
-    console.log(allex);
-    console.log(alley);
     //promise error komt van te snel te veranderen van index
 }
 
@@ -189,5 +188,6 @@ function terug() {
 
 let arr=window.location.pathname.split("/");
 if (arr[arr.length-1] === "markov.html") {
+    first_init();
     init();
 }

@@ -142,6 +142,14 @@ body{
     margin: 0 auto;
 }
 
+.inputtabletd{
+    width:132px;
+}
+
+input:invalid {
+    border: 3px solid red;
+}
+
 #mainPage{
     margin-right:auto;
 }
