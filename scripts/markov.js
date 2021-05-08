@@ -7,10 +7,12 @@ let oplossingcache = [];
 let index = 0;
 let allex = [];
 let alley = [];
+let AANTAL = 100;
+let STAPAANTAL = 30;
 
 function init_matrices(){
     //Matrixen aanmaken
-    matrix2.matrix[0][0] = 100;
+    matrix2.matrix[0][0] = AANTAL;
     matrix1.importMatrix([[0.8,0.1],[0.2,0.9]]);//hardgecodeerd
 
     let overgangsmatrix = document.querySelector("#table1");
@@ -24,16 +26,16 @@ function init_matrices(){
 function init(){
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
     init_matrices();
-    Vermenigvuldig(matrix2);
     oplossingcache[0] = matrix2;
-    for(let i = 0;i<matrix2.matrix[0][0];i++){
+    //genereer alle oplossingen
+    for(let i = 0;i<AANTAL;i++){
         oplossingcache[i+1] = Vermenigvuldig(oplossingcache[i]);
         allex[i] = (Math.random())+3;
         alley[i] = (Math.random()*6)+3;
     }
-
+    //plotly grafiek aanmaken
     let sliderSteps = [];
-    for(let i = 0; i<50;i++){
+    for(let i = 0; i<STAPAANTAL;i++){
         sliderSteps.push({
             method: 'animate',
             label: i,
@@ -48,7 +50,7 @@ function init(){
         x:allex,
         y:alley,
         mode:'markers',
-        hoverinfo:'skip'
+        hoverinfo:'skip',
     }], {
         title:{
             text:'Mensen                                                            Zombies',
@@ -59,7 +61,7 @@ function init(){
             visible:false
         },
         yaxis:{
-            range:[0,9],
+            range:[2,9.5],
             visible:false
         },
         color:'black',
@@ -80,12 +82,55 @@ function init(){
         }]
     });
     document.querySelector('#plot').on('plotly_sliderchange',function(e){
-        index = e.step.label;
-        toonOplossing(oplossingcache[index]);
+        index = parseInt(e.step.label);
+        toonOplossing(oplossingcache[index],oplossingcache[index+1]);
         requestAnimationFrame(update);
     });
-    toonOplossing(oplossingcache[0]);
+    toonOplossing(oplossingcache[0],oplossingcache[1]);
+
+    //oplossing invullen
+    let oplossing = oplossingcache[AANTAL-1].matrix;
+    let opltable = document.querySelector("#oplossing");
+    for(let i = 0;i<oplossing.length;i++){
+        let tr = document.createElement("tr");
+        for(let j = 0;j<oplossing[i].length;j++){
+            let td = document.createElement("td");
+            td.innerHTML = oplossing[i][j];
+            tr.appendChild(td);
+        }
+        opltable.appendChild(tr);
+    }
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
+    document.getElementById("bereken").addEventListener("click",eigenmatrix);
+}
+
+function eigenmatrix(){
+
+}
+
+function getMatrix() { //gekopieerd van vermenigvuldigoefening
+    let rij = 0;
+    let kolom = 0;
+    let input1=new Matrix(2,1);
+    let teller = 0;
+    //console.log(output)
+    document.querySelectorAll(".matrix_cell").forEach(  value => {
+        if(teller < 4) {
+            //console.log(`kolom= ${kolom}`)
+            if (kolom == 2) {//moet met == ipv === anders werkt het niet
+                rij++;
+                kolom = 0;
+            }
+            console.log(`${value}`);
+            input1.matrix[rij][kolom] = parseInt(value.value);
+            kolom++;
+        }
+        else{
+
+        }
+        teller++;
+    });
+    return output.matrix
 }
 
 function update(){
@@ -101,33 +146,37 @@ function update(){
             redraw: false
         }
     });
+    console.log(allex);
+    console.log(alley);
     //promise error komt van te snel te veranderen van index
 }
 
 function bereken(){
     for(let i = 0;i<matrix2.matrix[0][0];i++){
-        if(i<=oplossingcache[index].matrix[0][0] && allex[i]>4){
+        if(i<=oplossingcache[index].matrix[0][0] && allex[i]>5){
             allex[i] = (Math.random())+3;
             alley[i] = (Math.random()*6)+3;
         }
-        else if(i>oplossingcache[index].matrix[0][0] && allex[i]<4){
+        else if(i>oplossingcache[index].matrix[0][0] && allex[i]<5){
             allex[i] = (Math.random())+7;
             alley[i] = (Math.random()*6)+3;
         }
     }
 }
 
-function toonOplossing(matrix){
+function toonOplossing(matrix1,matrix2){
+    let toestandsmatrix = document.querySelector("#table2");
+    matrix1.drawMatrix(toestandsmatrix,"Toestandsmatrix");
     let oplossing= document.querySelector("#table3");
-    matrix.drawMatrix(oplossing,"Oplossing");
+    matrix2.drawMatrix(oplossing,"Oplossing");
 }
 
 function Vermenigvuldig(matrix){
     let matrix_opl= new Matrix(2,1,0);
     let opl = matrix1.vermenigvuldigMatrix(matrix);
     //hardgecodeerd voor 2x1 af te ronden
-    /*opl[0][0] = Math.round(opl[0][0]*10000)/10000;
-    opl[1][0] = Math.round(opl[1][0]*10000)/10000;*/
+    opl[0][0] = Math.round(opl[0][0]*100)/100;
+    opl[1][0] = Math.round(opl[1][0]*100)/100;
     matrix_opl.importMatrix(opl);
     return matrix_opl;
 }

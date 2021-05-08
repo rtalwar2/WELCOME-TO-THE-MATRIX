@@ -16,7 +16,7 @@ export class TutorialPage {
          //uitlegb in "stap 0"
             name: "TransponeerTutorial",
             description: "Dit is een korte Tutorial die uitlegt hoe je een matrix moet transponeren. <br> De getransponeerde matrix A^t van een matrix A kun je heel eenvoudig berekenen door de rijen van A te schrijven als de kolommen van A^t. Dit wordt wel duidelijk met de tutorial.",
-            uitlegb: "Klik op 'next' om de matrix stap voor stap te transponeren."
+            uitlegb: "Hier geven we een voorbeeld van hoe men een matrix transponeert, stap voor stap.\n\nKlik op 'next' om naar de volgende stap te gaan."
         },
         {
             name: "InverseTutorial",
@@ -27,7 +27,7 @@ export class TutorialPage {
                 "<br><br>Het daadwerkelijk berekenen van de inverse van een matrix kan op verschillende methoden. In deze tutorial wordt de algemene definitie gebruikt om de inverse te berekenen.<br/><br/> A^-1=1/det(A) * adj(A).<br/><br/>" +
                 "Hierin is det(A) de determinant van A en adj(a) de adjunct van A.  <br/><br/> De adjunct van een vierkante matrix kun je verkrijgen door elk element in de matrix te vervangen door zijn corresponderende cofactor en vervolgens de bekomen matrix te transponeren." +
                 "<br/> <br/> In formule: adj(A)[j,i] = (−1)^(i+j) M[i,j] = C[i,j] met M[i,j] de minor van het element a[i,j]<br><br>",
-            uitlegb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti umdoloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam"
+            uitlegb: "Hier geven we een voorbeeld van hoe men de inverse van een matrix berekent, stap voor stap. We berekenen de inverse van matrix1 en gebruiken de kleinere 2x2 matrix als minor.\n\nKlik op 'next' om naar de volgende stap te gaan."
         },
         {
             name: "VermenigvuldigTutorial",
@@ -38,7 +38,7 @@ export class TutorialPage {
                 "Bijvoorbeeld voor matrix <span class='kleur'>A</span> <table><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr></table>" +
                 "en matrix <span class='kleur2'>B</span> <table><tr><td>4</td><td>3</td></tr><tr><td>2</td><td>1</td></tr></table>" +
                 "is het element <span class='kleur3'>(AB)11</span> = <span class='kleur'>1</span>*<span class='kleur2'>4</span> + <span class='kleur'>2</span>*<span class='kleur2'>2</span> = <span class='kleur3'>8</span>",
-            uitlegb: "Als we de bewerking matrix1 * matrix2 stap voor stap uitvoeren dan bouwen we de oplossing in de productmatrix.\n\nKlik op 'next' om naar de volgende stap te gaan."
+            uitlegb: "Hier geven we een voorbeeld van hoe men de inverse van een matrix berekent, stap voor stap. We berekenen de vermenigvuldiging matrix1 * matrix2 en bouwen de oplossing in de productmatrix.\n\nKlik op 'next' om naar de volgende stap te gaan."
         },
         {
             name: "DeterminantTutorial",
