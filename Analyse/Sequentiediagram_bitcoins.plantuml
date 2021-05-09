@@ -3,111 +3,142 @@ autonumber
 
 actor Gebruiker
 participant MainProgram
-participant TutorialPage
-participant Tutorial
-participant VermenigvuldigTutorial
-participant OefeningPage
-participant Oefeningen
-participant VermenigvuldigOefening
 participant Bitcoins
 participant Matrix
 participant Speler
 participant localStorage
 
+activate MainProgram
+activate Matrix
+activate Speler
+activate localStorage
 
 ==Bitcoin-wallet==
-Gebruiker -> MainProgram: klik op toepassing1
+
+Gebruiker -> MainProgram: klik op "Crack the wallet"
 MainProgram -> Bitcoins: Open Bitcoins
+deactivate MainProgram
 activate Bitcoins
 
 Bitcoins -> Bitcoins: init()
+
 Bitcoins -> Matrix: new Matrix()
 Bitcoins -> Matrix: getDeterminant()
-Matrix -->> Bitcoins: returns determinant
-Bitcoins -> Matrix: importMatrix()
+    Matrix -->> Bitcoins: returns determinant
 Bitcoins -> Matrix: getInverse()
-Matrix -->> Bitcoins: returns {determinant, adjunct, inverse}
+    Matrix -->> Bitcoins: returns {determinant, adjunct, inverse}
 Bitcoins -> Matrix: getDeterminant()
-Matrix -->> Bitcoins: returns determinant
-
+    Matrix -->> Bitcoins: returns determinant
 Bitcoins -> Bitcoins: modInverse()
+Bitcoins -> Bitcoins: make_encoder_key()
 Bitcoins -> Bitcoins: showAlfabet_table()
-
 
 
 opt MMI calculator
     Gebruiker -> Bitcoins: vult determinant in
     Bitcoins -> Bitcoins: ShowMMI()
-    Bitcoins -> Bitcoins: modInverse()
-
+        Bitcoins -> Bitcoins: modInverse()
 end
 
 opt Start toepassing
     Gebruiker -> Bitcoins: klik op Start
     Bitcoins -> Bitcoins: startTimer()
-    Bitcoins -> Bitcoins: showTime()
-    opt if time = 0
-        Bitcoins -> Bitcoins: showData()
-        Bitcoins -> Matrix: drawMatrix()
-    end
-    Bitcoins -> Bitcoins: showData()
-    Bitcoins -> Matrix: drawMatrix()
-
-    opt hint
-        Gebruiker -> Bitcoins: klik op hint
-        Bitcoins -> Bitcoins: hint()
-        opt hint_nr = 1
-                Bitcoins -> Bitcoins: hint_init()
-                Bitcoins -> Bitcoins: hint1()
-                Bitcoins -> Matrix: new Matrix(3,1)
-                Bitcoins -> Matrix: drawMatrix()
-                Bitcoins -> Bitcoins: hint_uitleg()
-            else hint_nr = 2
-                Bitcoins -> Bitcoins: hint2()
-                Bitcoins -> Matrix: drawMatrix()
-            else hint_nr = 3
-                Bitcoins -> Bitcoins: hint3()
-            else hint_nr = 4
-                Bitcoins -> Bitcoins: hint4()
-                Bitcoins -> Matrix: drawMatrix()
-            else hint_nr <= 4 + (matrices.length*4)
-                loop voor het aantal vectoren (lengte codewoord /3)
-                    opt ((hint_nr-4)%4 ===  1)
-                            opt niet eerste keer loop
-                                Bitcoins -> Bitcoins: terug4()
-                                Bitcoins -> Matrix: drawMatrix()
-                            end
-                            Bitcoins -> Bitcoins: hint5(n)  (n = aantal keer loop)
-                            Bitcoins -> Matrix: drawMatrix()
-                        else ((hint_nr-4)%4 ===  2)
-                            Bitcoins -> Bitcoins: hint6(n)
-                            Bitcoins -> Matrix: new Matrix(3,1)
-                            Bitcoins -> Matrix: vermenigvuldigMatrix(.)
-                            Matrix -->> Bitcoins: returns [.][.]
-                            Bitcoins -> Matrix: importMatrix()
-                            Bitcoins -> Matrix: drawMatrix()
-                        else ((hint_nr-4)%4 ===  3)
-                            Bitcoins -> Bitcoins: hint7(n)
-                            Bitcoins -> Matrix: copyMatrix()
-                            Matrix -> Matrix: new Matrix(.,.)
-                            Matrix -->> Bitcoins: returns copy
-                            Bitcoins -> Matrix: drawMatrix()
-                            Bitcoins -> Matrix: drawMatrix()
-                        else ((hint_nr-4)%4 ===  0)
-                            Bitcoins -> Bitcoins: hint8(n)
-                            Bitcoins -> Matrix: new Matrix(3,1)
-                            Bitcoins -> Matrix: drawMatrix()
-                            Bitcoins -> Matrix: drawMatrix()
-                    end
-                end
-            else hint_nr > 4 + (matrices.length * 4)
-                Bitcoins -> Bitcoins: hint9()
+        Bitcoins -> Bitcoins: showTime()
+        opt if time = 0
+            Bitcoins -> Bitcoins: make_encoder_key()
+            Bitcoins -> Bitcoins: showData()
+                Bitcoins -> Matrix: drawMatrix(.,.)
         end
-    end
+        Bitcoins -> Bitcoins: showData()
+            Bitcoins -> Matrix: drawMatrix()
+
+
+        opt hint
+            Gebruiker -> Bitcoins: klik op hint
+            Bitcoins -> Bitcoins: hint()
+            opt hint_nr = 1
+                    Bitcoins -> Bitcoins: hint_init()
+                        Bitcoins -> Bitcoins: hint_uitleg()
+                    Bitcoins -> Bitcoins: hint1()
+                        Bitcoins -> Matrix: new Matrix(3,1)
+                        Bitcoins -> Matrix: drawMatrix()
+                else hint_nr = 2
+                    Bitcoins -> Bitcoins: hint2()
+                        Bitcoins -> Matrix: drawMatrix()
+                else hint_nr = 3
+                    Bitcoins -> Bitcoins: hint3()
+                else hint_nr = 4
+                    Bitcoins -> Bitcoins: hint4()
+                        Bitcoins -> Matrix: drawMatrix()
+                else hint_nr <= 4 + (matrices.length*4)
+                    loop voor het aantal vectoren (lengte codewoord /3)
+                        opt ((hint_nr-4)%4 ===  1)
+                                opt niet eerste keer loop
+                                    Bitcoins -> Bitcoins: terug4()
+                                        Bitcoins -> Matrix: drawMatrix()
+                                end
+                                Bitcoins -> Bitcoins: hint5(n)  (n = aantal keer loop)
+                                    Bitcoins -> Matrix: drawMatrix()
+                            else ((hint_nr-4)%4 ===  2)
+                                Bitcoins -> Bitcoins: hint6(n)
+                                    Bitcoins -> Matrix: new Matrix(3,1)
+                                    Bitcoins -> Matrix: vermenigvuldigMatrix(.)
+                                        Matrix -->> Bitcoins: returns [.][.]
+                                    Bitcoins -> Matrix: importMatrix()
+                                    Bitcoins -> Matrix: drawMatrix()
+                            else ((hint_nr-4)%4 ===  3)
+                                Bitcoins -> Bitcoins: hint7(n)
+                                    Bitcoins -> Matrix: copyMatrix()
+                                        Matrix -> Matrix: new Matrix(.,.)
+                                        Matrix -->> Bitcoins: returns copy
+                                    Bitcoins -> Matrix: drawMatrix()
+                                    Bitcoins -> Matrix: drawMatrix()
+                            else ((hint_nr-4)%4 ===  0)
+                                Bitcoins -> Bitcoins: hint8(n)
+                                    Bitcoins -> Matrix: new Matrix(3,1)
+                                    Bitcoins -> Matrix: drawMatrix()
+                                    Bitcoins -> Matrix: drawMatrix()
+                        end
+                    end
+                else hint_nr > 4 + (matrices.length * 4)
+                    Bitcoins -> Bitcoins: hint9()
+            end
+        end
+
+
+        opt passwoord cotroleren
+            Gebruiker -> Bitcoins: vult passwoord in en drukt op "open wallet"
+            Bitcoins -> Bitcoins: check()
+                Bitcoins -> Bitcoins: decode()
+                    Bitcoins -> Bitcoins: hint()    (opt hint tot einde)
+                    Bitcoins -> Bitcoins: hint()    (opt hint tot vorige positie)
+        end
+
+
+        opt exit
+               Gebruiker -> Bitcoins: klik op exit
+               Bitcoins -> Bitcoins: terug()
+                   Bitcoins -> localStorage: getItem("huidige speler")
+                       localStorage -->> Bitcoins: huidige speler
+
+                   Bitcoins -> Speler: new Speler(spelernaam)
+                       Speler -> localStorage: getItem(naam)
+                           localStorage -->> Speler: data over speler
+                       Speler -> localStorage: setItem("huidige speler", naam)
+
+                   Bitcoins -> localStorage: getItem("selected_button")
+                       localStorage -->> Bitcoins: naam deelsysteem
+
+                   Bitcoins -> Speler: eindTutorialOefening(naam deelsysteem)
+                       Speler -> Speler: saveData()
+                           Speler -> localStorage: setItem(naam, data)
+
+                   Bitcoins -> MainProgram: open Main (Sequentiediagram_startup)
+                   deactivate Bitcoins
+                   activate MainProgram
+            end
 end
 
-opt passwoord cotroleren
-    Gebruiker -> Bitcoins: vult passwoord in en drukt op "open wallet"
-end
+
 
 @enduml

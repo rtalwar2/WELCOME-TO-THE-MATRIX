@@ -7,19 +7,21 @@ participant TutorialPage
 participant Tutorial
 participant VermenigvuldigTutorial
 participant OefeningPage
-participant Oefeningen
-participant VermenigvuldigOefening
-participant Bitcoins
-participant Markov
 participant Matrix
 participant Speler
 participant localStorage
 
-activate TutorialPage
-activate localStorage
+activate MainProgram
+activate Matrix
 activate Speler
+activate localStorage
+
 
 == Tutorials  ==
+Gebruiker -> MainProgram: klik op een tutorial
+MainProgram -> TutorialPage: Open TutorialPage
+deactivate MainProgram
+activate TutorialPage
 
 TutorialPage -> TutorialPage: init()
 
@@ -30,7 +32,6 @@ TutorialPage -> TutorialPage: startTutorial(naam deelsysteem, 0)
     opt  if deelsysteem is VermenigvuldigTutorial
             loop subtutorial
                 TutorialPage -> Matrix: new Matrix(3, 3)
-                    activate Matrix
                 TutorialPage -> Matrix: new Matrix(3, 3)
 
                 TutorialPage -> VermenigvuldigTutorial: new VermenigvuldigTutorial(Matrix1, Matrix2)

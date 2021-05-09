@@ -3,19 +3,83 @@ autonumber
 
 actor Gebruiker
 participant MainProgram
-participant TutorialPage
-participant Tutorial
-participant VermenigvuldigTutorial
-participant OefeningPage
-participant Oefeningen
-participant VermenigvuldigOefening
-participant Bitcoins
+participant Markov
 participant Matrix
 participant Speler
 participant localStorage
 
+activate MainProgram
+activate Matrix
+activate Speler
+activate localStorage
 
 
+==Markov==
+
+Gebruiker -> MainProgram: klik op "Zombie simulatie"
+MainProgram -> Markov: Open Markov
+deactivate MainProgram
+activate Markov
+Markov -> Matrix: new Matrix(2,2,0)
+Markov -> Matrix: new Matrix(2,1,0)
+Markov -> Markov: init()
+Markov -> Markov: init_matrices()
+    Markov -> Matrix: drawMatrix(.,.)
+Markov -> Markov: Vermenigvuldig(.)
+    Markov -> Matrix: new Matrix(2,1,0)
+    Markov -> Matrix: vermenigvuldigMatrix(.)
+        Matrix -->> Markov: Matrix
+    Markov -> Matrix: importMatrix(.)
+        Matrix -->> Markov: []
+opt slider
+    Gebruiker -> Markov: veranderd slider
+    Markov -> Markov: toonOplossing(.,.,.)
+        Markov -> Matrix: drawMatrix(.,.)
+        Markov -> Matrix: drawMatrix(.,.)
+    Markov -> Markov: update()
+        Markov -> Markov: bereken()
+end
+Markov -> Markov: toonOplossing(.,.,.)
+    Markov -> Matrix: drawMatrix(.,.)
+    Markov -> Matrix: drawMatrix(.,.)
+Markov -> Matrix: drawMatrix(.,.)
+
+
+opt overgangsmatrix veranderen
+    Gebruiker -> Markov: veranderd overgangsmatrix
+    Markov -> Markov: reinitialize()
+        Markov -> Markov: init_matrices()
+            Markov -> Matrix: drawMatrix(.,.)
+        Markov -> Markov: Vermenigvuldig(.)
+            Markov -> Matrix: new Matrix(2,1,0)
+            Markov -> Matrix: vermenigvuldigMatrix(.)
+                Matrix -->> Markov: Matrix
+            Markov -> Matrix: importMatrix(.)
+                Matrix -->> Markov: []
+end
+
+opt exit
+   Gebruiker -> Markov: klik op exit
+   Markov -> Markov: terug()
+       Markov -> localStorage: getItem("huidige speler")
+           localStorage -->> Markov: huidige speler
+
+       Markov -> Speler: new Speler(spelernaam)
+           Speler -> localStorage: getItem(naam)
+               localStorage -->> Speler: data over speler
+           Speler -> localStorage: setItem("huidige speler", naam)
+
+       Markov -> localStorage: getItem("selected_button")
+           localStorage -->> Markov: naam deelsysteem
+
+       Markov -> Speler: eindTutorialOefening(naam deelsysteem)
+           Speler -> Speler: saveData()
+               Speler -> localStorage: setItem(naam, data)
+
+       Markov -> MainProgram: open Main (Sequentiediagram_startup)
+       deactivate Markov
+       activate MainProgram
+end
 
 
 @enduml

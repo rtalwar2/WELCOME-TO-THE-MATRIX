@@ -41,6 +41,7 @@ MainProgram -> MainProgram: haalKnoppen()
 == Speler ==
 
 MainProgram -> localStorage: getItem("huidige speler")
+    activate localStorage
     localStorage -->> MainProgram: huidige speler
 
 opt geen speler opgeslagen
@@ -51,7 +52,6 @@ opt geen speler opgeslagen
                 MainProgram -> Speler: Speler(naam)
                     activate Speler
                     Speler -> localStorage: getItem(naam)
-                    activate localStorage
                     localStorage -->> Speler: data over speler
                     Speler -> Speler: saveData()
                         Speler -> localStorage: setItem(naam, data)
@@ -234,7 +234,7 @@ OefeningPage -> OefeningPage: init()
 OefeningPage -> OefeningPage: new OefeningPage()
 
 OefeningPage -> localStorage: getItem("selected_button")
-localStorage -->> OefeningPage: naam deelsysteem
+    localStorage -->> OefeningPage: naam deelsysteem
 
 OefeningPage -> OefeningPage: startOefening(naam deelsysteem)
 opt if deelsysteem is VermenigvuldigOefening
@@ -242,23 +242,21 @@ opt if deelsysteem is VermenigvuldigOefening
     OefeningPage -> Matrix: new Matrix(3, 3)
 
     OefeningPage -> VermenigvuldigOefening: new VermenigvuldigOefening(Matrix1, Matrix2)
-    activate VermenigvuldigOefening
-
-    VermenigvuldigOefening -> Oefeningen: constructor()
-    activate Oefeningen
-    Oefeningen -->> VermenigvuldigOefening: constructor
-
-'    VermenigvuldigOefening -> Matrix: new Matrix(.,.,"0")
-    VermenigvuldigOefening -> Matrix: vermenigvuldigMatrix(.)
+        activate VermenigvuldigOefening
+        VermenigvuldigOefening -> Oefeningen: constructor()
+            activate Oefeningen
+            Oefeningen -->> VermenigvuldigOefening: constructor
+        VermenigvuldigOefening -> Matrix: vermenigvuldigMatrix(.)
 
     OefeningPage -> VermenigvuldigOefening: maakInvul()
-    VermenigvuldigOefening -> VermenigvuldigOefening: changeInvul()
+        VermenigvuldigOefening -> VermenigvuldigOefening: changeInvul()
+        VermenigvuldigOefening -> Oefeningen: setHint(.)
 
     loop foreach oefening.matrices[i]
         OefeningPage -> VermenigvuldigOefening: matrices[i]
-        VermenigvuldigOefening -> Oefeningen: matrices[i]
-        Oefeningen -->> VermenigvuldigOefening: matrices[i]
-        VermenigvuldigOefening -->> OefeningPage: matrices[i]
+            VermenigvuldigOefening -> Oefeningen: matrices[i]
+                Oefeningen -->> VermenigvuldigOefening: matrices[i]
+            VermenigvuldigOefening -->> OefeningPage: matrices[i]
 
         OefeningPage -> Matrix: drawMatrix(.)
     end
@@ -266,141 +264,234 @@ opt if deelsysteem is VermenigvuldigOefening
     opt check
        Gebruiker -> OefeningPage: klikt op Check
        OefeningPage ->  VermenigvuldigOefening: checkOplossing(.)
-
-       VermenigvuldigOefening -> VermenigvuldigOefening: getMatrix()
-       VermenigvuldigOefening -> Matrix: new Matrix(.,.)
-       VermenigvuldigOefening -> VermenigvuldigOefening: correct(.)
-       opt als juist
-            VermenigvuldigOefening -> Gebruiker: alert("goed")
-            else als fout
-            VermenigvuldigOefening -> Gebruiker: alert("slecht")
-       end
-
+           VermenigvuldigOefening -> VermenigvuldigOefening: getMatrix()
+               VermenigvuldigOefening -> Matrix: new Matrix(.,.)
+           VermenigvuldigOefening -> VermenigvuldigOefening: correct(.)
+               opt als juist
+                        VermenigvuldigOefening -> Gebruiker: alert("goed")
+                    else als fout
+                        VermenigvuldigOefening -> Gebruiker: alert("slecht")
+               end
     end
+
     opt exit
        Gebruiker -> OefeningPage: klik op exit
-
        OefeningPage -> OefeningPage: terug()
+           OefeningPage -> localStorage: getItem("huidige speler")
+               localStorage -->> OefeningPage: huidige speler
 
-       OefeningPage -> localStorage: getItem("huidige speler")
-       localStorage -->> OefeningPage: huidige speler
+           OefeningPage -> Speler: new Speler(spelernaam)
+               Speler -> localStorage: getItem(naam)
+                   localStorage -->> Speler: data over speler
+               Speler -> localStorage: setItem("huidige speler", naam)
 
-       OefeningPage -> Speler: new Speler(spelernaam)
+           OefeningPage -> localStorage: getItem("selected_button")
+               localStorage -->> OefeningPage: naam deelsysteem
 
-       Speler -> localStorage: getItem(naam)
-       localStorage -->> Speler: data over speler
-       Speler -> localStorage: setItem("huidige speler", naam)
+           OefeningPage -> Speler: eindTutorialOefening(naam deelsysteem)
+               Speler -> Speler: saveData()
+                   Speler -> localStorage: setItem(naam, data)
 
-       OefeningPage -> localStorage: getItem("selected_button")
-       localStorage -->> OefeningPage: naam deelsysteem
-
-       OefeningPage -> Speler: eindTutorialOefening(naam deelsysteem)
-       Speler -> Speler: saveData()
-       Speler -> localStorage: setItem(naam, data)
-
-       OefeningPage -> MainProgram: open Main (stap 2)
-       activate MainProgram
-       deactivate MainProgram
+           OefeningPage -> MainProgram: open Main (Sequentiediagram_startup)
+           activate MainProgram
+           deactivate MainProgram
     end
 end
 
 
 
 ==Bitcoin-wallet==
-Gebruiker -> MainProgram: klik op toepassing1
+
+Gebruiker -> MainProgram: klik op "Crack the wallet"
 MainProgram -> Bitcoins: Open Bitcoins
 activate Bitcoins
 
 Bitcoins -> Bitcoins: init()
+
 Bitcoins -> Matrix: new Matrix()
 Bitcoins -> Matrix: getDeterminant()
-Matrix -->> Bitcoins: returns determinant
-Bitcoins -> Matrix: importMatrix()
+    Matrix -->> Bitcoins: returns determinant
 Bitcoins -> Matrix: getInverse()
-Matrix -->> Bitcoins: returns {determinant, adjunct, inverse}
+    Matrix -->> Bitcoins: returns {determinant, adjunct, inverse}
 Bitcoins -> Matrix: getDeterminant()
-Matrix -->> Bitcoins: returns determinant
-
+    Matrix -->> Bitcoins: returns determinant
 Bitcoins -> Bitcoins: modInverse()
+Bitcoins -> Bitcoins: make_encoder_key()
 Bitcoins -> Bitcoins: showAlfabet_table()
-
 
 
 opt MMI calculator
     Gebruiker -> Bitcoins: vult determinant in
     Bitcoins -> Bitcoins: ShowMMI()
-    Bitcoins -> Bitcoins: modInverse()
-
+        Bitcoins -> Bitcoins: modInverse()
 end
 
 opt Start toepassing
     Gebruiker -> Bitcoins: klik op Start
     Bitcoins -> Bitcoins: startTimer()
-    Bitcoins -> Bitcoins: showTime()
-    opt if time = 0
-        Bitcoins -> Bitcoins: showData()
-        Bitcoins -> Matrix: drawMatrix()
-    end
-    Bitcoins -> Bitcoins: showData()
-    Bitcoins -> Matrix: drawMatrix()
-
-    opt hint
-        Gebruiker -> Bitcoins: klik op hint
-        Bitcoins -> Bitcoins: hint()
-        opt hint_nr = 1
-                Bitcoins -> Bitcoins: hint_init()
-                Bitcoins -> Bitcoins: hint1()
-                Bitcoins -> Matrix: new Matrix(3,1)
-                Bitcoins -> Matrix: drawMatrix()
-                Bitcoins -> Bitcoins: hint_uitleg()
-            else hint_nr = 2
-                Bitcoins -> Bitcoins: hint2()
-                Bitcoins -> Matrix: drawMatrix()
-            else hint_nr = 3
-                Bitcoins -> Bitcoins: hint3()
-            else hint_nr = 4
-                Bitcoins -> Bitcoins: hint4()
-                Bitcoins -> Matrix: drawMatrix()
-            else hint_nr <= 4 + (matrices.length*4)
-                loop voor het aantal vectoren (lengte codewoord /3)
-                    opt ((hint_nr-4)%4 ===  1)
-                            opt niet eerste keer loop
-                                Bitcoins -> Bitcoins: terug4()
-                                Bitcoins -> Matrix: drawMatrix()
-                            end
-                            Bitcoins -> Bitcoins: hint5(n)  (n = aantal keer loop)
-                            Bitcoins -> Matrix: drawMatrix()
-                        else ((hint_nr-4)%4 ===  2)
-                            Bitcoins -> Bitcoins: hint6(n)
-                            Bitcoins -> Matrix: new Matrix(3,1)
-                            Bitcoins -> Matrix: vermenigvuldigMatrix(.)
-                            Matrix -->> Bitcoins: returns [.][.]
-                            Bitcoins -> Matrix: importMatrix()
-                            Bitcoins -> Matrix: drawMatrix()
-                        else ((hint_nr-4)%4 ===  3)
-                            Bitcoins -> Bitcoins: hint7(n)
-                            Bitcoins -> Matrix: copyMatrix()
-                            Matrix -> Matrix: new Matrix(.,.)
-                            Matrix -->> Bitcoins: returns copy
-                            Bitcoins -> Matrix: drawMatrix()
-                            Bitcoins -> Matrix: drawMatrix()
-                        else ((hint_nr-4)%4 ===  0)
-                            Bitcoins -> Bitcoins: hint8(n)
-                            Bitcoins -> Matrix: new Matrix(3,1)
-                            Bitcoins -> Matrix: drawMatrix()
-                            Bitcoins -> Matrix: drawMatrix()
-                    end
-                end
-            else hint_nr > 4 + (matrices.length * 4)
-                Bitcoins -> Bitcoins: hint9()
+        Bitcoins -> Bitcoins: showTime()
+        opt if time = 0
+            Bitcoins -> Bitcoins: make_encoder_key()
+            Bitcoins -> Bitcoins: showData()
+                Bitcoins -> Matrix: drawMatrix(.,.)
         end
-    end
+        Bitcoins -> Bitcoins: showData()
+            Bitcoins -> Matrix: drawMatrix()
+
+
+        opt hint
+            Gebruiker -> Bitcoins: klik op hint
+            Bitcoins -> Bitcoins: hint()
+            opt hint_nr = 1
+                    Bitcoins -> Bitcoins: hint_init()
+                        Bitcoins -> Bitcoins: hint_uitleg()
+                    Bitcoins -> Bitcoins: hint1()
+                        Bitcoins -> Matrix: new Matrix(3,1)
+                        Bitcoins -> Matrix: drawMatrix()
+                else hint_nr = 2
+                    Bitcoins -> Bitcoins: hint2()
+                        Bitcoins -> Matrix: drawMatrix()
+                else hint_nr = 3
+                    Bitcoins -> Bitcoins: hint3()
+                else hint_nr = 4
+                    Bitcoins -> Bitcoins: hint4()
+                        Bitcoins -> Matrix: drawMatrix()
+                else hint_nr <= 4 + (matrices.length*4)
+                    loop voor het aantal vectoren (lengte codewoord /3)
+                        opt ((hint_nr-4)%4 ===  1)
+                                opt niet eerste keer loop
+                                    Bitcoins -> Bitcoins: terug4()
+                                        Bitcoins -> Matrix: drawMatrix()
+                                end
+                                Bitcoins -> Bitcoins: hint5(n)  (n = aantal keer loop)
+                                    Bitcoins -> Matrix: drawMatrix()
+                            else ((hint_nr-4)%4 ===  2)
+                                Bitcoins -> Bitcoins: hint6(n)
+                                    Bitcoins -> Matrix: new Matrix(3,1)
+                                    Bitcoins -> Matrix: vermenigvuldigMatrix(.)
+                                        Matrix -->> Bitcoins: returns [.][.]
+                                    Bitcoins -> Matrix: importMatrix()
+                                    Bitcoins -> Matrix: drawMatrix()
+                            else ((hint_nr-4)%4 ===  3)
+                                Bitcoins -> Bitcoins: hint7(n)
+                                    Bitcoins -> Matrix: copyMatrix()
+                                        Matrix -> Matrix: new Matrix(.,.)
+                                        Matrix -->> Bitcoins: returns copy
+                                    Bitcoins -> Matrix: drawMatrix()
+                                    Bitcoins -> Matrix: drawMatrix()
+                            else ((hint_nr-4)%4 ===  0)
+                                Bitcoins -> Bitcoins: hint8(n)
+                                    Bitcoins -> Matrix: new Matrix(3,1)
+                                    Bitcoins -> Matrix: drawMatrix()
+                                    Bitcoins -> Matrix: drawMatrix()
+                        end
+                    end
+                else hint_nr > 4 + (matrices.length * 4)
+                    Bitcoins -> Bitcoins: hint9()
+            end
+        end
+
+
+        opt passwoord cotroleren
+            Gebruiker -> Bitcoins: vult passwoord in en drukt op "open wallet"
+            Bitcoins -> Bitcoins: check()
+                Bitcoins -> Bitcoins: decode()
+                    Bitcoins -> Bitcoins: hint()    (opt hint tot einde)
+                    Bitcoins -> Bitcoins: hint()    (opt hint tot vorige positie)
+        end
+
+
+        opt exit
+               Gebruiker -> Bitcoins: klik op exit
+               Bitcoins -> Bitcoins: terug()
+                   Bitcoins -> localStorage: getItem("huidige speler")
+                       localStorage -->> Bitcoins: huidige speler
+
+                   Bitcoins -> Speler: new Speler(spelernaam)
+                       Speler -> localStorage: getItem(naam)
+                           localStorage -->> Speler: data over speler
+                       Speler -> localStorage: setItem("huidige speler", naam)
+
+                   Bitcoins -> localStorage: getItem("selected_button")
+                       localStorage -->> Bitcoins: naam deelsysteem
+
+                   Bitcoins -> Speler: eindTutorialOefening(naam deelsysteem)
+                       Speler -> Speler: saveData()
+                           Speler -> localStorage: setItem(naam, data)
+
+                   Bitcoins -> MainProgram: open Main (Sequentiediagram_startup)
+                   activate MainProgram
+                   deactivate MainProgram
+            end
 end
 
-opt passwoord cotroleren
-    Gebruiker -> Bitcoins: vult passwoord in en drukt op "open wallet"
+
+
+==Markov==
+
+Gebruiker -> MainProgram: klik op "Zombie simulatie"
+MainProgram -> Markov: Open Markov
+activate Markov
+Markov -> Matrix: new Matrix(2,2,0)
+Markov -> Matrix: new Matrix(2,1,0)
+Markov -> Markov: init()
+Markov -> Markov: init_matrices()
+    Markov -> Matrix: drawMatrix(.,.)
+Markov -> Markov: Vermenigvuldig(.)
+    Markov -> Matrix: new Matrix(2,1,0)
+    Markov -> Matrix: vermenigvuldigMatrix(.)
+        Matrix -->> Markov: Matrix
+    Markov -> Matrix: importMatrix(.)
+        Matrix -->> Markov: []
+opt slider
+    Gebruiker -> Markov: veranderd slider
+    Markov -> Markov: toonOplossing(.,.,.)
+        Markov -> Matrix: drawMatrix(.,.)
+        Markov -> Matrix: drawMatrix(.,.)
+    Markov -> Markov: update()
+        Markov -> Markov: bereken()
+end
+Markov -> Markov: toonOplossing(.,.,.)
+    Markov -> Matrix: drawMatrix(.,.)
+    Markov -> Matrix: drawMatrix(.,.)
+Markov -> Matrix: drawMatrix(.,.)
+
+
+opt overgangsmatrix veranderen
+    Gebruiker -> Markov: veranderd overgangsmatrix
+    Markov -> Markov: reinitialize()
+        Markov -> Markov: init_matrices()
+            Markov -> Matrix: drawMatrix(.,.)
+        Markov -> Markov: Vermenigvuldig(.)
+            Markov -> Matrix: new Matrix(2,1,0)
+            Markov -> Matrix: vermenigvuldigMatrix(.)
+                Matrix -->> Markov: Matrix
+            Markov -> Matrix: importMatrix(.)
+                Matrix -->> Markov: []
 end
 
+opt exit
+   Gebruiker -> Markov: klik op exit
+   Markov -> Markov: terug()
+       Markov -> localStorage: getItem("huidige speler")
+           localStorage -->> Markov: huidige speler
+
+       Markov -> Speler: new Speler(spelernaam)
+           Speler -> localStorage: getItem(naam)
+               localStorage -->> Speler: data over speler
+           Speler -> localStorage: setItem("huidige speler", naam)
+
+       Markov -> localStorage: getItem("selected_button")
+           localStorage -->> Markov: naam deelsysteem
+
+       Markov -> Speler: eindTutorialOefening(naam deelsysteem)
+           Speler -> Speler: saveData()
+               Speler -> localStorage: setItem(naam, data)
+
+       Markov -> MainProgram: open Main (Sequentiediagram_startup)
+       activate MainProgram
+       deactivate MainProgram
+end
 
 ==einde programma==
 
@@ -412,6 +503,7 @@ deactivate OefeningPage
 deactivate Oefeningen
 deactivate VermenigvuldigOefening
 deactivate Bitcoins
+deactivate Markov
 deactivate Matrix
 deactivate Speler
 deactivate localStorage
