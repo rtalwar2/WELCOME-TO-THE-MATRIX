@@ -119,7 +119,7 @@ function spelerMaken(naamSpeler) {
 }
 
 function vraagNaam() {
-    let naamSpeler = window.prompt("Naam?");
+    let naamSpeler = window.prompt("Naam:");
     spelerMaken(naamSpeler);
     showDescription();
 }

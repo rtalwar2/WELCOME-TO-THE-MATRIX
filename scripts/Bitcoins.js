@@ -366,7 +366,7 @@ function make_encoder_key() {
 console.log(make_encoder_key());
 
 function startTimer() {
-    tijd = 30; //5 minuten
+    tijd = 300; //5 minuten
     timer=setInterval(showTime, 1000);
     showData();
     document.querySelector("#hint").disabled = false;
