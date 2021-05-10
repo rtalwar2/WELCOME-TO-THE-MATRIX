@@ -108,10 +108,7 @@ function init(){
         requestAnimationFrame(update);
     });
     toonOplossing(oplossingcache[0],oplossingcache[1],0);
-    //oplossing invullen
-    let oplossing = oplossingcache[AANTAL-1];
-    let opltable = document.querySelector("#oplossing");
-    oplossing.drawMatrix(opltable);
+
 }
 
 function reinitialize(event){
