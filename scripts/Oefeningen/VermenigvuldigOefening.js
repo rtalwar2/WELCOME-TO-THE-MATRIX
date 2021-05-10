@@ -193,10 +193,10 @@ export class VermenigvuldigOefening extends Oefeningen {
                 tr2.appendChild(td2);
                 table2.appendChild(tr2);
             }
+            div.innerText=hint;
             div.appendChild(table1);
             div.appendChild(table2);
-            this.setHint(div);
-
+            //this.setHint(div);
         }
         else {
             div.innerHTML = "kan je deze matrices wel vermenigvuldigen? indien niet, antwoord dan met een 1*1 matrix met waarde 0";
