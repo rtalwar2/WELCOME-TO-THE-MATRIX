@@ -61,7 +61,7 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
         document.querySelector("nav").appendChild(row);
     }
     console.log(alle_teksten)
-    let lengte=Math.round(alle_teksten.length / 2)
+    let lengte = Math.round(alle_teksten.length / 2)
     let row = document.createElement("div");//wel een PROBLEEM bij oneven aantal knoppen
     row.classList.add("row");
     let content = document.createElement("div");
@@ -69,21 +69,23 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
     let button1 = document.createElement("button");
     button1.type = "button";
     button1.classList.add(...["btn", "btn-outline-success"]);
-    button1.innerText = alle_teksten[lengte-1];
-    button1.id = alle_teksten[lengte-1];
+    button1.innerText = alle_teksten[lengte - 1];
+    button1.id = alle_teksten[lengte - 1];
     content.appendChild(button1);
     row.appendChild(content);
     document.querySelector("nav").appendChild(row);
 }
+
 function showDescription() {
     console.log("fhdhdhf")
     //in de modal de juiste beschijving steken ze worden opgehaald uit JSON alle_beschrijvingen van TutorialPage klasse
-   // document.querySelector(".modal-body").innerText = "bob";
+    // document.querySelector(".modal-body").innerText = "bob";
     //in de modal juiste titel plaatsen
-   // document.querySelector("#exampleModalLabel").innerText = "jggkghkg"
+    // document.querySelector("#exampleModalLabel").innerText = "jggkghkg"
     //er zit een onzichtbare knop in de html die moet worden aangeklikt om de modal dte doen verschijnen, ik heb het niet zonder knop kunnen doen
     document.querySelector("#init_modal").click();
 }
+
 function init() {
     haalKnoppen();
 
@@ -120,6 +122,9 @@ function spelerMaken(naamSpeler) {
 
 function vraagNaam() {
     let naamSpeler = window.prompt("Naam:");
+    if (naamSpeler == null || naamSpeler=="") {
+        naamSpeler = "Anonymus";
+    }
     spelerMaken(naamSpeler);
     showDescription();
 }
