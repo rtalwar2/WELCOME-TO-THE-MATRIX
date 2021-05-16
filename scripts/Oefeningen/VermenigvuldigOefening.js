@@ -4,7 +4,6 @@ import Matrix from "../Matrix.js";
 
 export class VermenigvuldigOefening extends Oefeningen {
 
-    oplossing;
     matrix2;
 
     constructor(m1, m2) {

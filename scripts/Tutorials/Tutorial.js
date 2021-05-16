@@ -2,7 +2,6 @@ import Matrix from "../Matrix.js"
 
 export class Tutorial {
     stapnummer;
-    matrix;
     aantal_matrices;
     matrix1;//matrix waarmee de tutorial begint
     data; //van vorm {finished:boolean,data:een matrix, tekst:"de best passende beschrijving bij de huidige bewerking"} wordt teruggegeven door refresh methode
@@ -18,7 +17,7 @@ export class Tutorial {
         this.matrix1 = m1;
     }
 
-    refresh(stapnummer) {
+    refresh(tutorialPage) {
         throw new Error("Method 'refresh()' must be implemented.");
     }
 

@@ -4,11 +4,9 @@ import Matrix from "../Matrix.js";
 
 export class DeterminantOefening extends Oefeningen {
 
-    oplossing;
 
     constructor(m1) {
         super(m1);
-        this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, "0");
         this.matrices.push(this.matrix1);
         console.log(m1);
         this.oplossing = m1.getDeterminant();

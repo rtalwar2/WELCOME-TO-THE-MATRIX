@@ -4,8 +4,7 @@ import Matrix from "../Matrix.js";
 export class Oefeningen {
     matrix1;
     aantal_matrices;
-    data;
-    finished= false;
+    oplossing;
     matrices = [];
 
 

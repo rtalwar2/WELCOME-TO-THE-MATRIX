@@ -4,7 +4,6 @@ import Matrix from "../Matrix.js";
 
 export class InverseOefening extends Oefeningen {
 
-    oplossing;
 
     constructor(m1, strikvraag = false) {
         if (strikvraag) {
@@ -17,7 +16,6 @@ export class InverseOefening extends Oefeningen {
             }
         }
         super(m1);
-        this.data = new Matrix(m1.aantalRijen, m1.aantalKolommen, "0");
         this.matrices.push(this.matrix1);
         this.strikvraag = strikvraag;
         this.oplossing = m1.getInverse();
