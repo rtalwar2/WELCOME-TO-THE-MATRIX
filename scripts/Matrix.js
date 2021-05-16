@@ -1,10 +1,7 @@
 export default class Matrix {
-    // constructor(aantalRijen, aantalKolommen){ een klasse mag maar 1 constructor hebben blijkaar
-    //     this.aantalRijen = aantalRijen;
-    //     this.aantalKolommen = aantalKolommen;
-    //     this.matrix = [aantalRijen][aantalKolommen];
-    // }
-
+    aantalRijen;
+    aantalKolommen;
+    matrix;
 
     constructor(aantalRijen = 3, aantalKolommen = 3, fill = null) {
         this.aantalRijen = aantalRijen;

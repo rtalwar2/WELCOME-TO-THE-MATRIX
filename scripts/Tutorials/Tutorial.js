@@ -2,11 +2,9 @@ import Matrix from "../Matrix.js"
 
 export class Tutorial {
     stapnummer;
-    matrix;
     aantal_matrices;
     matrix1;//matrix waarmee de tutorial begint
     data; //van vorm {finished:boolean,data:een matrix, tekst:"de best passende beschrijving bij de huidige bewerking"} wordt teruggegeven door refresh methode
-    finished = false;
     rij1 = 0;
     kolom1 = -1;
     matrices = [];

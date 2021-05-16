@@ -5,7 +5,6 @@ export class Oefeningen {
     matrix1;
     aantal_matrices;
     data;
-    finished= false;
     matrices = [];
 
 

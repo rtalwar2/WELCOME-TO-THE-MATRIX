@@ -66,11 +66,9 @@ class OefeningPage{
 
 abstract class Tutorial{
     - int stapNummer
-    - Matrix matrix
     - int antal_matrices
     - Matrix matrix1
     - Matrix data
-    - boolean finished
     - int rij1
     - int kolom1
     - Matrix[] matrices
@@ -140,15 +138,15 @@ abstract class Oefeningen{
     + setHint(tekst: String): void
 }
 
-class VermenigvuldigingOefening{
+class VermenigvuldigOefening{
     - Matrix oplossing
     - Matrix matrix2
     __
-    + VermenigvuldigingOefening(m1: Matrix, m2: Matrix)
+    + VermenigvuldigOefening(m1: Matrix, m2: Matrix)
     ..
     + getMatrix(): Matrix
     + correct(invul: Matrix): boolean
-    + checkOplossing(object: VermenigvuldigingOefening): boolean
+    + checkOplossing(object: VermenigvuldigOefening): boolean
     + changeInvul(): void
     + maakInvul(): void
 }
@@ -159,7 +157,7 @@ class DeterminantOefening{
     + DeterminantOefening(m1: Matrix)
     ..
     + getOplossing(): int
-    + checkOplossing(object: VermenigvuldigingOefening): boolean
+    + checkOplossing(object: DeterminantOefening): boolean
     + maakInvul(): void
     + fout1(): int
     + fout2(): int
@@ -171,7 +169,7 @@ class InverseOefening{
     + InverseOefening(m1: Matrix, strikvraag: boolean)
     ..
     + getOplossing(): String
-    + checkOplossing(object: VermenigvuldigingOefening): boolean
+    + checkOplossing(object: InverseOefening): boolean
     + maakInvul(): void
     + fout1(): Matrix
     + fout2(): Matrix
@@ -191,11 +189,11 @@ class Speler{
 
 
 
-Oefeningen <|-- VermenigvuldigingOefening
+Oefeningen <|-- VermenigvuldigOefening
 Oefeningen <|-- DeterminantOefening
 Oefeningen <|-- InverseOefening
 
-Matrix "*" <- Oefeningen  :genereert matrices
+Matrix "*" -o Oefeningen
 Tutorial o- "*" Matrix
 
 TutorialPage  o- Tutorial
