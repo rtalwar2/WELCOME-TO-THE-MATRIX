@@ -144,7 +144,7 @@ export default class Matrix {
         return temp;
     }
 
-    getDeterminant(mat = this.matrix, n = this.aantalRijen) { //tijdelijk enkel voor 3x3 matrixen, groter gaat ander algoritme gebruiken, dit kan ook efficienter(recursief)
+    getDeterminant(mat = this.matrix, n = this.aantalRijen) {
         let D = 0; // Initialize result
         // Base case : if matrix contains single
         // element
@@ -155,7 +155,7 @@ export default class Matrix {
         let temp;
 
         // To store sign multiplier
-        let sign = 1; //meegegeven aan constructor zodat je bij determinantoefening snel een verkeersde oplossing kan bedenken toch niet
+        let sign = 1;
 
         // Iterate for each element of first row
         for (let f = 0; f < n; f++) {

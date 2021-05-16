@@ -13,7 +13,7 @@ let tijdelijk;      // tijdelijke variabele om vorige versie vector op te slaan
 let n = 0;          // duidt aan welke vector nu verwerkt wordt
 let uitleg_hint;    // uitleg dat per hint getoond wordt
 let eind_opl = [];  // lijst letters eindoplossing
-let einde_hints = false
+let einde_hints = false;
 let alphabet = ['A', 'B', 'C', 'D', 'E',
     'F', 'G', 'H', 'I', 'J',
     'K', 'L', 'M', 'N', 'O',
@@ -210,7 +210,7 @@ function hint6(n) {
     div.appendChild(t_matrixn);
 
     let opl = new Matrix(3, 1);
-    let array = decoder.vermenigvuldigMatrix(matrices[n - 1]);      // Werkt niet ?
+    let array = decoder.vermenigvuldigMatrix(matrices[n - 1]);
     opl.importMatrix(array);
 
     tijdelijk = opl;
@@ -339,7 +339,6 @@ function showTime() {
     let sec = tijd - min * 60;
     p.innerText = `${min}:${sec}`;
     tijd--;
-    // console.log(tijd)
     if (tijd == 0) {
         encoded_key = make_encoder_key();//nieuwe key kan random maar moet veelvoud van 3 letters hebben
         document.querySelector("#js_hints").innerText = "";//hints leegmaken
@@ -355,7 +354,6 @@ function showTime() {
 function make_encoder_key() {
     let result           = [];
     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let charactersLength = characters.length;
     for ( var i = 0; i < 6; i++ ) {
         result.push(characters.charAt(Math.floor(Math.random() *
             26)));
@@ -380,7 +378,6 @@ function init() {
         encoder = new Matrix();
         determinant = encoder.getDeterminant();
     }
-    //encoder.importMatrix([[6, 24, 1], [13, 16, 10], [20, 17, 15]]);
     decoder = encoder.getInverse().adjunct;
     for (let i = 0; i < encoder.aantalRijen; i++) {
         for (let j = 0; j < encoder.aantalKolommen; j++) {
@@ -395,7 +392,6 @@ function init() {
     encoded_key = make_encoder_key();//momenteel hardgecodeerd, kan random worden of iets dat een coole tekst wordt als je het decodeerd
     showAlfabet_table();    //LET OP: alleen keys kiezen die meervoud van 3 zijn
     document.querySelector("#js_timer_start").addEventListener("click", startTimer);
-    //showData();
     document.getElementById("js_open").addEventListener("click", check);
     document.getElementById("hint").addEventListener("click", hint);
     document.getElementById("mainPage").addEventListener("click", terug);//eventlistener voor exit knop
@@ -429,7 +425,7 @@ function decode() {
     n = 0;
     uitleg_hint = "";
     eind_opl = [];
-    einde_hints = false
+    einde_hints = false;
     let hint_knop = document.querySelector("#hint");
     hint_knop.disabled = false;
     hint_knop.innerText = "Hint";
