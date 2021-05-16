@@ -69,7 +69,7 @@ abstract class Tutorial{
     - int antal_matrices
     - Matrix matrix1
     - Matrix data
-    - finished
+    - boolean finished
     - int rij1
     - int kolom1
     - Matrix[] matrices
