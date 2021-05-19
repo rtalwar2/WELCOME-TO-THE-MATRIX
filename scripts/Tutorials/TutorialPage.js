@@ -1,9 +1,8 @@
 import Matrix from "../Matrix.js";
-import {Tutorial} from "./Tutorial.js";
 import {VermenigvuldigTutorial} from "./VermenigvuldigTutorial.js";
 import {TransponeerTutorial} from "./TransponeerTutorial.js";
 import {InverseTutorial} from "./InverseTutorial.js";
-
+import {Tutorial} from "./Tutorial.js";
 import {Speler} from "../Speler.js";
 import {DeterminantTutorial} from "./DeterminantTutorial.js";
 import {VermenigvuldigOefening} from "../Oefeningen/VermenigvuldigOefening.js";
@@ -98,16 +97,6 @@ export class TutorialPage {
         document.querySelector("p").innerHTML = tekst;
     }
 
-    // startOefening() {
-    //     console.log("joepie");
-    //     if (localStorage.getItem("selected_button").toString().contains("main")){
-    //         window.open("./main.html", "_self");
-    //     }
-    //     else {
-    //         window.open("./OefeningPage.html", "_self");
-    //     }
-    // }
-
     endTutorial() {//past de modal aan en laat hem verschijnen
         if (localStorage.getItem("selected_button") === "TransponeerTutorial"){
             document.querySelector(".modal-body").innerText = "Tutorial afgewerkt!";
@@ -136,7 +125,6 @@ export class TutorialPage {
         $("#js_modalbutton").unbind();
         $( "#js_modalbutton" ).click(function () {
             localStorage.setItem("selected_button", oef);
-            console.log("joepie");
             if (oef.includes("main")){
                 window.open("./main.html", "_self");
             }
@@ -144,16 +132,6 @@ export class TutorialPage {
                 window.open("./OefeningPage.html", "_self");
             }
         });
-        // let knop = document.querySelector("#js_modalbutton");
-        // console.log(knop);
-        // knop.addEventListener("hover",this.startOefening);
-        // knop.addEventListener("click",this.startOefening);
-        // console.log(knop);
-        //console.log(tp);
-        // if(confirm("Ben je klaar voor de oefening?")){
-        //     console.log(tp);
-        //     this.startOefening();//HELP ME please!!!
-        // }
     }
 
     nextTutorial() {

@@ -17,10 +17,6 @@ function init_matrices(){
 
     matrix2.matrix[0][0] = AANTAL;
     let arr=document.querySelector("#table1").querySelectorAll(`[data-id]`);
-    //console.log(arr)
-    // arr.forEach(value => console.log(value.value))
-    console.log("matrix eerst");
-    console.log(matrix1.matrix);
     let k=0;
     let r=0;
     for(let i=0;i<arr.length;i++){
@@ -30,14 +26,7 @@ function init_matrices(){
             r++;k=0;
         }
     }
-    console.log("matrix na");
-    console.log(matrix1.matrix);
-    //matrix1.importMatrix([[0.8,0.1],[0.2,0.9]]);//hardgecodeerd
-
-    //let overgangsmatrix = document.querySelector("#table1");
     let toestandsmatrix = document.querySelector("#table2");
-
-    //matrix1.drawMatrix(overgangsmatrix,"Overgangsmatrix");
     matrix2.drawMatrix(toestandsmatrix,"Toestandsmatrix (jaar 0)");
 }
 
@@ -114,9 +103,7 @@ function init(){
 function reinitialize(event){
     let input=event.target;
     let output=document.querySelectorAll(`[data-id='${input.dataset.id}']`)[1];
-    console.log(output);
     output.value=Math.round( 10-parseFloat(input.value)*10)/10;
-    console.log("opnieuw");
     init_matrices();
     oplossingcache[0] = matrix2;
     //genereer alle oplossingen

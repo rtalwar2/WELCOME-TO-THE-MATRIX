@@ -60,8 +60,7 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
         // </div>`
         document.querySelector("nav").appendChild(row);
     }
-    console.log(alle_teksten)
-    let lengte = Math.round(alle_teksten.length / 2)
+    let lengte = Math.round(alle_teksten.length / 2);
     let row = document.createElement("div");//wel een PROBLEEM bij oneven aantal knoppen
     row.classList.add("row");
     let content = document.createElement("div");
@@ -77,12 +76,6 @@ function haalKnoppen() {//de namen van de knoppen ophalen uit de TutorialPage en
 }
 
 function showDescription() {
-    console.log("fhdhdhf")
-    //in de modal de juiste beschijving steken ze worden opgehaald uit JSON alle_beschrijvingen van TutorialPage klasse
-    // document.querySelector(".modal-body").innerText = "bob";
-    //in de modal juiste titel plaatsen
-    // document.querySelector("#exampleModalLabel").innerText = "jggkghkg"
-    //er zit een onzichtbare knop in de html die moet worden aangeklikt om de modal dte doen verschijnen, ik heb het niet zonder knop kunnen doen
     document.querySelector("#init_modal").click();
 }
 
@@ -97,10 +90,7 @@ function init() {
     }
 
     document.querySelector("#account").addEventListener("click", vraagNaam);
-    document.querySelectorAll("button").forEach(value => value.addEventListener("click", ListenToKnop))
-    //een aale knoppen eventlistener ListenToKnop toegevoegd
-    // let speler = new Speler(localStorage.getItem("huidige speler"));
-    // dataSpeler = speler.getData();
+    document.querySelectorAll("button").forEach(value => value.addEventListener("click", ListenToKnop));
 }
 
 let dataSpeler;     // Map met gemaakte oefeningen/tutorials
@@ -108,7 +98,6 @@ let dataSpeler;     // Map met gemaakte oefeningen/tutorials
 function spelerMaken(naamSpeler) {
     let speler = new Speler(naamSpeler);
     dataSpeler = speler.getData();
-    console.log(dataSpeler);
     document.querySelectorAll("button").forEach(value => value.classList.remove("btn-outline-finished"))
     for (let key in dataSpeler) {
         let data = document.getElementById(key);

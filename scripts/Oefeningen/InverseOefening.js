@@ -39,10 +39,6 @@ export class InverseOefening extends Oefeningen {
 
 
     checkOplossing(object) {
-
-        // let obj = object;
-        // console.log("hff")
-        // console.log(obj)
         let invul = object.getOplossing();
 
         let bool = false;
@@ -54,41 +50,10 @@ export class InverseOefening extends Oefeningen {
 
             }
         }
-        // console.log(invul);
-        // console.log(this.oplossing.adjunct.matrix);
-        // let bool = true;
-        // // for (let i = 0; i < this.oplossing.adjunct.aantalRijen; i++) {
-        // //     for (let j = 0; j < this.oplossing.adjunct.aantalKolommen; j++) {
-        // //         if (invul.adjunct.matrix[i][j] !== this.oplossing.adjunct.matrix[i][j]) {
-        // //             bool = false;
-        // //         }
-        // //     }
-        // // }
         return bool;
     }
 
     maakInvul() {
-
-        //let kiesnummers = [1,2,3];
-        // let volgorde = [];
-        // //let kiesnummer = kiesnummers[Math.floor(Math.random()*2)];
-        // //kiesnummers.splice(kiesnummer-1, 1);
-        // volgorde[0] = this.oplossing;
-        // let valseOplossing1 = this.fout1();
-        // //kiesnummer = kiesnummers[Math.floor(Math.random())];
-        // //kiesnummers.splice(kiesnummer-1,1);
-        // volgorde[1] = valseOplossing1;
-        // let valseOplossing2 = this.fout2();
-        // //kiesnummer = kiesnummers[0];
-        // volgorde[2] = valseOplossing2;
-        // console.log(volgorde);
-        /*for (let i = volgorde.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            let temp = volgorde[i];
-            volgorde[i] = volgorde[j];
-            volgorde[j] = temp;
-        }*/
-
         let volgorde_nieuw = [{data: this.oplossing, isOplossing: "oplossing"}, {
             data: this.fout1(),
             isOplossing: "fout"
@@ -126,7 +91,7 @@ export class InverseOefening extends Oefeningen {
   <label class="form-check-label" for="flexRadioDefault1">
     Default radio
   </label>
-</div>`
+</div>`;
         //hint aanmaken
         let div = document.createElement("div");
         let hint = "inv(A) = adj(A)/det(A) met adj(A) = ";
@@ -168,7 +133,6 @@ export class InverseOefening extends Oefeningen {
         this.fout.inverse = new Matrix(this.oplossing.inverse.aantalKolommen, this.oplossing.inverse.aantalKolommen);
         let hulp = JSON.parse(JSON.stringify(this.oplossing.adjunct));
         let hulpinv = JSON.parse(JSON.stringify(this.oplossing.inverse));
-        console.log(this.oplossing)
         for (let i = 0; i < this.matrix1.aantalRijen; i++) {
             for (let j = 0; j < this.matrix1.aantalKolommen; j++) {
                 this.fout.adjunct.matrix[i][j] = hulp.matrix[i][j] * (-1);

@@ -99,7 +99,7 @@ export class InverseTutorial extends Tutorial {
             this.data = this.matrix3.getTransponneerde();
             let tabel2 = document.querySelector("#tabel_m2");   //Determinant tonen
             this.matrix2.drawMatrix(tabel2,"\"adjunct\"");
-            hoofdingData = "adjunct"
+            hoofdingData = "adjunct";
             this.tekst = "nu nog delen door determinant matrix1"
 
         }else if (this.stapnummer === 12){
@@ -111,7 +111,6 @@ export class InverseTutorial extends Tutorial {
                     this.data.matrix[i][j]+=`/${this.matrix1.getDeterminant()}`;
                 }
             }
-            //this.data = this.matrix1.getInverse().inverse;
             this.tekst = "adjunct delen door determinant matrix1 \nDet = " + this.det;
             hoofdingData = "Inverse";
             this.finished = true;

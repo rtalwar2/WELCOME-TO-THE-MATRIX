@@ -8,7 +8,6 @@ export class DeterminantOefening extends Oefeningen {
     constructor(m1) {
         super(m1);
         this.matrices.push(this.matrix1);
-        console.log(m1);
         this.oplossing = m1.getDeterminant();
         this.aantal_matrices = this.matrices.length;
     }
@@ -28,23 +27,6 @@ export class DeterminantOefening extends Oefeningen {
     }
 
     maakInvul() {
-        //volgorde random kiezen
-        // let kiesnummers = [1,2,3];
-        // let volgorde = [];
-        // let kiesnummer = kiesnummers[Math.floor(Math.random()*2)];
-        // kiesnummers.splice(kiesnummer-1, 1);
-        // volgorde[kiesnummer] = this.oplossing;
-        // let valseOplossing1 = this.oplossing + Math.floor(Math.random() * 10 - 5); //random getallen als valse oplossing
-        // kiesnummer = kiesnummers[Math.floor(Math.random())];
-        // kiesnummers.splice(kiesnummer-1,1);
-        // volgorde[kiesnummer] = valseOplossing1;
-        // let valseOplossing2 = this.oplossing + Math.floor(Math.random() * 10 - 5); //random getallen als valse oplossing +5 of -5 max
-        // kiesnummer = kiesnummers[0];
-        // volgorde[kiesnummer] = valseOplossing2;
-        //+Math.floor(this.oplossing*((Math.random()%0.2)+2))
-        //this.oplossing*-1+Math.floor(Math.random() * 10) - 5
-        console.log("Oplossing  " + this.oplossing);
-        console.log("Matrix 1 " + this.matrix1.matrix);
         let eerste_fout = this.fout1();
         let tweede_fout = this.fout2();
         while (eerste_fout === this.oplossing || tweede_fout === this.oplossing || eerste_fout === tweede_fout) {
@@ -52,12 +34,10 @@ export class DeterminantOefening extends Oefeningen {
             this.matrix1 = new Matrix();
             this.matrices.push(this.matrix1);
             this.oplossing = this.matrix1.getDeterminant();
-            console.log("Matrix 2 " + this.matrix1.matrix);
-            console.log("nieuwe matrix " + this.oplossing);
             eerste_fout = this.fout1();
             tweede_fout = this.fout2();
         }
-        let volgorde
+        let volgorde;
         if (!isNaN(this.oplossing)) {
             volgorde = [{data: this.oplossing, isOplossing: true}, {
                 data: eerste_fout,
@@ -76,7 +56,6 @@ export class DeterminantOefening extends Oefeningen {
             }];
         }
         volgorde = volgorde.sort((a, b) => 0.5 - Math.random());
-        console.log(volgorde);
         let form = document.getElementById("frm");
 
         //clear invul van vorige oefening
@@ -112,10 +91,7 @@ export class DeterminantOefening extends Oefeningen {
             p.innerText = "de determinant is enkel gedefinieerd voor een vierkante matrix";
             div.appendChild(p);
         } else {
-            console.log("de matrix is")
-            console.log(this.matrix1.matrix)
             let hint_inhoud="";
-            // let sign="+";
             for(let k=0;k<this.matrix1.aantalKolommen;k++){
                 let data = new Matrix(this.matrix1.aantalKolommen-1, this.matrix1.aantalRijen-1,"0");
                 let i=0;
@@ -134,47 +110,6 @@ export class DeterminantOefening extends Oefeningen {
                 hint_inhoud+=`${k%2?" -":" +"} (${this.matrix1.matrix[0][k]}) * ${data.toString()}`
             }
             div.innerHTML=hint_inhoud;
-
-            // let hint = "+ (" + this.matrix1.matrix[0][0] + ") * ";
-            // let table = document.createElement("table");
-            // for (let i = 0; i < 2; i++) {
-            //     let tr = document.createElement("tr");
-            //     let td1 = document.createElement("td");
-            //     td1.innerHTML = this.matrix1.matrix[1 + i][1];
-            //     tr.appendChild(td1);
-            //     let td2 = document.createElement("td");
-            //     td2.innerHTML = this.matrix1.matrix[1 + i][2];
-            //     tr.appendChild(td2);
-            //     table.appendChild(tr);
-            // }
-            // div.innerHTML = hint;
-            // div.appendChild(table);
-            // div.innerHTML += "- (" + this.matrix1.matrix[0][1] + ") * ";
-            // let table1 = document.createElement("table");
-            // for (let i = 0; i < 2; i++) {
-            //     let tr = document.createElement("tr");
-            //     let td1 = document.createElement("td");
-            //     td1.innerHTML = this.matrix1.matrix[1 + i][0];
-            //     tr.appendChild(td1);
-            //     let td2 = document.createElement("td");
-            //     td2.innerHTML = this.matrix1.matrix[1 + i][2];
-            //     tr.appendChild(td2);
-            //     table1.appendChild(tr);
-            // }
-            // div.append(table1);
-            // div.innerHTML += "+ (" + this.matrix1.matrix[0][2] + ") * ";
-            // let table2 = document.createElement("table");
-            // for (let i = 0; i < 2; i++) {
-            //     let tr = document.createElement("tr");
-            //     let td1 = document.createElement("td");
-            //     td1.innerHTML = this.matrix1.matrix[1 + i][0];
-            //     tr.appendChild(td1);
-            //     let td2 = document.createElement("td");
-            //     td2.innerHTML = this.matrix1.matrix[1 + i][1];
-            //     tr.appendChild(td2);
-            //     table2.appendChild(tr);
-            // }
-            // div.append(table2);
         }
         this.setHint(div)
     }
@@ -203,7 +138,6 @@ export class DeterminantOefening extends Oefeningen {
             // alternate sign
             sign = -sign;
         }
-        console.log("Fout1  " + D);
         return D;
     }
 
@@ -229,7 +163,6 @@ export class DeterminantOefening extends Oefeningen {
             // terms are to be added with
             // alternate sign
         }
-        console.log("Fout2  " + D);
         return D;
     }
 

@@ -24,7 +24,6 @@ export class OefeningPage {
 
     static oefeningen = {//alle soorten oefeningen
         "VermenigvuldigOefening": [new VermenigvuldigOefening(new Matrix(3, 3), new Matrix(3, 3)), new VermenigvuldigOefening(new Matrix(3,2),new Matrix(3,2))],
-        //"TransponeerOefening":Object,
         "InverseOefening": [new InverseOefening(new Matrix(2,2),true),new InverseOefening(new Matrix(2,2),true),new InverseOefening(new Matrix(3,3))],
         "DeterminantOefening": [new DeterminantOefening(new Matrix(2, 2)),new DeterminantOefening(new Matrix(3,3)),new DeterminantOefening(new Matrix(3, 2))]
     };
@@ -87,8 +86,6 @@ function init() {
     oef = new OefeningPage();
     document.getElementById("header").innerText= OefeningPage.alle_beschrijvingen.find(value => value.name === localStorage.getItem("selected_button")).name;
     oef.startOefening(localStorage.getItem("selected_button"));//uit localstorage de juiste Oefening ophalen en starten
-    //showDescription();//laat modal met juiste beschijving van de tutorial verschijnen
-    //document.querySelector("#next_step").addEventListener("click", ListenToKnop);//eventlistener voor next knop
     document.querySelector(".modal-body").innerText = "klaar voor de volgende oefening?";
     document.querySelector("#exampleModalLabel").innerText = "Juist!";
     document.getElementById("check").addEventListener("click", function () {
